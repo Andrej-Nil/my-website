@@ -25,7 +25,14 @@
                 @if ( Route::has('login') )
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Dashboard</a>
+                            <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{auth()->user()->name}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('logout')}}">Logout</a>
                         </li>
                     @else
                         <li class="nav-item">
@@ -42,8 +49,25 @@
     </div>
 </nav>
 
-<main class="main mt-3">
+<main class="main my-3">
     <div class="container">
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success')}}
+            </div>
+        @endif
+
         @yield('content')
     </div>
 </main>
