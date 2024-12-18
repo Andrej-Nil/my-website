@@ -31,9 +31,34 @@ class UserController extends Controller
         return view('user.login');
     }
 
+    public function loginAuth(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
+
+        if(Auth::attempt($credentials, $request->boolean('remember'))){
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard')->with('success', 'Welcome ' . Auth::user()->name);
+        }
+
+        return back()->withErrors([
+            'email' => 'Oops mistake!'
+        ]);
+//
+
+//    dd($request->all());
+
+    }
+
     public function logout() {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function forgotPasswordStore(){
+
     }
 
     public function dashboard(){

@@ -21,6 +21,16 @@ Route::middleware('guest')->group(function (){
     Route::get('register', [\App\Http\Controllers\UserController::class, 'create'])->name('register');
     Route::post('register', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
     Route::get('login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');
+    Route::post('login', [\App\Http\Controllers\UserController::class, 'loginAuth'])->name('login.auth');
+
+//    Route::get('/forgot-password', function () {
+//        return view('auth.forgot-password');
+//    })->middleware('guest')->name('password.request');
+    Route::get('forgot-password', function() {
+        return view('user.forgot-password');
+    })->name('password.request');
+
+    Route::post('forgot-password', [\App\Http\Controllers\UserController::class, 'forgotPasswordStore'])->name('password.email')->middleware('throttle:3,1');
 });
 
 
