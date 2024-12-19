@@ -52,15 +52,6 @@ class UserController extends Controller
 
     }
 
-    public function logout() {
-        Auth::logout();
-        return redirect()->route('login');
-    }
-
-    public function forgotPasswordStore(){
-
-    }
-
     public function dashboard(){
         return view('user.dashboard');
     }

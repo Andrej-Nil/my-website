@@ -8,11 +8,19 @@
             <h1>Востановление пароля</h1>
             <form action="{{route('password.email')}}" method="post">
                 @csrf
-
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input name="email" id="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
-
+                    <input
+                        name="email"
+                        id="email"
+                        type="text"
+                        class="form-control @error('email') is-invalid @enderror"
+                        placeholder="Email"
+                        value="{{old('email')}}"
+                    >
+                    @error('email')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
                 </div>
 
 
