@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,14 +19,13 @@ Route::middleware('guest')->group(function (){
 });
 
 
-
-
 Route::middleware('auth')->group(function (){
     Route::get('verify-email', [\App\Http\Controllers\User\VerifyController::class, 'notice'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}',  [\App\Http\Controllers\User\VerifyController::class, 'verify'])->middleware( 'signed')->name('verification.verify');
     Route::post('/email/verification-notification', [\App\Http\Controllers\User\VerifyController::class, 'send'])->middleware('throttle:3,1')->name('verification.send');
-
     Route::get('logout', [\App\Http\Controllers\User\LogoutController::class, 'logout'])->name('logout');
-
 });
+
+
+Route::resource('post', \App\Http\Controllers\PostController::class);
 

@@ -10,67 +10,86 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{route('home')}}">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
-                </li>
+{{--<nav class="navbar navbar-expand-lg bg-body-tertiary">--}}
+{{--    <div class="container-fluid">--}}
+{{--        <a class="navbar-brand" href="{{route('home')}}">Logo</a>--}}
+{{--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--}}
+{{--            <span class="navbar-toggler-icon"></span>--}}
+{{--        </button>--}}
+{{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+{{--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>--}}
+{{--                </li>--}}
 
-                @if ( Route::has('login') )
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('panel')}}">Panel</a>
-                        </li>
+{{--                @if ( Route::has('login') )--}}
+{{--                    @auth--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{route('panel')}}">Panel</a>--}}
+{{--                        </li>--}}
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">{{auth()->user()->name}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('logout')}}">Logout</a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('login')}}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('register')}}">Register</a>
-                        </li>
-                    @endauth
-                @endif
-            </ul>
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="#">{{auth()->user()->name}}</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{route('logout')}}">Logout</a>--}}
+{{--                        </li>--}}
+{{--                    @else--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{route('login')}}">Login</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{route('register')}}">Register</a>--}}
+{{--                        </li>--}}
+{{--                    @endauth--}}
+{{--                @endif--}}
+{{--            </ul>--}}
 
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</nav>--}}
+
+<div class="app">
+    <header class="header">
+        <div class="header__inner container">
+            <nav class="nav">
+                <a href="{{route('panel')}}" class="nav-item">Панель</a>
+                <a href="{{route('home')}}" class="nav-item">Главная</a>
+                <a href="" class="nav-item">Обо мне</a>
+                <a href="{{route('post.index')}}" class="nav-item">Блог</a>
+                <a href="" class="nav-item">Контакты</a>
+
+                <span class="nav-item">{{auth()->user()->name}}</span>
+            </nav>
         </div>
-    </div>
-</nav>
+    </header>
+    <div class="content">
 
-<main class="main my-3">
-    <div class="container">
+{{--        @if($errors->any())--}}
+{{--            <div class="alert alert-danger">--}}
+{{--                <ul>--}}
+{{--                    @foreach($errors->all() as $error)--}}
+{{--                        <li>{{$error}}</li>--}}
+{{--                    @endforeach--}}
+{{--                </ul>--}}
+{{--            </div>--}}
+{{--        @endif--}}
 
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success')}}
-            </div>
-        @endif
+{{--        @if(session('success'))--}}
+{{--            <div class="alert alert-success">--}}
+{{--                {{ session('success')}}--}}
+{{--            </div>--}}
+{{--        @endif--}}
 
         @yield('content')
+
     </div>
-</main>
+    <footer class="footer">
+        <div class="footer__inner container">
+            Это подвал
+        </div>
+    </footer>
+</div>
 
 <script src="{{asset('js/main.js')}}"></script>
 </body>
