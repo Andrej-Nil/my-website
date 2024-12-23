@@ -1,6 +1,17 @@
-@import 'reset';
-@import 'main';
+@import "reset";
+@import "main";
 
-@import 'components/site-link';
 
-@import 'blocks/sidebar';
+
+@import "components/site-link";
+@import "components/panel-title";
+@import "components/btn";
+
+@import "components/input";
+
+@import "blocks/sidebar";
+@import "blocks/content";
+@import "blocks/search-form";
+@import "blocks/list";
+@import "blocks/pagination";
+@import "blocks/form";

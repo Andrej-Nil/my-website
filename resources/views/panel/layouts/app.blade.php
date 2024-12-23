@@ -12,7 +12,7 @@
 <div class="app">
 
 
-    <div class="content">
+    <div class="wrapper">
         <div class="sidebar">
             <div class="sidebar__top">
                 <a href="{{route('home')}}" class="site-link"> Посетить сайт >></a>
@@ -20,14 +20,13 @@
 
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="{{route('post')}}" class="nav-item">Посты</a>
+                    <a href="{{route('panel.posts')}}" class="nav-item">Посты</a>
                 </li>
             </ul>
         </div>
         <div class="container">
-            sdjhdhgvfhgds
+            @yield('content')
         </div>
-
 
 
 
@@ -88,10 +87,8 @@
 {{--                {{ session('success')}}--}}
 {{--            </div>--}}
 {{--        @endif--}}
-
-        @yield('content')
-{{--    </div>--}}
-{{--</main>--}}
+            {{--    </div>--}}
+            {{--</main>--}}
 
     </div>
 </div>

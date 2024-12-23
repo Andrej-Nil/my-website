@@ -53,13 +53,16 @@
     <header class="header">
         <div class="header__inner container">
             <nav class="nav">
-                <a href="{{route('panel')}}" class="nav-item">Панель</a>
+
                 <a href="{{route('home')}}" class="nav-item">Главная</a>
                 <a href="" class="nav-item">Обо мне</a>
                 <a href="{{route('post.index')}}" class="nav-item">Блог</a>
                 <a href="" class="nav-item">Контакты</a>
+                @auth
+                    <a href="{{route('panel')}}" class="nav-item">Панель</a>
+                    <span class="nav-item">{{auth()->user()->name}}</span>
+                @endauth
 
-                <span class="nav-item">{{auth()->user()->name}}</span>
             </nav>
         </div>
     </header>

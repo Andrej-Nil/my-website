@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-//        return  view('post.index');
+
+        return  view('panel.post.index');
     }
 
     /**
@@ -21,15 +23,17 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return  view('panel.post.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+
+
+        dd($request->validated());
     }
 
     /**

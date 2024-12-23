@@ -1,0 +1,30 @@
+.form{
+    border: 1px solid #dfdfdf;
+
+    border-radius: 5px;
+    padding: 10px 15px;
+
+}
+
+.form__body{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form-control{
+    display: grid;
+    grid-template-columns: 19% 79%;
+    gap: 2%;
+}
+
+.form-control__group{
+    display: flex;
+    gap: 30px;
+}
+
+
+.form__bottom{
+    text-align: right;
+}

@@ -1,0 +1,30 @@
+.search-form{
+    display: flex;
+    gap: 10px;
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid #dfdfdf;
+    padding: 5px 10px;
+
+}
+
+.search-form__input{
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-form__btn{
+    width: 30px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+.search-form__icon{
+    width: 100%;
+    height: 100%;
+}
