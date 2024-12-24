@@ -27,7 +27,7 @@ class StorePostRequest extends FormRequest
             'title'     => ['required', 'string', 'max:255'],
 //            'photo'     => ['nullable', 'string'],
             'text' => ['required', 'string', 'max:10000'],
-//            'is_display' => ['nullable', 'boolean']
+            'is_display' => ['nullable', 'boolean']
         ];
     }
 

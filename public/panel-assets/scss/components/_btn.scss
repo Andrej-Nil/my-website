@@ -13,4 +13,11 @@
             background: #f6ed99;
         }
     }
+
+    &.btn--red{
+        background: #f8c0c0;
+        &:hover{
+            background: #f69999;
+        }
+    }
 }
