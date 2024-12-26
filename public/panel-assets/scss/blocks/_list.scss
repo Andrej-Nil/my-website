@@ -1,0 +1,52 @@
+.list{
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+}
+
+
+//.list-head{
+//    background: #f8f3c0;
+//    padding: 10px;
+//}
+
+.list-item{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 15px;
+    border-top: 1px solid #dfdfdf;
+    &:first-child{
+        border-top: none;
+    }
+}
+
+.list-item__title{
+    flex-grow: 1;
+    padding: 10px 0;
+}
+
+.list-item__btn{
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    &:hover{
+        background: #f8f3c0;
+    }
+}
+
+.list-item__icon{
+    width: 100%;
+    height: 100%;
+}
+
+.list__pagination{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 15px;
+}

@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class RegisterController extends Controller
 {
     public function create(){
         return view('user.create');
@@ -25,18 +26,5 @@ class UserController extends Controller
         event(new Registered($user));
         Auth::login($user);
         return redirect()->route('verification.notice');
-    }
-
-    public function login(){
-        return view('user.login');
-    }
-
-    public function logout() {
-        Auth::logout();
-        return redirect()->route('login');
-    }
-
-    public function dashboard(){
-        return view('user.dashboard');
     }
 }

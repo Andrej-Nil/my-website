@@ -11,7 +11,7 @@
     </div>
     <div>
         Не пришло письмо?
-        <form action="" method="post">
+        <form action="{{route('verification.send')}}" method="post">
             @csrf
             <button type="submit" class="btn btn-link ps-0">Отправить повторно</button>
         </form>

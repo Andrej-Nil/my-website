@@ -6,14 +6,34 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <title>My website @yield('title', 'My website')</title>
+    <link rel="stylesheet" href="{{asset('panel-assets/css/style.css')}}">
+    <title>@yield('title', 'Panel')</title>
 </head>
 <body>
+<div class="app">
+
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="sidebar__top">
+                <a href="{{route('home')}}" class="site-link"> Посетить сайт >></a>
+            </div>
+
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="{{route('panel.posts')}}" class="nav-item">Посты</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            @yield('content')
+        </div>
+
+
 
 {{--<nav class="navbar navbar-expand-lg bg-body-tertiary">--}}
 {{--    <div class="container-fluid">--}}
-{{--        <a class="navbar-brand" href="{{route('home')}}">Logo</a>--}}
+{{--        <a class="navbar-brand" href="{{route('home')}}">Site</a>--}}
 {{--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--}}
 {{--            <span class="navbar-toggler-icon"></span>--}}
 {{--        </button>--}}
@@ -26,7 +46,7 @@
 {{--                @if ( Route::has('login') )--}}
 {{--                    @auth--}}
 {{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="{{route('panel')}}">Panel</a>--}}
+{{--                            <a class="nav-link" href="{{route('panel')}}">Dashboard</a>--}}
 {{--                        </li>--}}
 
 {{--                        <li class="nav-item">--}}
@@ -50,24 +70,8 @@
 {{--    </div>--}}
 {{--</nav>--}}
 
-<div class="app">
-    <header class="header">
-        <div class="header__inner container">
-            <nav class="nav">
-
-                <a href="{{route('home')}}" class="nav-item">Главная</a>
-                <a href="" class="nav-item">Обо мне</a>
-                <a href="{{route('post.index')}}" class="nav-item">Блог</a>
-                <a href="" class="nav-item">Контакты</a>
-                @auth
-                    <a href="{{route('panel')}}" class="nav-item">Панель</a>
-                    <span class="nav-item">{{auth()->user()->name}}</span>
-                @endauth
-
-            </nav>
-        </div>
-    </header>
-    <div class="content">
+{{--<main class="main my-3">--}}
+{{--    <div class="container">--}}
 
 {{--        @if($errors->any())--}}
 {{--            <div class="alert alert-danger">--}}
@@ -84,17 +88,11 @@
 {{--                {{ session('success')}}--}}
 {{--            </div>--}}
 {{--        @endif--}}
-
-        @yield('content')
+            {{--    </div>--}}
+            {{--</main>--}}
 
     </div>
-    <footer class="footer">
-        <div class="footer__inner container">
-            Это подвал
-        </div>
-    </footer>
 </div>
-
-<script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('panel-assets/js/main.js')}}"></script>
 </body>
 </html>
