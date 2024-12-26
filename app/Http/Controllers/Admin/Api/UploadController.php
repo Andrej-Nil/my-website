@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
+use App\Repositories\ImageRepository;
 use App\Services\UploadService;
 use Illuminate\Http\Request;
+
 
 class UploadController extends BaseController
 {
@@ -26,10 +28,15 @@ class UploadController extends BaseController
             return $this->sendError('Размер файла превышает 3 мб');
         }
 
-        $fileName = uniqid() . '_' . uniqid() . '_' . date('Y_m_d_H_i_s');
-        return $this->sendResponse([ 'url' => $fileName]);
+        $path = $file->store('photo', 'public');
+        if(!$path){
+            return $this->sendError('Произошла ошибка');
+        }
+
+        $image = ImageRepository::createImage("/storage/$path");
+        return $this->sendResponse([ 'photo' =>  $image]);
+
     }
 
-//            $file->move(public_path() . '/uploads','filename.img');
-//return $this->sendResponse([ 'url' => $url]);
+
 }

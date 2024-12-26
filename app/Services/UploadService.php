@@ -8,7 +8,8 @@ class UploadService {
         if (
             $extension == 'png' ||
             $extension == 'jpg' ||
-            $extension == 'jpeg'
+            $extension == 'jpeg' ||
+            $extension == 'svg'
         ) {
             return true;
         }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Post;
+use App\Repositories\ImageRepository;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,8 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $postList = PostRepository::getPagination();
 
-        return  view('panel.post.index');
+        return  view('panel.post.index', ['postList' => $postList]);
     }
 
     /**
@@ -31,9 +34,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        $data = $request->validated();
+        PostRepository::createPost($data);
 
-
-        dd($request->validated());
     }
 
     /**

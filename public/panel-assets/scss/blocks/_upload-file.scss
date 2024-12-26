@@ -51,6 +51,12 @@
     color: #444;
 }
 
+.upload-file-preview{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 
 
 .upload-file-photo{
@@ -95,6 +101,16 @@
 .upload-file-photo__btn--bottom{
     bottom:0;
     transform: translate(-50%, 100%);
+}
+
+.upload-file__loader{
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 115px;
+    height: 115px;
+    background: #dfdfdf;
 }
 
 

@@ -10,7 +10,7 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'photo',
+        'photo_id',
         'text',
         'display'
 
