@@ -128,8 +128,6 @@ class UploadRender extends Render{
         this.delete($loader);
     }
 
-
-
     clearPreview = () => {
         this.clear(this.$preview);
     }
@@ -177,8 +175,6 @@ class UploadService extends Service{
         )
     }
 }
-
-
 
 class Upload {
     constructor($uploadFile) {

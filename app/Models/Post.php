@@ -16,6 +16,12 @@ class Post extends Model
 
     ];
 
+
+
+    public function photo(){
+        return $this->hasOne(Image::class, 'id' ,'photo_id');
+    }
+
 //    protected $casts = [
 //        'photo'=> 'array'
 //    ];
@@ -24,10 +30,7 @@ class Post extends Model
 //        return $this->created_at->format('d.m.Y');
 //    }
 //
-//    public function getImgAttribute(){
-//        if($this->photo){
-//            return $this->photo[0];
-//        }
-//        return asset('img/no-photo.jpg');
-//    }
+    public function getImgAttribute(){
+        return asset('img/no-photo.jpg');
+    }
 }

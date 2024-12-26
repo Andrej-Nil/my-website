@@ -34,9 +34,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $data = $request->validated();
-        PostRepository::createPost($data);
 
+        $post = PostRepository::createPost($request->validated());
+        return to_route('panel.posts.edit', $post['id'])->with('success', 'Статья создана');
     }
 
     /**
@@ -50,17 +50,22 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit($postId)
     {
-        //
+        $post = PostRepository::getPostById($postId);
+        if(!$post){
+            abort(404);
+        }
+
+        return  view('panel.post.edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update($postId)
     {
-        //
+       dd($postId);
     }
 
     /**

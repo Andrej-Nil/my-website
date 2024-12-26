@@ -1,0 +1,27 @@
+.board{
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    padding: 10px 15px;
+    background: #f0f0f0;
+    color: #444;
+    margin-bottom: 30px;
+
+
+}
+
+
+.board-item{
+    margin-bottom: 10px;
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+.board.board--success{
+    border: 1px solid #76c075;
+    background: #aef3ae;
+}
+
+.board.board--error{
+    border: 1px solid #c07575;
+    background: #f1b6b6;
+}

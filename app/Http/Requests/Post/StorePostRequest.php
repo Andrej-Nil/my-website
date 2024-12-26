@@ -31,13 +31,13 @@ class StorePostRequest extends FormRequest
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
             'title.required'    => 'Поле "Название" обязательно для заполнения',
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
-            'photo_id' => 'Изображение не существует',
+            'photo_id.exists'   => 'Изображения было удалено или не существует',
             'text.required'    => 'Поле "Название" обязательно для заполнения',
             'text.string'      => 'Поле "Название" должно быть строкой',
             'text.max'         => 'Поле "Название" не должно превышать 10 000 символов',

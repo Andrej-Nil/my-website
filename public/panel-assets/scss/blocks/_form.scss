@@ -19,6 +19,21 @@
     gap: 2%;
 }
 
+.form-control__body{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-control__input{
+    width: 100%;
+}
+
+.form-control__error{
+    font-size: 12px;
+    color: #ff3333;
+}
+
 .form-control__group{
     display: flex;
     gap: 30px;

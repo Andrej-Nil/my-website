@@ -26,31 +26,10 @@
 
 {{--                --}}
 {{--            </div>--}}
-
+            @forelse($postList as $post)
             <div class="list-item">
                 <p class="list-item__title">
-                    <span class="list-item__name">Пост 1</span>
-
-                </p>
-                <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">
-                    <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
-                </a>
-                <a href="" class="list-item__btn" title="Редоктировать">
-                    <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
-                </a>
-                <form action="" method="post" title="Удалить">
-                    @csrf
-                    @method('DELETE')
-                    <button  type="submit" class="list-item__btn">
-                        <img src="{{asset('panel-assets/img/icons/delete-icon.svg')}}" class="list-item__icon" alt="">
-                    </button>
-                </form>
-                </div>
-
-            <div class="list-item">
-                <p class="list-item__title">
-                    <span class="list-item__name">Пост 1</span>
-
+                    <span class="list-item__name">{{$post['title']}}</span>
                 </p>
                 <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">
                     <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
@@ -66,86 +45,9 @@
                     </button>
                 </form>
             </div>
-
-            <div class="list-item">
-                <p class="list-item__title">
-                    <span class="list-item__name">Пост 1</span>
-
-                </p>
-                <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">
-                    <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
-                </a>
-                <a href="" class="list-item__btn" title="Редоктировать">
-                    <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
-                </a>
-                <form action="" method="post" title="Удалить">
-                    @csrf
-                    @method('DELETE')
-                    <button  type="submit" class="list-item__btn">
-                        <img src="{{asset('panel-assets/img/icons/delete-icon.svg')}}" class="list-item__icon" alt="">
-                    </button>
-                </form>
-            </div>
-
-            <div class="list-item">
-                <p class="list-item__title">
-                    <span class="list-item__name">Пост 1</span>
-
-                </p>
-                <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">
-                    <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
-                </a>
-                <a href="" class="list-item__btn" title="Редоктировать">
-                    <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
-                </a>
-                <form action="" method="post" title="Удалить">
-                    @csrf
-                    @method('DELETE')
-                    <button  type="submit" class="list-item__btn">
-                        <img src="{{asset('panel-assets/img/icons/delete-icon.svg')}}" class="list-item__icon" alt="">
-                    </button>
-                </form>
-            </div>
-
-            <div class="list-item">
-                <p class="list-item__title">
-                    <span class="list-item__name">Пост 1</span>
-
-                </p>
-                <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">
-                    <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
-                </a>
-                <a href="" class="list-item__btn" title="Редоктировать">
-                    <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
-                </a>
-                <form action="" method="post" title="Удалить">
-                    @csrf
-                    @method('DELETE')
-                    <button  type="submit" class="list-item__btn">
-                        <img src="{{asset('panel-assets/img/icons/delete-icon.svg')}}" class="list-item__icon" alt="">
-                    </button>
-                </form>
-            </div>
-
-            <div class="list-item">
-                <p class="list-item__title">
-                    <span class="list-item__name">Пост 1</span>
-
-                </p>
-                <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">
-                    <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
-                </a>
-                <a href="" class="list-item__btn" title="Редоктировать">
-                    <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
-                </a>
-                <form action="" method="post" title="Удалить">
-                    @csrf
-                    @method('DELETE')
-                    <button  type="submit" class="list-item__btn">
-                        <img src="{{asset('panel-assets/img/icons/delete-icon.svg')}}" class="list-item__icon" alt="">
-                    </button>
-                </form>
-            </div>
+            @empty
+                 Постов не найдено.
+            @endforelse
 
 
 

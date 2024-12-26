@@ -6,17 +6,17 @@ class PostRepository
 {
 
     public static function getPagination(int $count = 20):array{
-        return Post::limit($count)->orderBy('id', 'DESC')->get()->toArray();
+        return Post::with('photo')->limit($count)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     public static function createPost(array $data):array{
         return Post::create($data)->toArray();
     }
 
-//    public static function getImgById(int $id):array{
-//        $item = Image::find($id);
-//        return $item ? $item->toArray() : [];
-//    }
+    public static function getPostById(int $id):array{
+        $item = Post::with('photo')->find($id);
+        return $item ? $item->toArray() : [];
+    }
 
 
 //    public static function updateArticle(int $id, array $data):bool{
