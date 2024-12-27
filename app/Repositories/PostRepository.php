@@ -5,8 +5,12 @@ use App\Models\Post;
 class PostRepository
 {
 
-    public static function getPagination(int $count = 20):array{
-        return Post::with('photo')->limit($count)->orderBy('id', 'DESC')->get()->toArray();
+    public static function getPagination( int $count = 20):array{
+
+//        if($data['value']){
+//            return Post::where('title', 'LIKE', '%'.$data['value'].'%')->orderBy('id', 'DESC')->get()->toArray();
+//        }
+        return Post::limit($count)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     public static function createPost(array $data):array{

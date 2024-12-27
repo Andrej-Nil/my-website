@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
+use App\Http\Requests\Search\SearchRequest;
 use App\Models\Post;
 use App\Repositories\ImageRepository;
 use App\Repositories\PostRepository;
@@ -15,8 +16,9 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SearchRequest $request)
     {
+//       dd($request->validated());
         $postList = PostRepository::getPagination();
 
         return  view('panel.post.index', ['postList' => $postList]);
@@ -35,7 +37,6 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-
         $post = PostRepository::createPost($request->validated());
         return to_route('panel.posts.edit', $post['id'])->with('success', 'Статья создана');
     }
@@ -53,7 +54,9 @@ class PostController extends Controller
      */
     public function edit($postId)
     {
-        $post = PostRepository::getPostById($postId);
+
+
+        $post = PostRepository::getPostById($postId);;
         if(!$post){
             abort(404);
         }

@@ -11,7 +11,7 @@
 
     <div class="content">
         <div class="content-top">
-            <form action="" method="get" class="search-form">
+            <form action="{{route('panel.posts')}}" method="get" class="search-form">
                 @csrf
                 <input name="value" class="search-form__input input" placeholder="Поиск по постам"/>
                 <button class="search-form__btn">
@@ -41,7 +41,7 @@
                 <a href="{{route('panel.posts.edit', $post['id'])}}" class="list-item__btn" title="Редоктировать">
                     <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
                 </a>
-                <form action="" method="post" title="Удалить">
+                <form action="{{route('panel.posts.delete', $post['id'])}}" method="post" title="Удалить">
                     @csrf
                     @method('DELETE')
                     <button  type="submit" class="list-item__btn">
@@ -50,7 +50,9 @@
                 </form>
             </div>
             @empty
-                 Постов не найдено.
+
+             <p class="list__empty">Постов не найдено.</p>
+
             @endforelse
 
 

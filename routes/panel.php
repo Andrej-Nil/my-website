@@ -12,5 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('panel/posts/{id}/edit', [\App\Http\Controllers\Admin\PostController::class, 'edit'] )->name('panel.posts.edit');
     Route::put('panel/posts/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'] )->name('panel.posts.update');
     Route::delete('panel/posts/{id}', [\App\Http\Controllers\Admin\PostController::class, 'destroy'] )->name('panel.posts.delete');
+
+    Route::get('panel/images', [\App\Http\Controllers\Admin\PostController::class, 'index'] )->name('panel.images');
 //    Route::resource('panel/posts', \App\Http\Controllers\Admin\PostController::class);
 });

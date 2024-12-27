@@ -38,17 +38,7 @@
                     </label>
                     @error('photo_id')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
-                <div data-upload-preview class="upload-file-preview">
-{{--                    <div data-upload-loader class="upload-file__loader">--}}
-{{--                        @include('panel.components.spinner')--}}
-{{--                    </div>--}}
-{{--                    <div data-upload-photo class="upload-file-photo">--}}
-{{--                        <img class="upload-file-photo__img" src="https://avatars.mds.yandex.net/i?id=1e0670b06696c56241f290174efa2385_sr-5858835-images-thumbs&n=13"/>--}}
-{{--                        <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>--}}
-{{--                        <button type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>--}}
-{{--                    </div>--}}
-                </div>
-{{--                <input id="postTitle" type="file" class="input" name="file" placeholder="Фото">--}}
+                <div data-upload-preview class="upload-file-preview"></div>
             </div>
 
         </div>
@@ -63,7 +53,7 @@
         </div>
 
         <div class="form-control">
-            <span for="postText" class="form-control__label">Статус публикации</span>
+            <span class="form-control__label">Статус публикации</span>
             <div class="form-control__group">
                 <div class="checkbox">
                     <label for="display1" class="form-control__label">Опубликовать</label>
@@ -72,7 +62,7 @@
 {{--                @dd(old('is_display'))--}}
                 <div class="checkbox">
                     <label for="display2" class="form-control__label">Скрыть</label>
-                    <input id="display2" type="radio" class="input" name="is_display" value="0" >
+                    <input id="display2" type="radio" class="input" name="is_display" value="0">
                 </div>
 
             </div>
