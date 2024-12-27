@@ -19,12 +19,12 @@ class PostRepository
     }
 
 
-//    public static function updateArticle(int $id, array $data):bool{
-//        return Article::where('id', $id)->update($data);
-//    }
-//    public static function deleteArticle(int $id):bool{
-//        return Article::where('id', $id)->delete();
-//    }
+    public static function updatePost(int $id, array $data):bool{
+        return Post::where('id', $id)->update($data);
+    }
+    public static function deletePost(int $id):bool{
+        return Post::where('id', $id)->delete();
+    }
 //    public static function getArticleById(int $id):array{
 //        $item = Article::find($id);
 //        return $item ? $item->toArray() : [];

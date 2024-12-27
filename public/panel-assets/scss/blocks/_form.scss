@@ -41,5 +41,7 @@
 
 
 .form__bottom{
-    text-align: right;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
 }

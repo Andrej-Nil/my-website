@@ -5,6 +5,10 @@
 @section('content')
     <h1 class="panel-title">Посты</h1>
 
+    @if(session()->has('success'))
+        @include('panel.components.success-board')
+    @endif
+
     <div class="content">
         <div class="content-top">
             <form action="" method="get" class="search-form">
@@ -34,7 +38,7 @@
                 <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">
                     <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
                 </a>
-                <a href="" class="list-item__btn" title="Редоктировать">
+                <a href="{{route('panel.posts.edit', $post['id'])}}" class="list-item__btn" title="Редоктировать">
                     <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
                 </a>
                 <form action="" method="post" title="Удалить">
