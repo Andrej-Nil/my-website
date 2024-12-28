@@ -5,11 +5,11 @@ use App\Models\Post;
 class PostRepository
 {
 
-    public static function getPagination( int $count = 20):array{
+    public static function getPagination(array $data = [], int $count = 20):array{
 
-//        if($data['value']){
-//            return Post::where('title', 'LIKE', '%'.$data['value'].'%')->orderBy('id', 'DESC')->get()->toArray();
-//        }
+        if(isset($data['search'])){
+           return Post::where('title', 'LIKE', '%'.$data['search'].'%')->limit($count)->get()->toArray();
+        }
         return Post::limit($count)->orderBy('id', 'DESC')->get()->toArray();
     }
 

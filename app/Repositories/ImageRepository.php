@@ -4,6 +4,9 @@ use App\Models\Image;
 
 class ImageRepository
 {
+        public static function getPagination(int $count = 40):array{
+        return Image::limit($count)->orderBy('id', 'DESC')->get()->toArray();
+    }
 
     public static function createImage(string $link):array{
         return Image::create(['link' => $link])->toArray();
@@ -20,9 +23,9 @@ class ImageRepository
 //    public static function updateArticle(int $id, array $data):bool{
 //        return Article::where('id', $id)->update($data);
 //    }
-//    public static function deleteArticle(int $id):bool{
-//        return Article::where('id', $id)->delete();
-//    }
+    public static function deleteImage(int $id):bool{
+        return Image::where('id', $id)->delete();
+    }
 //    public static function getArticleById(int $id):array{
 //        $item = Article::find($id);
 //        return $item ? $item->toArray() : [];

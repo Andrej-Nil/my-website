@@ -21,7 +21,10 @@
 
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="{{route('panel.posts')}}" class="nav-item">Посты</a>
+                    <a href="{{route('panel.posts')}}" class="nav-item__link">Посты</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('panel.images')}}" class="nav-item__link">Картинки</a>
                 </li>
             </ul>
         </div>

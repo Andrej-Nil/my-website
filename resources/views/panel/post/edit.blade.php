@@ -40,7 +40,6 @@
                     </div>
                     <div data-upload-preview class="upload-file-preview">
                         @if($post['photo'])
-
                             <div data-upload-photo="{{$post['photo']['id']}}" class="upload-file-photo">
                                 <input type="hidden" name="photo_id" value="{{$post['photo']['id']}}">
                                 <img class="upload-file-photo__img" src="{{$post['photo']['link']}}" alt=""/>

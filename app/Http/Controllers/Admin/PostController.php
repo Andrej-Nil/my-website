@@ -16,11 +16,9 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SearchRequest $request)
+    public function index()
     {
-//       dd($request->validated());
         $postList = PostRepository::getPagination();
-
         return  view('panel.post.index', ['postList' => $postList]);
     }
 
@@ -97,5 +95,16 @@ class PostController extends Controller
 
         PostRepository::deletePost($postId);
         return to_route('panel.posts')->with('success', 'Пост ' . "'" . $post['title'] . "'" . ' удален');
+    }
+
+
+    public function search(SearchRequest $request) {
+
+        $rez = $request->validated();
+        $postList = PostRepository::getPagination($rez);
+        return  view('panel.post.index', [
+            'postList' => $postList,
+            'search' => $rez['search']
+        ]);
     }
 }

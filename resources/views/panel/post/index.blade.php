@@ -9,16 +9,19 @@
         @include('panel.components.success-board')
     @endif
 
+
+
     <div class="content">
         <div class="content-top">
-            <form action="{{route('panel.posts')}}" method="get" class="search-form">
-                @csrf
-                <input name="value" class="search-form__input input" placeholder="Поиск по постам"/>
+            <form action="{{route('panel.posts.search')}}" method="get" class="search-form">
+
+                <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search ?? ''}}"/>
                 <button class="search-form__btn">
                     <img src="{{asset('panel-assets/img/icons/search-icon.svg')}}" alt="" class="search-form__icon">
                 </button>
             </form>
 
+           <div>сортировать <a href="">по а до я</a> <a href="">по я до а</a> <a href="">сначло старые</a> <a href="">сначло новые</a></div>
 
             <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Создать пост</a>
         </div>
