@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Image;
+use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -12,7 +15,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $imageList = ImageRepository::getPagination();
+        return view('panel.image.index', ['imageList' => $imageList]);
     }
 
     /**
@@ -58,8 +62,18 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Image $image)
+    public function destroy($id)
     {
-        //
+        $image = ImageRepository::getImgById($id);
+        if(!$image){
+            return to_route('panel.images');
+        }
+
+
+//        dd($image);
+        $res = Storage::delete($image['link']);
+
+        ImageRepository::deleteImage($id);
+        return to_route('panel.images');
     }
 }

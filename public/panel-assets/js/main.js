@@ -128,8 +128,6 @@ class UploadRender extends Render{
         this.delete($loader);
     }
 
-
-
     clearPreview = () => {
         this.clear(this.$preview);
     }
@@ -137,11 +135,11 @@ class UploadRender extends Render{
 
     getPhotoHtml = (photo) => {
         return `
-            <div data-upload-photo class="upload-file-photo">
+            <div data-upload-photo="${photo.id}" class="upload-file-photo">
                 <input type="hidden" name="photo_id" value="${photo.id}">
-                <img class="upload-file-photo__img" src="${photo.link}"/>
+                <img class="upload-file-photo__img" src="${photo.link}" alt=""/>
                 <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
-                <button data-delete type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
+                <button data-delete-photo type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
             </div>
         `
     }
@@ -178,8 +176,6 @@ class UploadService extends Service{
     }
 }
 
-
-
 class Upload {
     constructor($uploadFile) {
         this.$uploadFile = $uploadFile;
@@ -190,7 +186,6 @@ class Upload {
     init = () => {
         if (!this.$uploadFile) return;
         this.$input = this.$uploadFile.querySelector('[data-upload-input]');
-        this.$preview = this.$uploadFile.querySelector('[data-upload-preview]');
         this.api = this.$uploadFile.dataset.uploadApi;
         this.service = new UploadService(this.api);
         this.render = new UploadRender(this.$uploadFile);
@@ -212,8 +207,16 @@ class Upload {
             console.log(response.error);
         }
     }
+
+
+    deletePhoto = ($target) => {
+       this.$input.value = '';
+       this.render.delete($target.closest('[data-upload-photo]'));
+    }
     clickHandler = (e) => {
-        // console.log(e)
+        if(e.target.closest('[data-delete-photo]')){
+            this.deletePhoto(e.target);
+        }
     }
 
     disableInput = () => {

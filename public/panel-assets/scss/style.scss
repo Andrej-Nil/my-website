@@ -11,9 +11,15 @@
 @import "components/input";
 
 @import "blocks/sidebar";
+@import "blocks/nav";
+
+@import "blocks/board";
 @import "blocks/content";
 @import "blocks/search-form";
 @import "blocks/list";
+@import "blocks/image-list";
+@import "blocks/image-card";
+
 @import "blocks/pagination";
 @import "blocks/form";
 @import "blocks/upload-file";

@@ -20,6 +20,12 @@
     }
 }
 
+.list__empty{
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
 .list-item__title{
     flex-grow: 1;
     padding: 10px 0;
