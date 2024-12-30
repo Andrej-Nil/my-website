@@ -17,5 +17,12 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::get('panel/images', [\App\Http\Controllers\Admin\ImageController::class, 'index'] )->name('panel.images');
     Route::delete('panel/images/{id}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'] )->name('panel.images.delete');
+
+    Route::get('panel/contacts', [\App\Http\Controllers\Admin\ContactController::class, 'index'] )->name('panel.contacts');
+    Route::get('panel/contacts/create', [\App\Http\Controllers\Admin\ContactController::class, 'create'] )->name('panel.contacts.create');
+    Route::post('panel/contacts', [\App\Http\Controllers\Admin\ContactController::class, 'store'] )->name('panel.contacts.store');
+    Route::get('panel/contacts/{id}/edit', [\App\Http\Controllers\Admin\ContactController::class, 'edit'] )->name('panel.contacts.edit');
+    Route::put('panel/contacts/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'update'] )->name('panel.contacts.update');
+    Route::delete('panel/contacts/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'destroy'] )->name('panel.contacts.delete');
 //    Route::resource('panel/posts', \App\Http\Controllers\Admin\PostController::class);
 });
