@@ -68,11 +68,7 @@ class ImageController extends Controller
         if(!$image){
             return to_route('panel.images');
         }
-
-
-//        dd($image);
-        $res = Storage::delete($image['link']);
-
+        Storage::disk('public')->delete($image['link']);
         ImageRepository::deleteImage($id);
         return to_route('panel.images');
     }

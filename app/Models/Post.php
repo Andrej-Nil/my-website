@@ -30,7 +30,7 @@ class Post extends Model
 //        return $this->created_at->format('d.m.Y');
 //    }
 //
-    public function getImgAttribute(){
-        return asset('img/no-photo.jpg');
-    }
+//    public function getUrlAttribute(){
+//        return asset('img/no-photo.jpg');
+//    }
 }

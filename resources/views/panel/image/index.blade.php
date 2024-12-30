@@ -12,7 +12,7 @@
     <div class="image-list">
         @foreach($imageList as $image)
             <div data-image-card class="image-card">
-                <img data-zoom data-src="{{$image['link']}}" src="{{$image['link']}}" data-type="img" class="image-card__img" alt=""/>
+                <img data-zoom data-src="{{asset($image['link'])}}" src="{{$image['url']}}" data-type="img" class="image-card__img" alt=""/>
                 <form action="{{route('panel.images.delete', $image['id'])}}" method="post">
                     @csrf
                     @method('DELETE')

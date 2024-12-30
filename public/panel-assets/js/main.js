@@ -134,10 +134,11 @@ class UploadRender extends Render{
 
 
     getPhotoHtml = (photo) => {
+        console.log(photo);
         return `
             <div data-upload-photo="${photo.id}" class="upload-file-photo">
                 <input type="hidden" name="photo_id" value="${photo.id}">
-                <img class="upload-file-photo__img" src="${photo.link}" alt=""/>
+                <img class="upload-file-photo__img" src="${photo.url}" alt=""/>
                 <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
                 <button data-delete-photo type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
             </div>

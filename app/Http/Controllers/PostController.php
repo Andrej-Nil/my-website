@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,8 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        dd('sdhggfdg');
-//       return  view('post.index');
+       $postList = PostRepository::getPagination();
+       return  view('post.index', ['postList' => $postList]);
     }
 
     public function create()

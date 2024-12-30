@@ -33,7 +33,7 @@ class UploadController extends BaseController
             return $this->sendError('Произошла ошибка');
         }
 
-        $image = ImageRepository::createImage("/storage/$path");
+        $image = ImageRepository::createImage($path);
         return $this->sendResponse([ 'photo' =>  $image]);
 
     }

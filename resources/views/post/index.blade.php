@@ -4,13 +4,12 @@
 
 @section('content')
     <div class="container">
-        <h1 class="page-title">Посты flvbyrf</h1>
+        <h1 class="page-title">Посты</h1>
 
         <div class="grid col-4">
-            @include('post.post-card')
-            @include('post.post-card')
-            @include('post.post-card')
-            @include('post.post-card')
+            @foreach($postList as $post)
+                @include('post.post-card')
+            @endforeach
         </div>
 
     </div>
