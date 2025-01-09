@@ -33,9 +33,14 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($postId)
     {
-        //
+      $post = PostRepository::getPostById($postId);
+      if(!$post){
+          abort(404);
+      }
+
+      return view('post.show', ['post' => $post]);
     }
 
     /**
@@ -43,7 +48,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+
     }
 
     /**
