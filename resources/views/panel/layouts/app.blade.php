@@ -26,6 +26,9 @@
                 <li class="nav-item">
                     <a href="{{route('panel.images')}}" class="nav-item__link">Картинки</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('panel.contacts')}}" class="nav-item__link">Контакты</a>
+                </li>
             </ul>
         </div>
         <div class="container">

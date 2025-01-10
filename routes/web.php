@@ -28,4 +28,6 @@ Route::middleware('auth')->group(function (){
 
 
 Route::resource('post', \App\Http\Controllers\PostController::class);
+Route::get('about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about');
+Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 
