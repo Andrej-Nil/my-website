@@ -23,15 +23,10 @@
                     <span class="post-image-btn__shadow"></span>
                     <div class="post-image-btn__text">Раскрыть изображение</div>
                 </div>
-
-
             </div>
 
             <p class="post__text">{{$post['text']}}</p>
 
         </div>
-
-
-
     </div>
 @endsection
