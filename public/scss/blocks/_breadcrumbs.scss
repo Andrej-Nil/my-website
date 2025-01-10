@@ -1,0 +1,12 @@
+.breadcrumbs{
+    margin-bottom: 30px;
+}
+
+.breadcrumbs__link{
+    font-weight: 600;
+    &:last-child{
+        font-weight: 400;
+    }
+}
+
+
