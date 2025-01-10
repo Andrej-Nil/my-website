@@ -1,0 +1,29 @@
+.page-message{
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.page-message__inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.page-message__title{
+    font-weight: 600;
+    font-size: 34px;
+}
+
+.page-message__img{
+    max-width: 260px;
+    max-height: 260px;
+    width: auto;
+    height: auto;
+}
+
+.page-message__text{
+    font-size: 20px;
+}
