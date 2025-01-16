@@ -80,6 +80,7 @@ class ContactController extends Controller
         }
 
         ContactRepository::updateContact($id, $request->validated());
+        return to_route('panel.contacts.edit', $contact['id'])->with('success', 'Изменения сохранены');
     }
 
     /**

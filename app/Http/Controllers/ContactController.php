@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Repositories\ContactRepository;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -12,7 +13,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact');
+
+        $contactList = ContactRepository::getContacts();
+
+        return view('contact', ['contactList' => $contactList]);
     }
 
 }

@@ -6,7 +6,7 @@ class ContactRepository
 {
 
     public static function getContacts():array{
-        return Contact::orderBy('id', 'DESC')->get()->toArray();
+        return Contact::orderBy('id', 'DESC')->where('is_display', 1)->get()->toArray();
     }
     public static function getPagination():array{
         return Contact::orderBy('id', 'DESC')->get()->toArray();
