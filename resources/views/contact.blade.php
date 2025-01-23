@@ -14,16 +14,19 @@
 
 
         @if($contactList)
-            <div class="contact-list">
-                @foreach($contactList as $contact)
+            <div class="contact">
+{{--                    @dd($contact)--}}
                 <div class="contact-list">
+                    @foreach($contactList as $contact)
                     <div class="contact-item">
-                        <img src="" alt="" class="contact-item__icon">
-
-                        <a href="{{$contact['link']}}" class="contact-item__link">{{$contact['title']}}</a>
+                        <img src="{{$contact['photo']['url']}}" alt="" class="contact-item__icon">
+                        <div class="contact-item__body">
+                            <p class="contact-item__label">{{$contact['title']}}</p>
+                            <a href="{{$contact['link']}}" class="contact-item__link">{{$contact['display']}}</a>
+                        </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
 {{--            <div class="grid col-4">--}}
 {{--                @foreach($postList as $post)--}}

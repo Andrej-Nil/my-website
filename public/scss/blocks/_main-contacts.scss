@@ -1,0 +1,14 @@
+.main-contacts{
+    display: flex;
+    gap: 20px;
+}
+
+
+.main-contact{
+    padding: 10px;
+    transition: 0.2s ease-in-out;
+    color: #ccc;
+    &:hover{
+        color: #fff;
+    };
+}

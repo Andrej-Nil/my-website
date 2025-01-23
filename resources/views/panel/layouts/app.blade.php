@@ -32,6 +32,13 @@
             </ul>
         </div>
         <div class="container">
+            <nav class="link-list">
+                <a href="{{route('about')}}" class="link-item">Обо мне</a>
+                    <span class="link-item__slash">\</span>
+                <a href="{{route('post.index')}}" class="link-item">Блог</a>
+                    <span class="link-item__slash">\</span>
+                <a href="{{route('contact')}}" class="link-item">Контакты</a>
+            </nav>
             @yield('content')
         </div>
 
