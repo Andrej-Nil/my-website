@@ -22,7 +22,6 @@ class PostRepository
         return $item ? $item->toArray() : [];
     }
 
-
     public static function updatePost(int $id, array $data):bool{
         return Post::where('id', $id)->update($data);
     }

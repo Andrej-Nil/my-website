@@ -1,0 +1,10 @@
+.control{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control__label{
+    font-size: 16px;
+    color: #ccc;
+}

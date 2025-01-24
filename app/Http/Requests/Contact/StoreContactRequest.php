@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Post;
+namespace App\Http\Requests\Contact;
 
-//use App\Helpers\FormatHelper;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class UpdatePostRequest extends FormRequest
+class StoreContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +24,8 @@ class UpdatePostRequest extends FormRequest
         return [
             'title'     => ['required', 'string', 'max:255'],
             'photo_id'     => ['nullable', 'exists:images,id'],
-            'text' => ['required', 'string', 'max:10000'],
+            'link' => ['required', 'string', 'max:255'],
+            'display' => ['required', 'string', 'max:255'],
             'is_display' => ['nullable', 'boolean']
         ];
     }
@@ -38,10 +37,12 @@ class UpdatePostRequest extends FormRequest
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
             'photo_id.exists'   => 'Изображения было удалено или не существует',
-            'text.required'    => 'Поле "Название" обязательно для заполнения',
-            'text.string'      => 'Поле "Название" должно быть строкой',
-            'text.max'         => 'Поле "Название" не должно превышать 10 000 символов',
-
+            'link.required'    => 'Поле "Название" обязательно для заполнения',
+            'link.string'      => 'Поле "Название" должно быть строкой',
+            'link.max'         => 'Поле "Название" не должно превышать 255 символов',
+            'display.required'    => 'Поле "Название" обязательно для заполнения',
+            'display.string'      => 'Поле "Название" должно быть строкой',
+            'display.max'         => 'Поле "Название" не должно превышать 255 символов',
         ];
     }
 

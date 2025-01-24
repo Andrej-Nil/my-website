@@ -1,0 +1,18 @@
+.link-list{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.link-item{
+    font-size: 16px;
+    color: #007aff;
+    text-decoration: underline;
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+.link-item__slash{
+    color: #007aff;
+}

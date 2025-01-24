@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->unsignedBigInteger('photo_id')->nullable()->unsigned();
+            $table->foreign('photo_id')->references('id')->on('images')->onDelete('cascade');
+            $table->string('link');
+            $table->string('display');
+            $table->boolean('is_display')->default(true);
             $table->timestamps();
         });
     }

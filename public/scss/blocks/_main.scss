@@ -1,0 +1,43 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    min-height: 100%;
+}
+
+.main-header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-content{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    //flex-direction: column;
+    padding: 0 15px;
+    min-height: 100%;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1470px;
+    margin: 50px auto;
+}
+
+
+.main-footer{
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+

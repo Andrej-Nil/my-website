@@ -28,35 +28,33 @@
 
 
         <div class="list">
-            {{--            <div class="list-head">--}}
-            {{--                <p class="list-item__title">Название</p>--}}
+{{--                        <div class="list-head">--}}
+{{--                            <p class="list-item__title">Название</p>--}}
 
-            {{--                --}}
-            {{--            </div>--}}
-{{--            @forelse($postList as $post)--}}
-{{--                <div class="list-item">--}}
-{{--                    <p class="list-item__title">--}}
-{{--                        <span class="list-item__name">{{$post['title']}}</span>--}}
-{{--                    </p>--}}
-{{--                    <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">--}}
-{{--                        <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >--}}
-{{--                    </a>--}}
-{{--                    <a href="{{route('panel.posts.edit', $post['id'])}}" class="list-item__btn" title="Редоктировать">--}}
-{{--                        <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">--}}
-{{--                    </a>--}}
-{{--                    <form action="{{route('panel.posts.delete', $post['id'])}}" method="post" title="Удалить">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                        <button  type="submit" class="list-item__btn">--}}
-{{--                            <img src="{{asset('panel-assets/img/icons/delete-icon.svg')}}" class="list-item__icon" alt="">--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            @empty--}}
 
-{{--                <p class="list__empty">Постов не найдено.</p>--}}
+{{--                        </div>--}}
+            @forelse($contactList as $contact)
+                <div class="list-item">
+                    <p class="list-item__title">
+                        <span class="list-item__name">{{$contact['title']}}</span>
+                    </p>
 
-{{--            @endforelse--}}
+                    <a href="{{route('panel.contacts.edit', $contact['id'])}}" class="list-item__btn" title="Редоктировать">
+                        <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
+                    </a>
+                    <form action="{{route('panel.contacts.delete', $contact['id'])}}" method="post" title="Удалить">
+                        @csrf
+                        @method('DELETE')
+                        <button  type="submit" class="list-item__btn">
+                            <img src="{{asset('panel-assets/img/icons/delete-icon.svg')}}" class="list-item__icon" alt="">
+                        </button>
+                    </form>
+                </div>
+            @empty
+
+                <p class="list__empty">Постов не найдено.</p>
+
+            @endforelse
 
 
 
