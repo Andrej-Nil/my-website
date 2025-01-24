@@ -1,0 +1,41 @@
+.main-form{
+    display: none;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    &.show{
+        display: block;
+    }
+
+}
+
+.main-form__inner{
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+    //justify-content: center;
+    //align-items: center;
+}
+
+
+.main-form__title{
+    font-size: 30px;
+    margin-bottom: 50px;
+    color: #ccc;
+}
+
+.main-form__body{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-form__bottom{
+
+}
+
+
+

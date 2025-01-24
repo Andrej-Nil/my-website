@@ -28,22 +28,64 @@
        </header>
 
        <div class="main-content">
-
-
-           <div class="main-content__body">
-               <div class="signature">
-                   <div class="signature__inner">
-                       <h1 class="signature__name">Testtest Testte</h1>
-                       <p class="signature__profession">Test-test Testtesttst</p>
-                       <button type="button" class="signature__btn btn">Связь</button>
-                   </div>
-
+           <div class="signature">
+               <div class="signature__inner">
+                   <h1 class="signature__name">Testtest Testte</h1>
+                   <p class="signature__profession">Test-test Testtesttst</p>
+                   <button data-main-form-btn type="button" class="signature__btn btn">Название кнопки</button>
                </div>
+           </div>
 
-               <div class="main-content__slider">
+           <div id="mainFrame" class="main-frame">
+
+               <div id="mainFrameLight"  class="main-frame__light"></div>
+
+
+               <div class="main-frame__content">
+
+                   <form id="mainForm" action="" class="main-form">
+
+                           @csrf
+
+                       <div class="main-form__inner">
+                           <i data-main-form-close class="main-form__close"></i>
+                           <p class="main-form__title">Обратная связь</p>
+                           <div class="main-form__body">
+                                <div class="control">
+                                    <label for="mainFormName" class="control__label">Ваше имя</label>
+                                    <input type="text" id="mainFormName" class="control__input input" placeholder="Ваше имя">
+                                </div>
+
+                               <div class="control">
+                                   <label for="mainFormPhone" class="control__label">Номер телефона</label>
+                                   <input type="text" id="mainFormPhone" class="control__input input" placeholder="Номер телефона">
+                               </div>
+
+                               <div class="control">
+                                   <label for="mainFormMail" class="control__label">Почта</label>
+                                   <input type="text" id="mainFormMail" class="control__input input" placeholder="Почта">
+                               </div>
+
+                               <div class="control">
+                                   <label for="mainFormMessage" class="control__label">Почта</label>
+                                   <textarea id="mainFormMessage" class="control__input input" rows="2" placeholder="Коментарий"></textarea>
+{{--                                   <input type="text" id="mainFormMail" class="control__input input" placeholder="Почта">--}}
+                               </div>
+                           </div>
+                           <div class="main-form__bottom">
+                               <button type="submit" class="main-form__submit btn">Отправить</button>
+                           </div>
+                       </div>
+                   </form>
 
                </div>
            </div>
+
+{{--           <div class="main-content__body">--}}
+
+
+
+{{--           </div>--}}
 
 
        </div>

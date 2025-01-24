@@ -13,29 +13,17 @@
 
 .main-content{
     position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     //flex-direction: column;
     padding: 0 15px;
     min-height: 100%;
     flex-grow: 1;
     width: 100%;
     max-width: 1470px;
-    margin: 0 auto;
+    margin: 50px auto;
 }
-.main-content__body{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    //flex-direction: column;
-    //max-width: 300px;
-}
-.main-content__slider{
-
-    min-height: 100%;
-    background: #444;
-}
-
 
 
 .main-footer{
