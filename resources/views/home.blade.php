@@ -43,32 +43,30 @@
 
                <div class="main-frame__content">
 
-                   <form id="mainForm" action="" class="main-form">
-
+                   <form id="mainForm" action="{{route('callback')}}" method="post" class="main-form">
                            @csrf
-
                        <div class="main-form__inner">
                            <i data-main-form-close class="main-form__close"></i>
                            <p class="main-form__title">Обратная связь</p>
                            <div class="main-form__body">
                                 <div class="control">
                                     <label for="mainFormName" class="control__label">Ваше имя</label>
-                                    <input type="text" id="mainFormName" class="control__input input" placeholder="Ваше имя">
+                                    <input type="text" id="mainFormName" name="name" class="control__input input" placeholder="Ваше имя">
                                 </div>
 
                                <div class="control">
                                    <label for="mainFormPhone" class="control__label">Номер телефона</label>
-                                   <input type="text" id="mainFormPhone" class="control__input input" placeholder="Номер телефона">
+                                   <input type="text" id="mainFormPhone" name="phone" class="control__input input" placeholder="Номер телефона">
                                </div>
 
                                <div class="control">
                                    <label for="mainFormMail" class="control__label">Почта</label>
-                                   <input type="text" id="mainFormMail" class="control__input input" placeholder="Почта">
+                                   <input type="text" id="mainFormMail" name="email" class="control__input input" placeholder="Почта">
                                </div>
 
                                <div class="control">
                                    <label for="mainFormMessage" class="control__label">Почта</label>
-                                   <textarea id="mainFormMessage" class="control__input input" rows="2" placeholder="Коментарий"></textarea>
+                                   <textarea id="mainFormMessage" name="comment" class="control__input input" rows="2" placeholder="Коментарий"></textarea>
 {{--                                   <input type="text" id="mainFormMail" class="control__input input" placeholder="Почта">--}}
                                </div>
                            </div>

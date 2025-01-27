@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 
+use App\Http\Controllers\BaseController;
 use App\Repositories\ImageRepository;
 use App\Services\UploadService;
 use Illuminate\Http\Request;
