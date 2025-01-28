@@ -1,0 +1,60 @@
+.main-frame-light{
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 0 10px 10px #ffffff;
+    transition: 0.5s opacity linear;
+
+    &.foreground{
+        z-index: 3;
+    }
+    &.show{
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes blink {
+    from{
+        top: calc(0% - 40px);
+    }
+    to{
+        top: calc(100% + 40px);
+    }
+}
+
+.main-frame-light__blink{
+    position: absolute;
+    top: calc(0% - 40px) ;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 110%;
+    display: block;
+    height: 1px;
+    background: #000;
+    box-shadow: 0 0 10px 10px #000;
+
+}
+
+.blink .main-frame-light__blink{
+    animation: blink 5s linear infinite;
+}
+
+@keyframes glow-animation{
+    from {
+        box-shadow: 0 0 10px 10px #ffffff;
+    }
+
+    50% {
+        box-shadow: 0 0 15px 15px #ffffff;
+    }
+
+    to {
+        box-shadow: 0 0 10px 10px #ffffff;
+    }
+}

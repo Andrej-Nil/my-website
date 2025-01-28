@@ -1,58 +1,11 @@
 .main-frame{
     position: relative;
     display: flex;
-    //background: #ccc;
 }
 
-.main-form__close{
-    position: absolute;
-    top: 4px;
-    right: 0;
-    display: block;
-    width: 25px;
-    height: 25px;
-    background-image: url('../img/icon/close-white.svg');
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-.main-frame__light{
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: #fff;
-    box-shadow: 0 0 10px 10px #ffffff;
-    transition: 0.5s opacity linear;
-    //animation: glow-animation 1.5s linear infinite;
-    &.foreground{
-        z-index: 3;
-    }
-    &.show{
-        opacity: 1;
-    }
-}
-
-
-@keyframes glow-animation{
-    from {
-        box-shadow: 0 0 10px 10px #ffffff;
-    }
-
-    50% {
-        box-shadow: 0 0 15px 15px #ffffff;
-    }
-
-    to {
-        box-shadow: 0 0 10px 10px #ffffff;
-    }
-}
 
 
 .main-frame__content{
-    //padding: 50px;
     border: 1px solid #000;
     position: absolute;
     display: flex;

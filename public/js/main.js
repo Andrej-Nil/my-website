@@ -108,14 +108,33 @@ class MainForm {
 
     init = () => {
         if (!this.$form) return;
+
         this.api = this.$form.action;
         this.service = new MainFormService(this.api);
+        this.$inputList = this.$form.querySelectorAll('[data-input]')
 
     }
 
     send = async () => {
         const formData = new FormData(this.$form);
-        return await this.service.getFormData(formData);
+        const response = this.service.getFormData(formData);
+
+        if(response.success){
+            return {
+                success: true,
+                message: response.data.message
+            }
+        }else{
+
+        }
+
+    }
+
+
+    clear = () => {
+        this.$inputList.forEach(($input) => {
+            $input.value = '';
+        } )
     }
 
     show = () => {
@@ -124,6 +143,59 @@ class MainForm {
 
     hide = () => {
         this.$form.classList.remove('show');
+    }
+}
+
+
+class MainFrameMessage {
+    constructor() {
+        this.$message = document.querySelector('#mainFrameMessage');
+        this.init()
+    }
+
+    init = () => {
+        if(!this.$message) return;
+        this.$inner = document.querySelector('[data-message-inner]');
+    }
+
+    show = () => {
+        this.$message.classList.add('show');
+    }
+
+    hide = () => {
+        this.$message.classList.remove('show');
+    }
+
+    set = (content) => {
+        this.$inner.innerHTML = content;
+    }
+
+    clear = () => {
+        this.$inner.innerHTML = '';
+    }
+
+}
+
+class Light {
+    constructor() {
+        this.$light = document.querySelector('#mainFrameLight');
+    }
+
+    show = (isBlink) => {
+        this.$light.classList.add('foreground');
+
+        if(isBlink){
+            this.$light.classList.add('blink');
+        }
+        this.$light.classList.add('show');
+    }
+
+    hide = () => {
+        setTimeout(() => {
+            this.$light.classList.remove('foreground');
+            this.$light.classList.remove('blink');
+        }, 700);
+        this.$light.classList.remove('show');
     }
 }
 
@@ -137,6 +209,7 @@ class MainFrame {
         if (!this.$mainFrame) return;
         this.form = new MainForm();
         this.light = new Light();
+        this.message = new MainFrameMessage();
         this.isShowForm = false;
         this.listeners();
     }
@@ -161,11 +234,38 @@ class MainFrame {
         this.light.show();
         setTimeout(() => {
             this.form.hide();
-        }, 700);
-
-        setTimeout(() => {
             this.light.hide();
         }, 700);
+    }
+
+    hideMessage = () => {
+        this.light.show();
+
+        setTimeout(() => {
+            this.message.hide();
+            this.message.clear();
+            this.light.hide();
+        }, 700);
+
+    }
+
+    sendHandler = async (e) => {
+        this.light.show(true);
+        e.preventDefault();
+        const rez = await this.form.send();
+        if(rez.success){
+            this.message.set(`<p>${rez.error}</p>`);
+            this.message.show();
+            setTimeout(() => {
+                this.hideForm();
+            }, 1000);
+        }
+    }
+
+    submitHandler = (e) => {
+        if(e.target.closest('#mainForm')){
+            this.sendHandler(e);
+        }
     }
 
     clickHandler = (e) => {
@@ -176,18 +276,9 @@ class MainFrame {
         if(e.target.closest('[data-main-form-close]')){
             this.hideForm();
         }
-    }
 
-    sendHandler = async (e) => {
-        e.preventDefault();
-        const response = await this.form.send();
-
-        console.log(response)
-    }
-
-    submitHandler = (e) => {
-        if(e.target.closest('#mainForm')){
-            this.sendHandler(e);
+        if(e.target.closest('[data-main-frame-message-close]')){
+            this.hideMessage();
         }
     }
 
@@ -197,23 +288,7 @@ class MainFrame {
     }
 }
 
-class Light {
-    constructor() {
-        this.$light = document.querySelector('#mainFrameLight');
-    }
 
-    show = () => {
-        this.$light.classList.add('foreground');
-        this.$light.classList.add('show');
-    }
-
-    hide = () => {
-        setTimeout(() => {
-            this.$light.classList.remove('foreground');
-        }, 700);
-        this.$light.classList.remove('show');
-    }
-}
 
 const mainFrame = new MainFrame();
 
