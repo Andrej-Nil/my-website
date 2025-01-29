@@ -1,0 +1,10 @@
+.main-frame-tab{
+    display: none;
+    width: 100%;
+    padding: 30px;
+    &.show{
+        display: block;
+    }
+}
+
+
