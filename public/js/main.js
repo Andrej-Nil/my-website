@@ -112,7 +112,8 @@ class MainForm {
         this.api = this.$form.action;
         this.service = new MainFormService(this.api);
         this.$inputList = this.$form.querySelectorAll('[data-input]')
-        this.$inputErrorList = this.$form.querySelectorAll('[data-control-errors]')
+        this.$inputErrorList = this.$form.querySelectorAll('[data-control-errors]');
+        this.listeners()
 
     }
 
@@ -150,14 +151,17 @@ class MainForm {
             }
         }
     }
+
     clearError = ($error) => {
         $error.innerHTML = '';
     }
+
     clearErrorList = () => {
         this.$inputErrorList.forEach(($item) => {
             this.clearError($item);
         })
     }
+
     clear = () => {
         this.$inputList.forEach(($input) => {
             $input.value = '';
@@ -177,28 +181,73 @@ class MainForm {
     hide = () => {
         this.$form.classList.remove('show');
     }
-}
 
-class MainTab{
-    constructor() {
-        this.$tabList = document.querySelectorAll('[data-main-frame-tab]');
-        this.$linkList = document.querySelectorAll('[data-main-frame-tab-link]');
-        this.init();
+    sendHandler = () => {
+        //     sendHandler = async (e) => {
+//
+//         e.preventDefault();
+//         const rez = await this.form.send();
+//         if(rez.success){
+//             setTimeout(() => {
+//                 this.message.set(`<p>${rez.message}</p>`);
+//                 this.message.show();
+//                 this.form.reset();
+//                 this.hideForm();
+//             }, 700);
+//         } else {
+//             setTimeout(() => {
+//                 this.form.showErrors();
+//                 light.hide();
+//             }, 700);
+//         }
+//     }
     }
-    init = () => {
-        this.listeners();
-    }
 
+    submitHandler = async (e) => {
+        e.preventDefault();
+        frameLight.show(true);
 
-    clickHandler = (e) => {
+        const rez = await this.send();
+        if(rez.success){
+            setTimeout(() => {
+                frameMessage.set(`<p>${rez.message}</p>`);
+                frame.replaceTab('message');
+                this.reset();
+                frameLight.hide();
+            }, 700);
+
+        } else {
+            this.createErrors()
+        }
 
     }
 
     listeners = () => {
-
+        this.$form.addEventListener('submit', this.submitHandler);
     }
 
 }
+//
+// class MainTab{
+//     constructor() {
+//         this.$tabList = document.querySelectorAll('[data-main-frame-tab]');
+//         this.$linkList = document.querySelectorAll('[data-main-frame-tab-link]');
+//         this.init();
+//     }
+//     init = () => {
+//         this.listeners();
+//     }
+//
+//
+//     clickHandler = (e) => {
+//
+//     }
+//
+//     listeners = () => {
+//
+//     }
+//
+// }
 
 class MainFrameMessage {
     constructor() {
@@ -211,14 +260,6 @@ class MainFrameMessage {
         this.$inner = document.querySelector('[data-message-inner]');
     }
 
-    show = () => {
-        this.$message.classList.add('show');
-    }
-
-    hide = () => {
-        this.$message.classList.remove('show');
-    }
-
     set = (content) => {
         this.$inner.innerHTML = content;
     }
@@ -229,7 +270,7 @@ class MainFrameMessage {
 
 }
 
-class Light {
+class FrameLight {
     constructor() {
         this.$light = document.querySelector('#mainFrameLight');
     }
@@ -246,104 +287,183 @@ class Light {
     hide = () => {
         setTimeout(() => {
             this.$light.classList.remove('foreground');
+        }, 300);
+        setTimeout(() => {
             this.$light.classList.remove('blink');
         }, 700);
         this.$light.classList.remove('show');
     }
 }
 
-class MainFrame {
+// class MainFrame {
+//     constructor() {
+//         this.$mainFrame = document.querySelector('#mainFrame');
+//         this.init();
+//     }
+//
+//     init = () => {
+//         if (!this.$mainFrame) return;
+//         this.form = new MainForm();
+//         this.message = new MainFrameMessage();
+//         this.isShowForm = false;
+//         this.listeners();
+//     }
+//
+//     showForm = () => {
+//         if( this.isShowForm) return
+//         this.isShowForm = true;
+//         light.show();
+//         setTimeout(() => {
+//             this.form.show()
+//             light.hide();
+//         }, 700);
+//     }
+//
+//     hideForm = () => {
+//         this.isShowForm = false;
+//         light.show();
+//         setTimeout(() => {
+//             this.form.hide();
+//             light.hide();
+//         }, 700);
+//     }
+//
+//     hideMessage = () => {
+//         light.show();
+//         setTimeout(() => {
+//             this.message.hide();
+//             this.message.clear();
+//             light.hide();
+//         }, 700);
+//
+//     }
+//
+//     sendHandler = async (e) => {
+//         light.show(true);
+//         e.preventDefault();
+//         const rez = await this.form.send();
+//         if(rez.success){
+//             setTimeout(() => {
+//                 this.message.set(`<p>${rez.message}</p>`);
+//                 this.message.show();
+//                 this.form.reset();
+//                 this.hideForm();
+//             }, 700);
+//         } else {
+//             setTimeout(() => {
+//                 this.form.showErrors();
+//                 light.hide();
+//             }, 700);
+//         }
+//     }
+//
+//     submitHandler = (e) => {
+//         if(e.target.closest('#mainForm')){
+//             this.sendHandler(e);
+//         }
+//     }
+//
+//     clickHandler = (e) => {
+//         if(e.target.closest('[data-main-form-btn]')){
+//             this.showForm();
+//         }
+//
+//         if(e.target.closest('[data-main-form-close]')){
+//             this.hideForm();
+//         }
+//
+//         if(e.target.closest('[data-main-frame-message-close]')){
+//             this.hideMessage();
+//         }
+//     }
+//
+//     listeners = () => {
+//         document.addEventListener('click', this.clickHandler);
+//         this.$mainFrame.addEventListener('submit', this.submitHandler)
+//     }
+// }
+
+class Frame {
     constructor() {
-        this.$mainFrame = document.querySelector('#mainFrame');
-        this.init();
+        this.$frame = document.querySelector('#mainFrame');
+        this.init()
     }
 
     init = () => {
-        if (!this.$mainFrame) return;
-        this.form = new MainForm();
-        this.message = new MainFrameMessage();
-        this.isShowForm = false;
-        this.listeners();
+        if(!this.$frame) return;
+        this.$tabList = this.$frame.querySelectorAll('[data-frame-tab]');
+        this.$nav = this.$frame.querySelector('[data-frame-nav]');
+        this.currentTabName = null;
+        this.listeners()
     }
 
-    showForm = () => {
-        if( this.isShowForm) return
-        this.isShowForm = true;
-        light.show();
+    replaceTab = (tabName) => {
+        this.$tabList.forEach(($tab) => {
+            this.hideTab($tab);
+            if($tab.dataset.frameTab === tabName){
+                this.showTab($tab);
+            }
+        })
+    }
+
+    showTab = ($tab) => {
+        $tab.classList.add('show');
+    }
+
+    hideTab = ($tab) => {
+        $tab.classList.remove('show');
+    }
+
+    showNav = () => {
+        this.$nav.classList.remove('hide');
+    }
+
+    hideNav = () => {
+        this.$nav.classList.add('hide');
+    }
+
+    replaceTabHandler = ($link) => {
+        const tabName = $link.dataset.frameTabLink;
+        if (this.currentTabName === tabName) return;
+        frameLight.show();
         setTimeout(() => {
-            this.form.show()
-            light.hide();
+            this.replaceTab(tabName);
+            frameLight.hide();
+            this.hideNav();
         }, 700);
     }
 
-    hideForm = () => {
-        this.isShowForm = false;
-        light.show();
+    closeTabbHandler = ($target) => {
+        const $tab = $target.closest('[data-frame-tab]');
+        if(!$tab) return;
+        frameLight.show();
         setTimeout(() => {
-            this.form.hide();
-            light.hide();
-        }, 700);
-    }
-
-    hideMessage = () => {
-        light.show();
-        setTimeout(() => {
-            this.message.hide();
-            this.message.clear();
-            light.hide();
+            this.replaceTab('');
+            frameLight.hide();
+            this.showNav();
         }, 700);
 
-    }
-
-    sendHandler = async (e) => {
-        light.show(true);
-        e.preventDefault();
-        const rez = await this.form.send();
-        if(rez.success){
-            setTimeout(() => {
-                this.message.set(`<p>${rez.message}</p>`);
-                this.message.show();
-                this.form.reset();
-                this.hideForm();
-            }, 700);
-        } else {
-            setTimeout(() => {
-                this.form.showErrors();
-                light.hide();
-            }, 700);
-        }
-    }
-
-    submitHandler = (e) => {
-        if(e.target.closest('#mainForm')){
-            this.sendHandler(e);
-        }
     }
 
     clickHandler = (e) => {
-        if(e.target.closest('[data-main-form-btn]')){
-            this.showForm();
+        if(e.target.closest('[data-frame-tab-link]')){
+            this.replaceTabHandler(e.target.closest('[data-frame-tab-link]'));
         }
-
-        if(e.target.closest('[data-main-form-close]')){
-            this.hideForm();
-        }
-
-        if(e.target.closest('[data-main-frame-message-close]')){
-            this.hideMessage();
+        if(e.target.closest('[data-frame-tab-close]')){
+            this.closeTabbHandler(e.target);
         }
     }
 
     listeners = () => {
         document.addEventListener('click', this.clickHandler);
-        this.$mainFrame.addEventListener('submit', this.submitHandler)
     }
 }
 
 
 
 
-
-const mainFrame = new MainFrame();
-const light = new Light();
+const frame = new Frame();
+const frameForm = new MainForm();
+const frameMessage = new MainFrameMessage();
+const frameLight = new FrameLight();
 

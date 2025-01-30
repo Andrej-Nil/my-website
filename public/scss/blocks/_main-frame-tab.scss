@@ -1,10 +1,20 @@
 .main-frame-tab{
     display: none;
     width: 100%;
-    padding: 30px;
     &.show{
         display: block;
     }
 }
 
+.main-frame-tab__inner{
+    display: flex;
+    height: 100%;
+    padding: 30px 70px;
+    overflow: auto;
+}
 
+.main-frame-tab__close{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
