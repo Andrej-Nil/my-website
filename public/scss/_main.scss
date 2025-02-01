@@ -25,10 +25,20 @@ body{
     margin: 50px 0;
 }
 
-
-
-
-
+.scroll{
+    //scrollbar-width: thin;
+    //scrollbar-color: rgba(255,255,255,1) rgba(155,155,155,1);
+    &::-webkit-scrollbar{
+        width: 4px
+    }
+    &::-webkit-scrollbar-track{
+        background: rgba(50,50,50,1);
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgb(204, 204, 204);
+        border-radius: 5px
+    }
+}
 
 
 

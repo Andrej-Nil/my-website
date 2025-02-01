@@ -1,13 +1,17 @@
 .main-form{
-    display: none;
+
     max-width: 500px;
     width: 100%;
     margin: auto;
-    &.show{
-        display: block;
-    }
 
 }
+
+.main-form__close{
+    position: absolute;
+    top: 4px;
+    right: 0;
+}
+
 
 .main-form__inner{
     position: relative;
@@ -15,8 +19,6 @@
     height: 100%;
     flex-direction: column;
 
-    //justify-content: center;
-    //align-items: center;
 }
 
 

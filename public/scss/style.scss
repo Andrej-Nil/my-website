@@ -7,10 +7,19 @@
 @import "componets/page-title";
 @import "componets/btn";
 @import "componets/input";
+@import "componets/main-close";
 
 
 @import "blocks/main";
+@import "blocks/main-header";
+
 @import "blocks/main-frame";
+@import "blocks/main-frame-light";
+@import "blocks/main-frame-message";
+@import "blocks/main-frame-nav";
+@import "blocks/main-frame-link";
+@import "blocks/main-frame-tab";
+
 @import "blocks/main-form";
 @import "blocks/control";
 

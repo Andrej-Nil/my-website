@@ -1,0 +1,34 @@
+.main-frame-link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    //border: 3px solid #ccc;
+    padding: 10px;
+    //width: 70px;
+    //height: 70px;
+    //background: #ccc;
+    &:hover .main-frame-link__icon{
+        background: #fff;
+    }
+
+    &:hover .main-frame-link__title{
+        color: #fff;
+    }
+}
+
+.main-frame-link__icon{
+    width: 60px;
+    height: 60px;
+    background: #ccc;
+    transition: 0.3s ease-in-out;
+}
+
+
+.main-frame-link__title{
+    font-size: 14px;
+    text-align: center;
+    color: #ccc;
+    transition: 0.3s ease-in-out;
+}

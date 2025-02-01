@@ -1,0 +1,33 @@
+.main-frame-message{
+    display: flex;
+    position: relative;
+    max-width: 500px;
+    align-items: center;
+    margin: 0 auto;
+
+}
+
+.main-frame-message__inner{
+
+    position: relative;
+}
+
+.main-frame-message__content{
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+    color: #ccc;
+    font-size: 18px;
+}
+
+.main-frame-message__text{
+    color: #ccc;
+    text-align: center;
+    font-size: 18px;
+}
+
+.main-form-message__close{
+    position: absolute;
+    top: 0px;
+    right: 0;
+}
