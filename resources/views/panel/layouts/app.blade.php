@@ -23,6 +23,10 @@
                 <li class="nav-item">
                     <a href="{{route('panel.posts')}}" class="nav-item__link">Посты</a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{route('panel.works')}}" class="nav-item__link">Примеры работ</a>
+                </li>
                 <li class="nav-item">
                     <a href="{{route('panel.images')}}" class="nav-item__link">Картинки</a>
                 </li>
