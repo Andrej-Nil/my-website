@@ -4,7 +4,7 @@ use App\Models\Image;
 
 class ImageRepository
 {
-        public static function getPagination(int $count = 40):array{
+    public static function getPagination(int $count = 40):array{
         return Image::limit($count)->orderBy('id', 'DESC')->get()->toArray();
     }
 

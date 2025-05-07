@@ -134,30 +134,17 @@
                      <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
                      <div class="main-frame-tab__inner scroll">
                          <div class="my-works">
-                             <a href="" target="_blank" class="my-work-card">
-                                 <img src="{{asset('img/my-photo.jpg')}}" alt="" class="my-work-card__img"/>
-                             </a>
-                             <a href="" target="_blank" class="my-work-card">
-                                 <img src="{{asset('img/my-photo.jpg')}}" alt="" class="my-work-card__img"/>
-                             </a>
+                             @foreach($workList as $work)
+                                 <a href="{{$work['url']}}" target="_blank" class="my-work-card">
+                                     <img src="{{$work['photo']['url']}}" alt="" class="my-work-card__img"/>
+                                 </a>
+                             @endforeach
 
-                             <a href="" target="_blank" class="my-work-card">
-                                 <img src="{{asset('img/my-photo.jpg')}}" alt="" class="my-work-card__img"/>
-                             </a>
-
-                             <a href="" target="_blank" class="my-work-card">
-                                 <img src="{{asset('img/my-photo.jpg')}}" alt="" class="my-work-card__img"/>
-                             </a>
-                             <a href="" target="_blank" class="my-work-card">
-                                 <img src="{{asset('img/my-photo.jpg')}}" alt="" class="my-work-card__img"/>
-                             </a>
                          </div>
                      </div>
                  </div>
 
                    <div data-frame-tab="contact" class="main-frame-tab">
-
-
                      <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
                      <div class="main-frame-tab__inner scroll">
                          <div class="about-me">

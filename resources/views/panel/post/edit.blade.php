@@ -88,7 +88,7 @@
         </div>
 
     </form>
-    <form id="deletePost" action="{{route('panel.posts.delete', $post['id'])}}" method="post">
+    <form id="deletePost"  action="{{route('panel.posts.delete', $post['id'])}}" method="post">
         @csrf
         @method('DELETE')
     </form>

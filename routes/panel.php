@@ -19,6 +19,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('panel/works/create', [\App\Http\Controllers\Admin\WorkController::class, 'create'] )->name('panel.works.create');
     Route::post('panel/works/', [\App\Http\Controllers\Admin\WorkController::class, 'store'] )->name('panel.works.store');
     Route::get('panel/works/{id}/edit', [\App\Http\Controllers\Admin\WorkController::class, 'edit'] )->name('panel.works.edit');
+    Route::put('panel/works/{id}', [\App\Http\Controllers\Admin\WorkController::class, 'update'] )->name('panel.works.update');
+    Route::delete('panel/works/{id}', [\App\Http\Controllers\Admin\WorkController::class, 'destroy'] )->name('panel.works.delete');
 
     Route::get('panel/images', [\App\Http\Controllers\Admin\ImageController::class, 'index'] )->name('panel.images');
     Route::delete('panel/images/{id}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'] )->name('panel.images.delete');

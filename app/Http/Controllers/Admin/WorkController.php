@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Work\StoreWorkRequest;
+use App\Http\Requests\Work\UpdateWorkRequest;
+use App\Repositories\WorkRepository;
 use Illuminate\Http\Request;
 
 class WorkController extends Controller
@@ -13,7 +15,9 @@ class WorkController extends Controller
      */
     public function index()
     {
-        return  view('panel.work.index');
+        $workList = WorkRepository::getPagination();
+
+        return  view('panel.work.index', ['workList' => $workList]);
     }
 
     /**
@@ -29,9 +33,7 @@ class WorkController extends Controller
      */
     public function store(StoreWorkRequest $request)
     {
-
-
-        $work = PostRepository::createPost($request->validated());
+        $work = WorkRepository::createWork($request->validated());
         return to_route('panel.works.edit', $work['id'])->with('success', 'Пример работы создан');
     }
 
@@ -46,24 +48,43 @@ class WorkController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Work $work)
+    public function edit($workId)
     {
-        //
+       $work = WorkRepository::getWorkById($workId);
+
+        if(!$work){
+            abort(404);
+        }
+
+        return  view('panel.work.edit', ['work' => $work]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Work $work)
+    public function update(UpdateWorkRequest $request, $workId)
     {
-        //
+        $work = WorkRepository::getWorkById($workId);
+
+        if(!$work){
+            abort(404);
+        }
+        WorkRepository::updateWork($workId, $request->validated());
+        return to_route('panel.works.edit', $work['id'])->with('success', 'Пример работы создан');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Work $work)
+    public function destroy($workId)
     {
-        //
+        $work = WorkRepository::getWorkById($workId);
+
+        if(!$work){
+            abort(404);
+        }
+
+        WorkRepository::deleteWork($workId);
+        return to_route('panel.works')->with('success', 'Пример работы ' . "'" . $work['title'] . "'" . ' удален');
     }
 }
