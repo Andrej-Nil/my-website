@@ -15,6 +15,11 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::put('panel/posts/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'] )->name('panel.posts.update');
     Route::delete('panel/posts/{id}', [\App\Http\Controllers\Admin\PostController::class, 'destroy'] )->name('panel.posts.delete');
 
+    Route::get('panel/hobbies', [\App\Http\Controllers\Admin\HobbyController::class, 'index'] )->name('panel.hobbies');
+    Route::get('panel/hobbies/create', [\App\Http\Controllers\Admin\HobbyController::class, 'create'] )->name('panel.hobbies.create');
+    Route::post('panel/hobbies', [\App\Http\Controllers\Admin\HobbyController::class, 'store'] )->name('panel.hobbies.store');
+    Route::delete('panel/hobbies/{id}', [\App\Http\Controllers\Admin\HobbyController::class, 'destroy'] )->name('panel.hobbies.delete');
+
     Route::get('panel/works', [\App\Http\Controllers\Admin\WorkController::class, 'index'] )->name('panel.works');
     Route::get('panel/works/create', [\App\Http\Controllers\Admin\WorkController::class, 'create'] )->name('panel.works.create');
     Route::post('panel/works/', [\App\Http\Controllers\Admin\WorkController::class, 'store'] )->name('panel.works.store');

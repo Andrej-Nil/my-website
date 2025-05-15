@@ -18,8 +18,6 @@ class CallbackController extends BaseController
 //        $validatedData = $request->validate([
 //            'number' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/|','min:9', 'min:15'],
 //        ]);
-
-
     }
 
 }

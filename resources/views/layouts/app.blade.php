@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <title>My website @yield('title', 'My website')</title>
 </head>
-<body>
+<body class="body">
 
 {{--<nav class="navbar navbar-expand-lg bg-body-tertiary">--}}
 {{--    <div class="container-fluid">--}}
@@ -51,7 +51,7 @@
 {{--</nav>--}}
 
 <div class="app">
-    <header class="header">
+    <header class="header ">
         <div class="header__inner container">
             <nav class="nav">
 
@@ -63,11 +63,16 @@
                     <a href="{{route('panel')}}" class="nav-item">Панель</a>
                     <span class="nav-item">{{auth()->user()->name}}</span>
                 @endauth
-
             </nav>
+            <div class="header__contacts">
+                <a href="tel:" class="nav-item">+7 897 989 09 09</a>
+                <a href="mailto:" class="nav-item">testtesttesttest@test.ru</a>
+            </div>
         </div>
     </header>
-    <div class="content">
+
+
+    <div class="wrapper">
 
 {{--        @if($errors->any())--}}
 {{--            <div class="alert alert-danger">--}}

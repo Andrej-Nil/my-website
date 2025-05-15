@@ -72,7 +72,6 @@ class WorkController extends Controller
         WorkRepository::updateWork($workId, $request->validated());
         return to_route('panel.works.edit', $work['id'])->with('success', 'Пример работы создан');
     }
-
     /**
      * Remove the specified resource from storage.
      */
