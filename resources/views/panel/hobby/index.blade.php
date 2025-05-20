@@ -33,18 +33,18 @@
 
             {{--                --}}
             {{--            </div>--}}
-            @forelse($hobbyList as $hobbyList)
+            @forelse($hobbyList as $hobby)
                 <div class="list-item">
                     <p class="list-item__title">
                         <span class="list-item__name">{{$hobby['title']}}</span>
                     </p>
-                    <a href="{{route('post.show', $hobby['id'])}}" target="_blank" class="list-item__btn" title="Открыть на сайте">
-                        <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
-                    </a>
-                    <a href="{{route('panel.posts.edit', $hobby['id'])}}" class="list-item__btn" title="Редоктировать">
+{{--                    <a href="{{route('post.show', $hobby['id'])}}" target="_blank" class="list-item__btn" title="Открыть на сайте">--}}
+{{--                        <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >--}}
+{{--                    </a>--}}
+                    <a href="{{route('panel.hobbies.edit', $hobby['id'])}}" class="list-item__btn" title="Редоктировать">
                         <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
                     </a>
-                    <form action="{{route('panel.posts.delete', $hobby['id'])}}" method="post" title="Удалить">
+                    <form action="{{route('panel.hobbies.delete', $hobby['id'])}}" method="post" title="Удалить">
                         @csrf
                         @method('DELETE')
                         <button  type="submit" class="list-item__btn">

@@ -110,6 +110,7 @@ class UploadRender extends Render{
     constructor($uploadFile) {
         super();
         this.$uploadFile = $uploadFile;
+        this.name = $uploadFile.dataset.name;
         this.$preview = this.$uploadFile.querySelector('[data-upload-preview]');
         this.loader = new Loader();
     }
@@ -134,10 +135,9 @@ class UploadRender extends Render{
 
 
     getPhotoHtml = (photo) => {
-        console.log(photo);
         return `
             <div data-upload-photo="${photo.id}" class="upload-file-photo">
-                <input type="hidden" name="photo_id" value="${photo.id}">
+                <input type="hidden" name="${this.name}" value="${photo.id}">
                 <img class="upload-file-photo__img" src="${photo.url}" alt=""/>
                 <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
                 <button data-delete-photo type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
@@ -186,17 +186,23 @@ class Upload {
 
     init = () => {
         if (!this.$uploadFile) return;
+        this.type = this.$uploadFile.dataset.upload;
         this.$input = this.$uploadFile.querySelector('[data-upload-input]');
         this.api = this.$uploadFile.dataset.uploadApi;
         this.service = new UploadService(this.api);
         this.render = new UploadRender(this.$uploadFile);
         this.listeners();
+
     }
 
     uploadPhoto = async () => {
         this.disableInput();
-        this.render.clearPreview();
+
+        if(this.type !== 'multi'){
+            this.render.clearPreview();
+        }
         this.render.createLoader();
+
         const file = this.$input.files[0];
         const response = await this.service.fetchFileLink(file);
         if(response.success){
@@ -215,7 +221,9 @@ class Upload {
        this.render.delete($target.closest('[data-upload-photo]'));
     }
     clickHandler = (e) => {
+
         if(e.target.closest('[data-delete-photo]')){
+            console.log('  console.log')
             this.deletePhoto(e.target);
         }
     }

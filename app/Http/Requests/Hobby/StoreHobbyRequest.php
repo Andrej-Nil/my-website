@@ -24,8 +24,8 @@ class StoreHobbyRequest extends FormRequest
         return [
             'title'     => ['required', 'string', 'max:255'],
             'photo_id'     => ['nullable', 'exists:images,id'],
-            'link' => ['required', 'string', 'max:255'],
-            'display' => ['required', 'string', 'max:255'],
+            'text' => ['nullable', 'string'],
+            'photo_list'     => ['nullable', 'array'],
             'is_display' => ['nullable', 'boolean']
         ];
     }
@@ -37,12 +37,8 @@ class StoreHobbyRequest extends FormRequest
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
             'photo_id.exists'   => 'Изображения было удалено или не существует',
-            'link.required'    => 'Поле "Название" обязательно для заполнения',
-            'link.string'      => 'Поле "Название" должно быть строкой',
-            'link.max'         => 'Поле "Название" не должно превышать 255 символов',
-            'display.required'    => 'Поле "Название" обязательно для заполнения',
-            'display.string'      => 'Поле "Название" должно быть строкой',
-            'display.max'         => 'Поле "Название" не должно превышать 255 символов',
+            'text.string'       => 'Поле "Название" должно быть строкой',
+            'photo_list.boolean'        => 'Не верный тип данных'
         ];
     }
 

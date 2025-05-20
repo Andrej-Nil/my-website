@@ -18,6 +18,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('panel/hobbies', [\App\Http\Controllers\Admin\HobbyController::class, 'index'] )->name('panel.hobbies');
     Route::get('panel/hobbies/create', [\App\Http\Controllers\Admin\HobbyController::class, 'create'] )->name('panel.hobbies.create');
     Route::post('panel/hobbies', [\App\Http\Controllers\Admin\HobbyController::class, 'store'] )->name('panel.hobbies.store');
+    Route::get('panel/hobbies/{id}/edit', [\App\Http\Controllers\Admin\HobbyController::class, 'edit'] )->name('panel.hobbies.edit');
+    Route::put('panel/hobbies/{id}', [\App\Http\Controllers\Admin\HobbyController::class, 'update'] )->name('panel.hobbies.update');
     Route::delete('panel/hobbies/{id}', [\App\Http\Controllers\Admin\HobbyController::class, 'destroy'] )->name('panel.hobbies.delete');
 
     Route::get('panel/works', [\App\Http\Controllers\Admin\WorkController::class, 'index'] )->name('panel.works');

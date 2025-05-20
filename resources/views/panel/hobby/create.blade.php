@@ -25,7 +25,7 @@
 
         <div class="form-control">
             <span class="form-control__label">Главное фото</span>
-            <div data-upload class="upload-file" data-name="photo" data-upload-api="{{route('upload.photo')}}">
+            <div data-upload class="upload-file" data-name="photo_id" data-upload-api="{{route('upload.photo')}}">
                 <div class="form-control__body">
                     <label class="upload-file-btn">
                         <input data-upload-input type="file" class="upload-file-btn__input">
@@ -54,7 +54,7 @@
 
         <div class="form-control">
                 <span class="form-control__label">Дополнительные фото</span>
-                <div data-upload class="upload-file" data-name="photo-list" data-upload-api="{{route('upload.photo')}}">
+                <div data-upload="multi" class="upload-file" data-name="photo_list[]" data-upload-api="{{route('upload.photo')}}">
                     <div class="form-control__body">
                         <label class="upload-file-btn">
                             <input data-upload-input type="file" class="upload-file-btn__input">

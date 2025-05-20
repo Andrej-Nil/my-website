@@ -53,7 +53,7 @@
                                 <input type="hidden" name="photo_id" value="{{$work['photo']['id']}}">
                                 <img class="upload-file-photo__img" src="{{$work['photo']['url']}}" alt=""/>
                                 <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
-                                <button type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
+                                <button type="button" data-delete-photo class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
                             </div>
                         @endif
 
