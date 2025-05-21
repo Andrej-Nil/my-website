@@ -14,7 +14,6 @@ class HobbyRepository
         return Hobby::with('photo')->limit($count)->orderBy('id', 'DESC')->get()->toArray();
     }
 
-
     public static function createHobby(array $data):array{
         return Hobby::create($data)->toArray();
     }

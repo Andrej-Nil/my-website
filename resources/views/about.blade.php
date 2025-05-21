@@ -39,61 +39,36 @@
                         Какой то заголовок
                     </div>
 
-                    <div class="page-subtitle block">
-                        Какой то заголовок
-                    </div>
 
-                    <div class="hobby block mb-60">
-                        <div class="hobby__body">
-                            <div class="hobby__text">
-                                <p class="hobby__title">Здесь будут какойто тайтел</p>
-                                <p class="hobby__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolorem eum facilis magnam reiciendis? Accusamus accusantium ad consectetur distinctio dolorum ea, eligendi et eum illo ipsam,.</p>
+
+                    @foreach($hobbyList as $hobby)
+                        <div class="hobby block mb-60">
+                            <div class="hobby__body">
+                                <div class="hobby__text">
+                                    <p class="hobby__title">{{$hobby['title']}}</p>
+                                    <p class="hobby__text">{{$hobby['text']}}</p>
+                                </div>
+                                <img src="{{$hobby['photo']['url']}}" alt="" class="hobby__img" />
+
                             </div>
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__img" />
-
-                        </div>
 
 
-                        <div class="hobby__photos">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                        </div>
-                    </div>
-                    <div class="hobby block mb-60">
-                        <div class="hobby__body">
-                            <div class="hobby__text">
-                                <p class="hobby__title">Здесь будут какойто тайтел</p>
-                                <p class="hobby__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolorem eum facilis magnam reiciendis? Accusamus accusantium ad consectetur distinctio dolorum ea, eligendi et eum illo ipsam,.</p>
+
+                            @if($hobby['photo_list'])
+                            <div class="hobby__photos">
+
+                                @foreach($hobby['img_list'] as $img)
+                                    <div class="hobby-photo">
+                                        <img src="{{$img['url']}}" alt="" class="hobby-photo__img">
+                                    </div>
+                                @endforeach
                             </div>
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__img" />
-
+                            @endif
                         </div>
+                    @endforeach
 
 
-                        <div class="hobby__photos">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                        </div>
-                    </div>
-                    <div class="hobby block mb-60">
-                        <div class="hobby__body">
-                            <div class="hobby__text">
-                                <p class="hobby__title">Здесь будут какойто тайтел</p>
-                                <p class="hobby__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolorem eum facilis magnam reiciendis? Accusamus accusantium ad consectetur distinctio dolorum ea, eligendi et eum illo ipsam,.</p>
-                            </div>
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__img" />
 
-                        </div>
-
-
-                        <div class="hobby__photos">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                            <img src="{{asset('img/my-photo.jpg')}}" alt="" class="hobby__photo">
-                        </div>
-                    </div>
 
                 </div>
 

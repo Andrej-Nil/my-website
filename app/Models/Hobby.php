@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Repositories\ImageRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class Hobby extends Model
@@ -21,11 +22,14 @@ class Hobby extends Model
         'photo_list'=> 'array',
     ];
 
+    protected $appends = [
+        'img_list'
+    ];
+
     public function photo(){
         return $this->hasOne(Image::class, 'id' ,'photo_id');
     }
-
-    public function photo_list(){
-        return $this->hasOne(Image::class, 'id' ,'photo_list');
+    public function getImgListAttribute(){
+        return ImageRepository::getImgById($this->photo_list);
     }
 }
