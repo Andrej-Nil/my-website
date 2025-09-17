@@ -51,23 +51,45 @@
 {{--</nav>--}}
 
 <div class="app">
-    <header class="header ">
-        <div class="header__inner container">
-            <nav class="nav">
+{{--    <header class="header ">--}}
+{{--        <div class="header__inner ">--}}
+{{--            <nav class="nav">--}}
 
-                <a href="{{route('home')}}" class="nav-item">Главная</a>
-                <a href="{{route('about')}}" class="nav-item">Обо мне</a>
-                <a href="{{route('post.index')}}" class="nav-item">Блог</a>
-                <a href="{{route('contact')}}" class="nav-item">Контакты</a>
-                @auth
-                    <a href="{{route('panel')}}" class="nav-item">Панель</a>
-                    <span class="nav-item">{{auth()->user()->name}}</span>
-                @endauth
-            </nav>
-            <div class="header__contacts">
-                <a href="tel:" class="nav-item">+7 897 989 09 09</a>
-                <a href="mailto:" class="nav-item">testtesttesttest@test.ru</a>
-            </div>
+{{--                <a href="{{route('home')}}" class="nav-item">Главная</a>--}}
+{{--                <a href="{{route('resume')}}" class="nav-item">Резюме</a>--}}
+{{--                <a href="{{route('about')}}" class="nav-item">Обо мне</a>--}}
+{{--                <a href="{{route('post.index')}}" class="nav-item">Блог</a>--}}
+{{--                <a href="{{route('contact')}}" class="nav-item">Контакты</a>--}}
+{{--                @auth--}}
+{{--                    <a href="{{route('panel')}}" class="nav-item">Панель</a>--}}
+{{--                    <span class="nav-item">{{auth()->user()->name}}</span>--}}
+{{--                @endauth--}}
+{{--            </nav>--}}
+{{--            <div class="header__contacts">--}}
+{{--                <a href="tel:" class="nav-item">+7 897 989 09 09</a>--}}
+{{--                <a href="mailto:" class="nav-item">testtesttesttest@test.ru</a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
+
+    <header class="main-header">
+        <div class="main-nav">
+            <a href="{{route('home')}}" class="main-nav-item">Главное</a>
+            <a href="{{route('resume')}}" class="main-nav-item">Вуыс</a>
+            <a href="{{route('about')}}" class="main-nav-item">авыаыва ыаывавыа</a>
+            <a href="{{route('post.index')}}" class="main-nav-item">Бываывалок</a>
+            <a href="{{route('contact')}}" class="main-nav-item">авываыва</a>
+            @if(!(\Illuminate\Support\Facades\Auth::check()))
+                <a href="{{route('login')}}" class="main-nav-item">Вход</a>
+            @else
+                <a class="main-nav-item" href="{{route('panel')}}">Панель</a>
+                <span  class="main-nav-item">{{auth()->user()->name}}</span>
+            @endif
+        </div>
+
+        <div class="main-contacts">
+            <a href="tel:+7 898 909 90 09" class="main-contact">+7 898 909 90 09</a>
+            <a href="mailto:dskjjdfh" class="main-contact">test@test</a>
         </div>
     </header>
 
@@ -93,11 +115,17 @@
         @yield('content')
 
     </div>
-    <footer class="footer">
-        <div class="footer__inner container">
-            Это подвал
-        </div>
+    <footer class="main-footer">
+        dnfbdhjfdfh
+
+        {{--           <div class="signature">--}}
+        {{--               <h1 class="signature-name">Кучеров Андрей</h1>--}}
+        {{--               <p class="signature-profession">front-end разработчик</p>--}}
+        {{--           </div>--}}
     </footer>
+
+
+
 </div>
 
 <script src="{{asset('js/main.js')}}"></script>

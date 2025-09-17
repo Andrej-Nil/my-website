@@ -1,18 +1,19 @@
 .nav{
     display: flex;
-    gap: 30px;
+    gap: 10px;
 }
 
 .nav-item{
     position: relative;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     transition: 0.2s ease-in-out;
-    //padding: 10px 10px;
+    padding: 10px 10px;
     //bottom: 0;
+    color: #d0d0d0;
     &:hover{
         //transform: translateY(-5px);
-        color: #7fa0fa;
+        color: #ffffff;
     }
 }
 

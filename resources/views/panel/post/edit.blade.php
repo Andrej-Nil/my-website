@@ -82,7 +82,6 @@
             {{--            <textarea id="postText" rows="10"  class="input" name="title" placeholder="Описание"></textarea>--}}
         </div>
         <div class="form__bottom">
-
             <button type="submit" form="deletePost" class="btn btn--red">Удалить</button>
             <button type="submit" class="btn btn--yellow">Сохранить</button>
         </div>

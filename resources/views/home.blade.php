@@ -8,6 +8,7 @@
        <header class="main-header">
            <div class="main-nav">
                <a href="{{route('home')}}" class="main-nav-item">Главное</a>
+               <a href="{{route('resume')}}" class="main-nav-item">Вваыпва</a>
                <a href="{{route('about')}}" class="main-nav-item">Обо мне</a>
                <a href="{{route('post.index')}}" class="main-nav-item">Блок</a>
                <a href="{{route('contact')}}" class="main-nav-item">Контакты</a>

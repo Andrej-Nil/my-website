@@ -3,17 +3,28 @@
 @import 'grid';
 
 @import 'margins';
-
+@import "main-page/blocks/main";
+//@import 'blocks/header';
+@import "main-page/blocks/main-header";
+@import "main-page/blocks/main-nav";
+@import "main-page/blocks/main-contacts";
 @import "componets/page-title";
 @import "componets/page-subtitle";
 
 @import 'blocks/body';
-@import 'blocks/header';
+
+
 @import 'blocks/block';
 @import 'blocks/breadcrumbs';
 @import 'blocks/wrap-with-sidebar';
 @import 'blocks/sidebar';
 @import 'blocks/sidebar-nav';
+
+
+@import 'blocks/resume';
+@import 'blocks/badge';
+@import 'blocks/resume-group';
+
 
 @import 'blocks/about';
 @import 'blocks/hobby';

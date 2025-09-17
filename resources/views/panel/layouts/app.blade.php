@@ -21,6 +21,10 @@
 
             <ul class="nav">
                 <li class="nav-item">
+                    <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт</a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('panel.posts')}}" class="nav-item__link">Посты</a>
                 </li>
 

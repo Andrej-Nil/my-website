@@ -100,6 +100,28 @@ class MainFormService extends Service {
     }
 }
 
+class Container {
+    constructor(selector, ParentClass) {
+        this.selector = selector;
+        this.$elList = document.querySelectorAll(this.selector);
+        this.ParentClass = ParentClass;
+        this.list = [];
+        this.init()
+    }
+
+
+    init = () => {
+      if(!this.$elList.length) return;
+        this.$elList.forEach(($el) => {
+            this.set($el);
+        })
+    }
+
+    set = ($el) => {
+        this.list.push(new this.ParentClass($el));
+    }
+}
+
 class MainForm {
     constructor() {
         this.$form = document.querySelector('#mainForm');
@@ -459,11 +481,54 @@ class Frame {
     }
 }
 
+class Group {
+    constructor($group) {
+        this.$group = $group;
+        this.init();
+    }
+
+    init = () => {
+        if (!this.$group) return;
+        this.$showBtn = this.$group.querySelector('[data-group-btn="show"]');
+        this.$hideBtn = this.$group.querySelector('[data-group-btn="hide"]');
+        this.listeners();
+    }
 
 
+
+    showGroupHidden = () => {
+        this.$group.classList.remove('display-only-first');
+        this.$showBtn.classList.add('hide');
+        this.$hideBtn.classList.remove('hide');
+    }
+
+    hideGroupHidden = () => {
+        this.$group.classList.add('display-only-first');
+        this.$hideBtn.classList.add('hide');
+        this.$showBtn.classList.remove('hide');
+    }
+    // clickHandler = (e) => {
+    //     if(e.target.closest('[data-group-btn="show"]')){
+    //
+    //     }
+    //
+    //     if(e.target.closest('[data-group-btn="hide"]')){
+    //
+    //     }
+    // }
+
+    listeners = () => {
+        this.$showBtn.addEventListener('click', this.showGroupHidden);
+        this.$hideBtn.addEventListener('click', this.hideGroupHidden);
+
+        // document.addEventListener('click', this.clickHandler);
+    }
+}
 
 const frame = new Frame();
 const frameForm = new MainForm();
 const frameMessage = new MainFrameMessage();
 const frameLight = new FrameLight();
+
+const groupContainer = new Container('[data-group]', Group)
 

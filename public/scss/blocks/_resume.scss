@@ -1,0 +1,87 @@
+.resume{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.resume__row{
+    display: flex;
+    width: 100%;
+    gap: 24px;
+}
+
+.resume__top{
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+}
+
+.resume__body{
+    display: flex;
+
+}
+
+.resume__main{
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    flex-grow: 1;
+    padding: 25px 15px;
+    gap: 24px;
+}
+
+.resume__data{
+    display: flex;
+    flex-direction: column;
+    width: 480px;
+    background: #215eb2;
+    flex-shrink: 0;
+    padding: 25px 15px;
+    gap: 24px;
+    *{
+        color: #fff;
+
+    }
+
+    .resume-block__title{
+        border-color: #fff;
+    }
+}
+
+.resume-block{
+
+}
+
+.resume-block__title{
+    font-size: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+    margin-bottom: 10px;
+}
+
+.resume-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resume-list-item{
+    display: flex;
+    gap: 24px;
+}
+
+.resume-list-item__label{
+    width: 180px;
+    font-size: 16px;
+}
+
+.resume-list-item__value{
+    font-size: 14px;
+}
+
+.resume-block__content{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+

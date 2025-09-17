@@ -7,10 +7,12 @@ body{
     font-size: 16px;
     color: #444;
 }
+
 .app{
     display: flex;
     flex-direction: column;
     min-height: 100%;
+
 }
 
 .container{
@@ -22,7 +24,8 @@ body{
 
 .wrapper {
     flex: 1 0 auto;
-    margin: 50px 0;
+    margin: 20px 0;
+    //margin: 50px 0;
 }
 
 .scroll{

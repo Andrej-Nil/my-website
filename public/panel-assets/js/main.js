@@ -15,7 +15,6 @@ class Container{
 
 }
 
-
 class Render {
     delete = ($element) => {
         if (!$element) {
@@ -77,7 +76,6 @@ class Loader extends Render{
     }
 }
 
-
 class Service{
     constructor() {
         this.POST = 'POST';
@@ -101,6 +99,8 @@ class Service{
             headers: options.headers
         });
     }
+
+
     getToken = () => {
         return document.querySelector('[name="csrf-token"]').content;
     }
@@ -237,7 +237,6 @@ class Upload {
 
     }
 
-
     checkExtension = (file) => {
         const extension = file.name.split('.').pop().toLowerCase()
         if (this.validExtensions.indexOf(extension) <= -1) {
@@ -255,7 +254,215 @@ class Upload {
     }
 }
 
+
+
+
+// class Mover{
+//     constructor() {
+//         this.$wrapper = null;
+//         this.$draggingEl = null;
+//     }
+//
+//
+//     startMove = ($el) => {
+//         this.$draggingEl = $el;
+//         this.setOpacity()
+//     }
+//
+//     setOpacity = () => {
+//         this.$draggingEl.style.opacity = 0.2;
+//     }
+//
+//     endMove = () => {
+//         this.resetOpacity();
+//         this.resetDraggingEl();
+//     }
+//
+//     out = (e) => {
+//         e.preventDefault();
+//         const currentElement = e.target.closest('[data-mover-item]');
+//         if((currentElement !== this.$draggingEl) && e.target.closest('[data-mover-item]')){
+//             const nextElement = this.getNextElement(e.clientY, currentElement);
+//             this.$wrapper.insertBefore(this.$draggingEl, nextElement);
+//         }
+//     }
+//
+//     resetOpacity = () => {
+//         this.$draggingEl.style.opacity = 1;
+//     }
+//
+//     resetDraggingEl = () => {
+//         this.$draggingEl = null;
+//     }
+//
+//     getNextElement = (clientY, currentElement) => {
+//         const currentElementCoord = currentElement.getBoundingClientRect();
+//         const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+//         return (clientY < currentElementCenter) ? currentElement : currentElement.nextElementSibling;
+//     }
+// }
+
+
+class ManualListSorterService extends Service{
+    constructor(api) {
+        super();
+        this.api = api
+    }
+
+
+    updateSort = async (idList) => {
+        const formData = new FormData();
+
+        idList.forEach((id) => {
+            formData.append('id_list[]', id);
+        });
+        return await this.post(this.api, {
+            data: formData,
+            headers: {
+                "X-CSRF-Token": this._token
+            }
+        })
+    }
+}
+
+
+
+class ManualListSorter{
+    constructor() {
+        this.$sortableBlock = document.querySelector('[data-sortable-list]');
+        this.init();
+    }
+
+    init = () => {
+        if(!this.$sortableBlock) return;
+        this.$loader = this.$sortableBlock.querySelector('[data-sortable-loader]');
+        this.service = new ManualListSorterService(this.$sortableBlock.dataset.api);
+        this.$draggingEl = null;
+        this.api = this.$sortableBlock.dataset.api;
+        this.listeners();
+    }
+
+
+    dragstartHandler = (e) => {
+
+        const $item = e.target.closest('[data-sortable-item]');
+        const $wrapItem = e.target.closest('[data-sortable-list]');
+        if($item && $wrapItem === this.$sortableBlock){
+            this.startMove(e.target.closest('[data-sortable-item]'));
+        }
+    }
+
+
+    startMove = ($el) => {
+        this.$draggingEl = $el;
+        this.setOpacity()
+    }
+
+
+    setOpacity = () => {
+        this.$draggingEl.style.opacity = 0.2;
+    }
+
+    dragendHandler = (e) => {
+        const $item = e.target.closest('[data-sortable-item]');
+        const $wrapItem = e.target.closest('[data-sortable-list]');
+        if($item && $wrapItem === this.$sortableBlock){
+            this.endMove();
+            this.updateSortHandler();
+        }
+    }
+
+    endMove = () => {
+        this.resetOpacity();
+        this.resetDraggingEl();
+    }
+
+
+    resetOpacity = () => {
+        this.$draggingEl.style.opacity = 1;
+    }
+
+    resetDraggingEl = () => {
+        this.$draggingEl = null;
+    }
+
+    dragoverHandler = (e) => {
+        this.out(e);
+    }
+
+    out = (e) => {
+        e.preventDefault();
+        const currentElement = e.target.closest('[data-sortable-item]');
+        if((currentElement !== this.$draggingEl) && e.target.closest('[data-sortable-item]')){
+            const nextElement = this.getNextElement(e.clientY, currentElement);
+            this.$sortableBlock.insertBefore(this.$draggingEl, nextElement);
+        }
+    }
+
+    getNextElement = (clientY, currentElement) => {
+        const currentElementCoord = currentElement.getBoundingClientRect();
+        const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+        return (clientY < currentElementCenter) ? currentElement : currentElement.nextElementSibling;
+    }
+
+    updateSortHandler = async () => {
+        this.showLoader();
+        const result = await this.service.updateSort(this.getIdList());
+
+        if(result.success){
+            this.hideLoader();
+
+        }else {
+            this.showError();
+            this.hideLoader();
+        }
+
+    }
+
+    showLoader = () => {
+        this.$loader.classList.add('show');
+        this.hideError();
+    }
+    hideLoader = () => {
+        this.$loader.classList.remove('show');
+        this.hideError();
+    }
+
+    showError = () => {
+        this.$loader.classList.add('error');
+
+    }
+
+    hideError = () => {
+        this.$loader.classList.remove('error');
+    }
+    getIdList = () => {
+        const $itemList = this.$sortableBlock.querySelectorAll('[data-sortable-item]');
+        return Array.from($itemList).map(($item) => {
+            return $item.dataset.sortableItem;
+        })
+    }
+
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-loader-close]')){
+            this.hideLoader()
+        }
+    }
+    listeners = () => {
+        this.$sortableBlock.addEventListener('click', this.clickHandler)
+        this.$sortableBlock.addEventListener('dragstart', this.dragstartHandler);
+        this.$sortableBlock.addEventListener('dragend', this.dragendHandler);
+        this.$sortableBlock.addEventListener('dragover', this.dragoverHandler);
+    }
+}
+
 const uploadContainer = new Container('[data-upload]', Upload);
+
+const manualListSorter = new ManualListSorter();
+
+
+
 
 
 
