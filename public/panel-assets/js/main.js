@@ -106,6 +106,7 @@ class Service{
     }
 }
 
+
 class UploadRender extends Render{
     constructor($uploadFile) {
         super();
@@ -217,8 +218,8 @@ class Upload {
 
 
     deletePhoto = ($target) => {
-       this.$input.value = '';
-       this.render.delete($target.closest('[data-upload-photo]'));
+        this.$input.value = '';
+        this.render.delete($target.closest('[data-upload-photo]'));
     }
     clickHandler = (e) => {
 
@@ -253,8 +254,295 @@ class Upload {
         this.$input.addEventListener('input', this.uploadPhoto);
     }
 }
-
-
+// class FileService extends Service{
+//     constructor(type) {
+//         super();
+//         this.api = '/api-panel/upload/' + type;
+//     }
+//
+//     fetchFileUrl = (file) => {
+//         const data = new FormData();
+//         data.append('file', file);
+//         return this.post(
+//             this.api,
+//             {
+//                 data: data,
+//                 headers: {
+//                     "X-CSRF-Token": this._token,
+//                     // "Content-Type": "multipart/form-data",
+//                 }
+//             }
+//         )
+//     }
+// }
+//
+// class FileRender extends Render{
+//     constructor($parent) {
+//         super();
+//         this.$parent = $parent;
+//     }
+//
+//     empty = (name) => {
+//         this.render(this.$parent, this.getEmptyHtml, name);
+//     }
+//
+//     photo = (data) => {
+//         this.render(this.$parent, this.getPhotoHtml, data);
+//     }
+//     file = (data) => {
+//         this.render(this.$parent, this.getFileHtml, data);
+//     }
+//     video = (data) => {
+//         this.render(this.$parent, this.getVideoHtml, data);
+//     }
+//
+//     clearList = () => {
+//         this.clear(this.$parent);
+//     }
+//
+//     getPhotoHtml = (data) => {
+//         return `
+//             <div data-file-item class="file-cart">
+//                 ${this.getImgHtml(data.url)}
+//                 ${this.getTopBtnHtml(data)}
+//                 ${this.getBottomBtnHtml()}
+//                 ${this.getHiddenInputHtml(data)}
+//             </div>
+//         `
+//     }
+//
+//     error = ($el, data) => {
+//         this.render($el, this.getErrorHtml, data, false, 'afterend')
+//     }
+//
+//     getFileHtml = (data) => {
+//         return `
+//             <div data-file-item class="file-cart">
+//                 ${this.getFileNameHtml(data.url)}
+//                 ${this.getTopLinkHtml(data.url)}
+//                 ${this.getBottomBtnHtml()}
+//                 ${this.getHiddenInputHtml(data)}
+//             </div>
+//         `
+//     }
+//
+//     getVideoHtml = (data) => {
+//         return `
+//             <div data-file-item class="file-cart">
+//                 ${this.getVideoBlockHtml(data.url)}
+//                 ${this.getTopBtnHtml(data)}
+//                 ${this.getBottomBtnHtml()}
+//                 ${this.getHiddenInputHtml(data)}
+//             </div>
+//         `
+//     }
+//
+//     //
+//     //    ${data.type === 'photo' ? this.getPhotoPreview(data.url) : '' }
+//     //    ${data.type === 'file' ? this.getFilePreview(data.title) : '' }
+//     //
+//     //
+//     //
+//     //
+//     getImgHtml = (url) => {
+//         return `
+//             <img class="file-cart__img" src="${url}" alt="photo">
+//         `
+//     }
+//
+//     getTopBtnHtml = (data) => {
+//         return `
+//             <button class="file-cart__btn top" data-zoom="${data.url}" data-item-type="${data.type}" type="button">Просмотр</button>
+//         `
+//     }
+//
+//     getTopLinkHtml = (url) => {
+//         return `
+//             <a href="${url}" class="file-cart__btn top" data-show-item type="button">Просмотр</a>
+//         `
+//     }
+//
+//     getBottomBtnHtml = () => {
+//         return `
+//             <button class="file-cart__btn bottom" data-remove-item type="button">Удалить</button>
+//         `
+//     }
+//
+//     getVideoBlockHtml = (url) => {
+//         return `<video class="file-cart__video" src="${url}"></video>`
+//     }
+//
+//     getHiddenInputHtml = (data) => {
+//         return `
+//             <input type="hidden" name="${data.name}[]" value="${data.url}">
+//         `
+//     }
+//     getFileNameHtml = (title) => {
+//         return `
+//          <div class="file-cart__img">
+//             <span class="file-cart__text">${title}</span>
+//          </div>
+//         `
+//     }
+//     getEmptyHtml = (name) => {
+//         return `
+//             <input data-empty-input type="hidden" name="${name}">
+//         `
+//     }
+//
+//
+//     getErrorHtml = (data) => {
+//         return `
+//          <span data-message-error="${data.id}" class="invalid-feedback" role="alert">
+//             <strong>${data.message}</strong>
+//         </span>
+//         `
+//
+//     }
+// }
+//
+// class FileControl{
+//     constructor($file) {
+//         this.$file = $file;
+//         this.init();
+//     }
+//
+//     init(){
+//         if(!this.$file) return false;
+//         this.type = this.$file.dataset.file;
+//         this.quantity = this.$file.dataset.quantity;
+//         this.$input = this.$file.querySelector('[data-file-input]');
+//         this.name =  this.$input.dataset.fileInput;
+//         this.$fileList = this.$file.querySelector('[data-file-list]');
+//         this.$emptyInput = this.$fileList.querySelector('[data-empty-input]');
+//
+//         this.service = new FileService(this.type);
+//         this.render = new FileRender(this.$fileList);
+//
+//         this.listeners();
+//     }
+//
+//
+//     fetchItem = async (e) => {
+//         this.clearError()
+//         const response = await this.service.fetchFileUrl(e.target.files[0], this.type);
+//
+//         if(response.success){
+//             this.successHandler(response);
+//         } else {
+//             this.errorHandler(response);
+//         }
+//
+//     }
+//     errorHandler = (response) => {
+//         this.$input.value = '';
+//         this.createError(response.message);
+//     }
+//
+//     clearError = () => {
+//         this.$input.classList.remove('is-invalid');
+//         const $errorMessage = document.querySelector(`[data-message-error="${this.$input.id}"]`)
+//         if($errorMessage){
+//             this.render.delete($errorMessage);
+//         }
+//     }
+//     createError = (message) => {
+//         this.clearError();
+//         const data = {
+//             id: this.$input.id,
+//             message: message
+//         }
+//         this.$input.classList.add('is-invalid');
+//         this.render.error(this.$input, data);
+//     }
+//     successHandler = (response) => {
+//         const data ={
+//             url: response.data.url,
+//             name: this.name,
+//             type: this.type
+//         }
+//
+//         if(this.type === 'photo'){
+//             this.createPhotoItem(data);
+//         } else if(this.type === 'video') {
+//             this.createVideoItem(data);
+//         } else{
+//             if(this.$emptyInput){
+//                 this.render.clearList();
+//                 this.$emptyInput = null;
+//             }
+//             this.createFileItem(data);
+//         }
+//     }
+//
+//     createFileItem = (data) => {
+//         if(this.quantity === 'one'){
+//             this.render.clearList();
+//             this.render.file(data);
+//         }else{
+//             if(this.$emptyInput){
+//                 this.render.clearList();
+//                 this.$emptyInput = null;
+//             }
+//             this.render.file(data);
+//         }
+//     }
+//
+//     createPhotoItem = (data) => {
+//         if(this.quantity === 'one'){
+//             this.render.clearList();
+//             this.render.photo(data)
+//         }else{
+//             if(this.$emptyInput){
+//                 this.render.clearList();
+//                 this.$emptyInput = null;
+//             }
+//             this.render.photo(data)
+//         }
+//     }
+//
+//     createVideoItem = (data) => {
+//
+//         if(this.quantity === 'one'){
+//             this.render.clearList();
+//             this.render.video(data)
+//         }else{
+//
+//             this.render.video(data)
+//         }
+//     }
+//
+//     checkListItem = () => {
+//         const $itemList = this.$fileList.querySelector('[data-file-item]');
+//         if($itemList) return false;
+//         this.render.empty(this.name);
+//         this.$emptyInput = this.$fileList.querySelector('[data-empty-input]')
+//
+//     }
+//
+//     deletePreviewBlock = ($item) => {
+//         this.$input.value = '';
+//         this.render.delete($item);
+//         this.checkListItem();
+//     }
+//
+//     changeHandler = async (e) =>{
+//         if(e.target.closest('[data-file-input]')){
+//             await this.fetchItem(e);
+//         }
+//     }
+//
+//     clickHandler = (e) => {
+//         if(e.target.closest('[data-remove-item]')){
+//             this.deletePreviewBlock(e.target.closest('[data-file-item]'));
+//         }
+//     }
+//
+//     listeners = () => {
+//         this.$file.addEventListener('input', this.changeHandler);
+//         this.$file.addEventListener('click', this.clickHandler);
+//     }
+// }
 
 
 // class Mover{
@@ -302,7 +590,6 @@ class Upload {
 //     }
 // }
 
-
 class ManualListSorterService extends Service{
     constructor(api) {
         super();
@@ -324,8 +611,6 @@ class ManualListSorterService extends Service{
         })
     }
 }
-
-
 
 class ManualListSorter{
     constructor() {
@@ -457,7 +742,9 @@ class ManualListSorter{
     }
 }
 
+
 const uploadContainer = new Container('[data-upload]', Upload);
+
 
 const manualListSorter = new ManualListSorter();
 
