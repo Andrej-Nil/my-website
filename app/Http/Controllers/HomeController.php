@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Repositories\WorkRepository;
+
 class HomeController extends Controller
 {
 
     public function index(){
-        return view('home');
+        $workList = WorkRepository::getWorkByDisplay();
+        return view('home', ['workList' => $workList]);
     }
 }

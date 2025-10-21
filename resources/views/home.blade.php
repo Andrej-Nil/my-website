@@ -8,6 +8,7 @@
        <header class="main-header">
            <div class="main-nav">
                <a href="{{route('home')}}" class="main-nav-item">Главное</a>
+               <a href="{{route('resume')}}" class="main-nav-item">Вваыпва</a>
                <a href="{{route('about')}}" class="main-nav-item">Обо мне</a>
                <a href="{{route('post.index')}}" class="main-nav-item">Блок</a>
                <a href="{{route('contact')}}" class="main-nav-item">Контакты</a>
@@ -102,21 +103,88 @@
                    </div>
 
                    <div data-frame-tab="info" class="main-frame-tab">
-                     <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
-                     <div class="main-frame-tab__inner scroll">
-                         Окошко с крадким описанием
-                     </div>
-                 </div>
+                         <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
+                         <div class="main-frame-tab__inner scroll">
+                             <div class="about-me">
+                                 <div class="about-me__top">
+                                     <div class="about-me__intro">
+                                      <p class="about-me__title">Lorem ipsum.</p>
+                                      <p class="about-me__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore eaque earum, expedita facilis in odit provident repellat sequi soluta velit.</p>
+
+                                     </div>
+                                     <img src="{{asset('img/my-photo.jpg')}}" alt="" class="about-me__photo">
+                                 </div>
+
+                                 <div class="about-me__body">
+                                     <p class="about-me__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore eaque earum, expedita facilis in odit provident repellat sequi soluta velit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur at atque blanditiis culpa debitis deserunt dignissimos dolor dolorem earum eveniet excepturi facere fugit id illum impedit modi molestias nam, nisi nostrum obcaecati officiis porro praesentium quaerat quasi quibusdam quis recusandae reiciendis rem repellendus sed suscipit totam ut vel veritatis vero voluptatem. Alias animi eos, explicabo inventore ipsam odio pariatur perspiciatis provident ullam unde. Corporis excepturi in maiores nulla, officia quam qui temporibus vel vero, voluptas voluptatem voluptatibus! Accusamus ad asperiores aspernatur aut commodi corporis culpa deserunt dolorem doloremque dolores dolorum ipsam ipsum laborum pariatur, porro quidem, repellat repellendus voluptates!</p>
+                                 </div>
+
+                                 <div class="about-me__bottom">
+                                     <p class="about-me__subtitle">Lorem ipsum.</p>
+                                     <div class="about-me__list">
+                                        <a href="tel:+78989099009" class="about-me__link">+7 898 909 90 09</a>
+                                        <a href="mailto:test@test" class="about-me__link">test@test</a>
+                                        <button data-frame-tab-link="form" type="button" class="btn">форма</button>
+                                     </div>
+                                 </div>
+                             </div>
+                        </div>
+                   </div>
+
                    <div data-frame-tab="works" class="main-frame-tab">
                      <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
                      <div class="main-frame-tab__inner scroll">
-                         Окошко с примерами работ
+                         <div class="my-works">
+                             @foreach($workList as $work)
+                                 <a href="{{$work['url']}}" target="_blank" class="my-work-card">
+                                     <img src="{{$work['photo']['url']}}" alt="" class="my-work-card__img"/>
+                                 </a>
+                             @endforeach
+
+                         </div>
                      </div>
                  </div>
+
                    <div data-frame-tab="contact" class="main-frame-tab">
                      <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
                      <div class="main-frame-tab__inner scroll">
-                         Окошко с контактами
+                         <div class="about-me">
+                             <div class="about-me__body">
+                                 <p class="about-me__title">Lorem ipsum.</p>
+                                 <p class="about-me__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore eaque earum, expedita facilis in odit provident repellat sequi soluta velit.</p>
+                             </div>
+
+
+                                 <div class="my-contacts">
+                                     <div class="about-me__subtitle">Lorem ipsum dolor.</div>
+                                     <div class="my-contacts__list">
+
+                                         <div class="my-contact">
+                                             <span class="my-contact__title">Телефон</span>
+                                             <a href="tel:+78989099009"  class="my-contact__content">+7 898 909 90 09</a>
+                                         </div>
+
+                                         <div class="my-contact">
+                                             <span class="my-contact__title">Почта</span>
+                                             <a href="tel:+78989099009"  class="my-contact__content">test@test</a>
+                                         </div>
+                                     </div>
+
+                                        <div class="socials">
+                                            <a href="" target="_blank" class="social__link">
+                                                <img src="{{asset('img/icon/tg.svg')}}"class="social__icon" alt="">
+                                            </a>
+                                            <a href="" target="_blank" class="social__link">
+                                                <img src="{{asset('img/icon/vk.svg')}}"class="social__icon" alt="">
+                                            </a>
+                                            <a href="" target="_blank" class="social__link">
+                                                <img src="{{asset('img/icon/wa.svg')}}"class="social__icon" alt="">
+                                            </a>
+                                        </div>
+                                     <button data-frame-tab-link="form" type="button" class="my-contacts__btn btn">Форма</button>
+                                 </div>
+
+                         </div>
                      </div>
                  </div>
 

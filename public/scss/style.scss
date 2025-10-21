@@ -2,36 +2,32 @@
 @import 'main';
 @import 'grid';
 
-
-
+@import 'margins';
+@import "main-page/blocks/main";
+//@import 'blocks/header';
+@import "main-page/blocks/main-header";
+@import "main-page/blocks/main-nav";
+@import "main-page/blocks/main-contacts";
 @import "componets/page-title";
-@import "componets/btn";
-@import "componets/input";
-@import "componets/main-close";
+@import "componets/page-subtitle";
+
+@import 'blocks/body';
 
 
-@import "blocks/main";
-@import "blocks/main-header";
-
-@import "blocks/main-frame";
-@import "blocks/main-frame-light";
-@import "blocks/main-frame-message";
-@import "blocks/main-frame-nav";
-@import "blocks/main-frame-link";
-@import "blocks/main-frame-tab";
-
-@import "blocks/main-form";
-@import "blocks/control";
-
-@import "blocks/main-nav";
-@import "blocks/main-contacts";
-@import "blocks/signature";
-
-@import 'blocks/header';
-
+@import 'blocks/block';
 @import 'blocks/breadcrumbs';
+@import 'blocks/wrap-with-sidebar';
+@import 'blocks/sidebar';
+@import 'blocks/sidebar-nav';
 
 
+@import 'blocks/resume';
+@import 'blocks/badge';
+@import 'blocks/resume-group';
+
+
+@import 'blocks/about';
+@import 'blocks/hobby';
 
 @import 'blocks/page-message';
 @import 'blocks/nav';
@@ -40,5 +36,3 @@
 @import "blocks/contact";
 
 @import 'blocks/footer';
-
-

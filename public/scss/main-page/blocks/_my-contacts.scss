@@ -1,0 +1,34 @@
+.my-contacts{
+    margin-top: 30px;
+}
+
+.my-contacts__list{
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.my-contact{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    color: #cccccc;
+    max-width: 290px;
+    width: 100%;
+}
+
+.my-contact__title{
+    color: #cccccc;
+}
+
+.my-contact__content{
+    transition: 0.2s linear;
+    color: #cccccc;
+    &:hover{
+        color: #ffffff;
+    }
+}
+
+.my-contacts__btn{
+    margin-top: 30px;
+}

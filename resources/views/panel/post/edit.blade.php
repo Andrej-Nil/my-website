@@ -44,7 +44,7 @@
                                 <input type="hidden" name="photo_id" value="{{$post['photo']['id']}}">
                                 <img class="upload-file-photo__img" src="{{$post['photo']['url']}}" alt=""/>
                                 <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
-                                <button type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
+                                <button type="button" data-delete-photo class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
                             </div>
                         @endif
 
@@ -82,13 +82,12 @@
             {{--            <textarea id="postText" rows="10"  class="input" name="title" placeholder="Описание"></textarea>--}}
         </div>
         <div class="form__bottom">
-
             <button type="submit" form="deletePost" class="btn btn--red">Удалить</button>
             <button type="submit" class="btn btn--yellow">Сохранить</button>
         </div>
 
     </form>
-    <form id="deletePost" action="{{route('panel.posts.delete', $post['id'])}}" method="post">
+    <form id="deletePost"  action="{{route('panel.posts.delete', $post['id'])}}" method="post">
         @csrf
         @method('DELETE')
     </form>

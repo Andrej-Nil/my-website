@@ -10,7 +10,7 @@ class PostRepository
         if(isset($data['search'])){
            return Post::with('photo')->where('title', 'LIKE', '%'.$data['search'].'%')->limit($count)->get()->toArray();
         }
-        return Post::with('photo')->limit($count)->orderBy('id', 'DESC')->get()->toArray();
+        return Post::limit($count)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     public static function createPost(array $data):array{

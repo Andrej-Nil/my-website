@@ -1,0 +1,20 @@
+.about{
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+
+.about__img{
+    width: 300px;
+}
+
+.about__title{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+
+    &--right{
+        text-align: right;
+    }
+}

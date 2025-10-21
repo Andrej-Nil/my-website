@@ -1,0 +1,41 @@
+.sortable-list{
+    position: relative;
+
+}
+
+.sortable-loader__inner{
+    display: none;
+}
+.sortable-loader{
+    position: absolute;
+    //display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    animation: flicker 2s linear infinite;
+
+    &.show{
+        display: flex;
+    }
+
+    &.error{
+        background: rgba(253, 40, 40, 0.4);
+        animation:none;
+
+        .sortable-loader__inner{
+            display: block;
+            text-align: center;
+        }
+    }
+}
+
+
+.sortable-loader__message{
+    color: #8d0000;
+    font-weight: 600;
+    margin-bottom: 10px;
+}

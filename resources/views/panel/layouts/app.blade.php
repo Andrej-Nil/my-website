@@ -21,7 +21,18 @@
 
             <ul class="nav">
                 <li class="nav-item">
+                    <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт</a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('panel.posts')}}" class="nav-item__link">Посты</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('panel.works')}}" class="nav-item__link">Примеры работ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('panel.hobbies')}}" class="nav-item__link">Хобби</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('panel.images')}}" class="nav-item__link">Картинки</a>
@@ -29,6 +40,7 @@
                 <li class="nav-item">
                     <a href="{{route('panel.contacts')}}" class="nav-item__link">Контакты</a>
                 </li>
+
             </ul>
         </div>
         <div class="container">
@@ -38,6 +50,7 @@
                 <a href="{{route('post.index')}}" class="link-item">Блог</a>
                     <span class="link-item__slash">\</span>
                 <a href="{{route('contact')}}" class="link-item">Контакты</a>
+
             </nav>
             @yield('content')
         </div>
