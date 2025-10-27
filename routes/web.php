@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function (){
 
 Route::resource('post', \App\Http\Controllers\PostController::class);
 Route::get('about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about');
+Route::get('hobby', [\App\Http\Controllers\HobbyController::class, 'index'])->name('hobby');
 Route::get('contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 Route::get('resume', [\App\Http\Controllers\ResumeController::class, 'index'])->name('resume');
 

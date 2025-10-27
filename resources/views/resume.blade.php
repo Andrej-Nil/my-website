@@ -60,7 +60,33 @@
                         </div>
 
                     </div>
+                    <div class="resume-block">
+                        <p class="resume-block__title">Ggdjf</p>
+                        <div class="resume-block__content">
+                            <div data-group class="resume-group display-only-first">
+                                @foreach($educationList as $education)
+                                    <div data-group-item class="resume-group-item">
+                                        <div class="resume-group-item__top">
+                                            <p class="resume-group-item__title">{{$education['title']}}</p>
+                                            <p class="resume-group-item__period">
+                                                {{$education['start']}} gj {{$education['is_current_day'] ? 'настоящее время' : $education['end']}}</p>
+                                            <p class="resume-group-item__option">{{$education['specialization']}}</p>
+                                        </div>
 
+                                        <div class="resume-group-item__desc">
+                                            {{$education['text']}}
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <button data-group-btn="show" type="button" class="resume-group-btn">
+                                    open
+                                </button>
+                                <button data-group-btn="hide" type="button" class="resume-group-btn hide">
+                                    close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="resume__data">

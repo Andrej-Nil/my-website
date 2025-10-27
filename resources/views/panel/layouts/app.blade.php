@@ -25,6 +25,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{route('panel.educations')}}" class="nav-item__link">Оброзование</a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('panel.posts')}}" class="nav-item__link">Посты</a>
                 </li>
 

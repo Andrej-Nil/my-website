@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_places', function (Blueprint $table) {
+        Schema::create('educations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('profession');
+            $table->string('specialization');
             $table->date('start');
             $table->date('end')->nullable();
-            $table->boolean('is_current_job')->default(0);
+            $table->boolean('is_current_day')->default(false);
             $table->text('text')->nullable();
             $table->string('sort')->default(0);
             $table->boolean('is_display')->default(true);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_places');
+        Schema::dropIfExists('educations');
     }
 };

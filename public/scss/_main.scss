@@ -12,7 +12,9 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100%;
-
+    &.dark{
+        background: #000;
+    }
 }
 
 .container{
@@ -23,8 +25,9 @@ body{
 }
 
 .wrapper {
+    display: flex;
     flex: 1 0 auto;
-    margin: 20px 0;
+    //margin: 20px 0;
     //margin: 50px 0;
 }
 

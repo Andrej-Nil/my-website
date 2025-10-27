@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Post;
+namespace App\Http\Requests\Education;
 
-//use App\Helpers\FormatHelper;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StorePostRequest extends FormRequest
+class UpdateEducationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +23,12 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title'     => ['required', 'string', 'max:255'],
-            'photo_id'     => ['nullable', 'string'],
-            'text' => ['required', 'string', 'max:10000'],
-            'is_display' => ['nullable', 'boolean']
+            'specialization'     => ['nullable', 'string', 'max:255'],
+            'start' => ['required', 'date_format:Y-m-d'],
+            'is_current_day' => ['nullable', 'boolean'],
+            'end' => ['nullable', 'date', 'date_format:Y-m-d'],
+            'text' => ['nullable', 'string'],
+            'is_display' => ['nullable', 'boolean'],
         ];
     }
 
@@ -37,10 +38,15 @@ class StorePostRequest extends FormRequest
             'title.required'    => 'Поле "Название" обязательно для заполнения',
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
-            'photo_id.exists'   => 'Изображения было удалено или не существует',
-            'text.required'    => 'Поле "Название" обязательно для заполнения',
+            'specialization.string'      => 'Поле "Название" должно быть строкой',
+            'specialization.max'         => 'Поле "Название" не должно превышать 255 символов',
             'text.string'      => 'Поле "Название" должно быть строкой',
-            'text.max'         => 'Поле "Название" не должно превышать 10 000 символов',
+            'text.max'         => 'Поле "Название" не должно превышать 255 символов',
+            'start.required'    => 'Поле "Название" обязательно для заполнения',
+            'start.date'    => 'Не верный тип данных',
+            'end.date'    => 'Не верный тип данных',
+            'is_current_day.boolean' => 'Не верный тип данных',
+            'is_display.boolean' =>  'Не верный тип данных',
         ];
     }
 

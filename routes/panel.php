@@ -12,7 +12,12 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::put('panel/jobs/{id}', [\App\Http\Controllers\Admin\JobPlaceController::class, 'update'])->name('panel.jobs.update');
     Route::delete('panel/jobs/{id}', [\App\Http\Controllers\Admin\JobPlaceController::class, 'destroy'])->name('panel.jobs.delete');
 
-
+    Route::get('panel/educations', [\App\Http\Controllers\Admin\EducationController::class, 'index'])->name('panel.educations');
+    Route::get('panel/educations/create', [\App\Http\Controllers\Admin\EducationController::class, 'create'])->name('panel.educations.create');
+    Route::post('panel/educations', [\App\Http\Controllers\Admin\EducationController::class, 'store'])->name('panel.educations.store');
+    Route::get('panel/educations/{id}/edit', [\App\Http\Controllers\Admin\EducationController::class, 'edit'])->name('panel.educations.edit');
+    Route::put('panel/educations/{id}', [\App\Http\Controllers\Admin\EducationController::class, 'update'])->name('panel.educations.update');
+    Route::delete('panel/educations/{id}', [\App\Http\Controllers\Admin\EducationController::class, 'destroy'])->name('panel.educations.delete');
 
 
 

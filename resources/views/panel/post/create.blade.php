@@ -25,7 +25,7 @@
 
         <div class="form-control">
             <span class="form-control__label">Фото</span>
-            <div data-upload class="upload-file" data-name="photo" data-upload-api="{{route('upload.photo')}}">
+            <div data-upload class="upload-file" data-name="photo_id" data-upload-api="{{route('upload.photo')}}">
                 <div class="form-control__body">
                     <label class="upload-file-btn">
                         <input data-upload-input type="file" class="upload-file-btn__input">
