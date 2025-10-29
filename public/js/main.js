@@ -81,6 +81,7 @@ class Service {
 }
 
 
+
 class MainFormService extends Service {
     constructor(api) {
         super();
@@ -525,10 +526,147 @@ class Group {
     }
 }
 
+class GalleryModal {
+    constructor() {
+        this.$modal = document.querySelector('#galleryModal');
+        this.init();
+    }
+
+    init = () => {
+        if(!this.$modal) return;
+        this.$contentWrap = this.$modal.querySelector('[data-content]');
+        this.arrowList = this.$modal.querySelectorAll('[data-gallery-modal]');
+        this.IMG = 'img';
+        this.listeners();
+    }
+
+    setContent = ($photo) => {
+        const type = $photo.dataset.galleryItem;
+        const url = $photo.dataset.url;
+        if(type === this.IMG){
+            this.createImg(url);
+        }
+    }
+
+    createImg = (url) => {
+        this.$contentWrap.innerHTML = `<img src="${url}" alt="" class="gallery-modal__content"/>`;
+    }
+
+    open = (isShowArrows) => {
+
+        this.toggleArrows(isShowArrows);
+        this.$modal.classList.add('open');
+    }
+
+    close = () => {
+        this.$modal.classList.remove('open');
+    }
+
+    toggleArrows = (isShowArrows) => {
+        if(isShowArrows){
+            this.showArrows();
+        } else {
+            this.hideArrows();
+        }
+    }
+
+    showArrows = () => {
+        this.arrowList.forEach(($arrow) => {
+            $arrow.classList.remove('hide');
+        });
+    }
+
+    hideArrows = () => {
+        this.arrowList.forEach(($arrow) => {
+            $arrow.classList.add('hide');
+        });
+    }
+
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-close]')){
+            this.close();
+        }
+    }
+
+    listeners = () => {
+        this.$modal.addEventListener('click', this.clickHandler);
+    }
+}
+
+class Gallery {
+    constructor($gallery) {
+        this.$gallery = $gallery;
+
+        this.init();
+    }
+
+    init = () => {
+        if (!this.$gallery) return;
+        this.$photoList = this.$gallery.querySelectorAll('[data-gallery-item]');
+        this.isShowArrows = this.$photoList.length > 1;
+        this.index = null;
+        this.listeners();
+    }
+
+    setPhotoInModal = ($photo) => {
+        this.$photoList.forEach(($item, key) => {
+            if($item === $photo){
+                this.index = key;
+                galleryModal.setContent($photo);
+            }
+        })
+    }
+
+    showPhoto = ($photo) => {
+        this.setPhotoInModal($photo);
+        setTimeout(() => {
+            galleryModal.open(this.isShowArrows);
+        }, 40)
+    }
+
+    nextPhoto = () => {
+        this.index += 1;
+        if(this.index >  (this.$photoList.length - 1)){
+            this.index = 0;
+        }
+        galleryModal.setContent(this.$photoList[this.index]);
+    }
+
+    prevPhoto = () => {
+        this.index -= 1;
+
+        if(this.index <  0){
+            this.index = this.$photoList.length - 1;
+        }
+        galleryModal.setContent(this.$photoList[this.index]);
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-gallery-item]')){
+            this.showPhoto(e.target.closest('[data-gallery-item]'));
+        }
+
+        if(e.target.closest('[data-gallery-modal="prev"]')){
+            this.prevPhoto();
+        }
+
+        if(e.target.closest('[data-gallery-modal="next"]')){
+            this.nextPhoto();
+        }
+    }
+
+    listeners = () => {
+        document.addEventListener('click', this.clickHandler);
+    }
+}
+
 const frame = new Frame();
 const frameForm = new MainForm();
 const frameMessage = new MainFrameMessage();
 const frameLight = new FrameLight();
 
-const groupContainer = new Container('[data-group]', Group)
+const galleryModal = new GalleryModal();
+const galleryContainer = new Container('[data-gallery]', Gallery);
+const groupContainer = new Container('[data-group]', Group);
 
