@@ -526,6 +526,70 @@ class Group {
     }
 }
 
+class HobbyPage {
+    constructor() {
+        this.$hobbyPage = document.querySelector('#hobbyPage');
+        this.init();
+    }
+
+    init = () => {
+        if(!this.$hobbyPage) return;
+        this.activeTabIdx = 0
+        this.$tabList = this.$hobbyPage.querySelectorAll('[data-hobby-tab]');
+        this.$dotList = this.$hobbyPage.querySelectorAll('[data-hobby-dot]');
+        this.showTab(this.$tabList[this.activeTabIdx]);
+        this.changeDot(this.$dotList[this.activeTabIdx]);
+        this.listeners();
+    }
+
+    changeDot = ($dot) => {
+        // if()
+        $dot.classList.add('active');
+    }
+
+    hideTab = ($tab) => {
+        $tab.classList.remove('show');
+        $tab.classList.add('move-down');
+        setTimeout(() => {
+            $tab.classList.add('hide');
+            $tab.classList.remove('move-down');
+        }, 1000)
+        // $tab.classList.add('hide');
+    }
+
+    showTab = ($tab) => {
+        if(!$tab) return;
+        $tab.classList.add('move-up');
+        $tab.classList.remove('hide');
+        setTimeout(() => {
+            $tab.classList.remove('move-up');
+            $tab.classList.add('show');
+        }, 1000)
+    }
+
+    changeTab = ($dot) => {
+        const newActiveTabIdx = $dot.dataset.hobbyDot;
+        if(+newActiveTabIdx === this.activeTabIdx) return;
+        this.hideTab(this.$tabList[this.activeTabIdx]);
+        this.activeTabIdx = newActiveTabIdx;
+
+        setTimeout(() => {
+            this.showTab(this.$tabList[this.activeTabIdx]);
+        }, 1000)
+
+    }
+
+    clickHandler = (e) => {
+            if(e.target.closest('[data-hobby-dot]')){
+                this.changeTab(e.target.closest('[data-hobby-dot]'));
+            }
+    }
+
+    listeners = () => {
+        this.$hobbyPage.addEventListener('click', this.clickHandler);
+    }
+}
+
 class GalleryModal {
     constructor() {
         this.$modal = document.querySelector('#galleryModal');
@@ -662,11 +726,18 @@ class Gallery {
 }
 
 const frame = new Frame();
+
 const frameForm = new MainForm();
+
 const frameMessage = new MainFrameMessage();
+
 const frameLight = new FrameLight();
 
 const galleryModal = new GalleryModal();
+
 const galleryContainer = new Container('[data-gallery]', Gallery);
+
 const groupContainer = new Container('[data-group]', Group);
+
+const hobbyPage = new HobbyPage();
 

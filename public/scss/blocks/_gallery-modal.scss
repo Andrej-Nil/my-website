@@ -35,7 +35,7 @@
     max-height: 80vh;
     height: auto;
     border: 10px solid #fff;
-    z-index: 2;
+    z-index: 3;
 }
 
 .gallery-modal__close{
@@ -62,7 +62,7 @@
     width: 40px;
     height: 40px;
     cursor: pointer;
-user-select: none;
+    user-select: none;
     padding: 5px;
     transition: 0.2s linear;
     z-index: 1;
