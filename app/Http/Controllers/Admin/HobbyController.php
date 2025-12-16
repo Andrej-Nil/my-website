@@ -7,6 +7,7 @@ use App\Http\Requests\Hobby\StoreHobbyRequest;
 use App\Http\Requests\Hobby\UpdateHobbyRequest;
 use App\Repositories\HobbyRepository;
 use App\Repositories\ImageRepository;
+use App\Services\MediaUploadService;
 use Illuminate\Http\Request;
 
 class HobbyController extends Controller
@@ -16,8 +17,8 @@ class HobbyController extends Controller
      */
     public function index()
     {
-
         $hobbyList = HobbyRepository::getPagination();
+//        dd($hobbyList);
         return view('panel.hobby.index', ['hobbyList' => $hobbyList]);
     }
 
@@ -34,8 +35,10 @@ class HobbyController extends Controller
      */
     public function store(StoreHobbyRequest $request)
     {
-
         $hobby = HobbyRepository::createHobby($request->validated());
+        if(!$hobby){
+            abort(404);
+        }
         return to_route('panel.hobbies.edit', $hobby['id'])->with('success', 'Хобби добавленно');
     }
 
@@ -53,7 +56,7 @@ class HobbyController extends Controller
     public function edit($id)
     {
         $hobby = HobbyRepository::getHobbyById($id);
-        $photo_list = ImageRepository::getImgById($hobby['photo_list']);
+//        @dd($hobby);
         if(!$hobby){
             abort('404');
         }
@@ -62,7 +65,6 @@ class HobbyController extends Controller
 
         return view('panel.hobby.edit', [
             'hobby' => $hobby,
-            'photo_list' => $photo_list
             ]);
     }
     /**
@@ -83,15 +85,16 @@ class HobbyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($link)
     {
-        $hobby = HobbyRepository::getHobbyById($id);
+//        $hobby = HobbyRepository::getHobbyById($id);
+        $hobby = HobbyRepository::getHobbyByLink($link);
 
         if(!$hobby){
             abort('404');
         }
 
-        HobbyRepository::deleteHobby($id);
+        HobbyRepository::deleteHobby($link);
         return to_route('panel.hobbies')->with('success', 'Хобби ' . "'" . $hobby['title'] . "'" . ' удалено');
     }
 }

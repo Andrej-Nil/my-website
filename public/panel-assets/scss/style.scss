@@ -1,17 +1,14 @@
 @import "reset";
 @import "main";
 
-
-
 @import "components/site-link";
 @import "components/panel-title";
 @import "components/btn";
 @import "components/spinner";
+@import "components/download-btn";
+@import "components/cross";
 
 @import "components/input";
-
-
-
 
 @import "blocks/sidebar";
 @import "blocks/nav";
@@ -26,12 +23,15 @@
 @import "blocks/image-list";
 @import "blocks/image-card";
 
+
+@import "blocks/media-window";
+
+@import "blocks/media-file";
+@import "blocks/image-card";
+
 @import "blocks/pagination";
 @import "blocks/form";
 @import "blocks/upload-file";
-
-
-
 
 @import "animation/flicker";
 

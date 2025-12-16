@@ -1,0 +1,35 @@
+.download-btn{
+    width: 115px;
+    height: 115px;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    background: #f8f3c0;
+    &:hover{
+        background: #f6ed99;
+    }
+}
+
+.download-btn__input{
+    display: none;
+}
+
+.download-btn__icon{
+    width: 80px;
+    height: 60px;
+    display: block;
+    padding: 10px 20px;
+    margin-bottom: auto;
+}
+
+.download-btn__label{
+    font-size: 13px;
+    color: #444;
+}

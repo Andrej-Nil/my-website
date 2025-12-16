@@ -22,12 +22,18 @@ class StoreHobbyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'     => ['required', 'string', 'max:255'],
-            'photo_id'     => ['nullable', 'exists:images,id'],
-            'text' => ['nullable', 'string'],
-            'photo_list'     => ['nullable', 'array'],
-            'is_display' => ['nullable', 'boolean']
-        ];
+            'title'     => ['bail', 'required', 'string', 'max:255'],
+            'main_photo'     => ['bail', 'nullable', 'string', 'max:255'],
+            'bg_photo'     => ['bail', 'nullable', 'string', 'max:255'],
+            'mini_photo'     => ['bail', 'nullable', 'string', 'max:255'],
+            'photo_list'     => ['nullable', 'array', 'max:4'],
+
+            'photo_list.*' => ['string', 'max:255'],
+
+            'text' => ['bail', 'nullable', 'string'],
+
+            'is_display' => ['bail', 'nullable', 'boolean']
+       ];
     }
 
     public function messages()
@@ -36,9 +42,50 @@ class StoreHobbyRequest extends FormRequest
             'title.required'    => 'Поле "Название" обязательно для заполнения',
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
-            'photo_id.exists'   => 'Изображения было удалено или не существует',
+            'main_photo.string'      => 'Поле "Название" должно быть строкой',
+            'main_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+
+            'bg_photo.string'      => 'Поле "Название" должно быть строкой',
+            'bg_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+
+            'mini_photo.string'      => 'Поле "Название" должно быть строкой',
+            'mini_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+
+
+            'photo_list.array' => 'Неверный тип данных',
+            'photo_list.max' => 'Вы можете загрузить не более 4 фотографий',
+
             'text.string'       => 'Поле "Название" должно быть строкой',
-            'photo_list.boolean'        => 'Не верный тип данных'
+            'is_display.boolean'        => 'Не верный тип данных'
+//            'main_photo.image'     => 'Загружаемый файл должен быть изображением',
+//            'main_photo.mimetypes' => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+//            'main_photo.max'       => 'Максимальный размер каждой фотографии - 10 МБ',
+//            'main_photo.*.image'       => 'Загружаемый файл должен быть изображением',
+//            'main_photo.*.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+//            'main_photo.*.max' => 'Максимальный размер каждой фотографии - 10 МБ',
+//
+//            'bg_photo.image'     => 'Загружаемый файл должен быть изображением',
+//            'bg_photo.mimetypes' => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+//            'bg_photo.max'       => 'Максимальный размер каждой фотографии - 10 МБ',
+//            'bg_photo.*.image'       => 'Загружаемый файл должен быть изображением',
+//            'bg_photo.*.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+//            'bg_photo.*.max' => 'Максимальный размер каждой фотографии - 10 МБ',
+//
+//            'mini_photo.image'     => 'Загружаемый файл должен быть изображением',
+//            'mini_photo.mimetypes' => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+//            'mini_photo.max'       => 'Максимальный размер каждой фотографии - 10 МБ',
+//            'mini_photo.*.image'       => 'Загружаемый файл должен быть изображением',
+//            'mini_photo.*.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+//            'mini_photo.*.max' => 'Максимальный размер каждой фотографии - 10 МБ',
+//
+//            'photo_list.array'      => 'Неверный тип данных',
+//            'photo_list.max'        => 'Вы можете загрузить не более 4 фотографий',
+//            'photo_list.*.image'       => 'Загружаемый файл должен быть изображением',
+//            'photo_list.*.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+//            'photo_list.*.max' => 'Максимальный размер каждой фотографии - 10 МБ',
+
+//            'mini_photo.exists'   => 'Изображения было удалено или не существует',
+
         ];
     }
 

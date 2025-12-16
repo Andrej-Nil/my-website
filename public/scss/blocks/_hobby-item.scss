@@ -91,6 +91,18 @@
     }
 }
 
+@keyframes flareDotShadow {
+    from{
+        box-shadow: 0 0 2px 4px rgba(235, 240, 255, 1);
+    }
+    50%{
+        box-shadow: 0 0 5px 7px rgba(235, 240, 255, 1);
+    }
+    to{
+        box-shadow: 0 0 2px 4px rgba(235, 240, 255, 1);
+    }
+}
+
 .hobby-item{
     height: 100%;
     width: 100%;
@@ -258,6 +270,9 @@
     //height: 120px;
     padding: 10px 10px 0;
     background: #ebf0ff;
+    &.active{
+        animation: flareDotShadow 2s ease-in-out infinite;
+    }
 }
 
 .hobby-nav-item__img{

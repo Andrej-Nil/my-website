@@ -543,8 +543,12 @@ class HobbyPage {
     }
 
     changeDot = ($dot) => {
-        // if()
-        $dot.classList.add('active');
+        this.$dotList.forEach(($item) => {
+            $item.classList.remove('active')
+            if($item === $dot){
+                $item.classList.add('active');
+            }
+        });
     }
 
     hideTab = ($tab) => {
@@ -554,7 +558,6 @@ class HobbyPage {
             $tab.classList.add('hide');
             $tab.classList.remove('move-down');
         }, 1000)
-        // $tab.classList.add('hide');
     }
 
     showTab = ($tab) => {
@@ -571,18 +574,19 @@ class HobbyPage {
         const newActiveTabIdx = $dot.dataset.hobbyDot;
         if(+newActiveTabIdx === this.activeTabIdx) return;
         this.hideTab(this.$tabList[this.activeTabIdx]);
+
         this.activeTabIdx = newActiveTabIdx;
 
         setTimeout(() => {
             this.showTab(this.$tabList[this.activeTabIdx]);
+            this.changeDot(this.$dotList[this.activeTabIdx]);
         }, 1000)
-
     }
 
     clickHandler = (e) => {
-            if(e.target.closest('[data-hobby-dot]')){
-                this.changeTab(e.target.closest('[data-hobby-dot]'));
-            }
+        if(e.target.closest('[data-hobby-dot]')){
+            this.changeTab(e.target.closest('[data-hobby-dot]'));
+        }
     }
 
     listeners = () => {

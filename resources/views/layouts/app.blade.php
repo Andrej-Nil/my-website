@@ -105,7 +105,7 @@
 
 <div id="galleryModal" class="gallery-modal">
     <div data-close class="gallery-modal__back"></div>
-        <img data-close src="{{asset('img/icon/close-white.svg')}}" class="gallery-modal__close" />
+        <img data-close src="{{asset('img/icon/close-white.svg')}}" alt="" class="gallery-modal__close" />
         <div data-gallery-modal="prev" class="gallery-modal-arrow prev hide">
             <img src="{{asset('img/icon/arrow-left.svg')}}" alt="" class="gallery-modal-arrow__icon">
         </div>
