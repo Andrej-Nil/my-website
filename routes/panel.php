@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('panel', [\App\Http\Controllers\Admin\PanelController::class, 'index'])->name('panel');
 
-    Route::get('panel/jobs', [\App\Http\Controllers\Admin\JobPlaceController::class, 'index'])->name('panel.jobs');
+    Route::get('panel/jobs', [\App\Http\Controllers\Admin\JobController::class, 'index'])->name('panel.jobs');
+
+
     Route::get('panel/jobs/create', [\App\Http\Controllers\Admin\JobPlaceController::class, 'create'])->name('panel.jobs.create');
     Route::post('panel/jobs', [\App\Http\Controllers\Admin\JobPlaceController::class, 'store'])->name('panel.jobs.store');
     Route::get('panel/jobs/{id}/edit', [\App\Http\Controllers\Admin\JobPlaceController::class, 'edit'])->name('panel.jobs.edit');

@@ -23,9 +23,9 @@
                 <li class="nav-item">
                     <a href="{{route('panel.hobbies')}}" class="nav-item__link">Хобби</a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт</a>--}}
-{{--                </li>--}}
+                <li class="nav-item">
+                    <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт работы</a>
+                </li>
 
 {{--                <li class="nav-item">--}}
 {{--                    <a href="{{route('panel.educations')}}" class="nav-item__link">Оброзование</a>--}}
@@ -52,6 +52,8 @@
             <nav class="link-list">
                 <a href="{{route('hobby')}}" target="_blank" class="link-item">Хобби</a>
                     <span class="link-item__slash">\</span>
+                <a href="{{route('resume')}}" target="_blank" class="link-item">Резюме</a>
+                <span class="link-item__slash">\</span>
 {{--                <a href="{{route('post.index')}}" class="link-item">Блог</a>--}}
 {{--                    <span class="link-item__slash">\</span>--}}
 {{--                <a href="{{route('contact')}}" class="link-item">Контакты</a>--}}

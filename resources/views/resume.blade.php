@@ -36,20 +36,20 @@
                         <p class="resume-block__title">Gdkjfsdjf</p>
                         <div class="resume-block__content">
                             <div data-group class="resume-group display-only-first">
-                                @foreach($jobList as $job)
-                                <div data-group-item class="resume-group-item">
-                                    <div class="resume-group-item__top">
-                                        <p class="resume-group-item__title">{{$job['title']}}</p>
-                                        <p class="resume-group-item__period">
-                                            {{$job['start']}} gj {{$job['is_current_job'] ? 'настоящее время' : $job['end']}}</p>
-                                        <p class="resume-group-item__option">{{$job['profession']}}</p>
-                                    </div>
+{{--                                @foreach($jobList as $job)--}}
+{{--                                <div data-group-item class="resume-group-item">--}}
+{{--                                    <div class="resume-group-item__top">--}}
+{{--                                        <p class="resume-group-item__title">{{$job['title']}}</p>--}}
+{{--                                        <p class="resume-group-item__period">--}}
+{{--                                            {{$job['start']}} gj {{$job['is_current_job'] ? 'настоящее время' : $job['end']}}</p>--}}
+{{--                                        <p class="resume-group-item__option">{{$job['profession']}}</p>--}}
+{{--                                    </div>--}}
 
-                                    <div class="resume-group-item__desc">
-                                        {{$job['text']}}
-                                    </div>
-                                </div>
-                                @endforeach
+{{--                                    <div class="resume-group-item__desc">--}}
+{{--                                        {{$job['text']}}--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                @endforeach--}}
                                 <button data-group-btn="show" type="button" class="resume-group-btn">
                                     open
                                 </button>
@@ -64,20 +64,20 @@
                         <p class="resume-block__title">Ggdjf</p>
                         <div class="resume-block__content">
                             <div data-group class="resume-group display-only-first">
-                                @foreach($educationList as $education)
-                                    <div data-group-item class="resume-group-item">
-                                        <div class="resume-group-item__top">
-                                            <p class="resume-group-item__title">{{$education['title']}}</p>
-                                            <p class="resume-group-item__period">
-                                                {{$education['start']}} gj {{$education['is_current_day'] ? 'настоящее время' : $education['end']}}</p>
-                                            <p class="resume-group-item__option">{{$education['specialization']}}</p>
-                                        </div>
+{{--                                @foreach($educationList as $education)--}}
+{{--                                    <div data-group-item class="resume-group-item">--}}
+{{--                                        <div class="resume-group-item__top">--}}
+{{--                                            <p class="resume-group-item__title">{{$education['title']}}</p>--}}
+{{--                                            <p class="resume-group-item__period">--}}
+{{--                                                {{$education['start']}} gj {{$education['is_current_day'] ? 'настоящее время' : $education['end']}}</p>--}}
+{{--                                            <p class="resume-group-item__option">{{$education['specialization']}}</p>--}}
+{{--                                        </div>--}}
 
-                                        <div class="resume-group-item__desc">
-                                            {{$education['text']}}
-                                        </div>
-                                    </div>
-                                @endforeach
+{{--                                        <div class="resume-group-item__desc">--}}
+{{--                                            {{$education['text']}}--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @endforeach--}}
                                 <button data-group-btn="show" type="button" class="resume-group-btn">
                                     open
                                 </button>

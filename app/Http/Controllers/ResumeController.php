@@ -13,13 +13,14 @@ class ResumeController extends Controller
 
 //        $hobbyList = HobbyRepository::getPagination();
 
-        $jobList = JobPlaceRepository::getJobPlaceByIdDisplayAndSort();
-        $educationList = EducationRepository::getEducationByIdDisplayAndSort();
-        return view('resume', [
-            'jobList' => $jobList,
-            'educationList' => $educationList
-            ]
-        );
+//        $jobList = JobPlaceRepository::getJobPlaceByIdDisplayAndSort();
+//        $educationList = EducationRepository::getEducationByIdDisplayAndSort();
+//        return view('resume', [
+//            'jobList' => $jobList,
+//            'educationList' => $educationList
+//            ]
+
+        return view('resume');
     }
 
 //'retry_after' => (int) env('BEANSTALKD_QUEUE_RETRY_AFTER', 90),

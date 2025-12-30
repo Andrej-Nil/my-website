@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\JobPlace;
+namespace App\Http\Requests\Job;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreJobPlaceRequest extends FormRequest
+class UpdateJobRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,7 @@ class StoreJobPlaceRequest extends FormRequest
             'end' => ['nullable', 'date', 'date_format:Y-m-d'],
             'text' => ['nullable', 'string'],
             'is_display' => ['nullable', 'boolean'],
-            'sort' => ['nullable', 'int']
+            'is_show_first' => ['nullable', 'boolean'],
         ];
     }
 
@@ -46,7 +46,6 @@ class StoreJobPlaceRequest extends FormRequest
             'start.required'    => 'Поле "Название" обязательно для заполнения',
             'start.date'    => 'Не верный тип данных',
             'end.date'    => 'Не верный тип данных',
-            'sort.integer'    => 'Не верный тип данных',
             'is_display.boolean' =>  'Не верный тип данных',
 //            'photo_id.exists'   => 'Изображения было удалено или не существует',
 //            'text.string'       => 'Поле "Название" должно быть строкой',

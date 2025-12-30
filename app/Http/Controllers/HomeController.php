@@ -9,7 +9,8 @@ class HomeController extends Controller
 {
 
     public function index(){
-        $workList = WorkRepository::getWorkByDisplay();
-        return view('home', ['workList' => $workList]);
+//        $workList = WorkRepository::getWorkByDisplay();
+//        return view('home', ['workList' => $workList]);
+        return view('home');
     }
 }

@@ -5,19 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Job\StoreJobRequest;
 use App\Http\Requests\Job\UpdateJobRequest;
+use App\Models\Job;
 use App\Repositories\JobPlaceRepository;
+use Illuminate\Http\Request;
 
-class JobPlaceController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+//        $jobList = JobPlaceRepository::getPagination();
 
-        $jobList = JobPlaceRepository::getPagination();
-
-        return view('panel.job.index', ['jobList' => $jobList]);
+        return view('panel.job.index', ['jobList' => []]);
     }
 
     /**
@@ -46,15 +47,15 @@ class JobPlaceController extends Controller
     /**
      * Display the specified resource.
      */
-//    public function show(Job $placeWork)
-//    {
-//        //
-//    }
+    public function show(Job $job)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Job $job)
     {
         $job = JobPlaceRepository::getJobPlaceById($id);
         if(!$job){

@@ -1,11 +1,12 @@
 <header class="main-header">
     <div class="main-nav">
-        <a href="{{route('home')}}" class="main-nav-item">Главное</a>
+        <a href="{{route('home')}}" class="main-nav-item">Главная</a>
         <a href="{{route('hobby')}}" class="main-nav-item">Hobby</a>
-        <a href="{{route('resume')}}" class="main-nav-item">Вуыс</a>
-        <a href="{{route('about')}}" class="main-nav-item">авыаыва ыаывавыа</a>
-        <a href="{{route('post.index')}}" class="main-nav-item">Бываывалок</a>
-        <a href="{{route('contact')}}" class="main-nav-item">авываыва</a>
+        <a href="{{route('resume')}}" class="main-nav-item">Resume</a>
+{{--        <a href="{{route('resume')}}" class="main-nav-item">Вуыс</a>--}}
+{{--        <a href="{{route('about')}}" class="main-nav-item">авыаыва ыаывавыа</a>--}}
+{{--        <a href="{{route('post.index')}}" class="main-nav-item">Бываывалок</a>--}}
+{{--        <a href="{{route('contact')}}" class="main-nav-item">авываыва</a>--}}
         @if(!(\Illuminate\Support\Facades\Auth::check()))
             <a href="{{route('login')}}" class="main-nav-item">Вход</a>
         @else
