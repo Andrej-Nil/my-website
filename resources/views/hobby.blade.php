@@ -8,27 +8,34 @@
             <div class="hobby-page__content">
 
                 @foreach($hobbyList as $hobby)
+{{--                    @dd($hobbyList)--}}
                 <div data-hobby-tab="0" class="hobby-item hide">
                     <div class="hobby-item__inner container">
-{{--                        <img src="{{asset('img/image/hobby-1.png')}}" alt="" class="hobby-item__image">--}}
+                        @if($hobby['bg_photo_url'])
+                            <img src="{{$hobby['bg_photo_url']}}" alt="" class="hobby-item__image">
+                        @endif
                         <div class="hobby-item__desc">
                             <p class="hobby-item__title">{{$hobby['title']}}</p>
                             <p class="hobby-item__text"> {{$hobby['text']}}</p>
-{{--                            <div data-gallery class="hobby-item__gallery">--}}
-{{--                                <img data-gallery-item="img" data-url="https://i.pinimg.com/236x/29/3a/c7/293ac7ab9528e7d40299eb5b30de089c.jpg?nii=t" src="https://i.pinimg.com/236x/29/3a/c7/293ac7ab9528e7d40299eb5b30de089c.jpg?nii=t" alt="" class="hobby-item__photo">--}}
-{{--                                <img data-gallery-item="img" data-url="https://i.pinimg.com/originals/5d/e2/42/5de24294bad21ec99931f4c362354f22.jpg" src="https://i.pinimg.com/originals/5d/e2/42/5de24294bad21ec99931f4c362354f22.jpg" alt="" class="hobby-item__photo">--}}
-{{--                                <img data-gallery-item="img" data-url="https://i.pinimg.com/originals/0a/32/53/0a32539a7e667da3e86b0e36b175337e.jpg" src="https://i.pinimg.com/originals/0a/32/53/0a32539a7e667da3e86b0e36b175337e.jpg" alt="" class="hobby-item__photo">--}}
-{{--                                <img data-gallery-item="img" data-url="https://i.pinimg.com/736x/a1/84/89/a1848967eb617464ff618c4da0432004.jpg" src="https://i.pinimg.com/736x/a1/84/89/a1848967eb617464ff618c4da0432004.jpg" alt="" class="hobby-item__photo">--}}
-{{--                                    --}}{{--                        <div class="hobby-slider-slide">--}}
-{{--                                    --}}{{--                            <img src="" alt="" class="hobby-slider-slide__img">--}}
-{{--                                    --}}{{--                        </div>--}}
-{{--                                    --}}{{--                        <div class="hobby-slider-slide">--}}
-{{--                                    --}}{{--                            <img src="" alt="" class="hobby-slider-slide__img">--}}
-{{--                                    --}}{{--                        </div>--}}
-{{--                            </div>--}}
+                            @if($hobby['photo_list_url'])
+
+                            <div data-gallery class="hobby-item__gallery">
+                                @foreach($hobby['photo_list_url'] as $photoUrl)
+                                <img data-gallery-item="img" data-url="{{$photoUrl}}" src="{{$photoUrl}}" alt="" class="hobby-item__photo">
+{{--                                    <div class="hobby-slider-slide">--}}
+{{--                                        <img data-gallery-item="img" data-url="{{$photoUrl}}" src="{{$photoUrl}}" alt="" class="hobby-slider-slide__img">--}}
+{{--                                    </div>--}}
+                                @endforeach
+
+
+                            </div>
+
+                            @endif
                         </div>
                     </div>
-{{--                    <img src="{{asset('img/image/hobby-bg-1.png')}}" alt="" class="hobby-item__bg">--}}
+                    @if($hobby['mini_photo_url'])
+                        <img src="{{$hobby['mini_photo_url']}}" alt="" class="hobby-item__bg">
+                    @endif
                 </div>
                 @endforeach
 
