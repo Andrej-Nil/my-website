@@ -11,7 +11,7 @@
         @include('panel.components.success-board')
     @endif
 
-    <form action="{{route('panel.hobbies.store')}}" enctype="multipart/form-data" method="post" class="form">
+    <form id="formCreate" action="{{route('panel.hobbies.store')}}" enctype="multipart/form-data" method="post" class="form">
         @csrf
 
         <div class="form__body">
@@ -23,31 +23,13 @@
             </div>
         </div>
 
-        <div class="form-control">
-            <div class="form-control__head">
-                <span class="form-control__label">Главное фото</span>
-                <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
-            </div>
-
-            <div data-media-file="one" data-name="main_photo" class="media-file">
-                <div class="media-file__body">
-                    <label class="media-file__btn download-btn">
-                        <input data-media-add type="file" class="download-btn__input">
-                        <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                        <span class="download-btn__label">Загрузить фото</span>
-                    </label>
-                    <div data-media-list class="media-file__list"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-control">
+            <div class="form-control">
                 <div class="form-control__head">
-                    <span class="form-control__label">Фоновое фото</span>
+                    <span class="form-control__label">Главное фото</span>
                     <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
                 </div>
+                <div data-media-file="one" data-format="jpg,jpeg,png" data-name="main_photo" class="media-file">
 
-                <div data-media-file="one" data-name="main_photo" class="media-file">
                     <div class="media-file__body">
                         <label class="media-file__btn download-btn">
                             <input data-media-add type="file" class="download-btn__input">
@@ -56,26 +38,45 @@
                         </label>
                         <div data-media-list class="media-file__list"></div>
                     </div>
+                    <p data-media-error class="media-file__error"></p>
                 </div>
             </div>
 
-        <div class="form-control">
-            <div class="form-control__head">
-                <span class="form-control__label">Миниатюра</span>
-                <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
-            </div>
-            <div data-media-file="one" data-name="mini_photo" class="media-file">
-                <div class="media-file__body">
-                    <label class="media-file__btn download-btn">
-                        <input data-media-add type="file" class="download-btn__input">
-                        <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                        <span class="download-btn__label">Загрузить фото</span>
-                    </label>
-                    <div data-media-list class="media-file__list"></div>
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Фоновое фото</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
+                </div>
+                <div data-media-file="one" data-format="jpg,jpeg,png" data-name="bg_photo" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list"></div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
                 </div>
             </div>
 
-        </div>
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Миниатюра</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
+                </div>
+                <div data-media-file="one" data-format="jpg,jpeg,png" data-name="mini_photo" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list"></div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
+            </div>
 
         <div class="form-control">
             <label for="postText" class="form-control__label">Текст</label>
@@ -85,23 +86,25 @@
             </div>
         </div>
 
-        <div class="form-control">
-            <div class="form-control__head">
-                <span class="form-control__label">Фотогалерея</span>
-                <p class="form-control__note">Вы можите загрузить до 4 изображений в формате jpg, jpeg, png</p>
-            </div>
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Галерея</span>
+                    <p class="form-control__note">Вы можите загрузить до 4 изображений в формате jpg, jpeg, png</p>
+                </div>
+                <div data-media-file="multi" data-total="4" data-format="jpg,jpeg,png" data-name="photo_list[]" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list">
 
-            <div data-media-file="multi" data-total="4" data-name="photo_list[]" class="media-file">
-                <div class="media-file__body">
-                    <label class="media-file__btn download-btn">
-                        <input data-media-add type="file" class="download-btn__input">
-                        <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                        <span class="download-btn__label">Загрузить фото</span>
-                    </label>
-                    <div data-media-list class="media-file__list"></div>
+                        </div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
                 </div>
             </div>
-        </div>
 
         <div class="form-control">
             <span class="form-control__label">Статус публикации</span>

@@ -130,6 +130,33 @@ class FormEdit{
 
         this.api = this.$form.dataset.api;
 
+        this.$mediaFileList = this.$form.querySelectorAll('[data-upload-media-file]');
+
+        this.mediaFilesContainer = [];
+
+        this.initMediaFiles();
+
+    }
+
+    initMediaFiles = () => {
+        this.$mediaFileList.forEach(($item) => {
+            const exemplar = new UploadMediaFile($item, this.api);
+            this.mediaFilesContainer.push(exemplar);
+        })
+    }
+
+}
+
+class FormCreate {
+    constructor() {
+        this.$form = document.querySelector('#formCreate');
+        this.init();
+    }
+
+    init = () => {
+
+        if (!this.$form) return;
+
         this.$mediaFileList = this.$form.querySelectorAll('[data-media-file]');
 
         this.mediaFilesContainer = [];
@@ -140,11 +167,10 @@ class FormEdit{
 
     initMediaFiles = () => {
         this.$mediaFileList.forEach(($item) => {
-            const exemplar = new MediaFile($item, this.api);
+            const exemplar = new MediaFile($item, false);
             this.mediaFilesContainer.push(exemplar);
         })
     }
-
 }
 
 class ManualListSorterService extends Service{
@@ -380,6 +406,46 @@ class MediaFileService extends Service{
 }
 
 class MediaFileRender extends Render{
+    constructor($list, inputName) {
+        super();
+        this.$list = $list;
+        this.inputName = inputName;
+    }
+
+
+
+    photo = (dataFile) => {
+        this.render(this.$list, this.getPhotoHtml, dataFile);
+    }
+
+
+
+    video = (file) => {
+
+    }
+
+    getPhotoHtml = (dataFile) => {
+
+        return `
+            <div data-media-item class="media-file-item">
+                <input data-media-input type="file" name="${dataFile.name}" class="media-file-item__input new">
+                <span data-media-delete class="media-file-item__btn top">Удалить</span>
+                <img src="${dataFile.url}" alt="" class="media-file-item__content">
+                <span data-look="${dataFile.url}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+            </div>
+        `
+    }
+
+
+    clearList = () => {
+        this.clear(this.$list);
+    }
+
+
+
+}
+
+class UploadMediaFileRender extends Render{
 
     constructor($list, inputName) {
         super();
@@ -475,6 +541,203 @@ class MediaFileRender extends Render{
 }
 
 class MediaFile {
+    constructor($file) {
+        this.$file = $file;
+        this.init();
+    }
+
+    init = () => {
+        if(!this.$file) return;
+        this.type = this.$file.dataset.mediaFile;
+        this.format = this.$file.dataset.format;
+        this.inputName = this.$file.dataset.name;
+        this.totalItem = +this.$file.dataset.total;
+        this.$inputAdd = this.$file.querySelector('[data-media-add]');
+
+        this.$mediaList = this.$file.querySelector('[data-media-list]');
+        this.$messageError = this.$file.querySelector('[data-media-error]');
+        this.extensionList = this.getExtensionList();
+        this.currentCount = this.getMediaItemCount();
+
+        this.render = new MediaFileRender(this.$mediaList, this.inputName);
+
+        this.listeners();
+    }
+
+    clearInputAdd = () => {
+        this.$inputAdd.value = '';
+    }
+
+    addMedia = () => {
+
+        this.hideMessageError();
+        const file = this.$inputAdd.files[0];
+
+        if(this.checkExtension(file.name)) {
+
+           this.createItem(file);
+
+        } else {
+            this.showMessageError('Не правильнвый формат');
+        }
+
+        this.clearInputAdd();
+
+    }
+
+
+    showMessageError = (message = 'Произошла ошибка') => {
+
+        this.$messageError.classList.add('show');
+
+        this.$messageError.innerHTML = message;
+
+    }
+
+    hideMessageError = () => {
+
+        this.$messageError.classList.remove('show');
+
+        this.$messageError.innerHTML = '';
+
+    }
+
+    createItem = (file) => {
+        const dataFile = this.getDataFile(file);
+        if(this.type === 'multi'){
+            if(this.currentCount >= this.totalItem) {
+                this.showMessageError(`Лимит загрузки ${this.totalItem}`);
+                return;
+            }
+
+            this.render.photo(dataFile);
+
+        } else {
+
+            this.render.clearList();
+            this.render.photo(dataFile);
+
+        }
+
+        const newInputFile = this.$mediaList.querySelector('.new');
+        this.currentCount = this.getMediaItemCount();
+        if(newInputFile){
+            newInputFile.files = dataFile.file;
+            newInputFile.classList.remove('new');
+        }
+
+
+        // if(this.countItem >= this.count) return;
+        //
+        // const extension = files[0].name.split('.').slice(-1)[0];
+        // const url = URL.createObjectURL(files[0]);
+        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
+        //     // if(this.countPhoto === this.count) return;
+        //     this.render.photo(url);
+        //     this.countItem++;
+        //     // this.countPhoto = this.countPhoto + 1;
+        // } else if(extension === 'mp4'){
+        //     // if(this.countVideo === this.count) return;
+        //     this.render.mediaItem('video', files[0]);
+        //     this.countVideo = this.countVideo + 1;
+        // } else {
+        //     return false;
+        // }
+
+        // const newInputFile = this.$mediaList.querySelector('.new');
+        // newInputFile.files = file;
+        // newInputFile.classList.remove('new');
+
+
+        // return dataTransfer.files;
+    }
+
+    getDataFile = (file) => {
+        const dataTransfer = new DataTransfer();
+
+        dataTransfer.items.add(
+            new File([file.slice(0, file.size, file.type)], file.name)
+        )
+
+        return {
+            file: dataTransfer.files,
+            url: URL.createObjectURL(dataTransfer.files[0]),
+            name: this.inputName
+        }
+    }
+
+
+    getExtensionList = () => {
+        return this.format.split(',');
+    }
+
+    filterFiles = (files) => {
+        const dataTransfer = new DataTransfer();
+        for(let i=0; i<files.length; i++) {
+            const file = files[i];
+
+            if(this.checkExtension(file.name)){
+                dataTransfer.items.add(
+                    new File([file.slice(0, file.size, file.type)], file.name)
+                );
+            }
+        }
+        return dataTransfer.files;
+    }
+
+    deleteMediaItem = ($target) => {
+        if(!$target) return;
+
+        const $item = $target.closest('[data-media-item]');
+
+        if(!$item) return;
+
+        this.render.delete($item);
+        this.currentCount = this.getMediaItemCount();
+
+    }
+
+    checkExtension = (name) => {
+
+        const extension = name.split('.').slice(-1)[0];
+
+        return this.extensionList.includes(extension);
+
+        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
+        //     // if(this.countPhoto === this.count) return;
+        //     this.countItem++;
+        //     // this.countPhoto = this.countPhoto + 1;
+        // } else if(extension === 'mp4'){
+        //     // if(this.countVideo === this.count) return;
+        //     this.render.mediaItem('video', files[0]);
+        //     this.countVideo = this.countVideo + 1;
+        // } else {
+        //     return false;
+        // }
+    }
+
+    getMediaItemCount = () => {
+
+        return this.$mediaList.querySelectorAll('[data-media-item]').length;
+
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-media-delete]')){
+            this.deleteMediaItem(e.target);
+        }
+    }
+
+
+    listeners = () => {
+        this.$mediaList.addEventListener('click', this.clickHandler);
+        this.$inputAdd.addEventListener('input', this.addMedia);
+    }
+
+}
+
+class UploadMediaFile {
+
     constructor($mediaFile, updatingEntityApi = false) {
         this.$mediaFile = $mediaFile;
         this.updatingEntityApi = updatingEntityApi;
@@ -482,11 +745,17 @@ class MediaFile {
     }
 
     init = () => {
+
         if (!this.$mediaFile) return;
-        this.type = this.$mediaFile.dataset.mediaFile;
+
+        this.type = this.$mediaFile.dataset.uploadMediaFile;
+
         this.inputName = this.$mediaFile.dataset.name;
+
         this.totalItem = +this.$mediaFile.dataset.total;
+
         this.$inputAdd = this.$mediaFile.querySelector('[data-media-add]');
+
         this.$messageError = this.$mediaFile.querySelector('[data-media-error]');
 
         this.extensionList = ['jpg', 'jpeg', 'png', 'mp4'];
@@ -497,9 +766,10 @@ class MediaFile {
 
         this.currentCount = this.getMediaItemCount();
 
-        this.render = new MediaFileRender(this.$mediaList, this.inputName);
+        this.render = new UploadMediaFileRender(this.$mediaList, this.inputName);
 
         this.listeners();
+
     }
 
     createMediaItem = (media) => {
@@ -535,23 +805,35 @@ class MediaFile {
         const files = this.$inputAdd.files;
         this.hideMessageError();
 
-        // const valide = this.checkExtension(files[0]);
+        // const valid = this.checkExtension(files[0]);
+
         if(this.type === 'multi'){
+
             this.render.spinner();
+
         } else {
+
             this.render.clearList();
+
             this.render.spinner();
+
         }
 
         const response = await this.service.fetchUrl(files[0]);
 
         if(response.success){
 
-             this.render.spinnerDestroy();
+            this.render.spinnerDestroy();
 
-             this.clearInputAdd();
+            this.clearInputAdd();
 
-             this.createMediaItem(response.data.media);
+            this.createMediaItem(response.data.media);
+
+            if(this.updatingEntityApi){
+
+                await this.updatingEntity();
+
+            }
 
         }else{
 
@@ -563,23 +845,31 @@ class MediaFile {
 
         this.toggleAddMedia();
 
-
     }
 
     toggleAddMedia = () => {
+
         this.currentCount = this.getCountItem();
 
         if(this.currentCount >= this.totalItem){
+
             this.$inputAdd.disabled = true;
+
             this.$mediaFile.classList.add('disabled');
+
         } else {
+
             this.$inputAdd.disabled = false;
+
             this.$mediaFile.classList.remove('disabled');
+
         }
     }
 
     clearInputAdd = () => {
+
         this.$inputAdd.value = '';
+
     }
 
     showMessageError = (message = 'Произошла ошибка') => {
@@ -612,24 +902,11 @@ class MediaFile {
     //     return dataTransfer.files;
     // }
 
-
-
     checkExtension = (name) => {
+
         const extension = name.split('.').slice(-1)[0];
 
         return this.extensionList.includes(extension);
-
-            // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
-            //     // if(this.countPhoto === this.count) return;
-            //     this.countItem++;
-            //     // this.countPhoto = this.countPhoto + 1;
-            // } else if(extension === 'mp4'){
-            //     // if(this.countVideo === this.count) return;
-            //     this.render.mediaItem('video', files[0]);
-            //     this.countVideo = this.countVideo + 1;
-            // } else {
-            //     return false;
-            // }
     }
 
     getMediaItemCount = () => {
@@ -655,7 +932,9 @@ class MediaFile {
             this.render.delete($mediaItem);
 
             if(this.updatingEntityApi){
-                await this.updatingEntity($mediaItem, this.updatingEntityApi);
+
+                await this.updatingEntity();
+
             }
 
         } else {
@@ -664,7 +943,7 @@ class MediaFile {
 
         }
 
-        const $file = $mediaItem.querySelector('[data-media-file]')
+        // const $file = $mediaItem.querySelector('[data-media-file]')
 
         // if($file.name === 'videos[]'){
         //     this.countVideo = this.countVideo - 1;
@@ -686,16 +965,21 @@ class MediaFile {
     updatingEntity = async () => {
 
         const data = {
+
             name: this.inputName,
+
             link: []
+
         }
 
-        const $links = this.$mediaList.querySelectorAll('[data-media-input]');
+        const $inputs = this.$mediaList.querySelectorAll('[data-media-input]');
 
-        if($links.length){
-            const $list = this.$mediaList.querySelectorAll('[data-media-input]');
-            $list.forEach(($item) => data.link.push($item.value));
+        if($inputs.length){
+
+            $inputs.forEach(($item) => data.link.push($item.value));
+
         }
+
         const response = await this.service.updatingEntity(data);
 
         if(response.success){
@@ -823,7 +1107,7 @@ class MediaViewer {
     }
 }
 
-// const mediaFileContainer = new Container('[data-media-file]', MediaFile, );
+const mediaFileContainer = new Container('[data-media-file]', MediaFile);
 
 const manualListSorter = new ManualListSorter();
 

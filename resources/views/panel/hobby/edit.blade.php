@@ -28,7 +28,7 @@
                     <span class="form-control__label">Главное фото</span>
                     <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
                 </div>
-                <div data-media-file="one" data-name="main_photo" class="media-file">
+                <div data-upload-media-file="one" data-name="main_photo" class="media-file">
 
                     <div class="media-file__body">
                         <label class="media-file__btn download-btn">
@@ -56,7 +56,7 @@
                     <span class="form-control__label">Фоновое фото</span>
                     <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
                 </div>
-                <div data-media-file="one" data-name="bg_photo" class="media-file">
+                <div data-upload-media-file="one" data-name="bg_photo" class="media-file">
                     <div class="media-file__body">
                         <label class="media-file__btn download-btn">
                             <input data-media-add type="file" class="download-btn__input">
@@ -83,7 +83,7 @@
                     <span class="form-control__label">Миниатюра</span>
                     <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
                 </div>
-                <div data-media-file="one" data-name="mini_photo" class="media-file">
+                <div data-upload-media-file="one" data-name="mini_photo" class="media-file">
                     <div class="media-file__body">
                         <label class="media-file__btn download-btn">
                             <input data-media-add type="file" class="download-btn__input">
@@ -119,7 +119,7 @@
                     <span class="form-control__label">Галерея</span>
                     <p class="form-control__note">Вы можите загрузить до 4 изображений в формате jpg, jpeg, png</p>
                 </div>
-                <div data-media-file="multi" data-name="photo_list[]" class="media-file">
+                <div data-upload-media-file="multi" data-name="photo_list[]" class="media-file">
                     <div class="media-file__body">
                         <label class="media-file__btn download-btn">
                             <input data-media-add type="file" class="download-btn__input">

@@ -8,6 +8,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Media\StoreMediaRequest;
 use App\Repositories\ImageRepository;
 use App\Repositories\MediaRepository;
+use App\Services\MediaDeleteService;
 use App\Services\MediaUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,20 +33,17 @@ class MediaController extends BaseController
         return $this->sendResponse(['media'=>$item]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, MediaDeleteService $mediaDeleteService)
     {
 
-//        $media = MediaRepository::getMediaByLink($request->link);
-//
-//        if(!$media){
-//            return $this->sendError('Изображение или видео не существует или уже удалено');
-//        }
-//
-//        MediaRepository::deleteMedia($media['id']);
-//
-//        Storage::disk('public')->delete($request->link);
+        $rez = $mediaDeleteService->handle($request->link);
 
-        return $this->sendResponse(['message' => 'Картинка удалена']);
+        if($rez['success']){
+            return $this->sendResponse(['message' => 'Картинка удалена']);
+        } else {
+            return $this->sendError($rez['message']);
+        }
+
     }
 
 //    public function photo(Request $request){

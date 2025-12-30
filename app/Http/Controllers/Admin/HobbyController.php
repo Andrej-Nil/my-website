@@ -7,6 +7,8 @@ use App\Http\Requests\Hobby\StoreHobbyRequest;
 use App\Http\Requests\Hobby\UpdateHobbyRequest;
 use App\Repositories\HobbyRepository;
 use App\Repositories\ImageRepository;
+use App\Repositories\MediaRepository;
+use App\Services\MediaDeleteService;
 use App\Services\MediaUploadService;
 use Illuminate\Http\Request;
 
@@ -33,12 +35,32 @@ class HobbyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHobbyRequest $request)
+    public function store(StoreHobbyRequest $request, MediaUploadService $mediaUploadService)
     {
-        $hobby = HobbyRepository::createHobby($request->validated());
+
+        $validatedData = $request->validated();
+//        $hobby = HobbyRepository::createHobby($request->validated());
+        $hobbyData = collect($validatedData)->except(['main_photo', 'bg_photo', 'mini_photo', 'photo_list'])->toArray();
+
+        if($request->main_photo){
+            $hobbyData['main_photo'] = $mediaUploadService->handle($request->main_photo)['link'];
+        }
+        if($request->bg_photo){
+            $hobbyData['bg_photo'] = $mediaUploadService->handle($request->bg_photo)['link'];
+        }
+        if($request->mini_photo){
+            $hobbyData['mini_photo'] = $mediaUploadService->handle($request->mini_photo)['link'];
+        }
+        if($request->photo_list){
+            $hobbyData['photo_list'] = $mediaUploadService->handle($request->photo_list)['link'];
+        }
+//        $hobbyData['bg_photo'] = $mediaUploadService->handle($request->bg_photo)['link'];
+//        $hobbyData['mini_photo'] = $mediaUploadService->handle($validatedData['mini_photo'])['link'];
+        $hobby = HobbyRepository::createHobby($hobbyData);
         if(!$hobby){
             abort(404);
         }
+
         return to_route('panel.hobbies.edit', $hobby['id'])->with('success', 'Хобби добавленно');
     }
 
@@ -85,16 +107,38 @@ class HobbyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($link)
+    public function destroy($id, MediaDeleteService $mediaDeleteService)
     {
-//        $hobby = HobbyRepository::getHobbyById($id);
-        $hobby = HobbyRepository::getHobbyByLink($link);
+
+        $hobby = HobbyRepository::getHobbyById($id);
 
         if(!$hobby){
             abort('404');
         }
 
-        HobbyRepository::deleteHobby($link);
+        if($hobby['main_photo']){
+            $mediaDeleteService->handle($hobby['main_photo']);
+
+//            $media = MediaRepository::getMediaByLink($hobby['main_photo']);
+//            dd($media);
+//            MediaRepository::deleteMediaByLink($hobby['main_photo']);
+//
+        }
+
+        if($hobby['bg_photo']){
+            MediaRepository::deleteMediaByLink($hobby['bg_photo']);
+        }
+
+        if($hobby['mini_photo']){
+            MediaRepository::deleteMediaByLink($hobby['mini_photo']);
+        }
+        if($hobby['photo_list']){
+            foreach ($hobby['photo_list'] as $photo){
+                MediaRepository::deleteMediaByLink($photo);
+            }
+        }
+
+        HobbyRepository::deleteHobby($id);
         return to_route('panel.hobbies')->with('success', 'Хобби ' . "'" . $hobby['title'] . "'" . ' удалено');
     }
 }

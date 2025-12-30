@@ -46,6 +46,10 @@ class MediaRepository
         return Media::where('id', $id)->delete();
     }
 
+    public static function deleteMediaByLink(string $link):bool{
+        return Media::where('link', $link)->delete();
+    }
+
 //    public static function deleteMediaByLink(int $link):bool{
 //        return Media::where('link', $link)->delete();
 //    }

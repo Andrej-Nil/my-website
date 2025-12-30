@@ -62,14 +62,16 @@ class Hobby extends Model
     public function getPhotoListUrlAttribute() {
         // Storage::disk('public')->exists() проверяет, существует ли файл физически
         $list = [];
-
-        foreach ($this->photo_list as $key =>$link){
-            if($link && Storage::disk('public')->exists($link)) {
-                $list[] = Storage::disk('public')->url($link);
+        if($this->photo_list){
+            foreach ($this->photo_list as $key =>$link){
+                if($link && Storage::disk('public')->exists($link)) {
+                    $list[] = Storage::disk('public')->url($link);
 //                array_push($list, Storage::disk('public')->url($link));
-            }
+                }
 //            $list[$key] = $link;
+            }
         }
+
        return $list;
     }
 

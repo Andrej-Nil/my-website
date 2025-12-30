@@ -23,12 +23,34 @@ class StoreHobbyRequest extends FormRequest
     {
         return [
             'title'     => ['bail', 'required', 'string', 'max:255'],
-            'main_photo'     => ['bail', 'nullable', 'string', 'max:255'],
-            'bg_photo'     => ['bail', 'nullable', 'string', 'max:255'],
-            'mini_photo'     => ['bail', 'nullable', 'string', 'max:255'],
-            'photo_list'     => ['nullable', 'array', 'max:4'],
+            'main_photo'     => [
+                'bail',
+                'mimetypes:image/jpeg,image/jpg,image/png,image',
+                'max:10240'
+            ],
+            'bg_photo'     => [
+                'bail',
+                'mimetypes:image/jpeg,image/jpg,image/png,image',
+                'max:10240'
+            ],
 
-            'photo_list.*' => ['string', 'max:255'],
+            'mini_photo'     => [
+                'bail',
+                'mimetypes:image/jpeg,image/jpg,image/png,image',
+                'max:10240'
+            ],
+            'photo_list'          => [
+                'bail',
+                'nullable',
+                'array',
+                'max:4'
+            ],
+
+            'photo_list.*'         => [
+                'bail',
+                'mimetypes:image/jpeg,image/jpg,image/png,image',
+                'max:10240'
+            ],
 
             'text' => ['bail', 'nullable', 'string'],
 
@@ -42,18 +64,24 @@ class StoreHobbyRequest extends FormRequest
             'title.required'    => 'Поле "Название" обязательно для заполнения',
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
-            'main_photo.string'      => 'Поле "Название" должно быть строкой',
-            'main_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
 
-            'bg_photo.string'      => 'Поле "Название" должно быть строкой',
-            'bg_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+            'main_photo.image'       => 'Загружаемый файл должен быть изображением',
+            'main_photo.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+            'main_photo.max' => 'Максимальный размер каждой фотографии - 10 МБ',
 
-            'mini_photo.string'      => 'Поле "Название" должно быть строкой',
-            'mini_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+            'bg_photo.image'       => 'Загружаемый файл должен быть изображением',
+            'bg_photo.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+            'bg_photo.max' => 'Максимальный размер каждой фотографии - 10 МБ',
 
+            'mini_photo.image'       => 'Загружаемый файл должен быть изображением',
+            'mini_photo.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+            'mini_photo.max' => 'Максимальный размер каждой фотографии - 10 МБ',
 
             'photo_list.array' => 'Неверный тип данных',
             'photo_list.max' => 'Вы можете загрузить не более 4 фотографий',
+            'photo_list.*.image'       => 'Загружаемый файл должен быть изображением',
+            'photo_list.*.mimetypes'     => 'Допускаются только изображения форматов: jpg, jpeg, png, gif',
+            'photo_list.*.max' => 'Максимальный размер каждой фотографии - 10 МБ',
 
             'text.string'       => 'Поле "Название" должно быть строкой',
             'is_display.boolean'        => 'Не верный тип данных'

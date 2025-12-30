@@ -22,12 +22,12 @@ class UpdateHobbyRequest extends FormRequest
     {
         return [
             'title'     => ['bail', 'required', 'string', 'max:255'],
-            'main_photo'     => ['bail', 'nullable', 'string', 'max:255'],
-            'bg_photo'     => ['bail', 'nullable', 'string', 'max:255'],
-            'mini_photo'     => ['bail', 'nullable', 'string', 'max:255'],
-            'photo_list'     => ['nullable', 'array', 'max:4'],
-
-            'photo_list.*' => ['string', 'max:255'],
+//            'main_photo'     => ['bail', 'nullable', 'string', 'max:255'],
+//            'bg_photo'     => ['bail', 'nullable', 'string', 'max:255'],
+//            'mini_photo'     => ['bail', 'nullable', 'string', 'max:255'],
+//            'photo_list'     => ['nullable', 'array', 'max:4'],
+//
+//            'photo_list.*' => ['string', 'max:255'],
 
             'text' => ['bail', 'nullable', 'string'],
 
@@ -41,18 +41,18 @@ class UpdateHobbyRequest extends FormRequest
             'title.required'    => 'Поле "Название" обязательно для заполнения',
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
-            'main_photo.string'      => 'Поле "Название" должно быть строкой',
-            'main_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
-
-            'bg_photo.string'      => 'Поле "Название" должно быть строкой',
-            'bg_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
-
-            'mini_photo.string'      => 'Поле "Название" должно быть строкой',
-            'mini_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
-
-
-            'photo_list.array' => 'Неверный тип данных',
-            'photo_list.max' => 'Вы можете загрузить не более 4 фотографий',
+//            'main_photo.string'      => 'Поле "Название" должно быть строкой',
+//            'main_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+//
+//            'bg_photo.string'      => 'Поле "Название" должно быть строкой',
+//            'bg_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+//
+//            'mini_photo.string'      => 'Поле "Название" должно быть строкой',
+//            'mini_photo.max'         => 'Поле "Название" не должно превышать 255 символов',
+//
+//
+//            'photo_list.array' => 'Неверный тип данных',
+//            'photo_list.max' => 'Вы можете загрузить не более 4 фотографий',
 
             'text.string'       => 'Поле "Название" должно быть строкой',
             'is_display.boolean'        => 'Не верный тип данных'
