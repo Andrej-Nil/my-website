@@ -1107,11 +1107,159 @@ class MediaViewer {
     }
 }
 
+class BlockingInput {
+    constructor($blockingInput) {
+        this.$blockingInput = $blockingInput;
+        this.init();
+    }
+
+    init = () => {
+        if (!this.$blockingInput) return;
+        this.idLinkInput = this.$blockingInput.dataset.blockingInput;
+        if(!this.idLinkInput) return;
+        this.$linkInput = document.querySelector(`#${this.idLinkInput}`);
+
+        this.value =  this.$linkInput.value;
+
+        this.listeners();
+
+    }
+
+    changeHandler = () => {
+        if(this.$linkInput.disabled){
+            this.unBlockedLinkInput();
+        } else {
+            this.blockedLinkInput();
+        }
+    }
+
+    blockedLinkInput = () => {
+        this.$linkInput.disabled = true;
+        this.value = this.$linkInput.value;
+        this.$linkInput.value = '';
+    }
+    unBlockedLinkInput = () => {
+        this.$linkInput.disabled = false;
+
+        this.$linkInput.value = this.value;
+    }
+
+    listeners = () => {
+        this.$blockingInput.addEventListener('click', this.changeHandler);
+    }
+
+}
+
+class DisplaySwitcherService extends Service{
+    constructor(id, api) {
+        super();
+        this.id = id;
+        this.api = api;
+    }
+
+
+    updateDisplay = async () => {
+        const formData = new FormData();
+            formData.append('id', this.id);
+        return await this.post(this.api, {
+            data: formData,
+            headers: {
+                "X-CSRF-Token": this._token
+            }
+        })
+    }
+}
+
+class DisplaySwitcher {
+   constructor($btn) {
+       this.$btn = $btn;
+       this.init()
+   }
+
+    init = () => {
+       if(!this.$btn) return;
+       this.id = this.$btn.dataset.displaySwitcher;
+       this.api = this.$btn.dataset.api;
+       this.service = new DisplaySwitcherService(this.id, this.api);
+       this.loading = false;
+       this.listeners();
+    }
+
+    switching = async () => {
+        if(this.loading) return;
+        this.loading = true;
+        const result = await this.service.updateDisplay();
+        if(result.success){
+            this.toggle(result.data.isDisplay)
+            this.loading = false;
+        } else {
+
+        }
+    }
+
+    toggle = (isDisplay) => {
+        if(isDisplay){
+            this.show();
+        }else{
+            this.hide();
+        }
+    }
+
+    show = () => {
+        this.$btn.classList.add('active');
+    }
+
+    hide = () => {
+        this.$btn.classList.remove('active');
+    }
+
+
+
+    // clickHandler = () => {
+    //    console.log('ksdhfhshdgf');
+    // }
+
+    listeners = () => {
+        this.$btn.addEventListener('click', this.switching)
+    };
+
+}
+
+
+class SortingSelect{
+    constructor($sortingSelect) {
+        this.$sortingSelect = $sortingSelect;
+        this.init();
+
+        this.listeners();
+
+    }
+    init = () => {
+        if(!this.$sortingSelect) return;
+        this.$btn = this.$sortingSelect.querySelector('[data-sorting-btn]');
+        this.$list = this.$sortingSelect.querySelector('[data-sorting-list]');
+
+    }
+    toggle = () => {
+        this.$list.classList.toggle('show');
+    }
+
+    listeners = () => {
+        this.$btn.addEventListener('click', this.toggle)
+    };
+
+}
+
 const mediaFileContainer = new Container('[data-media-file]', MediaFile);
+
+const sortingSelectContainer = new Container('[data-sorting]', SortingSelect);
+
+const displaySwitcherContainer = new Container('[data-display-switcher]', DisplaySwitcher);
+
+const blockingInputContainer = new Container('[data-blocking-input]', BlockingInput);
 
 const manualListSorter = new ManualListSorter();
 
 const mediaViewer = new MediaViewer();
 
 const formEdit = new FormEdit();
-

@@ -24,12 +24,13 @@ class StoreJobRequest extends FormRequest
         return [
             'title'     => ['required', 'string', 'max:255'],
             'profession'     => ['nullable', 'string', 'max:255'],
-            'start' => ['required', 'date_format:Y-m-d'],
-            'is_current_job' => ['nullable', 'boolean'],
+            'start' => ['required', 'date', 'date_format:Y-m-d'],
+            'is_current' => ['nullable', 'boolean'],
             'end' => ['nullable', 'date', 'date_format:Y-m-d'],
             'text' => ['nullable', 'string'],
+            'sort' => ['nullable', 'int'],
             'is_display' => ['nullable', 'boolean'],
-            'sort' => ['nullable', 'int']
+
         ];
     }
 

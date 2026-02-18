@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Hobby\StoreHobbyRequest;
 use App\Http\Requests\Hobby\UpdateHobbyRequest;
+use App\Http\Requests\Search\SearchRequest;
 use App\Repositories\HobbyRepository;
 use App\Repositories\ImageRepository;
 use App\Repositories\MediaRepository;
@@ -140,5 +141,16 @@ class HobbyController extends Controller
 
         HobbyRepository::deleteHobby($id);
         return to_route('panel.hobbies')->with('success', 'Хобби ' . "'" . $hobby['title'] . "'" . ' удалено');
+    }
+
+
+    public function search(SearchRequest $request) {
+
+        $rez = $request->validated();
+//        $postList = PostRepository::getPagination($rez);
+//        return  view('panel.post.index', [
+//            'postList' => $postList,
+//            'search' => $rez['search']
+//        ]);
     }
 }

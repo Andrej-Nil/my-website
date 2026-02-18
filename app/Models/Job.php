@@ -11,6 +11,7 @@ class Job extends Model
         'profession',
         'start',
         'end',
+        'is_current',
         'sort',
         'text',
         'is_display'

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Sort;
+namespace App\Http\Requests\Display;
 
-//use App\Helpers\FormatHelper;
+
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class UpdateSortRequest extends FormRequest
+class UpdateDisplayRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +23,15 @@ class UpdateSortRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_list' => ['required', 'array'],
+            'id' => ['nullable'],
         ];
     }
 //
     public function messages()
     {
         return [
-                'id_list.required' => 'Поле "Название" обязательно для заполнения',
-                'id_list.array'    => 'Тип данных не соответсвует',
+            'id.required' => 'Поле "Название" обязательно для заполнения',
+            'id.array'    => 'Тип данных не соответсвует',
 //            'title.required'    => 'Поле "Название" обязательно для заполнения',
 //            'title.string'      => 'Поле "Название" должно быть строкой',
 //            'title.max'         => 'Слишком длинный запрос.',
@@ -44,7 +43,7 @@ class UpdateSortRequest extends FormRequest
     }
 
 
-//
+
 //    protected function prepareForValidation(): void {
 //        $this->merge([
 ////            'slug' => FormatHelper::slug($this->title),

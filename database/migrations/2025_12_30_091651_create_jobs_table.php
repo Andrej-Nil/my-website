@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('profession');
             $table->timestamp('start')->default(null);
+            $table->boolean('is_current')->default(false);
             $table->timestamp('end')->default(null);
             $table->text('text')->nullable();
+            $table->integer('sort')->default(0);
             $table->boolean('is_display')->default(true);
             $table->timestamps();
         });

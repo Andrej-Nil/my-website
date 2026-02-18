@@ -25,11 +25,10 @@ class UpdateJobRequest extends FormRequest
             'title'     => ['required', 'string', 'max:255'],
             'profession'     => ['nullable', 'string', 'max:255'],
             'start' => ['required', 'date_format:Y-m-d'],
-            'is_current_job' => ['nullable', 'boolean'],
+            'is_current' => ['nullable', 'boolean'],
             'end' => ['nullable', 'date', 'date_format:Y-m-d'],
             'text' => ['nullable', 'string'],
             'is_display' => ['nullable', 'boolean'],
-            'is_show_first' => ['nullable', 'boolean'],
         ];
     }
 
