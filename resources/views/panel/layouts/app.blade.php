@@ -23,8 +23,12 @@
                 <li class="nav-item">
                     <a href="{{route('panel.hobbies')}}" class="nav-item__link">Хобби</a>
                 </li>
+
                 <li class="nav-item">
+                    <p class="nav-item__title">Блок резюме</p>
                     <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт работы</a>
+                    <a href="{{route('panel.schools')}}" class="nav-item__link">Образование</a>
+                    <a href="{{route('panel.qualities')}}" class="nav-item__link">Качества</a>
                 </li>
 
 {{--                <li class="nav-item">--}}

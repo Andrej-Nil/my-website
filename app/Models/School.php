@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Education extends Model
+class School extends Model
 {
     protected $fillable = [
         'title',
         'specialization',
-        'is_current_day',
+        'is_current',
         'start',
         'end',
         'sort',

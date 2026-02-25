@@ -8,12 +8,20 @@ class HobbyRepository
 {
     public static function getPagination(array $data = [], int $count = 20):array{
 
-//        if(isset($data['search'])){
-//            return Hobby::with('photo')->where('title', 'LIKE', '%'.$data['search'].'%')->limit($count)->get()->toArray();
-//        }
-//        return Hobby::with('photo')->limit($count)->orderBy('id', 'DESC')->get()->toArray();
+        if(isset($data['search'])){
+            return Hobby::where('title', 'LIKE', '%'.$data['search'].'%')->
+                orderBy($data['sort']['key'], $data['sort']['type'])->
+                paginate($count)->
+                appends($data['params'])->
+                toArray();
+        }
 
-        return Hobby::orderBy('id', 'DESC')->get()->toArray();
+
+        return Hobby::orderBy($data['sort']['key'], $data['sort']['type'])->
+            paginate($count)->
+            appends($data['params'])->
+            toArray();
+
     }
 
     public static function createHobby(array $data):array{

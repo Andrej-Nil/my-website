@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Education;
+namespace App\Http\Requests\School;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateEducationRequest extends FormRequest
+class UpdateSchoolRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class UpdateEducationRequest extends FormRequest
             'title'     => ['required', 'string', 'max:255'],
             'specialization'     => ['nullable', 'string', 'max:255'],
             'start' => ['required', 'date_format:Y-m-d'],
-            'is_current_day' => ['nullable', 'boolean'],
+            'is_current' => ['nullable', 'boolean'],
             'end' => ['nullable', 'date', 'date_format:Y-m-d'],
             'text' => ['nullable', 'string'],
             'is_display' => ['nullable', 'boolean'],

@@ -7,7 +7,6 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::get('panel/jobs', [\App\Http\Controllers\Admin\JobController::class, 'index'])->name('panel.jobs');
 
-
     Route::get('panel/jobs/create', [\App\Http\Controllers\Admin\JobController::class, 'create'])->name('panel.jobs.create');
     Route::post('panel/jobs', [\App\Http\Controllers\Admin\JobController::class, 'store'])->name('panel.jobs.store');
     Route::get('panel/jobs/{id}/edit', [\App\Http\Controllers\Admin\JobController::class, 'edit'])->name('panel.jobs.edit');
@@ -17,12 +16,19 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 
 
-    Route::get('panel/educations', [\App\Http\Controllers\Admin\EducationController::class, 'index'])->name('panel.educations');
-    Route::get('panel/educations/create', [\App\Http\Controllers\Admin\EducationController::class, 'create'])->name('panel.educations.create');
-    Route::post('panel/educations', [\App\Http\Controllers\Admin\EducationController::class, 'store'])->name('panel.educations.store');
-    Route::get('panel/educations/{id}/edit', [\App\Http\Controllers\Admin\EducationController::class, 'edit'])->name('panel.educations.edit');
-    Route::put('panel/educations/{id}', [\App\Http\Controllers\Admin\EducationController::class, 'update'])->name('panel.educations.update');
-    Route::delete('panel/educations/{id}', [\App\Http\Controllers\Admin\EducationController::class, 'destroy'])->name('panel.educations.delete');
+    Route::get('panel/schools', [\App\Http\Controllers\Admin\SchoolController::class, 'index'])->name('panel.schools');
+    Route::get('panel/schools/create', [\App\Http\Controllers\Admin\SchoolController::class, 'create'])->name('panel.schools.create');
+    Route::post('panel/schools', [\App\Http\Controllers\Admin\SchoolController::class, 'store'])->name('panel.schools.store');
+    Route::get('panel/schools/{id}/edit', [\App\Http\Controllers\Admin\SchoolController::class, 'edit'])->name('panel.schools.edit');
+    Route::put('panel/schools/{id}', [\App\Http\Controllers\Admin\SchoolController::class, 'update'])->name('panel.schools.update');
+    Route::delete('panel/schools/{id}', [\App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('panel.schools.delete');
+
+    Route::get('panel/qualities', [\App\Http\Controllers\Admin\QualityController::class, 'index'])->name('panel.qualities');
+    Route::get('panel/qualities/create', [\App\Http\Controllers\Admin\QualityController::class, 'create'])->name('panel.qualities.create');
+    Route::post('panel/qualities', [\App\Http\Controllers\Admin\QualityController::class, 'store'])->name('panel.qualities.store');
+    Route::get('panel/qualities/{id}/edit', [\App\Http\Controllers\Admin\QualityController::class, 'edit'])->name('panel.qualities.edit');
+    Route::put('panel/qualities/{id}', [\App\Http\Controllers\Admin\QualityController::class, 'update'])->name('panel.qualities.update');
+    Route::delete('panel/qualities/{id}', [\App\Http\Controllers\Admin\QualityController::class, 'destroy'])->name('panel.qualities.delete');
 
 
 

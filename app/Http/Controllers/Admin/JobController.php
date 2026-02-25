@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\SortDataHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Job\StoreJobRequest;
 use App\Http\Requests\Job\UpdateJobRequest;
 use App\Http\Requests\Search\SearchRequest;
 use App\Repositories\JobRepository;
-use DateTime;
-use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
@@ -21,23 +20,15 @@ class JobController extends Controller
         $validatedData = $request->validated();
         $data = $request->all();
         $search = '';
+        $validatedData['params'] = [];
         if(isset($validatedData['search'])){
             $search = $validatedData['search'];
         }
         if(isset($data['sort'])){
-            if($data['sort'] == 'a-up'){
-                $validatedData['sort'] = ['key' => 'title', 'type' => 'ASC', 'label' => 'От А до Я', 'name' => 'a-up'];
-            } elseif($data['sort'] == 'z-up') {
-                $validatedData['sort'] = ['key' => 'title', 'type' => 'DESC', 'label' => 'От Я до А', 'name' => 'z-up'];
-            } elseif($data['sort'] == 'new-up') {
-                $validatedData['sort'] = ['key' => 'created_at', 'type' => 'ASC', 'label' => 'Сначало новые', 'name' => 'new-up'];
-            } elseif($data['sort'] == 'old-up') {
-                $validatedData['sort'] = ['key' => 'created_at', 'type' => 'DESC', 'label' => 'Сначало старые', 'name' => 'old-up'];
-            }
+            $validatedData['sort'] = SortDataHelper::handle($data['sort']);
         } else {
             $validatedData['sort'] = ['key' => 'sort', 'type' => 'ASC', 'label' => 'По умолчанию', 'name' => null];
         }
-        $validatedData['params'] = [];
 
         if($validatedData['sort']['name']){
             $validatedData['params']['sort'] = $validatedData['sort']['name'];
@@ -47,17 +38,9 @@ class JobController extends Controller
             $validatedData['params']['search'] = $validatedData['search'];
         }
 
-//        dd($validatedData);
+
         $jobList = JobRepository::getPagination($validatedData);
-//        dd($jobList);
-//        if(!isset($data['search'])){
-//            $jobList = JobRepository::getPagination($data);
-//            return  view('panel.job.index', [
-//                'jobList' => $jobList,
-//                'search' => $data['search'] ??
-//            ]);
-//        }
-//dd($jobList);
+
         return  view('panel.job.index', [
             'jobList' => $jobList,
             'search' => $search,
@@ -65,7 +48,6 @@ class JobController extends Controller
             'currentSortTitle' => $validatedData['sort']['label']
         ]);
 
-//        return view('panel.job.index', ['jobList' => $jobList]);
     }
 
     /**

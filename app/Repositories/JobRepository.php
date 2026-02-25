@@ -6,16 +6,19 @@ use App\Models\Job;
 
 class JobRepository
 {
-    public static function getPagination(array $data = [], int $count = 20){
+    public static function getPagination(array $data = [], int $count = 20):array{
 //        return Job::limit($count)->orderBy('sort', 'ASC')->get()->toArray();
         if(isset($data['search'])){
             return Job::where('title', 'LIKE', '%'.$data['search'].'%')->
-            orderBy($data['sort']['key'], $data['sort']['type'])->
+                orderBy($data['sort']['key'], $data['sort']['type'])->
+                paginate($count)->
+                appends($data['params'])->
+                toArray();
+        }
+        return Job::orderBy($data['sort']['key'], $data['sort']['type'])->
             paginate($count)->
             appends($data['params'])->
             toArray();
-        }
-        return Job::orderBy($data['sort']['key'], $data['sort']['type'])->paginate($count)->appends($data['params'])->toArray();
     }
 
     public static function createJob(array $data):array{
@@ -44,5 +47,10 @@ class JobRepository
             return false;
         }
     }
+
+    public static function getJobByIdDisplayAndSort(){
+        return Job::where(['is_display' => 1])->orderBy('sort', 'ASC')->get()->toArray();
+    }
+
 
 }

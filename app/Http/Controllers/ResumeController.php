@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 
 
-use App\Repositories\EducationRepository;
+use App\Repositories\SchoolRepository;
 use App\Repositories\JobPlaceRepository;
+use App\Repositories\JobRepository;
 
 class ResumeController extends Controller
 {
@@ -13,15 +14,13 @@ class ResumeController extends Controller
 
 //        $hobbyList = HobbyRepository::getPagination();
 
-//        $jobList = JobPlaceRepository::getJobPlaceByIdDisplayAndSort();
-//        $educationList = EducationRepository::getEducationByIdDisplayAndSort();
-//        return view('resume', [
-//            'jobList' => $jobList,
-//            'educationList' => $educationList
-//            ]
+        $jobList = JobRepository::getJobByIdDisplayAndSort();
+        $schoolList = SchoolRepository::getSchoolByIdDisplayAndSort();
 
-        return view('resume');
+
+        return view('resume', [
+                'jobList' => $jobList,
+                'schoolList' => $schoolList
+            ]);
     }
-
-//'retry_after' => (int) env('BEANSTALKD_QUEUE_RETRY_AFTER', 90),
 }

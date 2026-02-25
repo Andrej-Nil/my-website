@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\SortDataHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Hobby\StoreHobbyRequest;
 use App\Http\Requests\Hobby\UpdateHobbyRequest;
@@ -18,11 +19,31 @@ class HobbyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SearchRequest $request)
     {
-        $hobbyList = HobbyRepository::getPagination();
-//        dd($hobbyList);
-        return view('panel.hobby.index', ['hobbyList' => $hobbyList]);
+        $validatedData = $request->validated();
+        $data = $request->all();
+        $search = '';
+        $validatedData['params'] = [];
+        if(isset($validatedData['search'])){
+            $search = $validatedData['search'];
+        }
+        if(isset($data['sort'])){
+            $validatedData['sort'] = SortDataHelper::handle($data['sort']);
+        } else {
+            $validatedData['sort'] = ['key' => 'title', 'type' => 'ASC', 'label' => 'От А до Я', 'name' => 'a-up'];
+        }
+
+        if($validatedData['sort']['name']){
+            $validatedData['params']['sort'] = $validatedData['sort']['name'];
+        }
+
+        if(isset($validatedData['search'])) {
+            $validatedData['params']['search'] = $validatedData['search'];
+        }
+
+        $hobbyList = HobbyRepository::getPagination($validatedData);
+        return view('panel.hobby.index', ['hobbyList' => $hobbyList, 'search' => $search]);
     }
 
     /**
