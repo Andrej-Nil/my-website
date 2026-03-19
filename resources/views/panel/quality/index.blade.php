@@ -33,7 +33,6 @@
                     </div>
                 </div>
             </div>
-
             <a href="{{route('panel.qualities.create')}}" class="btn btn--yellow">Добавить качество</a>
         </div>
 
