@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('qualities', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type');
+            $table->integer('type');
             $table->integer('sort')->default(0);
+            $table->boolean('is_display')->default(true);
             $table->timestamps();
         });
     }

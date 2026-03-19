@@ -9,6 +9,7 @@ class Quality extends Model
     protected $fillable = [
         'title',
         'type',
-        'sort'
+        'sort',
+        'is_display'
     ];
 }

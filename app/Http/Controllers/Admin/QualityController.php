@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helper\SortDataHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Quality\QualityStoreRequest;
+use App\Http\Requests\Quality\UpdateQualityRequest;
 use App\Http\Requests\Search\SearchRequest;
 use App\Models\Quality;
+use App\Repositories\QualityRepository;
 use Illuminate\Http\Request;
 
 class QualityController extends Controller
@@ -37,10 +40,8 @@ class QualityController extends Controller
         if(isset($validatedData['search'])) {
             $validatedData['params']['search'] = $validatedData['search'];
         }
-        $qualityList['data'] = [];
-
+        $qualityList = QualityRepository::getPagination($validatedData);
         return (view('panel.quality.index',
-
             [
                 'qualityList' => $qualityList,
                 'search' => $search,
@@ -55,15 +56,17 @@ class QualityController extends Controller
      */
     public function create()
     {
-        dd('xsdjkhhjxcfg');
+        return (view('panel.quality.create'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(QualityStoreRequest $request)
     {
-        //
+        $quality = QualityRepository::createQuality($request->validated());
+
+        return to_route('panel.qualities.edit', $quality['id'])->with('success', 'Качество добавленно');
     }
 
     /**
@@ -77,17 +80,33 @@ class QualityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Quality $quality)
+    public function edit($id)
     {
-        //
+        $quality = QualityRepository::getQualityById($id);
+
+
+        if(!$quality){
+            abort(404);
+        }
+
+        return view('panel.quality.edit', ['quality' => $quality]);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Quality $quality)
+    public function update(UpdateQualityRequest $request, $id)
     {
-        //
+        $school = QualityRepository::getQualityById($id);
+
+        if(!$school){
+            abort(404);
+        }
+
+        QualityRepository::updateQuality($id, $request->validated());
+
+        return to_route('panel.qualities.edit', $school['id'])->with('success', 'Изменения сохранены');
     }
 
     /**

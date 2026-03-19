@@ -49,10 +49,10 @@
                 <div draggable="true" data-sortable-item="{{$quality['id']}}" class="list-item">
                     <span data-display-switcher="{{$quality['id']}}" data-api="{{route('quality.update.display')}}" class="list-item__btn{{$quality['is_display'] ? ' active' : '' }} " title="Редоктировать">
                     <span class="list-item__slash"></span>
-                    <img src="{{asset('panel-assets/img/icons/eye.svg')}}"
-                         class="list-item__icon list-item__icon--eye"
-                         alt="">
-                </span>
+                        <img src="{{asset('panel-assets/img/icons/eye.svg')}}"
+                             class="list-item__icon list-item__icon--eye"
+                             alt="">
+                    </span>
                     <p class="list-item__title list-item__title--grab">
                         <span class="list-item__name">{{$quality['title']}}</span>
                     </p>
