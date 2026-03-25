@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\JobPlace\StoreJobPlaceRequest;
-use App\Http\Requests\JobPlace\UpdateJobPlaceRequest;
+use App\Http\Requests\Job\StoreJobRequest;
+use App\Http\Requests\Job\UpdateJobRequest;
 use App\Repositories\JobPlaceRepository;
 
 class JobPlaceController extends Controller
@@ -25,13 +25,15 @@ class JobPlaceController extends Controller
      */
     public function create()
     {
+
+
         return view('panel.job.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJobPlaceRequest $request)
+    public function store(StoreJobRequest $request)
     {
 
         $job = JobPlaceRepository::createJobPlace($request->validated());
@@ -67,7 +69,7 @@ class JobPlaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobPlaceRequest $request, $id)
+    public function update(UpdateJobRequest $request, $id)
     {
 
         $job = JobPlaceRepository::getJobPlaceById($id);

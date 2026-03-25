@@ -6,13 +6,21 @@
 
 .nav-item{
     transition: 0.2s ease-in-out;
-    &:hover{
-        transform: translateX(10px);
-    }
+    margin-bottom: 5px;
 }
 .nav-item__link{
     display: block;
     padding: 5px 10px;
-    font-size: 18px;
+
+    font-size: 16px;
     font-weight: 500;
+    transition: 0.2s ease-in-out;
+    &:hover{
+        transform: translateX(10px);
+    }
+}
+
+.nav-item__title{
+    margin-bottom: 5px;
+    text-decoration: underline;
 }

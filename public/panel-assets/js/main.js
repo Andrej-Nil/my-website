@@ -1,9 +1,11 @@
 class Container{
-    constructor(selector, DeclaredClass) {
-        this.$elList = document.querySelectorAll(selector);
+    constructor(selector, DeclaredClass, parentSelector = null) {
+
+        this.$elList = this.getElList(selector, parentSelector);
         this.exemplarList = [];
-        this.DeclaredClass = DeclaredClass
+        this.DeclaredClass = DeclaredClass;
         this.init();
+
     }
 
     init = () => {
@@ -12,6 +14,17 @@ class Container{
             this.exemplarList.push(exemplar);
         })
     }
+
+    getElList = (selector, parentSelector) => {
+        if(parentSelector){
+            const $parent = document.querySelector(parentSelector);
+            return $parent.querySelectorAll(selector);
+        } else{
+            return document.querySelectorAll(selector);
+        }
+    }
+
+    //
 
 }
 
@@ -100,495 +113,65 @@ class Service{
         });
     }
 
-
     getToken = () => {
         return document.querySelector('[name="csrf-token"]').content;
     }
 }
 
-
-class UploadRender extends Render{
-    constructor($uploadFile) {
-        super();
-        this.$uploadFile = $uploadFile;
-        this.name = $uploadFile.dataset.name;
-        this.$preview = this.$uploadFile.querySelector('[data-upload-preview]');
-        this.loader = new Loader();
-    }
-
-
-    createPhoto = (photo) => {
-        this.render(this.$preview, this.getPhotoHtml, photo);
-    }
-
-    createLoader = () => {
-        this.render(this.$preview, this.getLoaderHtml);
-    }
-
-    destroyLoader = () => {
-        const $loader = this.$uploadFile.querySelector('[data-upload-loader]');
-        this.delete($loader);
-    }
-
-    clearPreview = () => {
-        this.clear(this.$preview);
-    }
-
-
-    getPhotoHtml = (photo) => {
-        return `
-            <div data-upload-photo="${photo.id}" class="upload-file-photo">
-                <input type="hidden" name="${this.name}" value="${photo.id}">
-                <img class="upload-file-photo__img" src="${photo.url}" alt=""/>
-                <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
-                <button data-delete-photo type="button"  class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
-            </div>
-        `
-    }
-
-
-
-    getLoaderHtml = () => {
-        return `
-            <div data-upload-loader class="upload-file__loader">
-                ${this.loader.getLoaderHtml()}
-            </div>
-        `
-    }
-}
-
-class UploadService extends Service{
-    constructor(api) {
-        super()
-        this.api = api;
-    }
-
-    fetchFileLink = (file) => {
-        const data = new FormData();
-        data.append('file', file);
-        return this.post(
-            this.api,
-            {
-                data: data,
-                headers: {
-                    "X-CSRF-Token": this._token
-                }
-            }
-        )
-    }
-}
-
-class Upload {
-    constructor($uploadFile) {
-        this.$uploadFile = $uploadFile;
-        this.validExtensions = ['jpg', 'jpeg', 'png', 'svg'];
-        this.init()
+class FormEdit{
+    constructor() {
+        this.$form = document.querySelector('#formEdit');
+        this.init();
     }
 
     init = () => {
-        if (!this.$uploadFile) return;
-        this.type = this.$uploadFile.dataset.upload;
-        this.$input = this.$uploadFile.querySelector('[data-upload-input]');
-        this.api = this.$uploadFile.dataset.uploadApi;
-        this.service = new UploadService(this.api);
-        this.render = new UploadRender(this.$uploadFile);
-        this.listeners();
+
+        if (!this.$form) return;
+
+        this.api = this.$form.dataset.api;
+
+        this.$mediaFileList = this.$form.querySelectorAll('[data-upload-media-file]');
+
+        this.mediaFilesContainer = [];
+
+        this.initMediaFiles();
 
     }
 
-    uploadPhoto = async () => {
-        this.disableInput();
-
-        if(this.type !== 'multi'){
-            this.render.clearPreview();
-        }
-        this.render.createLoader();
-
-        const file = this.$input.files[0];
-        const response = await this.service.fetchFileLink(file);
-        if(response.success){
-            this.enableInput();
-            this.$input.value = '';
-            this.render.destroyLoader();
-            this.render.createPhoto(response.data.photo);
-        } else {
-            console.log(response.error);
-        }
+    initMediaFiles = () => {
+        this.$mediaFileList.forEach(($item) => {
+            const exemplar = new UploadMediaFile($item, this.api);
+            this.mediaFilesContainer.push(exemplar);
+        })
     }
 
+}
 
-    deletePhoto = ($target) => {
-        this.$input.value = '';
-        this.render.delete($target.closest('[data-upload-photo]'));
-    }
-    clickHandler = (e) => {
-
-        if(e.target.closest('[data-delete-photo]')){
-            console.log('  console.log')
-            this.deletePhoto(e.target);
-        }
+class FormCreate {
+    constructor() {
+        this.$form = document.querySelector('#formCreate');
+        this.init();
     }
 
-    disableInput = () => {
-        this.$input.disabled = true;
-    }
+    init = () => {
 
-    enableInput = () => {
-        this.$input.disabled = false;
+        if (!this.$form) return;
+
+        this.$mediaFileList = this.$form.querySelectorAll('[data-media-file]');
+
+        this.mediaFilesContainer = [];
+
+        this.initMediaFiles();
 
     }
 
-    checkExtension = (file) => {
-        const extension = file.name.split('.').pop().toLowerCase()
-        if (this.validExtensions.indexOf(extension) <= -1) {
-            return false;
-        } else {
-            return true;
-        }
-
-    }
-
-
-    listeners = () => {
-        this.$uploadFile.addEventListener('click', this.clickHandler);
-        this.$input.addEventListener('input', this.uploadPhoto);
+    initMediaFiles = () => {
+        this.$mediaFileList.forEach(($item) => {
+            const exemplar = new MediaFile($item, false);
+            this.mediaFilesContainer.push(exemplar);
+        })
     }
 }
-// class FileService extends Service{
-//     constructor(type) {
-//         super();
-//         this.api = '/api-panel/upload/' + type;
-//     }
-//
-//     fetchFileUrl = (file) => {
-//         const data = new FormData();
-//         data.append('file', file);
-//         return this.post(
-//             this.api,
-//             {
-//                 data: data,
-//                 headers: {
-//                     "X-CSRF-Token": this._token,
-//                     // "Content-Type": "multipart/form-data",
-//                 }
-//             }
-//         )
-//     }
-// }
-//
-// class FileRender extends Render{
-//     constructor($parent) {
-//         super();
-//         this.$parent = $parent;
-//     }
-//
-//     empty = (name) => {
-//         this.render(this.$parent, this.getEmptyHtml, name);
-//     }
-//
-//     photo = (data) => {
-//         this.render(this.$parent, this.getPhotoHtml, data);
-//     }
-//     file = (data) => {
-//         this.render(this.$parent, this.getFileHtml, data);
-//     }
-//     video = (data) => {
-//         this.render(this.$parent, this.getVideoHtml, data);
-//     }
-//
-//     clearList = () => {
-//         this.clear(this.$parent);
-//     }
-//
-//     getPhotoHtml = (data) => {
-//         return `
-//             <div data-file-item class="file-cart">
-//                 ${this.getImgHtml(data.url)}
-//                 ${this.getTopBtnHtml(data)}
-//                 ${this.getBottomBtnHtml()}
-//                 ${this.getHiddenInputHtml(data)}
-//             </div>
-//         `
-//     }
-//
-//     error = ($el, data) => {
-//         this.render($el, this.getErrorHtml, data, false, 'afterend')
-//     }
-//
-//     getFileHtml = (data) => {
-//         return `
-//             <div data-file-item class="file-cart">
-//                 ${this.getFileNameHtml(data.url)}
-//                 ${this.getTopLinkHtml(data.url)}
-//                 ${this.getBottomBtnHtml()}
-//                 ${this.getHiddenInputHtml(data)}
-//             </div>
-//         `
-//     }
-//
-//     getVideoHtml = (data) => {
-//         return `
-//             <div data-file-item class="file-cart">
-//                 ${this.getVideoBlockHtml(data.url)}
-//                 ${this.getTopBtnHtml(data)}
-//                 ${this.getBottomBtnHtml()}
-//                 ${this.getHiddenInputHtml(data)}
-//             </div>
-//         `
-//     }
-//
-//     //
-//     //    ${data.type === 'photo' ? this.getPhotoPreview(data.url) : '' }
-//     //    ${data.type === 'file' ? this.getFilePreview(data.title) : '' }
-//     //
-//     //
-//     //
-//     //
-//     getImgHtml = (url) => {
-//         return `
-//             <img class="file-cart__img" src="${url}" alt="photo">
-//         `
-//     }
-//
-//     getTopBtnHtml = (data) => {
-//         return `
-//             <button class="file-cart__btn top" data-zoom="${data.url}" data-item-type="${data.type}" type="button">Просмотр</button>
-//         `
-//     }
-//
-//     getTopLinkHtml = (url) => {
-//         return `
-//             <a href="${url}" class="file-cart__btn top" data-show-item type="button">Просмотр</a>
-//         `
-//     }
-//
-//     getBottomBtnHtml = () => {
-//         return `
-//             <button class="file-cart__btn bottom" data-remove-item type="button">Удалить</button>
-//         `
-//     }
-//
-//     getVideoBlockHtml = (url) => {
-//         return `<video class="file-cart__video" src="${url}"></video>`
-//     }
-//
-//     getHiddenInputHtml = (data) => {
-//         return `
-//             <input type="hidden" name="${data.name}[]" value="${data.url}">
-//         `
-//     }
-//     getFileNameHtml = (title) => {
-//         return `
-//          <div class="file-cart__img">
-//             <span class="file-cart__text">${title}</span>
-//          </div>
-//         `
-//     }
-//     getEmptyHtml = (name) => {
-//         return `
-//             <input data-empty-input type="hidden" name="${name}">
-//         `
-//     }
-//
-//
-//     getErrorHtml = (data) => {
-//         return `
-//          <span data-message-error="${data.id}" class="invalid-feedback" role="alert">
-//             <strong>${data.message}</strong>
-//         </span>
-//         `
-//
-//     }
-// }
-//
-// class FileControl{
-//     constructor($file) {
-//         this.$file = $file;
-//         this.init();
-//     }
-//
-//     init(){
-//         if(!this.$file) return false;
-//         this.type = this.$file.dataset.file;
-//         this.quantity = this.$file.dataset.quantity;
-//         this.$input = this.$file.querySelector('[data-file-input]');
-//         this.name =  this.$input.dataset.fileInput;
-//         this.$fileList = this.$file.querySelector('[data-file-list]');
-//         this.$emptyInput = this.$fileList.querySelector('[data-empty-input]');
-//
-//         this.service = new FileService(this.type);
-//         this.render = new FileRender(this.$fileList);
-//
-//         this.listeners();
-//     }
-//
-//
-//     fetchItem = async (e) => {
-//         this.clearError()
-//         const response = await this.service.fetchFileUrl(e.target.files[0], this.type);
-//
-//         if(response.success){
-//             this.successHandler(response);
-//         } else {
-//             this.errorHandler(response);
-//         }
-//
-//     }
-//     errorHandler = (response) => {
-//         this.$input.value = '';
-//         this.createError(response.message);
-//     }
-//
-//     clearError = () => {
-//         this.$input.classList.remove('is-invalid');
-//         const $errorMessage = document.querySelector(`[data-message-error="${this.$input.id}"]`)
-//         if($errorMessage){
-//             this.render.delete($errorMessage);
-//         }
-//     }
-//     createError = (message) => {
-//         this.clearError();
-//         const data = {
-//             id: this.$input.id,
-//             message: message
-//         }
-//         this.$input.classList.add('is-invalid');
-//         this.render.error(this.$input, data);
-//     }
-//     successHandler = (response) => {
-//         const data ={
-//             url: response.data.url,
-//             name: this.name,
-//             type: this.type
-//         }
-//
-//         if(this.type === 'photo'){
-//             this.createPhotoItem(data);
-//         } else if(this.type === 'video') {
-//             this.createVideoItem(data);
-//         } else{
-//             if(this.$emptyInput){
-//                 this.render.clearList();
-//                 this.$emptyInput = null;
-//             }
-//             this.createFileItem(data);
-//         }
-//     }
-//
-//     createFileItem = (data) => {
-//         if(this.quantity === 'one'){
-//             this.render.clearList();
-//             this.render.file(data);
-//         }else{
-//             if(this.$emptyInput){
-//                 this.render.clearList();
-//                 this.$emptyInput = null;
-//             }
-//             this.render.file(data);
-//         }
-//     }
-//
-//     createPhotoItem = (data) => {
-//         if(this.quantity === 'one'){
-//             this.render.clearList();
-//             this.render.photo(data)
-//         }else{
-//             if(this.$emptyInput){
-//                 this.render.clearList();
-//                 this.$emptyInput = null;
-//             }
-//             this.render.photo(data)
-//         }
-//     }
-//
-//     createVideoItem = (data) => {
-//
-//         if(this.quantity === 'one'){
-//             this.render.clearList();
-//             this.render.video(data)
-//         }else{
-//
-//             this.render.video(data)
-//         }
-//     }
-//
-//     checkListItem = () => {
-//         const $itemList = this.$fileList.querySelector('[data-file-item]');
-//         if($itemList) return false;
-//         this.render.empty(this.name);
-//         this.$emptyInput = this.$fileList.querySelector('[data-empty-input]')
-//
-//     }
-//
-//     deletePreviewBlock = ($item) => {
-//         this.$input.value = '';
-//         this.render.delete($item);
-//         this.checkListItem();
-//     }
-//
-//     changeHandler = async (e) =>{
-//         if(e.target.closest('[data-file-input]')){
-//             await this.fetchItem(e);
-//         }
-//     }
-//
-//     clickHandler = (e) => {
-//         if(e.target.closest('[data-remove-item]')){
-//             this.deletePreviewBlock(e.target.closest('[data-file-item]'));
-//         }
-//     }
-//
-//     listeners = () => {
-//         this.$file.addEventListener('input', this.changeHandler);
-//         this.$file.addEventListener('click', this.clickHandler);
-//     }
-// }
-
-
-// class Mover{
-//     constructor() {
-//         this.$wrapper = null;
-//         this.$draggingEl = null;
-//     }
-//
-//
-//     startMove = ($el) => {
-//         this.$draggingEl = $el;
-//         this.setOpacity()
-//     }
-//
-//     setOpacity = () => {
-//         this.$draggingEl.style.opacity = 0.2;
-//     }
-//
-//     endMove = () => {
-//         this.resetOpacity();
-//         this.resetDraggingEl();
-//     }
-//
-//     out = (e) => {
-//         e.preventDefault();
-//         const currentElement = e.target.closest('[data-mover-item]');
-//         if((currentElement !== this.$draggingEl) && e.target.closest('[data-mover-item]')){
-//             const nextElement = this.getNextElement(e.clientY, currentElement);
-//             this.$wrapper.insertBefore(this.$draggingEl, nextElement);
-//         }
-//     }
-//
-//     resetOpacity = () => {
-//         this.$draggingEl.style.opacity = 1;
-//     }
-//
-//     resetDraggingEl = () => {
-//         this.$draggingEl = null;
-//     }
-//
-//     getNextElement = (clientY, currentElement) => {
-//         const currentElementCoord = currentElement.getBoundingClientRect();
-//         const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
-//         return (clientY < currentElementCenter) ? currentElement : currentElement.nextElementSibling;
-//     }
-// }
 
 class ManualListSorterService extends Service{
     constructor(api) {
@@ -742,20 +325,941 @@ class ManualListSorter{
     }
 }
 
+class MediaFileService extends Service{
+    constructor(updatingEntityApi) {
+        super();
+        this.updatingEntityApi = updatingEntityApi
+        this.apiStore = '/media/api/store';
+        this.apiDestroy = '/media/api/delete';
+    }
 
-const uploadContainer = new Container('[data-upload]', Upload);
+    fetchUrl = async (file) => {
+        const formData = new FormData();
 
+        formData.append('media', file);
+        // data.files.forEach((file) => {
+        //     formData.append('media[]', data.files);
+        // })
+        // for(let i=0; i<data.files.length; i++) {
+
+        // }
+
+        // formData.append('count', data.count);
+        // idList.forEach((id) => {
+        //     formData.append('id_list[]', id);
+        // });
+        return await this.post(this.apiStore, {
+            data: formData,
+            headers: {
+                "X-CSRF-Token": this._token
+            }
+        })
+    }
+
+    destroy = async (link) => {
+        const formData = new FormData();
+        formData.append('_method', 'DELETE');
+        formData.append('link', link);
+        // data.files.forEach((file) => {
+        //     formData.append('media[]', data.files);
+        // })
+        // for(let i=0; i<data.files.length; i++) {
+
+        // }
+
+        // formData.append('count', data.count);
+        // idList.forEach((id) => {
+        //     formData.append('id_list[]', id);
+        // });
+        return await this.post(this.apiDestroy, {
+            data: formData,
+            headers: {
+                // "Content-Type": "multipart/form-data",
+                "X-CSRF-Token": this._token
+            }
+        })
+    }
+
+    updatingEntity = async (data) => {
+
+        const formData = new FormData();
+        if(data.link.length){
+            data.link.forEach((link) => {
+                formData.append(`${data.name}`, link);
+            })
+        } else {
+            formData.append(`${data.name}`, '');
+        }
+
+        // formData.append('name', data.name);
+        // formData.append('link', data.link);
+        // formData.append(`${data.name}`, data.link);
+        return await this.post(this.updatingEntityApi, {
+            data: formData,
+
+            headers: {
+                // "Content-Type": "multipart/form-data",
+                "X-CSRF-Token": this._token
+            }
+        })
+    }
+}
+
+class MediaFileRender extends Render{
+    constructor($list, inputName) {
+        super();
+        this.$list = $list;
+        this.inputName = inputName;
+    }
+
+
+
+    photo = (dataFile) => {
+        this.render(this.$list, this.getPhotoHtml, dataFile);
+    }
+
+
+
+    video = (file) => {
+
+    }
+
+    getPhotoHtml = (dataFile) => {
+
+        return `
+            <div data-media-item class="media-file-item">
+                <input data-media-input type="file" name="${dataFile.name}" class="media-file-item__input new">
+                <span data-media-delete class="media-file-item__btn top">Удалить</span>
+                <img src="${dataFile.url}" alt="" class="media-file-item__content">
+                <span data-look="${dataFile.url}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+            </div>
+        `
+    }
+
+
+    clearList = () => {
+        this.clear(this.$list);
+    }
+
+
+
+}
+
+class UploadMediaFileRender extends Render{
+
+    constructor($list, inputName) {
+        super();
+        this.$list = $list;
+        this.inputName = inputName;
+        this.loader = new Loader();
+    }
+
+    mediaItem = (type, file) => {
+        let content = '';
+
+        if(type === 'photo'){
+            content = this.getPhotoContentHtml(file);
+        }else if(type === 'video'){
+            content = this.getVideoContentHtml(file);
+        } else {
+            return false
+        }
+
+        this.$list.insertAdjacentHTML('beforeend',
+            `<div data-media-item class="media-file-item">${content}</div>`
+        );
+    }
+
+    spinner = () => {
+        this.render(this.$list, this.getSpinnerHtml);
+    }
+
+    mediaItemSpinner = ($item) => {
+        this.render($item, this.getItemSpinnerHtml);
+    }
+
+    photo = (media) => {
+        this.render(this.$list, this.getPhotoContentHtml, media);
+    }
+
+    getPhotoContentHtml = (media) => {
+        return `
+            <div data-media-item="${media.link}" class="media-file-item">
+                <input data-media-input type="text" name="${this.inputName}" value="${media.link}" class="media-file-item__input new">
+                <span data-media-delete class="media-file-item__btn top">Удалить</span>
+                <img src="${media.url}" alt="" class="media-file-item__content">
+                <span data-look="${media.url}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+            </div>
+        `
+    }
+
+    getVideoContentHtml = (file) => {
+        const url = URL.createObjectURL(file);
+        return `
+            <div data-media-item class="media-file-item">
+                <input data-media-input type="file" name="${this.inputName}" class="media-file-item__input new">
+                <span data-media-delete class="media-file-item__btn top">Удалить</span>
+                <img src="img/icon/play.svg" alt="" class="media-file-item__play">
+                <video class="media-file-item__content">
+                    <source src="${url}" type="video/mp4" />
+                </video>
+                <span data-look="${url}" data-look-type="video" class="media-file-item__btn bottom">Просмотр</span>
+            </div>
+        `
+    }
+
+    getSpinnerHtml = () => {
+        return `
+            <div data-spinner class="media-file-item media-file-spinner">
+                ${this.loader.getLoaderHtml()}
+            </div>
+        `
+    }
+
+    getItemSpinnerHtml = () => {
+        return `
+            <div data-media-item-spinner class="media-file-item__spinner">
+               ${this.loader.getLoaderHtml()}
+            </div>
+        `
+    }
+
+    clearList = () => {
+        this.clear(this.$list);
+    }
+
+    spinnerDestroy = () => {
+        const $spinner = this.$list.querySelector('[data-spinner]');
+        this.delete($spinner);
+    }
+
+    itemSpinnerDestroy = () => {
+        const $spinner = this.$list.querySelector('[data-media-item-spinner]');
+        this.delete($spinner);
+    }
+
+}
+
+class MediaFile {
+    constructor($file) {
+        this.$file = $file;
+        this.init();
+    }
+
+    init = () => {
+        if(!this.$file) return;
+        this.type = this.$file.dataset.mediaFile;
+        this.format = this.$file.dataset.format;
+        this.inputName = this.$file.dataset.name;
+        this.totalItem = +this.$file.dataset.total;
+        this.$inputAdd = this.$file.querySelector('[data-media-add]');
+
+        this.$mediaList = this.$file.querySelector('[data-media-list]');
+        this.$messageError = this.$file.querySelector('[data-media-error]');
+        this.extensionList = this.getExtensionList();
+        this.currentCount = this.getMediaItemCount();
+
+        this.render = new MediaFileRender(this.$mediaList, this.inputName);
+
+        this.listeners();
+    }
+
+    clearInputAdd = () => {
+        this.$inputAdd.value = '';
+    }
+
+    addMedia = () => {
+
+        this.hideMessageError();
+        const file = this.$inputAdd.files[0];
+
+        if(this.checkExtension(file.name)) {
+
+           this.createItem(file);
+
+        } else {
+            this.showMessageError('Не правильнвый формат');
+        }
+
+        this.clearInputAdd();
+
+    }
+
+
+    showMessageError = (message = 'Произошла ошибка') => {
+
+        this.$messageError.classList.add('show');
+
+        this.$messageError.innerHTML = message;
+
+    }
+
+    hideMessageError = () => {
+
+        this.$messageError.classList.remove('show');
+
+        this.$messageError.innerHTML = '';
+
+    }
+
+    createItem = (file) => {
+        const dataFile = this.getDataFile(file);
+        if(this.type === 'multi'){
+            if(this.currentCount >= this.totalItem) {
+                this.showMessageError(`Лимит загрузки ${this.totalItem}`);
+                return;
+            }
+
+            this.render.photo(dataFile);
+
+        } else {
+
+            this.render.clearList();
+            this.render.photo(dataFile);
+
+        }
+
+        const newInputFile = this.$mediaList.querySelector('.new');
+        this.currentCount = this.getMediaItemCount();
+        if(newInputFile){
+            newInputFile.files = dataFile.file;
+            newInputFile.classList.remove('new');
+        }
+
+
+        // if(this.countItem >= this.count) return;
+        //
+        // const extension = files[0].name.split('.').slice(-1)[0];
+        // const url = URL.createObjectURL(files[0]);
+        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
+        //     // if(this.countPhoto === this.count) return;
+        //     this.render.photo(url);
+        //     this.countItem++;
+        //     // this.countPhoto = this.countPhoto + 1;
+        // } else if(extension === 'mp4'){
+        //     // if(this.countVideo === this.count) return;
+        //     this.render.mediaItem('video', files[0]);
+        //     this.countVideo = this.countVideo + 1;
+        // } else {
+        //     return false;
+        // }
+
+        // const newInputFile = this.$mediaList.querySelector('.new');
+        // newInputFile.files = file;
+        // newInputFile.classList.remove('new');
+
+
+        // return dataTransfer.files;
+    }
+
+    getDataFile = (file) => {
+        const dataTransfer = new DataTransfer();
+
+        dataTransfer.items.add(
+            new File([file.slice(0, file.size, file.type)], file.name)
+        )
+
+        return {
+            file: dataTransfer.files,
+            url: URL.createObjectURL(dataTransfer.files[0]),
+            name: this.inputName
+        }
+    }
+
+
+    getExtensionList = () => {
+        return this.format.split(',');
+    }
+
+    filterFiles = (files) => {
+        const dataTransfer = new DataTransfer();
+        for(let i=0; i<files.length; i++) {
+            const file = files[i];
+
+            if(this.checkExtension(file.name)){
+                dataTransfer.items.add(
+                    new File([file.slice(0, file.size, file.type)], file.name)
+                );
+            }
+        }
+        return dataTransfer.files;
+    }
+
+    deleteMediaItem = ($target) => {
+        if(!$target) return;
+
+        const $item = $target.closest('[data-media-item]');
+
+        if(!$item) return;
+
+        this.render.delete($item);
+        this.currentCount = this.getMediaItemCount();
+
+    }
+
+    checkExtension = (name) => {
+
+        const extension = name.split('.').slice(-1)[0];
+
+        return this.extensionList.includes(extension);
+
+        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
+        //     // if(this.countPhoto === this.count) return;
+        //     this.countItem++;
+        //     // this.countPhoto = this.countPhoto + 1;
+        // } else if(extension === 'mp4'){
+        //     // if(this.countVideo === this.count) return;
+        //     this.render.mediaItem('video', files[0]);
+        //     this.countVideo = this.countVideo + 1;
+        // } else {
+        //     return false;
+        // }
+    }
+
+    getMediaItemCount = () => {
+
+        return this.$mediaList.querySelectorAll('[data-media-item]').length;
+
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-media-delete]')){
+            this.deleteMediaItem(e.target);
+        }
+    }
+
+
+    listeners = () => {
+        this.$mediaList.addEventListener('click', this.clickHandler);
+        this.$inputAdd.addEventListener('input', this.addMedia);
+    }
+
+}
+
+class UploadMediaFile {
+
+    constructor($mediaFile, updatingEntityApi = false) {
+        this.$mediaFile = $mediaFile;
+        this.updatingEntityApi = updatingEntityApi;
+        this.init();
+    }
+
+    init = () => {
+
+        if (!this.$mediaFile) return;
+
+        this.type = this.$mediaFile.dataset.uploadMediaFile;
+
+        this.inputName = this.$mediaFile.dataset.name;
+
+        this.totalItem = +this.$mediaFile.dataset.total;
+
+        this.$inputAdd = this.$mediaFile.querySelector('[data-media-add]');
+
+        this.$messageError = this.$mediaFile.querySelector('[data-media-error]');
+
+        this.extensionList = ['jpg', 'jpeg', 'png', 'mp4'];
+
+        this.service = new MediaFileService(this.updatingEntityApi);
+
+        this.$mediaList = this.$mediaFile.querySelector('[data-media-list]');
+
+        this.currentCount = this.getMediaItemCount();
+
+        this.render = new UploadMediaFileRender(this.$mediaList, this.inputName);
+
+        this.listeners();
+
+    }
+
+    createMediaItem = (media) => {
+
+        if(media.type === 'video'){
+            // this.render.video(item.link);
+        } else {
+            this.render.photo(media);
+        }
+        // if(this.countItem >= this.count) return;
+        //
+        // const extension = files[0].name.split('.').slice(-1)[0];
+        // const url = URL.createObjectURL(files[0]);
+        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
+        //     // if(this.countPhoto === this.count) return;
+        //     this.render.photo(url);
+        //     this.countItem++;
+        //     // this.countPhoto = this.countPhoto + 1;
+        // } else if(extension === 'mp4'){
+        //     // if(this.countVideo === this.count) return;
+        //     this.render.mediaItem('video', files[0]);
+        //     this.countVideo = this.countVideo + 1;
+        // } else {
+        //     return false;
+        // }
+        //
+        // const newInputFile = this.$mediaList.querySelector('.new');
+        // newInputFile.files = files;
+        // newInputFile.classList.remove('new');
+    }
+
+    addMedia = async () => {
+        const files = this.$inputAdd.files;
+        this.hideMessageError();
+
+        // const valid = this.checkExtension(files[0]);
+
+        if(this.type === 'multi'){
+
+            this.render.spinner();
+
+        } else {
+
+            this.render.clearList();
+
+            this.render.spinner();
+
+        }
+
+        const response = await this.service.fetchUrl(files[0]);
+
+        if(response.success){
+
+            this.render.spinnerDestroy();
+
+            this.clearInputAdd();
+
+            this.createMediaItem(response.data.media);
+
+            if(this.updatingEntityApi){
+
+                await this.updatingEntity();
+
+            }
+
+        }else{
+
+             this.createMediaItem(response.data.media);
+
+             this.showMessageError();
+
+        }
+
+        this.toggleAddMedia();
+
+    }
+
+    toggleAddMedia = () => {
+
+        this.currentCount = this.getCountItem();
+
+        if(this.currentCount >= this.totalItem){
+
+            this.$inputAdd.disabled = true;
+
+            this.$mediaFile.classList.add('disabled');
+
+        } else {
+
+            this.$inputAdd.disabled = false;
+
+            this.$mediaFile.classList.remove('disabled');
+
+        }
+    }
+
+    clearInputAdd = () => {
+
+        this.$inputAdd.value = '';
+
+    }
+
+    showMessageError = (message = 'Произошла ошибка') => {
+
+        this.$messageError.classList.add('show');
+
+        this.$messageError.innerHTML = message;
+
+    }
+
+    hideMessageError = () => {
+
+        this.$messageError.classList.remove('show');
+
+        this.$messageError.innerHTML = '';
+
+    }
+
+    // filterFiles = (files) => {
+    //     const dataTransfer = new DataTransfer();
+    //     for(let i=0; i<files.length; i++) {
+    //         const file = files[i];
+    //
+    //         if(this.checkExtension(file.name)){
+    //             dataTransfer.items.add(
+    //                 new File([file.slice(0, file.size, file.type)], file.name)
+    //             );
+    //         }
+    //     }
+    //     return dataTransfer.files;
+    // }
+
+    checkExtension = (name) => {
+
+        const extension = name.split('.').slice(-1)[0];
+
+        return this.extensionList.includes(extension);
+    }
+
+    getMediaItemCount = () => {
+
+        return this.$mediaList.querySelectorAll('[data-media-item]').length;
+
+    }
+
+    deleteMedia = async ($target) => {
+
+        this.hideMessageError();
+
+        const $mediaItem = $target.closest('[data-media-item]');
+
+        const link = $mediaItem.dataset.mediaItem;
+
+        this.createMediaItemSpinner($mediaItem);
+
+        const response = await this.service.destroy(link);
+
+        if(response.success){
+
+            this.render.delete($mediaItem);
+
+            if(this.updatingEntityApi){
+
+                await this.updatingEntity();
+
+            }
+
+        } else {
+
+            this.deleteMediaItemSpinner($mediaItem);
+
+        }
+
+        // const $file = $mediaItem.querySelector('[data-media-file]')
+
+        // if($file.name === 'videos[]'){
+        //     this.countVideo = this.countVideo - 1;
+        // }if($file.name === 'photos[]'){
+        //     this.countPhoto = this.countPhoto - 1;
+        // }
+        this.toggleAddMedia();
+
+    }
+
+    createMediaItemSpinner = ($mediaItem) => {
+
+        $mediaItem.classList.add('to-wait');
+
+        this.render.mediaItemSpinner($mediaItem);
+
+    }
+
+    updatingEntity = async () => {
+
+        const data = {
+
+            name: this.inputName,
+
+            link: []
+
+        }
+
+        const $inputs = this.$mediaList.querySelectorAll('[data-media-input]');
+
+        if($inputs.length){
+
+            $inputs.forEach(($item) => data.link.push($item.value));
+
+        }
+
+        const response = await this.service.updatingEntity(data);
+
+        if(response.success){
+
+        } else {
+            this.showMessageError(response.error);
+        }
+    }
+
+    deleteMediaItemSpinner = ($mediaItem) => {
+
+        $mediaItem.classList.remove('to-wait');
+
+        this.render.itemSpinnerDestroy($mediaItem);
+
+    }
+
+    getCountItem = () => {
+        return this.$mediaList.querySelectorAll('[data-media-item]').length;
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-media-delete]')){
+            this.deleteMedia(e.target);
+        }
+    }
+
+    listeners = () => {
+        this.$inputAdd.addEventListener('input', this.addMedia);
+        this.$mediaList.addEventListener('click', this.clickHandler);
+    }
+}
+
+class MediaWindowRender extends Render {
+    constructor($contentWrap) {
+        super();
+        this.$contentWrap = $contentWrap;
+    }
+
+
+    img = (url) => {
+        this.render(this.$contentWrap, this.getImgHtml, url);
+    }
+
+
+    video = () => {
+
+    }
+
+    getImgHtml = (url) => {
+        return `
+            <img class="media-window__content" alt="" src="${url}"/>
+        `
+    }
+
+    getVideoHtml = () => {
+
+    }
+}
+
+class MediaWindow{
+    constructor() {
+        this.$window = document.querySelector('#mediaWindow');
+        this.init();
+    }
+
+    init = () => {
+        if (!this.$window) return;
+        this.$windowInner = this.$window.querySelector('#mediaWindowInner')
+
+        this.render = new MediaWindowRender(this.$windowInner)
+        this.listeners();
+    }
+
+    close = () => {
+        this.$window.classList.remove('show');
+        this.render.clear(this.$windowInner);
+    }
+
+    open = ($target) => {
+        if (!$target) return;
+        const typeContent = $target.dataset.lookType;
+        const url = $target.dataset.look;
+        if(typeContent === 'img'){
+            this.render.img(url);
+        } else if(typeContent === 'video'){
+            this.render.video(url);
+        } else {
+            this.render.img(url);
+        }
+        this.$window.classList.add('show');
+    }
+
+    clickHandler = (e) => {
+            if(e.target.closest('[data-close]')){
+                this.close();
+            }
+    }
+
+    listeners = () => {
+        this.$window.addEventListener('click', this.clickHandler);
+    }
+
+}
+
+class MediaViewer {
+    constructor() {
+        this.init();
+    }
+
+    init = () => {
+        this.window = new MediaWindow();
+        this.listeners();
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-look]')){
+            this.window.open(e.target.closest('[data-look]'))
+        }
+    }
+
+
+    listeners = () => {
+        document.addEventListener('click', this.clickHandler);
+    }
+}
+
+class BlockingInput {
+    constructor($blockingInput) {
+        this.$blockingInput = $blockingInput;
+        this.init();
+    }
+
+    init = () => {
+        if (!this.$blockingInput) return;
+        this.idLinkInput = this.$blockingInput.dataset.blockingInput;
+        if(!this.idLinkInput) return;
+        this.$linkInput = document.querySelector(`#${this.idLinkInput}`);
+
+        this.value =  this.$linkInput.value;
+
+        this.listeners();
+
+    }
+
+    changeHandler = () => {
+        if(this.$linkInput.disabled){
+            this.unBlockedLinkInput();
+        } else {
+            this.blockedLinkInput();
+        }
+    }
+
+    blockedLinkInput = () => {
+        this.$linkInput.disabled = true;
+        this.value = this.$linkInput.value;
+        this.$linkInput.value = '';
+    }
+    unBlockedLinkInput = () => {
+        this.$linkInput.disabled = false;
+
+        this.$linkInput.value = this.value;
+    }
+
+    listeners = () => {
+        this.$blockingInput.addEventListener('click', this.changeHandler);
+    }
+
+}
+
+class DisplaySwitcherService extends Service{
+    constructor(id, api) {
+        super();
+        this.id = id;
+        this.api = api;
+    }
+
+
+    updateDisplay = async () => {
+        const formData = new FormData();
+            formData.append('id', this.id);
+        return await this.post(this.api, {
+            data: formData,
+            headers: {
+                "X-CSRF-Token": this._token
+            }
+        })
+    }
+}
+
+class DisplaySwitcher {
+   constructor($btn) {
+       this.$btn = $btn;
+       this.init()
+   }
+
+    init = () => {
+       if(!this.$btn) return;
+       this.id = this.$btn.dataset.displaySwitcher;
+       this.api = this.$btn.dataset.api;
+       this.service = new DisplaySwitcherService(this.id, this.api);
+       this.loading = false;
+       this.listeners();
+    }
+
+    switching = async () => {
+        if(this.loading) return;
+        this.loading = true;
+        const result = await this.service.updateDisplay();
+        if(result.success){
+            this.toggle(result.data.isDisplay)
+            this.loading = false;
+        } else {
+
+        }
+    }
+
+    toggle = (isDisplay) => {
+        if(isDisplay){
+            this.show();
+        }else{
+            this.hide();
+        }
+    }
+
+    show = () => {
+        this.$btn.classList.add('active');
+    }
+
+    hide = () => {
+        this.$btn.classList.remove('active');
+    }
+
+
+
+    // clickHandler = () => {
+    //    console.log('ksdhfhshdgf');
+    // }
+
+    listeners = () => {
+        this.$btn.addEventListener('click', this.switching)
+    };
+
+}
+
+
+class SortingSelect{
+    constructor($sortingSelect) {
+        this.$sortingSelect = $sortingSelect;
+        this.init();
+
+        this.listeners();
+
+    }
+    init = () => {
+        if(!this.$sortingSelect) return;
+        this.$btn = this.$sortingSelect.querySelector('[data-sorting-btn]');
+        this.$list = this.$sortingSelect.querySelector('[data-sorting-list]');
+
+    }
+    toggle = () => {
+        this.$list.classList.toggle('show');
+    }
+
+    listeners = () => {
+        this.$btn.addEventListener('click', this.toggle)
+    };
+
+}
+
+const mediaFileContainer = new Container('[data-media-file]', MediaFile);
+
+const sortingSelectContainer = new Container('[data-sorting]', SortingSelect);
+
+const displaySwitcherContainer = new Container('[data-display-switcher]', DisplaySwitcher);
+
+const blockingInputContainer = new Container('[data-blocking-input]', BlockingInput);
 
 const manualListSorter = new ManualListSorter();
 
+const mediaViewer = new MediaViewer();
 
-
-
-
-
-
-
-
-
-
-
+const formEdit = new FormEdit();

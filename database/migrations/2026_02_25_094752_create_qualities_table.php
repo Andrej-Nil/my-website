@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hobbies', function (Blueprint $table) {
+        Schema::create('qualities', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('photo_id')->nullable()->unsigned();
-            $table->foreign('photo_id')->references('id')->on('images')->onDelete('cascade');
-            $table->json('photo_list')->nullable();
-            $table->text('text')->nullable();
+            $table->integer('type');
+            $table->integer('sort')->default(0);
             $table->boolean('is_display')->default(true);
             $table->timestamps();
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hobbies');
+        Schema::dropIfExists('qualities');
     }
 };

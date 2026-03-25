@@ -1,4 +1,7 @@
 .checkbox{
+    position: relative;
     cursor: pointer;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }

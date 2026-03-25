@@ -21,35 +21,50 @@
 
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('panel.posts')}}" class="nav-item__link">Посты</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('panel.works')}}" class="nav-item__link">Примеры работ</a>
-                </li>
-                <li class="nav-item">
                     <a href="{{route('panel.hobbies')}}" class="nav-item__link">Хобби</a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{route('panel.images')}}" class="nav-item__link">Картинки</a>
+                    <a href="{{route('panel.userInfos.create')}}" class="nav-item__link">Данные</a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{route('panel.contacts')}}" class="nav-item__link">Контакты</a>
+                    <p class="nav-item__title">Блок резюме</p>
+                    <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт работы</a>
+                    <a href="{{route('panel.schools')}}" class="nav-item__link">Образование</a>
+                    <a href="{{route('panel.qualities')}}" class="nav-item__link">Качества</a>
                 </li>
+
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{route('panel.educations')}}" class="nav-item__link">Оброзование</a>--}}
+{{--                </li>--}}
+
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{route('panel.posts')}}" class="nav-item__link">Посты</a>--}}
+{{--                </li>--}}
+
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{route('panel.works')}}" class="nav-item__link">Примеры работ</a>--}}
+{{--                </li>--}}
+{{--                --}}
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{route('panel.images')}}" class="nav-item__link">Картинки</a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{route('panel.contacts')}}" class="nav-item__link">Контакты</a>--}}
+{{--                </li>--}}
 
             </ul>
         </div>
         <div class="container">
             <nav class="link-list">
-                <a href="{{route('about')}}" class="link-item">Обо мне</a>
+                <a href="{{route('hobby')}}" target="_blank" class="link-item">Хобби</a>
                     <span class="link-item__slash">\</span>
-                <a href="{{route('post.index')}}" class="link-item">Блог</a>
-                    <span class="link-item__slash">\</span>
-                <a href="{{route('contact')}}" class="link-item">Контакты</a>
+                <a href="{{route('resume')}}" target="_blank" class="link-item">Резюме</a>
+                <span class="link-item__slash">\</span>
+{{--                <a href="{{route('post.index')}}" class="link-item">Блог</a>--}}
+{{--                    <span class="link-item__slash">\</span>--}}
+{{--                <a href="{{route('contact')}}" class="link-item">Контакты</a>--}}
 
             </nav>
             @yield('content')
@@ -116,6 +131,17 @@
 {{--        @endif--}}
             {{--    </div>--}}
             {{--</main>--}}
+
+    </div>
+</div>
+
+<div id="mediaWindow" class="media-window">
+    <div data-close class="media-window__bg">
+        <span class="media-window__close">
+            <span class="cross cross--white"></span>
+        </span>
+    </div>
+    <div id="mediaWindowInner" class="media-window__inner">
 
     </div>
 </div>

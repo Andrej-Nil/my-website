@@ -44,13 +44,13 @@ class UpdateSortRequest extends FormRequest
     }
 
 
-
-    protected function prepareForValidation(): void {
-        $this->merge([
-//            'slug' => FormatHelper::slug($this->title),
-            'user_id' => Auth::id()
-        ]);
-    }
+//
+//    protected function prepareForValidation(): void {
+//        $this->merge([
+////            'slug' => FormatHelper::slug($this->title),
+//            'user_id' => Auth::id()
+//        ]);
+//    }
 
 
 }

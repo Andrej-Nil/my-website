@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('works', function (Blueprint $table) {
+        Schema::create('hobbies', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('photo_id')->nullable()->unsigned();
-            $table->foreign('photo_id')->references('id')->on('images')->onDelete('cascade');
-            $table->text('text');
-            $table->string('url');
+            $table->string('main_photo')->nullable();
+            $table->string('bg_photo')->nullable();
+            $table->string('mini_photo')->nullable();
+            $table->json('photo_list')->nullable();
+            $table->text('text')->nullable();
             $table->boolean('is_display')->default(true);
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('works');
+        Schema::dropIfExists('hobbies');
     }
 };

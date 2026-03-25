@@ -17,7 +17,6 @@ class Post extends Model
     ];
 
 
-
     public function photo(){
         return $this->hasOne(Image::class, 'id' ,'photo_id');
     }

@@ -11,7 +11,7 @@
         @include('panel.components.success-board')
     @endif
 
-    <form action="{{route('panel.hobbies.update', $hobby['id'])}}" method="post" class="form">
+    <form id="formEdit" data-api="{{route('hobby.api.update', $hobby['id'])}}"  action="{{route('panel.hobbies.update', $hobby['id'])}}" method="post" class="form">
         @csrf
         @method('PUT')
         <div class="form__body">
@@ -24,35 +24,85 @@
             </div>
 
             <div class="form-control">
-                <span class="form-control__label">Фото</span>
-                <div data-upload class="upload-file" data-name="photo" data-upload-api="{{route('upload.photo')}} ">
-                    <div class="form-control__body">
-                        <label class="upload-file-btn">
-                            <input data-upload-input type="file" class="upload-file-btn__input">
-                            <span class="upload-file-btn__fake">
-                            <span class="upload-file-btn__pic">
-                                <img class="upload-file-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                            </span>
-                            <span class="upload-file-btn__label">Загрузить фото</span>
-                        </span>
-                        </label>
-                        @error('photo_id')<p class="form-control__error">{{$message}}</p>@enderror
-                    </div>
-                    <div data-upload-preview class="upload-file-preview">
-                        @if($hobby['photo'])
-                            <div data-upload-photo="{{$hobby['photo']['id']}}" class="upload-file-photo">
-                                <input type="hidden" name="photo_id" value="{{$hobby['photo']['id']}}">
-                                <img class="upload-file-photo__img" src="{{$hobby['photo']['url']}}" alt=""/>
-                                <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
-                                <button type="button" data-delete-photo class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
-                            </div>
-                        @endif
-
-
-                    </div>
-                    {{--                <input id="postTitle" type="file" class="input" name="file" placeholder="Фото">--}}
+                <div class="form-control__head">
+                    <span class="form-control__label">Главное фото</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
                 </div>
+                <div data-upload-media-file="one" data-name="main_photo" class="media-file">
 
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list">
+                            @if($hobby['main_photo'])
+                                <div data-media-item="{{$hobby['main_photo']}}" class="media-file-item">
+                                    <input data-media-input="" type="text" name="main_photo" value="{{$hobby['main_photo']}}" class="media-file-item__input">
+                                    <span data-media-delete="" class="media-file-item__btn top">Удалить</span>
+                                    <img src="{{$hobby['main_photo_url']}}" alt="" class="media-file-item__content">
+                                    <span data-look="{{$hobby['main_photo_url']}}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
+            </div>
+
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Фоновое фото</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
+                </div>
+                <div data-upload-media-file="one" data-name="bg_photo" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list">
+                            @if($hobby['bg_photo'])
+                                <div data-media-item="{{$hobby['bg_photo']}}" class="media-file-item">
+                                    <input data-media-input="" type="text" name="bg_photo" value="{{$hobby['bg_photo']}}" class="media-file-item__input">
+                                    <span data-media-delete="" class="media-file-item__btn top">Удалить</span>
+                                    <img src="{{$hobby['bg_photo_url']}}" alt="" class="media-file-item__content">
+                                    <span data-look="{{$hobby['bg_photo_url']}}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
+            </div>
+
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Миниатюра</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
+                </div>
+                <div data-upload-media-file="one" data-name="mini_photo" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list">
+                            @if($hobby['mini_photo'])
+                                <div data-media-item="{{$hobby['mini_photo']}}" class="media-file-item">
+                                    <input data-media-input="" type="text" name="mini_photo" value="{{$hobby['mini_photo']}}" class="media-file-item__input">
+                                    <span data-media-delete="" class="media-file-item__btn top">Удалить</span>
+                                    <img src="{{$hobby['mini_photo_url']}}" alt="" class="media-file-item__content">
+                                    <span data-look="{{$hobby['mini_photo_url']}}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
             </div>
 
             <div class="form-control">
@@ -65,34 +115,34 @@
             </div>
 
             <div class="form-control">
-                <span class="form-control__label">Дополнительные фото</span>
-                <div data-upload="multi" class="upload-file" data-name="photo_list[]" data-upload-api="{{route('upload.photo')}}">
-                    <div class="form-control__body">
-                        <label class="upload-file-btn">
-                            <input data-upload-input type="file" class="upload-file-btn__input">
-                            <span class="upload-file-btn__fake">
-                            <span class="upload-file-btn__pic">
-                                <img class="upload-file-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                            </span>
-                            <span class="upload-file-btn__label">Загрузить фото</span>
-                        </span>
-                        </label>
-                        @error('photo_id')<p class="form-control__error">{{$message}}</p>@enderror
-                    </div>
-                    <div data-upload-preview class="upload-file-preview">
-                        @if($photo_list)
-                            @foreach($photo_list as $photo)
-                                <div data-upload-photo="{{$photo['id']}}" class="upload-file-photo">
-                                    <input type="hidden" name="photo_list[]" value="{{$photo['id']}}">
-                                    <img class="upload-file-photo__img" src="{{$photo['url']}}" alt="">
-                                    <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
-                                    <button data-delete-photo type="button" class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
+                <div class="form-control__head">
+                    <span class="form-control__label">Галерея</span>
+                    <p class="form-control__note">Вы можите загрузить до 4 изображений в формате jpg, jpeg, png</p>
                 </div>
-
+                <div data-upload-media-file="multi" data-name="photo_list[]" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list">
+                            @if($hobby['photo_list'])
+                                @foreach($hobby['photo_list'] as $key=>$photo)
+                                @if(isset($hobby['photo_list_url'][$key]))
+                                    <div data-media-item="{{$photo}}" class="media-file-item">
+                                        <input data-media-input="" type="text" name="photo_list[]" value="{{$photo}}" class="media-file-item__input new">
+                                        <span data-media-delete="" class="media-file-item__btn top">Удалить</span>
+                                        <img src="{{$hobby['photo_list_url'][$key]}} " alt="" class="media-file-item__content">
+                                        <span data-look="{{$hobby['photo_list_url'][$key]}}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+                                    </div>
+                                @endif
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
             </div>
 
             <div class="form-control">

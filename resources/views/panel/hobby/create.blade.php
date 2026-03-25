@@ -11,7 +11,7 @@
         @include('panel.components.success-board')
     @endif
 
-    <form action="{{route('panel.hobbies.store')}}" method="post" class="form">
+    <form id="formCreate" action="{{route('panel.hobbies.store')}}" enctype="multipart/form-data" method="post" class="form">
         @csrf
 
         <div class="form__body">
@@ -23,53 +23,87 @@
             </div>
         </div>
 
-        <div class="form-control">
-            <span class="form-control__label">Главное фото</span>
-            <div data-upload class="upload-file" data-name="photo_id" data-upload-api="{{route('upload.photo')}}">
-                <div class="form-control__body">
-                    <label class="upload-file-btn">
-                        <input data-upload-input type="file" class="upload-file-btn__input">
-                        <span class="upload-file-btn__fake">
-                            <span class="upload-file-btn__pic">
-                                <img class="upload-file-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                            </span>
-                            <span class="upload-file-btn__label">Загрузить фото</span>
-                        </span>
-                    </label>
-                    @error('photo_id')<p class="form-control__error">{{$message}}</p>@enderror
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Главное фото</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
                 </div>
-                <div data-upload-preview class="upload-file-preview"></div>
+                <div data-media-file="one" data-format="jpg,jpeg,png" data-name="main_photo" class="media-file">
+
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list"></div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
             </div>
 
-        </div>
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Фоновое фото</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
+                </div>
+                <div data-media-file="one" data-format="jpg,jpeg,png" data-name="bg_photo" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list"></div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
+            </div>
+
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Миниатюра</span>
+                    <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
+                </div>
+                <div data-media-file="one" data-format="jpg,jpeg,png" data-name="mini_photo" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list"></div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
+            </div>
 
         <div class="form-control">
             <label for="postText" class="form-control__label">Текст</label>
             <div class="form-control__body">
-                <textarea id="postText" rows="10"  class="input" name="text"  placeholder="Описание">{{old('text')}}</textarea>
+                <textarea id="postText" rows="10"  class="input" name="text" placeholder="Описание">{{old('text')}}</textarea>
                 @error('text')<p class="form-control__error">{{$message}}</p>@enderror
             </div>
-
         </div>
 
-        <div class="form-control">
-                <span class="form-control__label">Дополнительные фото</span>
-                <div data-upload="multi" class="upload-file" data-name="photo_list[]" data-upload-api="{{route('upload.photo')}}">
-                    <div class="form-control__body">
-                        <label class="upload-file-btn">
-                            <input data-upload-input type="file" class="upload-file-btn__input">
-                            <span class="upload-file-btn__fake">
-                            <span class="upload-file-btn__pic">
-                                <img class="upload-file-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                            </span>
-                            <span class="upload-file-btn__label">Загрузить фото</span>
-                        </span>
-                        </label>
-                        @error('photo_id')<p class="form-control__error">{{$message}}</p>@enderror
-                    </div>
-                    <div data-upload-preview class="upload-file-preview"></div>
+            <div class="form-control">
+                <div class="form-control__head">
+                    <span class="form-control__label">Галерея</span>
+                    <p class="form-control__note">Вы можите загрузить до 4 изображений в формате jpg, jpeg, png</p>
                 </div>
+                <div data-media-file="multi" data-total="4" data-format="jpg,jpeg,png" data-name="photo_list[]" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list">
 
+                        </div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
             </div>
 
         <div class="form-control">
@@ -89,8 +123,25 @@
         </div>
 {{--            <textarea id="postText" rows="10"  class="input" name="title" placeholder="Описание"></textarea>--}}
         </div>
+
+{{--        <div class="form-control">--}}
+{{--            <span class="form-control__label">Медифайл</span>--}}
+{{--            <div data-media-file data-name="name[]" data-count="1" class="media-file">--}}
+{{--                    <div class="media-file__body">--}}
+{{--                        <label class="media-file__btn download-btn">--}}
+{{--                           <input data-media-add multiple type="file" class="download-btn__input">--}}
+{{--                           <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">--}}
+{{--                           <span class="download-btn__label">Загрузить фото</span>--}}
+{{--                        </label>--}}
+{{--                        <div data-media-list class="media-file__list">--}}
+
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--        </div>--}}
+
         <div class="form__bottom">
-            <button type="submit" class="btn btn--yellow">Создать пост</button>
+            <button type="submit" class="btn btn--yellow">Добавить хобби</button>
         </div>
     </form>
 @endsection

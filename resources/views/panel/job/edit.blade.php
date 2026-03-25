@@ -1,7 +1,7 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Создание поста')
-
+@section('title', 'Редоктирование места')
+b)
 @section('content')
     <h1 class="panel-title">Редоктирование места</h1>
     @if($errors->any())
@@ -39,11 +39,12 @@
             </div>
 
             <div class="form-control">
-                <label for="isCurrentJob" class="form-control__label">По настоящеее время</label>
+                <label for="isCurrent" class="form-control__label">По настоящеее время</label>
                 <div class="form-control__body">
                     <div class="checkbox">
-                        <input  type="hidden" name="is_current_job" value="0">
-                        <input id="isCurrentJob" type="checkbox" class="input" name="is_current_job" value="1" @checked($job['is_current_job'])>
+                        <input type="hidden" name="is_current" value="0">
+                        <input data-blocking-input="jobsEnd" id="isCurrent" type="checkbox" class="input" name="is_current" value="1" @checked($job['is_current'])>
+                        @error('is_current')<p class="form-control__error">{{$message}}</p>@enderror
                     </div>
                 </div>
             </div>
@@ -51,7 +52,12 @@
             <div class="form-control">
                 <label for="jobsEnd" class="form-control__label">Окончание</label>
                 <div class="form-control__body">
-                    <input id="jobsEnd" type="date" class="form-control__input input" name="end" value="{{$job['end']}}">
+
+
+                    <input id="jobsEnd" type="date" class="form-control__input input" name="end"
+                        value="{{$job['is_current'] ? '' : $job['end'] }}"
+                        @disabled($job['is_current'] == 1)
+                    >
                     @error('end')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>

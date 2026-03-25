@@ -25,7 +25,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title'     => ['required', 'string', 'max:255'],
-            'photo_id'     => ['nullable', 'exists:images,id'],
+            'photo_id'     => ['nullable', 'string'],
             'text' => ['required', 'string', 'max:10000'],
             'is_display' => ['nullable', 'boolean']
         ];

@@ -13,16 +13,28 @@
 
     <div class="content">
         <div class="content-top">
-            <form action="" method="get" class="search-form">
+            <form action="{{route('panel.hobbies')}}" method="get" class="search-form">
 
-                <input name="search" class="search-form__input input" placeholder="Поиск по постам" value=""/>
+                <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>
                 <button class="search-form__btn">
                     <img src="{{asset('panel-assets/img/icons/search-icon.svg')}}" alt="" class="search-form__icon">
                 </button>
             </form>
 
-            <div>сортировать <a href="">по а до я</a> <a href="">по я до а</a> <a href="">сначло старые</a> <a href="">сначло новые</a></div>
+            <div data-sorting class="sorting">
+                <span class="sorting__label">Сортировка</span>
 
+                <div class="sorting__select">
+{{--                    <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>--}}
+                    <span data-sorting-btn class="sorting__current">От А до Я</span>
+                    <div data-sorting-list class="sorting__list">
+                        <a href="{{route('panel.hobbies', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
+                        <a href="{{route('panel.hobbies', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
+                        <a href="{{route('panel.hobbies', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
+                        <a href="{{route('panel.hobbies', ['sort' => 'old-up', 'search' => $search] )}}" class="sorting__link">Сначало старые</a>
+                    </div>
+                </div>
+            </div>
             <a href="{{route('panel.hobbies.create')}}" class="btn btn--yellow">Добавить хобби</a>
         </div>
 
@@ -33,7 +45,7 @@
 
             {{--                --}}
             {{--            </div>--}}
-            @forelse($hobbyList as $hobby)
+            @forelse($hobbyList['data'] as $hobby)
                 <div class="list-item">
                     <p class="list-item__title">
                         <span class="list-item__name">{{$hobby['title']}}</span>
@@ -61,15 +73,8 @@
 
 
         </div>
-        <div class="list__pagination">
-            <div class="pagination">
-                <a href="" class="pagination-item active">1</a>
-                <a href="" class="pagination-item">2</a>
-                <a href="" class="pagination-item">3</a>
-                <a href="" class="pagination-item">4</a>
-                <a href="" class="pagination-item">5</a>
-            </div>
-        </div>
-    </div>
+        @if(count($hobbyList['links']) > 3 )
+            @include('panel.components.pagination', ['paginate' => $hobbyList])
+        @endif
     </div>
 @endsection

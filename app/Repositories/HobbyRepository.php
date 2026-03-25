@@ -9,9 +9,19 @@ class HobbyRepository
     public static function getPagination(array $data = [], int $count = 20):array{
 
         if(isset($data['search'])){
-            return Hobby::with('photo')->where('title', 'LIKE', '%'.$data['search'].'%')->limit($count)->get()->toArray();
+            return Hobby::where('title', 'LIKE', '%'.$data['search'].'%')->
+                orderBy($data['sort']['key'], $data['sort']['type'])->
+                paginate($count)->
+                appends($data['params'])->
+                toArray();
         }
-        return Hobby::with('photo')->limit($count)->orderBy('id', 'DESC')->get()->toArray();
+
+
+        return Hobby::orderBy($data['sort']['key'], $data['sort']['type'])->
+            paginate($count)->
+            appends($data['params'])->
+            toArray();
+
     }
 
     public static function createHobby(array $data):array{
@@ -19,16 +29,18 @@ class HobbyRepository
     }
 
     public static function getHobbyById(int $id):array{
-        $item = Hobby::with('photo')->find($id);
+        $item = Hobby::find($id);
         return $item ? $item->toArray() : [];
     }
 
     public static function updateHobby(int $id, array $data):bool{
         return Hobby::where('id', $id)->update($data);
     }
+
     public static function deleteHobby(int $id):bool{
         return Hobby::where('id', $id)->delete();
     }
+
 //    public static function getArticleById(int $id):array{
 //        $item = Article::find($id);
 //        return $item ? $item->toArray() : [];

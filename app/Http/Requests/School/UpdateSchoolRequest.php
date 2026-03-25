@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\JobPlace;
+namespace App\Http\Requests\School;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreJobPlaceRequest extends FormRequest
+class UpdateSchoolRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,12 @@ class StoreJobPlaceRequest extends FormRequest
     {
         return [
             'title'     => ['required', 'string', 'max:255'],
-            'profession'     => ['nullable', 'string', 'max:255'],
+            'specialization'     => ['nullable', 'string', 'max:255'],
             'start' => ['required', 'date_format:Y-m-d'],
-            'is_current_job' => ['nullable', 'boolean'],
+            'is_current' => ['nullable', 'boolean'],
             'end' => ['nullable', 'date', 'date_format:Y-m-d'],
             'text' => ['nullable', 'string'],
             'is_display' => ['nullable', 'boolean'],
-            'sort' => ['nullable', 'int']
         ];
     }
 
@@ -39,18 +38,15 @@ class StoreJobPlaceRequest extends FormRequest
             'title.required'    => 'Поле "Название" обязательно для заполнения',
             'title.string'      => 'Поле "Название" должно быть строкой',
             'title.max'         => 'Поле "Название" не должно превышать 255 символов',
-            'profession.string'      => 'Поле "Название" должно быть строкой',
-            'profession.max'         => 'Поле "Название" не должно превышать 255 символов',
+            'specialization.string'      => 'Поле "Название" должно быть строкой',
+            'specialization.max'         => 'Поле "Название" не должно превышать 255 символов',
             'text.string'      => 'Поле "Название" должно быть строкой',
             'text.max'         => 'Поле "Название" не должно превышать 255 символов',
             'start.required'    => 'Поле "Название" обязательно для заполнения',
             'start.date'    => 'Не верный тип данных',
             'end.date'    => 'Не верный тип данных',
-            'sort.integer'    => 'Не верный тип данных',
+            'is_current_day.boolean' => 'Не верный тип данных',
             'is_display.boolean' =>  'Не верный тип данных',
-//            'photo_id.exists'   => 'Изображения было удалено или не существует',
-//            'text.string'       => 'Поле "Название" должно быть строкой',
-//            'photo_list.boolean'        => 'Не верный тип данных'
         ];
     }
 

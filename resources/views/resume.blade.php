@@ -41,7 +41,7 @@
                                     <div class="resume-group-item__top">
                                         <p class="resume-group-item__title">{{$job['title']}}</p>
                                         <p class="resume-group-item__period">
-                                            {{$job['start']}} gj {{$job['is_current_job'] ? 'настоящее время' : $job['end']}}</p>
+                                            {{$job['start']}}  {{$job['is_current'] ? 'настоящее время' : $job['end']}}</p>
                                         <p class="resume-group-item__option">{{$job['profession']}}</p>
                                     </div>
 
@@ -60,7 +60,37 @@
                         </div>
 
                     </div>
+                    <div class="resume-block">
+                        <p class="resume-block__title">Ggdjf</p>
+                        <div class="resume-block__content">
+                            <div data-group class="resume-group display-only-first">
+                                @foreach($schoolList as $school)
+                                    <div data-group-item class="resume-group-item">
+                                        <div class="resume-group-item__top">
+                                            <p class="resume-group-item__title">{{$school['title']}}</p>
+                                            <p class="resume-group-item__period">
+                                                {{$school['start']}} по {{$school['is_current'] ? 'настоящее время' : $school['end']}}</p>
+                                            <p class="resume-group-item__option">{{$school['specialization']}}</p>
+                                        </div>
 
+                                        <div class="resume-group-item__desc">
+                                            {{$school['text']}}
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                @if(count($schoolList) > 1)
+                                <button data-group-btn="show" type="button" class="resume-group-btn">
+                                    open
+                                </button>
+                                <button data-group-btn="hide" type="button" class="resume-group-btn hide">
+                                    close
+                                </button>
+
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="resume__data">

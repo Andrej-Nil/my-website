@@ -16,15 +16,15 @@
 
         <div class="post">
             <h1 class="post__title">{{$post['title']}}</h1>
-            <div class="post-image">
-                <img class="post-image__img" src="{{$post['photo']['url']}}" alt="">
-
-                <div class="post-image-btn">
-                    <span class="post-image-btn__shadow"></span>
-                    <div class="post-image-btn__text">Раскрыть изображение</div>
+            @if($post['photo'])
+                <div class="post-image">
+                    <img src="{{$post['photo']['url']}}" alt="" class="post-card__img">
+                    <div class="post-image-btn">
+                        <span class="post-image-btn__shadow"></span>
+                        <div class="post-image-btn__text">Раскрыть изображение</div>
+                    </div>
                 </div>
-            </div>
-
+            @endif
             <p class="post__text">{{$post['text']}}</p>
 
         </div>

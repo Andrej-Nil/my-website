@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('photo_id')->nullable()->unsigned();
-            $table->foreign('photo_id')->references('id')->on('images')->onDelete('cascade');
-            $table->string('link');
-            $table->string('display');
+            $table->string('profession');
+            $table->timestamp('start')->default(null);
+            $table->boolean('is_current')->default(false);
+            $table->timestamp('end')->default(null);
+            $table->text('text')->nullable();
+            $table->integer('sort')->default(0);
             $table->boolean('is_display')->default(true);
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('jobs');
     }
 };
