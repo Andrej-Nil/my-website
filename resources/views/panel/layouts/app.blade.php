@@ -25,9 +25,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <p class="nav-item__title">Данные</p>
-                    <a href="" class="nav-item__link">Контакты</a>
-                    <a href="" class="nav-item__link">Данные</a>
+                    <a href="{{route('panel.userInfos.create')}}" class="nav-item__link">Данные</a>
                 </li>
 
                 <li class="nav-item">

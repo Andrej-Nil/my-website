@@ -105,8 +105,6 @@ class HobbyController extends Controller
             abort('404');
         }
 
-
-
         return view('panel.hobby.edit', [
             'hobby' => $hobby,
             ]);

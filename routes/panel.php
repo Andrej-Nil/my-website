@@ -30,6 +30,12 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::put('panel/qualities/{id}', [\App\Http\Controllers\Admin\QualityController::class, 'update'])->name('panel.qualities.update');
     Route::delete('panel/qualities/{id}', [\App\Http\Controllers\Admin\QualityController::class, 'destroy'])->name('panel.qualities.delete');
 
+//    Route::get('panel/qualities', [\App\Http\Controllers\Admin\QualityController::class, 'index'])->name('panel.qualities');
+    Route::get('panel/user-infos/create', [\App\Http\Controllers\Admin\UserInfoController::class, 'create'])->name('panel.userInfos.create');
+    Route::post('panel/user-infos', [\App\Http\Controllers\Admin\UserInfoController::class, 'store'])->name('panel.userInfos.store');
+    Route::get('panel/user-infos/{id}/edit', [\App\Http\Controllers\Admin\UserInfoController::class, 'edit'])->name('panel.userInfos.edit');
+    Route::put('panel/user-infos/{id}', [\App\Http\Controllers\Admin\UserInfoController::class, 'update'])->name('panel.userInfos.update');
+    Route::delete('panel/user-infos', [\App\Http\Controllers\Admin\UserInfoController::class, 'destroy'])->name('panel.userInfos.delete');
 
 
     Route::get('panel/posts', [\App\Http\Controllers\Admin\PostController::class, 'index'] )->name('panel.posts');

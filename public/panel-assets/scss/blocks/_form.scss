@@ -16,6 +16,7 @@
 .form-control{
     display: grid;
     grid-template-columns: 19% 79%;
+    align-items: center;
     gap: 2%;
 }
 
@@ -26,7 +27,8 @@
 }
 
 .form-control__label{
-    margin-bottom: auto;
+    //margin-bottom: auto;
+
 }
 
 .form-control__body{

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class UserInfo extends Model
 {
@@ -11,7 +12,7 @@ class UserInfo extends Model
         'second_name',
         'photo',
         'about',
-        'age',
+        'year_birth',
         'city',
         'phone',
         'mail',
@@ -19,4 +20,19 @@ class UserInfo extends Model
         'whatsapp',
         'vk'
     ];
+
+
+    protected $appends = [
+        'photo_url',
+    ];
+
+
+
+    public function getPhotoUrlAttribute() {
+        // Storage::disk('public')->exists() проверяет, существует ли файл физически
+        if($this->photo && Storage::disk('public')->exists($this->photo)) {
+            return Storage::disk('public')->url($this->photo);
+        }
+        return null;
+    }
 }
