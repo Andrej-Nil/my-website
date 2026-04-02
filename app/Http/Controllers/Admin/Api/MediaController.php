@@ -37,7 +37,6 @@ class MediaController extends BaseController
     {
 
         $rez = $mediaDeleteService->handle($request->link);
-
         if($rez['success']){
             return $this->sendResponse(['message' => 'Картинка удалена']);
         } else {

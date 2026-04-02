@@ -5,26 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class UserInfo extends Model
+class Portfolio extends Model
 {
     protected $fillable = [
-        'first_name',
-        'second_name',
+        'title',
+        'link',
         'photo',
-        'about',
-        'year_birth',
-        'city',
-        'phone',
-        'mail',
-        'telegram',
-        'whatsapp',
-        'vk'
+        'text',
+        'text',
+        'is_display',
     ];
+
+
 
 
     protected $appends = [
         'photo_url',
     ];
+
+
 
     public function getPhotoUrlAttribute() {
         // Storage::disk('public')->exists() проверяет, существует ли файл физически
