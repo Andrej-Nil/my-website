@@ -6,20 +6,24 @@ use App\Models\Portfolio;
 
 class PortfolioRepository
 {
-    public static function getPagination(array $data = [], int $count = 20):array{
-
-        if(isset($data['search'])){
-            return Portfolio::where('title', 'LIKE', '%'.$data['search'].'%')->
-            orderBy($data['sort']['key'], $data['sort']['type'])->
-            paginate($count)->
-            appends($data['params'])->
-            toArray();
+    public static function getPagination(array $data = [], int $count = 20):array
+    {
+        if ($data) {
+            if (isset($data['search'])) {
+                return Portfolio::where('title', 'LIKE', '%' . $data['search'] . '%')->
+                orderBy($data['sort']['key'], $data['sort']['type'])->
+                paginate($count)->
+                appends($data['params'])->
+                toArray();
+            } else {
+                return Portfolio::orderBy($data['sort']['key'], $data['sort']['type'])->
+                paginate($count)->
+                appends($data['params'])->
+                toArray();
+            }
         }
 
-        return Portfolio::orderBy($data['sort']['key'], $data['sort']['type'])->
-        paginate($count)->
-        appends($data['params'])->
-        toArray();
+        return Portfolio::paginate($count)->toArray();
     }
 
     public static function createPortfolio(array $data):array{

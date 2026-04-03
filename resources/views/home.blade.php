@@ -88,22 +88,24 @@
                              <div class="about-me">
                                  <div class="about-me__top">
                                      <div class="about-me__intro">
-                                      <p class="about-me__title">Lorem ipsum.</p>
-                                      <p class="about-me__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore eaque earum, expedita facilis in odit provident repellat sequi soluta velit.</p>
+                                      <p class="about-me__title">{{$admin['second_name'].' '.$admin['first_name']}}</p>
+                                      <p class="about-me__text">
+                                          {{$admin['about']}}
+                                      </p>
 
                                      </div>
-                                     <img src="{{asset('img/my-photo.jpg')}}" alt="" class="about-me__photo">
+                                     <img src="{{$admin['photo_url']}}" alt="" class="about-me__photo">
                                  </div>
 
-                                 <div class="about-me__body">
-                                     <p class="about-me__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore eaque earum, expedita facilis in odit provident repellat sequi soluta velit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur at atque blanditiis culpa debitis deserunt dignissimos dolor dolorem earum eveniet excepturi facere fugit id illum impedit modi molestias nam, nisi nostrum obcaecati officiis porro praesentium quaerat quasi quibusdam quis recusandae reiciendis rem repellendus sed suscipit totam ut vel veritatis vero voluptatem. Alias animi eos, explicabo inventore ipsam odio pariatur perspiciatis provident ullam unde. Corporis excepturi in maiores nulla, officia quam qui temporibus vel vero, voluptas voluptatem voluptatibus! Accusamus ad asperiores aspernatur aut commodi corporis culpa deserunt dolorem doloremque dolores dolorum ipsam ipsum laborum pariatur, porro quidem, repellat repellendus voluptates!</p>
-                                 </div>
+{{--                                 <div class="about-me__body">--}}
+{{--                                     <p class="about-me__text">{{$admin['second_name']}}</p>--}}
+{{--                                 </div>--}}
 
                                  <div class="about-me__bottom">
-                                     <p class="about-me__subtitle">Lorem ipsum.</p>
+{{--                                     <p class="about-me__subtitle">{{$admin['second_name']}} {{$admin['first_name']}}</p>--}}
                                      <div class="about-me__list">
-                                        <a href="tel:+78989099009" class="about-me__link">+7 898 909 90 09</a>
-                                        <a href="mailto:test@test" class="about-me__link">test@test</a>
+                                        <a href="tel:{{$admin['phone']}}" class="about-me__link">{{$admin['phone']}}</a>
+                                        <a href="mailto:{{$admin['mail']}}" class="about-me__link">{{$admin['mail']}}</a>
                                         <button data-frame-tab-link="form" type="button" class="btn">форма</button>
                                      </div>
                                  </div>
@@ -115,6 +117,21 @@
                      <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
                      <div class="main-frame-tab__inner scroll">
                          <div class="my-works">
+                             <div class="my-works__list">
+                                 @foreach($portfolioList as $portfolio)
+                                     <a href="{{$portfolio['link']}}" target="_blank" class="my-work-card">
+                                         <img src="{{$portfolio['photo_url']}}" alt="" class="my-work-card__img"/>
+                                         <p class="my-work-card__title">{{$portfolio['title']}}</p>
+                                     </a>
+                                 @endforeach
+                             </div>
+
+                             <div class="my-works__bottom">
+                                <a href="{{route('portfolio')}}" class="my-works__link btn">Ссылка</a>
+                             </div>
+
+
+{{--                             @endif--}}
 {{--                             @foreach($workList as $work)--}}
 {{--                                 <a href="{{$work['url']}}" target="_blank" class="my-work-card">--}}
 {{--                                     <img src="{{$work['photo']['url']}}" alt="" class="my-work-card__img"/>--}}
@@ -130,34 +147,33 @@
                      <div class="main-frame-tab__inner scroll">
                          <div class="about-me">
                              <div class="about-me__body">
-                                 <p class="about-me__title">Lorem ipsum.</p>
-                                 <p class="about-me__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore eaque earum, expedita facilis in odit provident repellat sequi soluta velit.</p>
+                                 <p class="about-me__title">{{$admin['second_name'].' '.$admin['first_name']}}</p>
+                                 <p class="about-me__text">{{$admin['about']}}</p>
                              </div>
 
-
                                  <div class="my-contacts">
-                                     <div class="about-me__subtitle">Lorem ipsum dolor.</div>
+                                     <div class="about-me__subtitle">Контакты</div>
                                      <div class="my-contacts__list">
 
                                          <div class="my-contact">
                                              <span class="my-contact__title">Телефон</span>
-                                             <a href="tel:+78989099009"  class="my-contact__content">+7 898 909 90 09</a>
+                                             <a href="tel:{{$admin['phone']}}"  class="my-contact__content">{{$admin['phone']}}</a>
                                          </div>
 
                                          <div class="my-contact">
                                              <span class="my-contact__title">Почта</span>
-                                             <a href="tel:+78989099009"  class="my-contact__content">test@test</a>
+                                             <a href="tel:{{$admin['mail']}}"  class="my-contact__content">{{$admin['mail']}}</a>
                                          </div>
                                      </div>
 
                                         <div class="socials">
-                                            <a href="" target="_blank" class="social__link">
+                                            <a href="{{$admin['telegram']}}" target="_blank" class="social__link">
                                                 <img src="{{asset('img/icon/tg.svg')}}"class="social__icon" alt="">
                                             </a>
-                                            <a href="" target="_blank" class="social__link">
+                                            <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
                                                 <img src="{{asset('img/icon/vk.svg')}}"class="social__icon" alt="">
                                             </a>
-                                            <a href="" target="_blank" class="social__link">
+                                            <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
                                                 <img src="{{asset('img/icon/wa.svg')}}"class="social__icon" alt="">
                                             </a>
                                         </div>

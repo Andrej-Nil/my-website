@@ -26,11 +26,11 @@
                 <div class="sorting__select">
                     <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>
                     <div data-sorting-list class="sorting__list">
-                        <a href="{{route('panel.jobs', ['search' => $search])}}" class="sorting__link">По умолчанию</a>
-                        <a href="{{route('panel.jobs', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
-                        <a href="{{route('panel.jobs', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
-                        <a href="{{route('panel.jobs', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
-                        <a href="{{route('panel.jobs', ['sort' => 'old-up', 'search' => $search] )}}" class="sorting__link">Сначало старые</a>
+                        <a href="{{route('panel.portfolios', ['search' => $search])}}" class="sorting__link">По умолчанию</a>
+                        <a href="{{route('panel.portfolios', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
+                        <a href="{{route('panel.portfolios', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
+                        <a href="{{route('panel.portfolios', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
+                        <a href="{{route('panel.portfolios', ['sort' => 'old-up', 'search' => $search] )}}" class="sorting__link">Сначало старые</a>
                     </div>
                 </div>
             </div>
