@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserInfo\StoreUserInfoRequest;
 use App\Http\Requests\UserInfo\UpdateUserInfoRequest;
 use App\Models\UserInfo;
-use App\Repositories\HobbyRepository;
 use App\Repositories\UserInfoRepository;
 use App\Services\MediaDeleteService;
 use App\Services\MediaUploadService;
-use Illuminate\Http\Request;
 
 class UserInfoController extends Controller
 {

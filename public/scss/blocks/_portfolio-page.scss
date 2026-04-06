@@ -1,0 +1,26 @@
+.portfolio-page{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px
+}
+
+.portfolio-page__img{
+    width: 100%;
+}
+
+.portfolio-page__content{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.portfolio-page__text{
+    margin-bottom: auto;
+    color: #ccc;
+}
+
+.portfolio-page__bottom{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}

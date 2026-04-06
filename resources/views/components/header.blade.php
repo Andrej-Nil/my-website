@@ -1,8 +1,10 @@
 <header class="main-header">
     <div class="main-nav">
         <a href="{{route('home')}}" class="main-nav-item">Главная</a>
+        <a href="{{route('portfolio')}}" class="main-nav-item">Portfolio</a>
         <a href="{{route('hobby')}}" class="main-nav-item">Hobby</a>
         <a href="{{route('resume')}}" class="main-nav-item">Resume</a>
+
 {{--        <a href="{{route('resume')}}" class="main-nav-item">Вуыс</a>--}}
 {{--        <a href="{{route('about')}}" class="main-nav-item">авыаыва ыаывавыа</a>--}}
 {{--        <a href="{{route('post.index')}}" class="main-nav-item">Бываывалок</a>--}}
@@ -16,7 +18,7 @@
     </div>
 
     <div class="main-contacts">
-        <a href="tel:+7 898 909 90 09" class="main-contact">+7 898 909 90 09</a>
-        <a href="mailto:dskjjdfh" class="main-contact">test@test</a>
+        <a href="tel:{{$admin['phone']}}" class="main-contact">{{$admin['phone']}}</a>
+        <a href="mailto:{{$admin['mail']}}" class="main-contact">{{$admin['mail']}}</a>
     </div>
 </header>

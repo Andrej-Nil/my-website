@@ -17,3 +17,6 @@ Route::post('school/update/display', [\App\Http\Controllers\Admin\Api\SchoolApiC
 
 Route::post('quality/update/sort', [\App\Http\Controllers\Admin\Api\QualityApiController::class, 'updateSort'])->name('quality.update.sort');
 Route::post('quality/update/display', [\App\Http\Controllers\Admin\Api\QualityApiController::class, 'updateDisplay'])->name('quality.update.display');
+
+Route::post('portfolio/update/sort', [\App\Http\Controllers\Admin\Api\PortfolioApiController::class, 'updateSort'])->name('portfolios.update.sort');
+Route::post('portfolio/update/display', [\App\Http\Controllers\Admin\Api\PortfolioApiController::class, 'updateDisplay'])->name('portfolios.update.display');

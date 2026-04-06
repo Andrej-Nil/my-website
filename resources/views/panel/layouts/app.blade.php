@@ -21,21 +21,28 @@
 
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="{{route('panel.hobbies')}}" class="nav-item__link">Хобби</a>
-                </li>
-
-                <li class="nav-item">
                     <a href="{{route('panel.userInfos.create')}}" class="nav-item__link">Данные</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item">
                     <p class="nav-item__title">Блок резюме</p>
-                    <a href="{{route('panel.jobs')}}" class="nav-item__link">Опыт работы</a>
-                    <a href="{{route('panel.schools')}}" class="nav-item__link">Образование</a>
-                    <a href="{{route('panel.qualities')}}" class="nav-item__link">Качества</a>
+                    <a href="{{route('panel.jobs')}}" class="nav-item__link nav-item__link--in-block">Опыт работы</a>
+                    <a href="{{route('panel.schools')}}" class="nav-item__link nav-item__link--in-block">Образование</a>
+                    <a href="{{route('panel.qualities')}}" class="nav-item__link nav-item__link--in-block">Качества</a>
                 </li>
 
-{{--                <li class="nav-item">--}}
+                <li class="nav-item">
+                    <a href="{{route('panel.portfolios')}}" class="nav-item__link">Портфолио</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('panel.hobbies')}}" class="nav-item__link">Хобби</a>
+                </li>
+
+
+
+
+                {{--                <li class="nav-item">--}}
 {{--                    <a href="{{route('panel.educations')}}" class="nav-item__link">Оброзование</a>--}}
 {{--                </li>--}}
 

@@ -152,6 +152,7 @@ class HobbyController extends Controller
         if($hobby['mini_photo']){
             MediaRepository::deleteMediaByLink($hobby['mini_photo']);
         }
+
         if($hobby['photo_list']){
             foreach ($hobby['photo_list'] as $photo){
                 MediaRepository::deleteMediaByLink($photo);

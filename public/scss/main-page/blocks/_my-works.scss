@@ -1,22 +1,47 @@
 .my-works{
+
+}
+
+.my-works__list{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
 .my-work-card{
-    border: 3px solid #cccccc;
-    height: 300px;
-    transition: 0.2s linear;
-    &:hover{
+    //border: 3px solid #cccccc;
+    //transition: 0.2s linear;
+    &:hover .my-work-card__img{
         border: 3px solid #ffffff;
         box-shadow: 0 0 10px #ffffff;
+    }
+
+    &:hover .my-work-card__title{
+        color: #ffffff;
     }
 }
 
 .my-work-card__img{
     width: 100%;
-    height: 100%;
+    height: 250px;
     object-fit: cover;
     object-position: center;
+    border: 3px solid #cccccc;
+    transition: 0.2s linear;
+
+}
+
+.my-work-card__title{
+    margin: 10px;
+    transition: 0.2s linear;
+}
+
+.my-works__bottom{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.my-works__link {
+
 }

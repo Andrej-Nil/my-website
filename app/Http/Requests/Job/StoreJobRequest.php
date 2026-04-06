@@ -30,7 +30,6 @@ class StoreJobRequest extends FormRequest
             'text' => ['nullable', 'string'],
             'sort' => ['nullable', 'int'],
             'is_display' => ['nullable', 'boolean'],
-
         ];
     }
 

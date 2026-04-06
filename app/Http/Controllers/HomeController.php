@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 
-use App\Repositories\WorkRepository;
+
+use App\Repositories\PortfolioRepository;
+use App\Repositories\UserInfoRepository;
 
 class HomeController extends Controller
 {
 
     public function index(){
-//        $workList = WorkRepository::getWorkByDisplay();
-//        return view('home', ['workList' => $workList]);
-        return view('home');
+        $count = 10;
+        $admin = UserInfoRepository::getUserInfoByFirst();
+        $portfolioData = PortfolioRepository::getPaginationByIsDisplay();
+        return view('home', [
+            'admin' => $admin,
+            'portfolioList' => $portfolioData['data']
+        ]);
     }
 }

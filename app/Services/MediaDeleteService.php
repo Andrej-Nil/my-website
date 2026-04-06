@@ -10,7 +10,8 @@ class MediaDeleteService
     public function handle($mediaLink){
 
         $media = MediaRepository::getMediaByLink($mediaLink);
-        if(!$media){
+
+        if(!count($media)){
             return [
                 'success' => false,
                 'message' => 'Медиа не существует или уже удалено'
