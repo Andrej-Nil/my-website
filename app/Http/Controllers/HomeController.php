@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index(){
         $count = 10;
         $admin = UserInfoRepository::getUserInfoByFirst();
-        $portfolioData = PortfolioRepository::getPagination([],$count);
+        $portfolioData = PortfolioRepository::getPaginationByIsDisplay();
         return view('home', [
             'admin' => $admin,
             'portfolioList' => $portfolioData['data']

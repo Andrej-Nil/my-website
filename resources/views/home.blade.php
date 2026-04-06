@@ -39,6 +39,7 @@
                            </div>
                        </div>
                    </div>
+
                    <div data-frame-tab="form" class="main-frame-tab">
                        <div data-frame-tab-close class="main-close main-frame-tab__close"></div>
                        <div class="main-frame-tab__inner scroll">
@@ -86,7 +87,7 @@
                          <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
                          <div class="main-frame-tab__inner scroll">
                              <div class="about-me">
-                                 <div class="about-me__top">
+                                 <div class="about-me__content">
                                      <div class="about-me__intro">
                                       <p class="about-me__title">{{$admin['second_name'].' '.$admin['first_name']}}</p>
                                       <p class="about-me__text">
@@ -95,8 +96,8 @@
 
                                      </div>
                                      <img src="{{$admin['photo_url']}}" alt="" class="about-me__photo">
-                                 </div>
 
+                                 </div>
 {{--                                 <div class="about-me__body">--}}
 {{--                                     <p class="about-me__text">{{$admin['second_name']}}</p>--}}
 {{--                                 </div>--}}
@@ -151,7 +152,7 @@
                                  <p class="about-me__text">{{$admin['about']}}</p>
                              </div>
 
-                                 <div class="my-contacts">
+                             <div class="my-contacts">
                                      <div class="about-me__subtitle">Контакты</div>
                                      <div class="my-contacts__list">
 

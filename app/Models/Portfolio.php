@@ -12,7 +12,6 @@ class Portfolio extends Model
         'link',
         'photo',
         'text',
-        'text',
         'is_display',
     ];
 
@@ -21,6 +20,7 @@ class Portfolio extends Model
 
     protected $appends = [
         'photo_url',
+        'text_short',
     ];
 
 
@@ -29,6 +29,18 @@ class Portfolio extends Model
         // Storage::disk('public')->exists() проверяет, существует ли файл физически
         if($this->photo && Storage::disk('public')->exists($this->photo)) {
             return Storage::disk('public')->url($this->photo);
+        }
+        return null;
+    }
+
+    public function getTextShortAttribute() {
+        $len = 300;
+        if($this->text) {
+            $short = substr($this->text, 0,$len);
+            if(strlen($short) === $len){
+                $short = $short . '...';
+            }
+            return  $short;
         }
         return null;
     }

@@ -18,7 +18,7 @@
     </div>
 
     <div class="main-contacts">
-        <a href="tel:{{$admin['phone']}}" class="main-contact">tel:{{$admin['phone']}}</a>
+        <a href="tel:{{$admin['phone']}}" class="main-contact">{{$admin['phone']}}</a>
         <a href="mailto:{{$admin['mail']}}" class="main-contact">{{$admin['mail']}}</a>
     </div>
 </header>

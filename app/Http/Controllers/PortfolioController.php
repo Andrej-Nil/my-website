@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PortfolioRepository;
 use App\Repositories\UserInfoRepository;
 
 class PortfolioController extends Controller
@@ -10,13 +11,24 @@ class PortfolioController extends Controller
     {
 
         $admin = UserInfoRepository::getUserInfoByFirst();
+        $portfolioList = PortfolioRepository::getPagination();
         return view('portfolio.index', [
-            'admin' => $admin
+            'admin' => $admin,
+            'portfolioList' => $portfolioList
         ]);
     }
 
-    public function show()
+    public function show($id)
     {
+        $portfolio = PortfolioRepository::getPortfolioById($id);
 
+        if(!$portfolio){
+            abort(404);
+        }
+        $admin = UserInfoRepository::getUserInfoByFirst();
+
+        return view('portfolio.show', [
+            'admin' => $admin,
+            'portfolio' =>$portfolio]);
     }
 }

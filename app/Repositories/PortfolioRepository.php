@@ -6,7 +6,7 @@ use App\Models\Portfolio;
 
 class PortfolioRepository
 {
-    public static function getPagination(array $data = [], int $count = 20):array
+    public static function getPagination(array $data = [],  int $count = 20):array
     {
         if ($data) {
             if (isset($data['search'])) {
@@ -23,7 +23,16 @@ class PortfolioRepository
             }
         }
 
+
+
         return Portfolio::paginate($count)->toArray();
+    }
+
+    public static function getPaginationByIsDisplay(int $isDisplay = 1, int $count = 12){
+        return Portfolio::where('is_display', $isDisplay)->
+        orderBy('sort', 'ASC')->
+        paginate($count)->
+        toArray();
     }
 
     public static function createPortfolio(array $data):array{
