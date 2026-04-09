@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Hobby;
+use App\Models\Quality;
 
 class HobbyRepository
 {
@@ -39,6 +40,12 @@ class HobbyRepository
 
     public static function deleteHobby(int $id):bool{
         return Hobby::where('id', $id)->delete();
+    }
+
+    public static function getHobbyByIsDisplay(){
+        return Hobby::where('is_display', 1)->
+        get()->
+        toArray();
     }
 
 //    public static function getArticleById(int $id):array{

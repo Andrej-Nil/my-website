@@ -11,8 +11,8 @@
        <div class="main-content">
            <div class="signature">
                <div class="signature__inner">
-                   <h1 class="signature__name">Testtest Testte</h1>
-                   <p class="signature__profession">Test-test Testtesttst</p>
+                   <h1 class="signature__name">{{$admin['first_name'] . ' ' . $admin['second_name']}} </h1>
+                   <p class="signature__profession">{{$admin['profession']}}</p>
                    <button data-frame-tab-link="form" type="button" class="signature__btn btn">Название кнопки</button>
                </div>
            </div>

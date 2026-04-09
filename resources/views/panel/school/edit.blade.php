@@ -53,9 +53,8 @@
                 <label for="end" class="form-control__label">Окончание</label>
                 <div class="form-control__body">
 
-
                     <input id="end" type="date" class="form-control__input input" name="end"
-                           value="{{$school['is_current'] ? '' : $job['end'] }}"
+                           value="{{$school['is_current'] ? '' : $school['end'] }}"
                         @disabled($school['is_current'] == 1)
                     >
                     @error('end')<p class="form-control__error">{{$message}}</p>@enderror
@@ -82,7 +81,6 @@
                         <label for="display2" class="form-control__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0"  @checked($school['is_display'] == 0)>
                     </div>
-
                 </div>
             </div>
         </div>

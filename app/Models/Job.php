@@ -16,4 +16,29 @@ class Job extends Model
         'text',
         'is_display'
     ];
+
+    protected $appends = [
+        'start_date',
+        'end_date',
+    ];
+
+    public function getStartDateAttribute() {
+        if($this->start) {
+            return explode(' ', $this->start)[0];
+        }
+
+        return null;
+    }
+
+    public function getEndDateAttribute() {
+        if($this->end) {
+            return explode(' ', $this->start)[0];
+        }
+
+        return null;
+    }
+
 }
+
+
+

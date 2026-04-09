@@ -24,7 +24,6 @@
 
                 </div>
                 <img src="{{$portfolio['photo_url']}}" class="portfolio-page__img" alt="{{$portfolio['title']}}"/>
-
             </div>
         </div>
     </div>

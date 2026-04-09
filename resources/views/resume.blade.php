@@ -5,222 +5,161 @@
 @section('content')
 
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="{{route('home')}}" class="breadcrumbs__link">Главная</a>
-            <span class="breadcrumbs__slash">/</span>
-            <a class="breadcrumbs__link">Decs</a>
-        </div>
-
-        <h1 class="page-title">Decs</h1>
-
-        <div class="resume">
-            <div class="resume__top">
-                <div class="badge">
-                    <img src="{{asset('img/my-photo.jpg')}}" alt="" class="badge__photo">
-                    <div class="badge__body">
-                        <p class="badge__name">Kfgsdjhds Ksdkjfdsb Rsdbgdfh</p>
-                        <p class="badge__data">Kfgsdjhds Ksdkjfdsb 19.11.3464h(64 kjh)</p>
-                        <p class="badge__post">Fdshfdshf-sdfdshf</p>
-                    </div>
-                </div>
+        <div class="content">
+            <div class="breadcrumbs">
+                <a href="{{route('home')}}" class="breadcrumbs__link">Главная</a>
+                <span class="breadcrumbs__slash">/</span>
+                <a class="breadcrumbs__link">Decs</a>
             </div>
 
-            <div class="resume__body">
-                <div class="resume__main">
+            <h1 class="page-title">Резюме</h1>
 
-                    <div class="resume-block">
-                        <p class="resume-block__title">Gdkjfsdjf</p>
-                        <div class="resume-block__content">
-                            <div data-group class="resume-group display-only-first">
-{{--                                @foreach($jobList as $job)--}}
-{{--                                <div data-group-item class="resume-group-item">--}}
-{{--                                    <div class="resume-group-item__top">--}}
-{{--                                        <p class="resume-group-item__title">{{$job['title']}}</p>--}}
-{{--                                        <p class="resume-group-item__period">--}}
-{{--                                            {{$job['start']}}  {{$job['is_current'] ? 'настоящее время' : $job['end']}}</p>--}}
-{{--                                        <p class="resume-group-item__option">{{$job['profession']}}</p>--}}
-{{--                                    </div>--}}
-
-{{--                                    <div class="resume-group-item__desc">--}}
-{{--                                        {{$job['text']}}--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                @endforeach--}}
-                                <button data-group-btn="show" type="button" class="resume-group-btn">
-                                    open
-                                </button>
-                                <button data-group-btn="hide" type="button" class="resume-group-btn hide">
-                                    close
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="resume-block">
-                        <p class="resume-block__title">Ggdjf</p>
-                        <div class="resume-block__content">
-                            <div data-group class="resume-group display-only-first">
-{{--                                @foreach($schoolList as $school)--}}
-{{--                                    <div data-group-item class="resume-group-item">--}}
-{{--                                        <div class="resume-group-item__top">--}}
-{{--                                            <p class="resume-group-item__title">{{$school['title']}}</p>--}}
-{{--                                            <p class="resume-group-item__period">--}}
-{{--                                                {{$school['start']}} по {{$school['is_current'] ? 'настоящее время' : $school['end']}}</p>--}}
-{{--                                            <p class="resume-group-item__option">{{$school['specialization']}}</p>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="resume-group-item__desc">--}}
-{{--                                            {{$school['text']}}--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @endforeach--}}
-
-{{--                                @if(count($schoolList) > 1)--}}
-{{--                                <button data-group-btn="show" type="button" class="resume-group-btn">--}}
-{{--                                    open--}}
-{{--                                </button>--}}
-{{--                                <button data-group-btn="hide" type="button" class="resume-group-btn hide">--}}
-{{--                                    close--}}
-{{--                                </button>--}}
-
-{{--                                @endif--}}
-                            </div>
+            <div class="resume">
+                <div class="resume__top">
+                    <div class="badge">
+                        <img src="{{$admin['photo_url']}}" alt="" class="badge__photo">
+                        <div class="badge__body">
+                            <p class="badge__name">{{$admin['second_name'].' '.$admin['first_name']}}</p>
+                            <p class="badge__data">Дата рождения: {{$admin['year_birth_date']}}</p>
+                            <p class="badge__post">{{$admin['profession']}}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="resume__data">
-                    <div class="resume-block">
+                <div class="resume__body">
+                    <div class="resume__main">
+                    @if($jobList)
+                        <div class="resume-block">
+                            <p class="resume-block__title">Опыт работы</p>
+                            <div class="resume-block__content">
+                                <div data-group class="resume-group display-only-first">
+                                    @foreach($jobList as $job)
+                                    <div data-group-item class="resume-item">
+                                        <div class="resume-item__top">
+                                            <p class="resume-item__title">{{$job['title']}}</p>
+                                            <p class="resume-item__period">
+                                                Начало работы: {{$job['start_date']}}
+                                            </p>
+                                            <p class="resume-item__period">
+                                                Окончание работы: {{$job['is_current'] ? ' по настоящее время' : $job['end_date']}}
+                                            </p>
+                                            <p class="resume-item__option">
+                                                Должность: {{$job['profession']}}
+                                            </p>
+                                        </div>
 
-                        <p class="resume-block__title">Gdkjfsdjf</p>
+                                        <div class="resume-item-desc">
+                                            <p class="resume-item-desc__title">Описание:</p>
+                                            <p class="resume-item-desc__text">{{$job['text']}}</p>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @if(count($jobList) > 1)
+                                        <button data-group-btn="show" type="button" class="resume-group-btn">
+                                            open
+                                        </button>
+                                        <button data-group-btn="hide" type="button" class="resume-group-btn hide">
+                                            close
+                                        </button>
+                                     @endif
+                                </div>
+                            </div>
 
-                        <ul class="resume-list">
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                        </div>
+                    @endif
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                    @if($schoolList)
+                        <div class="resume-block">
+                            <p class="resume-block__title">Образование</p>
+                            <div class="resume-block__content">
+                                <div data-group class="resume-group display-only-first">
+                                    @foreach($schoolList as $school)
+                                        <div data-group-item class="resume-item">
+                                            <div class="resume-item__top">
+                                                <p class="resume-item__title">{{$school['title']}}</p>
+                                                <p class="resume-item__period">
+                                                    Начало учебы: {{$school['start_date']}}
+                                                </p>
+                                                <p class="resume-item__period">
+                                                    Окончание учебы: {{$school['is_current'] ? ' по настоящее время' : $school['end_date']}}
+                                                </p>
+                                                <p class="resume-item__option">
+                                                    Специальность: {{$school['specialization']}}
+                                                </p>
+                                            </div>
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                                            <div class="resume-item-desc">
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                                                <div class="resume-item-desc">
+                                                    <p class="resume-item-desc__title">Описание:</p>
+                                                    <p class="resume-item-desc__text">{{$job['text']}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-                        </ul>
+                                    @if(count($schoolList) > 1)
+                                    <button data-group-btn="show" type="button" class="resume-group-btn">
+                                        open
+                                    </button>
+                                    <button data-group-btn="hide" type="button" class="resume-group-btn hide">
+                                        close
+                                    </button>
+
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     </div>
 
-                    <div class="resume-block">
+                    <div class="resume__data">
+                        @if($professionalQualities)
+                            <div class="resume-block">
 
-                        <p class="resume-block__title">Gdkjfsdjf</p>
+                                <p class="resume-block__title">Профессиональные навыки </p>
+                                <ul class="resume-list">
+                                @foreach($professionalQualities as $quality)
 
-                        <ul class="resume-list">
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                                        <li class="resume-list-item">
+                                            <span class="resume-list-item__label">{{$quality['title']}}</span>
+                                        </li>
+                                @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                            @if($personalQualities)
+                                <div class="resume-block">
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                                    <p class="resume-block__title">Личные навыки</p>
+                                    <ul class="resume-list">
+                                        @foreach($personalQualities as $quality)
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
+                                            <li class="resume-list-item">
+                                                <span class="resume-list-item__label">{{$quality['title']}}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="resume-block">
-
-                        <p class="resume-block__title">Gdkjfsdjf</p>
-
-                        <ul class="resume-list">
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="resume-block">
-
-                        <p class="resume-block__title">Gdkjfsdjf</p>
-
-                        <ul class="resume-list">
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-
-                            <li class="resume-list-item">
-                                <span class="resume-list-item__label">Название Название:</span>
-                                <span class="resume-list-item__value">Значение</span>
-                            </li>
-                        </ul>
+                            @if($hobbyList)
+                                <div class="resume-block">
+                                    <p class="resume-block__title">Хобби</p>
+                                    <ul class="resume-list">
+                                        @foreach($hobbyList as $hobby)
+                                            <li class="resume-list-item">
+                                                <span class="resume-list-item__label">{{$hobby['title']}}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 @endsection

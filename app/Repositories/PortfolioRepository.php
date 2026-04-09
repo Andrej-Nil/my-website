@@ -28,7 +28,7 @@ class PortfolioRepository
         return Portfolio::paginate($count)->toArray();
     }
 
-    public static function getPaginationByIsDisplay(int $isDisplay = 1, int $count = 12){
+    public static function getPaginationByIsDisplay(int $isDisplay = 1, int $count = null){
         return Portfolio::where('is_display', $isDisplay)->
         orderBy('sort', 'ASC')->
         paginate($count)->

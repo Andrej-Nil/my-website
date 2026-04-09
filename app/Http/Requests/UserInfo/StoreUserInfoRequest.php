@@ -30,7 +30,7 @@ class StoreUserInfoRequest extends FormRequest
             'first_name'     => ['bail', 'required', 'string', 'max:255'],
             'second_name'     => ['bail', 'required', 'string', 'max:255'],
             'year_birth' => ['bail', 'nullable', 'date', 'date_format:Y-m-d'],
-
+            'profession' => ['bail', 'nullable', 'string', 'max:255'],
             'about' => ['bail', 'nullable', 'string'],
 
             'city' => ['bail', 'nullable', 'string', 'max:255'],
@@ -62,7 +62,11 @@ class StoreUserInfoRequest extends FormRequest
 
             'about.string'      => 'Поле "Название" должно быть строкой',
 
-            'city.required'    => 'Поле "Название" обязательно для заполнения',
+
+            'profession.string'      => 'Поле "Название" должно быть строкой',
+            'profession.max'         => 'Поле "Название" не должно превышать 255 символов',
+
+
             'city.string'      => 'Поле "Название" должно быть строкой',
             'city.max'         => 'Поле "Название" не должно превышать 255 символов',
 

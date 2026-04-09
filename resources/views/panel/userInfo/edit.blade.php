@@ -61,6 +61,14 @@
             </div>
 
             <div class="form-control">
+                <label for="profession" class="form-control__label">Профессия</label>
+                <div class="form-control__body">
+                    <input id="profession" type="text" class="form-control__input input" name="profession" value="{{$userInfo['profession']}}" placeholder="Профессия">
+                    @error('profession')<p class="form-control__error">{{$message}}</p>@enderror
+                </div>
+            </div>
+
+            <div class="form-control">
                 <label for="yearBirth" class="form-control__label">Дата Рождения</label>
                 <div class="form-control__body">
                     <input id="yearBirth" type="date" class="form-control__input input" name="year_birth" value="{{$userInfo['year_birth']}}">
