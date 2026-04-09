@@ -1,20 +1,45 @@
 .breadcrumbs{
     margin-bottom: 30px;
-    &--white *{
+    &--white .breadcrumbs__link{
         color: #ccc;
     }
+    &--white  .breadcrumbs__link:last-child{
+        color: #fff;
+    }
+    &--white .breadcrumbs__slash{
+        color: #ccc;
+    }
+
+    &--white  .breadcrumbs__link:hover{
+        color: #fff;
+    }
+
+
+
+        //&:hover{
+        //    color: #fff;
+        //}
+        //&:last-child{
+        //    font-weight: 600;
+        //    color: #fff;
+        //}
+
 }
+
+
 
 .breadcrumbs__link{
     font-size: 12px;
     font-weight: 400;
     transition: 0.2s linear;
+    color: #666;
     &:last-child{
         font-weight: 600;
-        color: #fff;
+        color: #000;
     }
 
     &:hover{
-        color: #fff;
+        color: #000;
     }
+
 }

@@ -59,6 +59,14 @@
             </div>
 
             <div class="form-control">
+                <label for="profession" class="form-control__label">Профессия</label>
+                <div class="form-control__body">
+                    <input id="profession" type="text" class="form-control__input input" name="profession" value="{{old('profession')}}" placeholder="Профессия">
+                    @error('profession')<p class="form-control__error">{{$message}}</p>@enderror
+                </div>
+            </div>
+
+            <div class="form-control">
                 <label for="city" class="form-control__label">Город</label>
                 <div class="form-control__body">
                     <input id="city" type="text" class="form-control__input input" name="city" value="{{old('city')}}" placeholder="Город">

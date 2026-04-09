@@ -13,6 +13,7 @@ class UserInfo extends Model
         'photo',
         'about',
         'year_birth',
+        'profession',
         'city',
         'phone',
         'mail',
@@ -24,12 +25,20 @@ class UserInfo extends Model
 
     protected $appends = [
         'photo_url',
+        'year_birth_date',
     ];
 
     public function getPhotoUrlAttribute() {
         // Storage::disk('public')->exists() проверяет, существует ли файл физически
         if($this->photo && Storage::disk('public')->exists($this->photo)) {
             return Storage::disk('public')->url($this->photo);
+        }
+        return null;
+    }
+
+    public function getYearBirthDateAttribute() {
+        if($this->year_birth) {
+            return explode(' ', $this->year_birth)[0];
         }
         return null;
     }

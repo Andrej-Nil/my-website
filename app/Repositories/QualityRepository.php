@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Portfolio;
 use App\Models\Quality;
 
 class QualityRepository
@@ -29,6 +30,15 @@ class QualityRepository
         $item = Quality::find($id);
         return $item ? $item->toArray() : [];
     }
+
+
+    public static function getQualityByIsDisplay(){
+        return Quality::where('is_display', 1)->
+            orderBy('sort', 'ASC')->
+            get()->
+            toArray();
+    }
+
 //    public static function getPagination(int $count = 20):array{
 //        return Article::limit($count)->orderBy('id', 'DESC')->get()->toArray();
 //    }

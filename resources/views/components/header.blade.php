@@ -1,9 +1,10 @@
 <header class="main-header">
     <div class="main-nav">
         <a href="{{route('home')}}" class="main-nav-item">Главная</a>
+        <a href="{{route('resume')}}" class="main-nav-item">Resume</a>
         <a href="{{route('portfolio')}}" class="main-nav-item">Portfolio</a>
         <a href="{{route('hobby')}}" class="main-nav-item">Hobby</a>
-        <a href="{{route('resume')}}" class="main-nav-item">Resume</a>
+
 
 {{--        <a href="{{route('resume')}}" class="main-nav-item">Вуыс</a>--}}
 {{--        <a href="{{route('about')}}" class="main-nav-item">авыаыва ыаывавыа</a>--}}

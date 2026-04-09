@@ -30,7 +30,7 @@ class UpdateUserInfoRequest extends FormRequest
             'first_name'     => ['bail', 'required', 'string', 'max:255'],
             'second_name'     => ['bail', 'required', 'string', 'max:255'],
             'year_birth' => ['bail', 'nullable', 'date', 'date_format:Y-m-d'],
-
+            'profession' => ['bail', 'nullable', 'string', 'max:255'],
             'about' => ['bail', 'nullable', 'string'],
 
             'city' => ['bail', 'nullable', 'string', 'max:255'],
@@ -58,31 +58,32 @@ class UpdateUserInfoRequest extends FormRequest
             'second_name.string'      => 'Поле "Название" должно быть строкой',
             'second_name.max'         => 'Поле "Название" не должно превышать 255 символов',
 
+            'profession.string'      => 'Поле "Название" должно быть строкой',
+            'profession.max'         => 'Поле "Название" не должно превышать 255 символов',
+
             'year_birth.date'    => 'Не верный тип данных',
 
             'about.string'      => 'Поле "Название" должно быть строкой',
 
-            'city.required'    => 'Поле "Название" обязательно для заполнения',
             'city.string'      => 'Поле "Название" должно быть строкой',
             'city.max'         => 'Поле "Название" не должно превышать 255 символов',
 
-            'phone.required'    => 'Поле "Название" обязательно для заполнения',
+
             'phone.string'      => 'Поле "Название" должно быть строкой',
             'phone.max'         => 'Поле "Название" не должно превышать 255 символов',
 
-            'mail.required'    => 'Поле "Название" обязательно для заполнения',
             'mail.string'      => 'Поле "Название" должно быть строкой',
             'mail.max'         => 'Поле "Название" не должно превышать 255 символов',
 
-            'telegram.required'    => 'Поле "Название" обязательно для заполнения',
+
             'telegram.string'      => 'Поле "Название" должно быть строкой',
             'telegram.max'         => 'Поле "Название" не должно превышать 255 символов',
 
-            'whatsapp.required'    => 'Поле "Название" обязательно для заполнения',
+
             'whatsapp.string'      => 'Поле "Название" должно быть строкой',
             'whatsapp.max'         => 'Поле "Название" не должно превышать 255 символов',
 
-            'vk.required'    => 'Поле "Название" обязательно для заполнения',
+
             'vk.string'      => 'Поле "Название" должно быть строкой',
             'vk.max'         => 'Поле "Название" не должно превышать 255 символов',
         ];

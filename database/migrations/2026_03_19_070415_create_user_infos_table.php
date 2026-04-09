@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('second_name');
             $table->timestamp('year_birth')->nullable();
+            $table->string('profession')->nullable();
             $table->text('about')->nullable();
             $table->string('city')->nullable();
             $table->string('phone')->nullable();
