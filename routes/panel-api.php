@@ -20,3 +20,7 @@ Route::post('quality/update/display', [\App\Http\Controllers\Admin\Api\QualityAp
 
 Route::post('portfolio/update/sort', [\App\Http\Controllers\Admin\Api\PortfolioApiController::class, 'updateSort'])->name('portfolios.update.sort');
 Route::post('portfolio/update/display', [\App\Http\Controllers\Admin\Api\PortfolioApiController::class, 'updateDisplay'])->name('portfolios.update.display');
+
+
+Route::post('posts/update/sort', [\App\Http\Controllers\Admin\Api\PostApiController::class, 'updateSort'])->name('posts.update.sort');
+Route::post('posts/update/display', [\App\Http\Controllers\Admin\Api\PostApiController::class, 'updateDisplay'])->name('posts.update.display');

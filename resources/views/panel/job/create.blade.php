@@ -3,7 +3,15 @@
 @section('title', 'Создание поста')
 
 @section('content')
-    <h1 class="panel-title">Добовление места</h1>
+    <div class="content-top">
+
+        <div class="breadcrumbs">
+            <a href="{{route('panel.jobs')}}" class="breadcrumbs__link">Опыт работы</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Добовление места работы</a>
+        </div>
+    </div>
+    <h1 class="panel-title">Добовление места работы</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif

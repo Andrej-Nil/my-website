@@ -3,7 +3,17 @@
 @section('title', 'Редостирование поста')
 
 @section('content')
-    <h1 class="panel-title">Редостирование поста</h1>
+    <div class="content-top">
+
+        <div class="breadcrumbs">
+            <a href="{{route('panel.posts')}}" class="breadcrumbs__link">Посты</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Редатирование поста</a>
+        </div>
+        <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Создать новый пост</a>
+    </div>
+
+    <h1 class="panel-title">Редатирование поста</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка сохранения формы.'])
     @endif
@@ -11,54 +21,54 @@
         @include('panel.components.success-board')
     @endif
 
-    <form action="{{route('panel.posts.update', $post['id'])}}" method="post" class="form">
+
+    <form id="formEdit" action="{{route('panel.posts.update', $post['id'])}}" method="post" class="form">
         @csrf
         @method('PUT')
         <div class="form__body">
             <div class="form-control">
-                <label for="postTitle" class="form-control__label">Название</label>
+                <label for="title" class="form-control__label">Название</label>
                 <div class="form-control__body">
-                    <input id="postTitle" type="text" class="form-control__input input" name="title" value="{{$post['title']}}" placeholder="Название поста">
+                    <input id="title" type="text" class="form-control__input input" name="title" value="{{$post['title']}}" placeholder="Название поста">
                     @error('title')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
 
             <div class="form-control">
-                <span class="form-control__label">Фото</span>
-                <div data-upload class="upload-file" data-name="photo" data-upload-api="{{route('upload.photo')}} ">
-                    <div class="form-control__body">
-                        <label class="upload-file-btn">
-                            <input data-upload-input type="file" class="upload-file-btn__input">
-                            <span class="upload-file-btn__fake">
-                            <span class="upload-file-btn__pic">
-                                <img class="upload-file-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
-                            </span>
-                            <span class="upload-file-btn__label">Загрузить фото</span>
-                        </span>
-                        </label>
-                        @error('photo_id')<p class="form-control__error">{{$message}}</p>@enderror
-                    </div>
-                    <div data-upload-preview class="upload-file-preview">
-                        @if($post['photo'])
-                            <div data-upload-photo="{{$post['photo']['id']}}" class="upload-file-photo">
-                                <input type="hidden" name="photo_id" value="{{$post['photo']['id']}}">
-                                <img class="upload-file-photo__img" src="{{$post['photo']['url']}}" alt=""/>
-                                <button type="button" class="btn btn--yellow upload-file-photo__btn upload-file-photo__btn--top">Просмотр</button>
-                                <button type="button" data-delete-photo class="btn btn--red upload-file-photo__btn upload-file-photo__btn--bottom">Удалить</button>
-                            </div>
-                        @endif
-
-
-                    </div>
-                    {{--                <input id="postTitle" type="file" class="input" name="file" placeholder="Фото">--}}
+                <div class="form-control__head">
+                    <span class="form-control__label">Фотографии</span>
+                    <p class="form-control__note">Вы можите загрузить до 4 изображений в формате jpg, jpeg, png</p>
                 </div>
-
+                <div data-upload-media-file="multi" data-name="photo_list[]" class="media-file">
+                    <div class="media-file__body">
+                        <label class="media-file__btn download-btn">
+                            <input data-media-add type="file" class="download-btn__input">
+                            <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">
+                            <span class="download-btn__label">Загрузить фото</span>
+                        </label>
+                        <div data-media-list class="media-file__list">
+                            @if($post['photo_list'])
+                                @foreach($post['photo_list'] as $key=>$photo)
+                                    @if(isset($post['photo_list_url'][$key]))
+                                        <div data-media-item="{{$photo}}" class="media-file-item">
+                                            <input data-media-input="" type="text" name="photo_list[]" value="{{$photo}}" class="media-file-item__input new">
+                                            <span data-media-delete="" class="media-file-item__btn top">Удалить</span>
+                                            <img src="{{$post['photo_list_url'][$key]}} " alt="" class="media-file-item__content">
+                                            <span data-look="{{$post['photo_list_url'][$key]}}" data-look-type="img" class="media-file-item__btn bottom">Просмотр</span>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <p data-media-error class="media-file__error"></p>
+                </div>
             </div>
 
             <div class="form-control">
                 <label for="postText" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="postText" rows="10"  class="input" name="text"  placeholder="Описание">{{$post['text']}}</textarea>
+                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{$post['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
 
@@ -82,12 +92,12 @@
             {{--            <textarea id="postText" rows="10"  class="input" name="title" placeholder="Описание"></textarea>--}}
         </div>
         <div class="form__bottom">
-            <button type="submit" form="deletePost" class="btn btn--red">Удалить</button>
+            <button type="submit" form="delete" class="btn btn--red">Удалить</button>
             <button type="submit" class="btn btn--yellow">Сохранить</button>
         </div>
 
     </form>
-    <form id="deletePost"  action="{{route('panel.posts.delete', $post['id'])}}" method="post">
+    <form id="delete"  action="{{route('panel.posts.delete', $post['id'])}}" method="post">
         @csrf
         @method('DELETE')
     </form>

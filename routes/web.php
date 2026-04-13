@@ -28,11 +28,15 @@ Route::middleware('auth')->group(function (){
 
 
 Route::get('about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about');
-Route::get('hobby', [\App\Http\Controllers\HobbyController::class, 'index'])->name('hobby');
+Route::get('hobbies', [\App\Http\Controllers\HobbyController::class, 'index'])->name('hobbies');
 Route::get('resume', [\App\Http\Controllers\ResumeController::class, 'index'])->name('resume');
 
 
-Route::get('portfolio', [\App\Http\Controllers\PortfolioController::class, 'index'])->name('portfolio');
-Route::get('portfolio/{id}/show', [\App\Http\Controllers\PortfolioController::class, 'show'])->name('portfolio.show');
+Route::get('portfolios', [\App\Http\Controllers\PortfolioController::class, 'index'])->name('portfolios');
+Route::get('portfolios/{id}/show', [\App\Http\Controllers\PortfolioController::class, 'show'])->name('portfolios.show');
+
+
+Route::get('posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts');
+Route::get('posts/{id}/show', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
 

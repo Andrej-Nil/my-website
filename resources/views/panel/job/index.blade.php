@@ -3,7 +3,7 @@
 @section('title', 'Примеры работ')
 
 @section('content')
-    <h1 class="panel-title">Работы</h1>
+    <h1 class="panel-title">Добовление места работы</h1>
 
     @if(session()->has('success'))
         @include('panel.components.success-board')
@@ -36,7 +36,7 @@
                 </div>
            </div>
 
-            <a href="{{route('panel.jobs.create')}}" class="btn btn--yellow">Создать работу</a>
+            <a href="{{route('panel.jobs.create')}}" class="btn btn--yellow">Добавить место работы</a>
         </div>
 
 
@@ -91,14 +91,5 @@
             @include('panel.components.pagination', ['paginate' => $jobList])
         @endif
 
-{{--        <div class="list__pagination">--}}
-{{--            <div class="pagination">--}}
-{{--                <a href="" class="pagination-item active">1</a>--}}
-{{--                <a href="" class="pagination-item">2</a>--}}
-{{--                <a href="" class="pagination-item">3</a>--}}
-{{--                <a href="" class="pagination-item">4</a>--}}
-{{--                <a href="" class="pagination-item">5</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
 </div>
 @endsection

@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Hobby;
-use App\Models\Quality;
 
 class HobbyRepository
 {
@@ -16,7 +15,6 @@ class HobbyRepository
                 appends($data['params'])->
                 toArray();
         }
-
 
         return Hobby::orderBy($data['sort']['key'], $data['sort']['type'])->
             paginate($count)->
