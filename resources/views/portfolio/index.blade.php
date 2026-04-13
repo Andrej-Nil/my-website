@@ -28,7 +28,7 @@
                                     <p class="portfolio-card__title">{{$portfolio['title']}}</p>
                                     <p class="portfolio-card__text">{{$portfolio['text_short']}}</p>
                                     <div class="portfolio-card__bottom">
-                                        <a href="{{route('portfolio.show', $portfolio['id'])}}" class="portfolio-card__btn btn">Подробнее</a>
+                                        <a href="{{route('portfolios.show', $portfolio['id'])}}" class="portfolio-card__btn btn">Подробнее</a>
                                         <a href="{{$portfolio['link']}}" target="_blank" class="portfolio-card__btn btn">Ссылка</a>
                                     </div>
                                 </div>

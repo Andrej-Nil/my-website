@@ -10,7 +10,7 @@
     //height: 70px;
     //background: #ccc;
     &:hover .main-frame-link__icon{
-        background: #fff;
+        opacity: 1;
     }
 
     &:hover .main-frame-link__title{
@@ -21,14 +21,15 @@
 .main-frame-link__icon{
     width: 60px;
     height: 60px;
-    background: #ccc;
+    //background: #ccc;
     transition: 0.3s ease-in-out;
+    opacity: 0.7;
 }
 
 
 .main-frame-link__title{
     font-size: 14px;
     text-align: center;
-    color: #ccc;
+    color: #aaa;
     transition: 0.3s ease-in-out;
 }

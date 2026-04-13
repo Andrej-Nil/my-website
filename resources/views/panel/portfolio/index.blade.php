@@ -60,9 +60,9 @@
                     <p class="list-item__title list-item__title--grab">
                         <span class="list-item__name">{{$portfolio['title']}}</span>
                     </p>
-                    {{--                <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">--}}
-                    {{--                    <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >--}}
-                    {{--                </a>--}}
+                    <a href="{{route('portfolios.show', $portfolio['id'])}}" target="_blank" class="list-item__btn" title="Открыть на сайте">
+                        <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
+                    </a>
 
 
                     <a href="{{route('panel.portfolios.edit', $portfolio['id'])}}" class="list-item__btn" title="Редоктировать">

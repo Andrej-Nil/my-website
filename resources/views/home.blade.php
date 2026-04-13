@@ -13,7 +13,7 @@
                <div class="signature__inner">
                    <h1 class="signature__name">{{$admin['first_name'] . ' ' . $admin['second_name']}} </h1>
                    <p class="signature__profession">{{$admin['profession']}}</p>
-                   <button data-frame-tab-link="form" type="button" class="signature__btn btn">Название кнопки</button>
+                   <button data-frame-tab-link="form" type="button" class="signature__btn btn">Обратная связь</button>
                </div>
            </div>
 
@@ -69,10 +69,10 @@
                                        </div>
 
                                        <div class="control">
-                                           <label for="mainFormMessage" class="control__label">Почта</label>
+                                           <label for="mainFormMessage" class="control__label">Коментарий</label>
                                            <textarea data-input id="mainFormMessage" name="comment" class="control__input input" rows="2" placeholder="Коментарий"></textarea>
                                            <div data-control-errors="comment" class="control__errors"></div>
-                                           {{--                                   <input type="text" id="mainFormMail" class="control__input input" placeholder="Почта">--}}
+
                                        </div>
                                    </div>
                                    <div class="main-form__bottom">
@@ -107,7 +107,7 @@
                                      <div class="about-me__list">
                                         <a href="tel:{{$admin['phone']}}" class="about-me__link">{{$admin['phone']}}</a>
                                         <a href="mailto:{{$admin['mail']}}" class="about-me__link">{{$admin['mail']}}</a>
-                                        <button data-frame-tab-link="form" type="button" class="btn">форма</button>
+                                        <button data-frame-tab-link="form" type="button" class="btn">Обратная связь</button>
                                      </div>
                                  </div>
                              </div>
@@ -128,7 +128,7 @@
                              </div>
 
                              <div class="my-works__bottom">
-                                <a href="{{route('portfolio')}}" class="my-works__link btn">Ссылка</a>
+                                <a href="{{route('portfolios')}}" class="my-works__link btn">Ссылка</a>
                              </div>
 
 
@@ -189,21 +189,22 @@
                        <div class="main-frame-nav__list">
                        <div data-frame-tab-link="info" class="main-frame-link">
 
-                           <span class="main-frame-link__icon"></span>
+{{--                           <span class="main-frame-link__icon"></span>--}}
+                           <img src="{{asset('img/icon/user.svg')}}" alt="" class="main-frame-link__icon">
 
                            <p class="main-frame-link__title">Кратко<br/> обо мне</p>
 
                        </div>
 
                        <div data-frame-tab-link="works" class="main-frame-link">
-                           <span class="main-frame-link__icon"></span>
-
+{{--                           <span class="main-frame-link__icon"></span>--}}
+                           <img src="{{asset('img/icon/directory.svg')}}" alt="" class="main-frame-link__icon">
                            <p class="main-frame-link__title">Пример<br/> работ</p>
                        </div>
 
                        <div data-frame-tab-link="contact" class="main-frame-link">
-                           <span class="main-frame-link__icon"></span>
-
+{{--                           <span class="main-frame-link__icon"></span>--}}
+                           <img src="{{asset('img/icon/old-phone.svg')}}" alt="" class="main-frame-link__icon">
                            <p class="main-frame-link__title">Контакты</p>
                        </div>
                        </div>
