@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Portfolio;
 use App\Models\Quality;
 
 class QualityRepository
@@ -46,9 +45,18 @@ class QualityRepository
     public static function updateQuality(int $id, array $data):bool{
         return Quality::where('id', $id)->update($data);
     }
-//    public static function deleteContact(int $id):bool{
-//        return Contact::where('id', $id)->delete();
-//    }
+
+    public static function updateSort($id, $sort){
+        $result = Quality::where('id', $id);
+        if($result){
+            return $result->update(['sort' => $sort]);
+        } else {
+            return false;
+        }
+    }
+    public static function deleteQuality(int $id):bool{
+        return Quality::where('id', $id)->delete();
+    }
 //    public static function getArticleById(int $id):array{
 //        $item = Article::find($id);
 //        return $item ? $item->toArray() : [];

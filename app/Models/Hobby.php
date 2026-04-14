@@ -18,6 +18,7 @@ class Hobby extends Model
         'mini_photo',
         'photo_list',
         'text',
+        'sort',
         'is_display',
     ];
 
@@ -75,23 +76,4 @@ class Hobby extends Model
        return $list;
     }
 
-//    protected $appends = [
-//        'img_list'
-//    ];
-//
-//    public function mainPhoto(){
-//        return $this->hasOne(Image::class, 'id' ,'main_photo');
-//    }
-//
-//    public function bgPhoto(){
-//        return $this->hasOne(Image::class, 'id' ,'bg_photo');
-//    }
-//
-//    public function miniPhoto(){
-//        return $this->hasOne(Image::class, 'id' ,'mini_photo');
-//    }
-//
-//    public function getImgListAttribute(){
-//        return ImageRepository::getImgById($this->photo_list);
-//    }
 }

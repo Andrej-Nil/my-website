@@ -62,10 +62,6 @@
                 <p class="list-item__title list-item__title--grab">
                     <span class="list-item__name">{{$job['title']}}</span>
                 </p>
-{{--                <a href="" target="_blank" class="list-item__btn" title="Открыть на сайте">--}}
-{{--                    <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >--}}
-{{--                </a>--}}
-
 
                 <a href="{{route('panel.jobs.edit', $job['id'])}}" class="list-item__btn" title="Редоктировать">
                     <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
@@ -80,11 +76,9 @@
             </div>
             @empty
 
-             <p class="list__empty">Постов не найдено.</p>
+             <p class="list__empty">Опыт работы не добавлен</p>
 
             @endforelse
-
-{{--{{$jobList->links()}}--}}
 
     </div>
         @if(count($jobList['links']) > 3 )

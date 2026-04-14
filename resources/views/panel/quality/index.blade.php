@@ -1,6 +1,6 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Оброзование')
+@section('title', 'Качества')
 
 @section('content')
     <h1 class="panel-title">Качества</h1>
@@ -68,16 +68,12 @@
                     </form>
                 </div>
             @empty
-
                 <p class="list__empty">Качеств не найдено</p>
-
             @endforelse
 
-
-
         </div>
-{{--        @if(count($qualityList['links']) > 3 )--}}
-{{--            @include('panel.components.pagination', ['paginate' => $schoolList])--}}
-{{--        @endif--}}
+        @if(count($qualityList['links']) > 3 )
+            @include('panel.components.pagination', ['paginate' => $schoolList])
+        @endif
     </div>
 @endsection

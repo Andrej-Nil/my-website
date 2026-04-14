@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Hobby;
+use App\Models\Job;
 
 class HobbyRepository
 {
@@ -46,6 +47,19 @@ class HobbyRepository
         toArray();
     }
 
+    public static function getHobbyByIdDisplayAndSort(){
+        return Hobby::where(['is_display' => 1])->orderBy('sort', 'ASC')->get()->toArray();
+    }
+
+    public static function updateSort($id, $sort)
+    {
+        $result = Hobby::where('id', $id);
+        if ($result) {
+            return $result->update(['sort' => $sort]);
+        } else {
+            return false;
+        }
+    }
 //    public static function getArticleById(int $id):array{
 //        $item = Article::find($id);
 //        return $item ? $item->toArray() : [];

@@ -1,9 +1,16 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Создание поста')
+@section('title', 'Добавить опыт')
 
 @section('content')
-    <h1 class="panel-title">Добавление хобби</h1>
+    <div class="content-top">
+        <div class="breadcrumbs">
+            <a href="{{route('panel.portfolios')}}" class="breadcrumbs__link">Портфолио</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Добовить опыт</a>
+        </div>
+    </div>
+    <h1 class="panel-title">Добавить опыт</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -66,7 +73,6 @@
                     <label for="display1" class="form-control__label">Опубликовать</label>
                     <input id="display1" type="radio" class="input" name="is_display" value="1" checked>
                 </div>
-{{--                @dd(old('is_display'))--}}
                 <div class="checkbox">
                     <label for="display2" class="form-control__label">Скрыть</label>
                     <input id="display2" type="radio" class="input" name="is_display" value="0">
@@ -74,27 +80,10 @@
 
             </div>
         </div>
-{{--            <textarea id="postText" rows="10"  class="input" name="title" placeholder="Описание"></textarea>--}}
         </div>
 
-{{--        <div class="form-control">--}}
-{{--            <span class="form-control__label">Медифайл</span>--}}
-{{--            <div data-media-file data-name="name[]" data-count="1" class="media-file">--}}
-{{--                    <div class="media-file__body">--}}
-{{--                        <label class="media-file__btn download-btn">--}}
-{{--                           <input data-media-add multiple type="file" class="download-btn__input">--}}
-{{--                           <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">--}}
-{{--                           <span class="download-btn__label">Загрузить фото</span>--}}
-{{--                        </label>--}}
-{{--                        <div data-media-list class="media-file__list">--}}
-
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--        </div>--}}
-
         <div class="form__bottom">
-            <button type="submit" class="btn btn--yellow">Добавить работу</button>
+            <button type="submit" class="btn btn--yellow">Добавить опыт</button>
         </div>
     </form>
 @endsection

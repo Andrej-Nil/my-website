@@ -1,9 +1,9 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Создание поста')
+@section('title', 'Добовление информации')
 
 @section('content')
-    <h1 class="panel-title">Добавление хобби</h1>
+    <h1 class="panel-title">Добовление информации</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -121,24 +121,7 @@
                     @error('vk')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
-
         </div>
-
-        {{--        <div class="form-control">--}}
-        {{--            <span class="form-control__label">Медифайл</span>--}}
-        {{--            <div data-media-file data-name="name[]" data-count="1" class="media-file">--}}
-        {{--                    <div class="media-file__body">--}}
-        {{--                        <label class="media-file__btn download-btn">--}}
-        {{--                           <input data-media-add multiple type="file" class="download-btn__input">--}}
-        {{--                           <img class="download-btn__icon" src="{{asset('panel-assets/img/icons/download-icon.svg')}}" alt="">--}}
-        {{--                           <span class="download-btn__label">Загрузить фото</span>--}}
-        {{--                        </label>--}}
-        {{--                        <div data-media-list class="media-file__list">--}}
-
-        {{--                        </div>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
-        {{--        </div>--}}
 
         <div class="form__bottom">
             <button type="submit" class="btn btn--yellow">Добавить данные</button>

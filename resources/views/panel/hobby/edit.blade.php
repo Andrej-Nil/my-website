@@ -1,9 +1,18 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редостирование поста')
+@section('title', 'Редактировать хобби')
 
 @section('content')
-    <h1 class="panel-title">Редостирование хобби</h1>
+    <div class="content-top">
+        <div class="breadcrumbs">
+            <a href="{{route('panel.hobbies')}}" class="breadcrumbs__link">Хобби</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Редактировать хобби</a>
+        </div>
+
+        <a href="{{route('panel.hobbies.create')}}" class="btn btn--yellow">Добавить хобби</a>
+    </div>
+    <h1 class="panel-title">Редактировать хобби</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка сохранения формы.'])
     @endif
@@ -16,9 +25,9 @@
         @method('PUT')
         <div class="form__body">
             <div class="form-control">
-                <label for="postTitle" class="form-control__label">Название</label>
+                <label for="title" class="form-control__label">Название</label>
                 <div class="form-control__body">
-                    <input id="postTitle" type="text" class="form-control__input input" name="title" value="{{$hobby['title']}}" placeholder="Название поста">
+                    <input id="title" type="text" class="form-control__input input" name="title" value="{{$hobby['title']}}" placeholder="Название поста">
                     @error('title')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
@@ -106,9 +115,9 @@
             </div>
 
             <div class="form-control">
-                <label for="postText" class="form-control__label">Текст</label>
+                <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="postText" rows="10"  class="input" name="text"  placeholder="Описание">{{$hobby['text']}}</textarea>
+                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{$hobby['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
 
@@ -164,12 +173,12 @@
         </div>
         <div class="form__bottom">
 
-            <button type="submit" form="deletePost" class="btn btn--red">Удалить</button>
+            <button type="submit" form="delete" class="btn btn--red">Удалить</button>
             <button type="submit" class="btn btn--yellow">Сохранить</button>
         </div>
 
     </form>
-    <form id="deletePost"  action="{{route('panel.hobbies.delete', $hobby['id'])}}" method="post">
+    <form id="delete"  action="{{route('panel.hobbies.delete', $hobby['id'])}}" method="post">
         @csrf
         @method('DELETE')
     </form>

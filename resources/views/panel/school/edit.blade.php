@@ -1,9 +1,17 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редотирование места обучения')
+@section('title', 'Редатирование учереждения')
 
 @section('content')
-    <h1 class="panel-title">Редотирование места обучения</h1>
+    <div class="content-top">
+        <div class="breadcrumbs">
+            <a href="{{route('panel.schools')}}" class="breadcrumbs__link">Образование</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Редатирование учереждения</a>
+        </div>
+        <a href="{{route('panel.schools.create')}}" class="btn btn--yellow">Добавить учереждение</a>
+    </div>
+    <h1 class="panel-title">Редатирование учереждения</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -88,8 +96,6 @@
             <button type="submit" form="delete" class="btn btn--red">Удалить</button>
             <button type="submit" class="btn btn--yellow">Сохранить</button>
         </div>
-
-
     </form>
     <form id="delete"  action="{{route('panel.schools.delete', $school['id'])}}" method="post">
         @csrf

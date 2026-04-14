@@ -9,8 +9,6 @@
         @include('panel.components.success-board')
     @endif
 
-
-
     <div class="content">
         <div class="content-top">
             <form action="{{route('panel.schools')}}" method="get" class="search-form">
@@ -71,11 +69,9 @@
                 </div>
             @empty
 
-                <p class="list__empty">Постов не найдено.</p>
+                <p class="list__empty">Учереждений не добавлено</p>
 
             @endforelse
-
-
 
         </div>
         @if(count($schoolList['links']) > 3 )

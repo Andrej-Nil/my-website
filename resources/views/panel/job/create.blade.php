@@ -1,17 +1,16 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Создание поста')
+@section('title', 'Добовить место работ')
 
 @section('content')
     <div class="content-top">
-
         <div class="breadcrumbs">
             <a href="{{route('panel.jobs')}}" class="breadcrumbs__link">Опыт работы</a>
             <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Добовление места работы</a>
+            <a class="breadcrumbs__link">Добовить место работ</a>
         </div>
     </div>
-    <h1 class="panel-title">Добовление места работы</h1>
+    <h1 class="panel-title">Добовить место работы</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -24,24 +23,25 @@
 
         <div class="form__body">
         <div class="form-control">
-            <label for="jobsTitle" class="form-control__label">Название</label>
+            <label for="title" class="form-control__label">Название</label>
             <div class="form-control__body">
-                <input id="jobsTitle" type="text" class="form-control__input input" name="title" value="{{old('title')}}" placeholder="Организация">
+                <input id="title" type="text" class="form-control__input input" name="title" value="{{old('title')}}" placeholder="Организация">
                 @error('title')<p class="form-control__error">{{$message}}</p>@enderror
             </div>
         </div>
 
             <div class="form-control">
-                <label for="jobsProfession" class="form-control__label">Должность</label>
+                <label for="profession" class="form-control__label">Должность</label>
                 <div class="form-control__body">
-                    <input id="jobsProfession" type="text" class="form-control__input input" name="profession" value="{{old('profession')}}" placeholder="Должность">
+                    <input id="profession" type="text" class="form-control__input input" name="profession" value="{{old('profession')}}" placeholder="Должность">
                     @error('profession')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
+
             <div class="form-control">
-                <label for="jobsStart" class="form-control__label">Начало</label>
+                <label for="start" class="form-control__label">Начало</label>
                 <div class="form-control__body">
-                    <input id="jobsStart" type="date" class="form-control__input input" name="start" value="{{old('start')}}">
+                    <input id="start" type="date" class="form-control__input input" name="start" value="{{old('start')}}">
                     @error('start')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
@@ -51,24 +51,24 @@
                 <div class="form-control__body">
                     <div class="checkbox">
                         <input type="hidden" name="is_current" value="0">
-                        <input data-blocking-input="jobsEnd" id="isCurrent" type="checkbox" class="input" name="is_current" value="1" @checked(old('is_current') == 1)>
+                        <input data-blocking-input="end" id="isCurrent" type="checkbox" class="input" name="is_current" value="1" @checked(old('is_current') == 1)>
                         @error('is_current')<p class="form-control__error">{{$message}}</p>@enderror
                     </div>
                 </div>
             </div>
 
             <div class="form-control">
-                <label for="jobsEnd" class="form-control__label">Окончание</label>
+                <label for="end" class="form-control__label">Окончание</label>
                 <div class="form-control__body">
-                    <input id="jobsEnd" type="date" class="form-control__input input" name="end" value="{{old('end')}}">
+                    <input id="end" type="date" class="form-control__input input" name="end" value="{{old('end')}}">
                     @error('end')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
 
             <div class="form-control">
-                <label for="jobsText" class="form-control__label">Текст</label>
+                <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="jobsText" rows="10"  class="input" name="text"  placeholder="Описание">{{old('text')}}</textarea>
+                    <textarea id="text" rows="10" class="input" name="text" placeholder="Описание">{{old('text')}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>

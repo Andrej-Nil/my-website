@@ -13,7 +13,6 @@
         <div class="content-top">
             <form action="{{route('panel.portfolios')}}" method="get" class="search-form">
 
-{{--                <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>--}}
                 <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>
                 <button class="search-form__btn">
                     <img src="{{asset('panel-assets/img/icons/search-icon.svg')}}" alt="" class="search-form__icon">
@@ -34,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить работу</a>
+            <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить опыт</a>
         </div>
 
 
@@ -78,15 +77,14 @@
                 </div>
             @empty
 
-                <p class="list__empty">Постов не найдено.</p>
+                <p class="list__empty">Портфолио пустое</p>
 
             @endforelse
 
-            {{--{{$jobList->links()}}--}}
 
         </div>
-{{--        @if(count($hobbyList['links']) > 3 )--}}
-{{--            @include('panel.components.pagination', ['paginate' => $hobbyList])--}}
-{{--        @endif--}}
+        @if(count($portfolioList['links']) > 3 )
+            @include('panel.components.pagination', ['paginate' => $hobbyList])
+        @endif
     </div>
 @endsection

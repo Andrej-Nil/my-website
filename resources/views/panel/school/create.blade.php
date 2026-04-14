@@ -1,8 +1,15 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Оброзование')
+@section('title', 'Добавить учреждение')
 
 @section('content')
+    <div class="content-top">
+        <div class="breadcrumbs">
+            <a href="{{route('panel.schools')}}" class="breadcrumbs__link">Образование</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Добавить учреждение</a>
+        </div>
+    </div>
     <h1 class="panel-title">Добавить учреждение</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
@@ -16,9 +23,9 @@
 
         <div class="form__body">
             <div class="form-control">
-                <label for="postTitle" class="form-control__label">Название</label>
+                <label for="title" class="form-control__label">Название</label>
                 <div class="form-control__body">
-                    <input id="postTitle" type="text" class="form-control__input input" name="title" value="{{old('title')}}" placeholder="Названия учреждение">
+                    <input id="title" type="text" class="form-control__input input" name="title" value="{{old('title')}}" placeholder="Названия учреждения">
                     @error('title')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
@@ -59,9 +66,9 @@
             </div>
 
             <div class="form-control">
-                <label for="jobsText" class="form-control__label">Приобретеные</label>
+                <label for="text" class="form-control__label">Описание</label>
                 <div class="form-control__body">
-                    <textarea id="jobsText" rows="10"  class="input" name="text"  placeholder="Приобретеные навыки">{{old('text')}}</textarea>
+                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{old('text')}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>

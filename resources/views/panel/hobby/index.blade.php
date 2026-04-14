@@ -1,6 +1,6 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Посты')
+@section('title', 'Хобби')
 
 @section('content')
     <h1 class="panel-title">Хобби</h1>
@@ -25,9 +25,10 @@
                 <span class="sorting__label">Сортировка</span>
 
                 <div class="sorting__select">
-{{--                    <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>--}}
-                    <span data-sorting-btn class="sorting__current">От А до Я</span>
+                    <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>
+
                     <div data-sorting-list class="sorting__list">
+                        <a href="{{route('panel.hobbies', ['search' => $search])}}" class="sorting__link">По умолчанию</a>
                         <a href="{{route('panel.hobbies', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
                         <a href="{{route('panel.hobbies', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
                         <a href="{{route('panel.hobbies', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
@@ -39,20 +40,31 @@
         </div>
 
 
-        <div class="list">
+        <div data-group data-sortable-list data-api="{{route('hobby.update.sort')}}" class="list sortable-list">
             {{--            <div class="list-head">--}}
             {{--                <p class="list-item__title">Название</p>--}}
+            <div data-sortable-loader class="sortable-loader">
+                <div class="sortable-loader__inner">
+                    <p class="sortable-loader__message">Произошла ошибка. Попробуйте еще раз.</p>
+                    <button data-loader-close class="btn btn--yellow">Закрыть</button>
+                </div>
+            </div>
 
-            {{--                --}}
             {{--            </div>--}}
             @forelse($hobbyList['data'] as $hobby)
-                <div class="list-item">
-                    <p class="list-item__title">
+                <div draggable="true" data-sortable-item="{{$hobby['id']}}" class="list-item">
+                 <span data-display-switcher="{{$hobby['id']}}" data-api="{{route('hobby.update.display')}}" class="list-item__btn{{$hobby['is_display'] ? ' active' : '' }} " title="Редоктировать">
+                    <span class="list-item__slash"></span>
+                    <img src="{{asset('panel-assets/img/icons/eye.svg')}}"
+                         class="list-item__icon list-item__icon--eye"
+                         alt="">
+                    </span>
+                    <p class="list-item__title list-item__title--grab">
                         <span class="list-item__name">{{$hobby['title']}}</span>
                     </p>
-{{--                    <a href="{{route('post.show', $hobby['id'])}}" target="_blank" class="list-item__btn" title="Открыть на сайте">--}}
-{{--                        <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >--}}
-{{--                    </a>--}}
+
+
+
                     <a href="{{route('panel.hobbies.edit', $hobby['id'])}}" class="list-item__btn" title="Редоктировать">
                         <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
                     </a>
@@ -66,10 +78,9 @@
                 </div>
             @empty
 
-                <p class="list__empty">Хобби не найдено.</p>
+                <p class="list__empty">Портфолио пустое</p>
 
             @endforelse
-
 
 
         </div>

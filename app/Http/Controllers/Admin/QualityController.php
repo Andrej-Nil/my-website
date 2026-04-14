@@ -112,8 +112,16 @@ class QualityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Quality $quality)
+    public function destroy($id)
     {
-        //
+        $quality = QualityRepository::getQualityById($id);
+
+        if(!$quality){
+            abort(404);
+        }
+
+        QualityRepository::deleteQuality($id);
+
+        return to_route('panel.qualities')->with('success', 'Кочество ' . "'" . $quality['title'] . "'" . ' удалено');
     }
 }
