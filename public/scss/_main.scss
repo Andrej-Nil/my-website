@@ -24,6 +24,10 @@ body{
     margin: 0 auto;
 }
 
+.container--small{
+    max-width: 640px;
+}
+
 .wrapper {
     display: flex;
     flex: 1 0 auto;
@@ -36,8 +40,6 @@ body{
 }
 
 .scroll{
-    //scrollbar-width: thin;
-    //scrollbar-color: rgba(255,255,255,1) rgba(155,155,155,1);
     &::-webkit-scrollbar{
         width: 4px
     }

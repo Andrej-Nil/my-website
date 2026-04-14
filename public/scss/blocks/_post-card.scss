@@ -1,35 +1,36 @@
 .post-card{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    border: 1px solid #555;
+    transition: 0.2s linear;
+    border: 2px solid #ccc;
+    &:hover{
+        box-shadow: 0 0 10px 5px #fff;
+        border: 2px solid #fff;
+    }
+
+    &:hover .post-card__title{
+        color: #fff;
+    }
 }
 
-
-.post-card__content{
+.post-card__link{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 10px;
+    height: 100%;
 }
 
 .post-card__img{
     width: 100%;
-    height: 250px;
+    height: 320px;
     object-fit: cover;
     object-position: center;
+    margin-bottom: auto;
 }
 
 .post-card__title{
-    font-size: 20px;
-}
-
-
-.post-card__link{
-    font-weight: 600;
-    transition: 0.2s ease-in-out;
-    &:hover{
-        margin-left: 5px;
-    }
+    margin-top: auto;
+    padding: 0 15px 20px;
+    font-size: 18px;
+    color: #ccc;
+    transition: 0.2s linear;
 }
 
