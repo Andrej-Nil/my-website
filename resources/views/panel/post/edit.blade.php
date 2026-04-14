@@ -1,6 +1,6 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редостирование поста')
+@section('title', 'Редастировать пост')
 
 @section('content')
     <div class="content-top">
@@ -8,12 +8,12 @@
         <div class="breadcrumbs">
             <a href="{{route('panel.posts')}}" class="breadcrumbs__link">Посты</a>
             <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редатирование поста</a>
+            <a class="breadcrumbs__link">Редастировать пост</a>
         </div>
         <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Создать новый пост</a>
     </div>
 
-    <h1 class="panel-title">Редатирование поста</h1>
+    <h1 class="panel-title">Редастировать пост</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка сохранения формы.'])
     @endif

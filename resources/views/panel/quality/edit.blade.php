@@ -1,9 +1,17 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редотирование качества')
+@section('title', 'Редактировать качество')
 
 @section('content')
-    <h1 class="panel-title">Редотирование места обучения</h1>
+    <div class="content-top">
+        <div class="breadcrumbs">
+            <a href="{{route('panel.qualities')}}" class="breadcrumbs__link">Качества</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Редактировать качество</a>
+        </div>
+        <a href="{{route('panel.qualities.create')}}" class="btn btn--yellow">Добавить качество</a>
+    </div>
+    <h1 class="panel-title">Редактировать качество</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -22,7 +30,6 @@
                     @error('title')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
-
 
             <div class="form-control">
                 <span class="form-control__label">Тип</span>
@@ -54,7 +61,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="form__bottom">
             <button type="submit" form="delete" class="btn btn--red">Удалить</button>

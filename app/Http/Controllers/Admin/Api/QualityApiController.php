@@ -17,7 +17,7 @@ class QualityApiController extends BaseController
         }
 
         foreach ($data['id_list'] as $key=>$id) {
-            $result = SchoolRepository::updateSort($id, $key);
+            $result = QualityRepository::updateSort($id, $key);
             if(!$result){
                 return  $this->sendError('Ошибка');
             }

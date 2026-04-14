@@ -1,9 +1,16 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Оброзование')
+@section('title', 'Добавить качество')
 
 @section('content')
-    <h1 class="panel-title">Добавить учреждение</h1>
+    <div class="content-top">
+        <div class="breadcrumbs">
+            <a href="{{route('panel.qualities')}}" class="breadcrumbs__link">Качества</a>
+            <span class="breadcrumbs__slash">\</span>
+            <a class="breadcrumbs__link">Добавить качество</a>
+        </div>
+    </div>
+    <h1 class="panel-title">Добавить качество</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif

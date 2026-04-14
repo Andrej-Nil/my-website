@@ -132,13 +132,13 @@ class JobController extends Controller
         return to_route('panel.jobs')->with('success', 'Место работы ' . "'" . $job['title'] . "'" . ' удалено');
     }
 
-    public function search(SearchRequest $request) {
-//dd($request->validated());
-        $data = $request->validated();
-        $jobList = JobRepository::getPagination($data);
-        return  view('panel.job.index', [
-            'jobList' => $jobList,
-            'search' => $data['search']
-        ]);
-    }
+//    public function search(SearchRequest $request) {
+////dd($request->validated());
+//        $data = $request->validated();
+//        $jobList = JobRepository::getPagination($data);
+//        return  view('panel.job.index', [
+//            'jobList' => $jobList,
+//            'search' => $data['search']
+//        ]);
+//    }
 }

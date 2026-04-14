@@ -31,7 +31,7 @@ class HobbyController extends Controller
         if(isset($data['sort'])){
             $validatedData['sort'] = SortDataHelper::handle($data['sort']);
         } else {
-            $validatedData['sort'] = ['key' => 'title', 'type' => 'ASC', 'label' => 'От А до Я', 'name' => 'a-up'];
+            $validatedData['sort'] = ['key' => 'sort', 'type' => 'ASC', 'label' => 'По умолчанию', 'name' => null];
         }
 
         if($validatedData['sort']['name']){
@@ -43,7 +43,14 @@ class HobbyController extends Controller
         }
 
         $hobbyList = HobbyRepository::getPagination($validatedData);
-        return view('panel.hobby.index', ['hobbyList' => $hobbyList, 'search' => $search]);
+        return view('panel.hobby.index', [
+                'hobbyList' => $hobbyList,
+                'search' => $search,
+                'data' => $validatedData,
+                'currentSortTitle' => $validatedData['sort']['label']
+            ]
+
+        );
     }
 
     /**

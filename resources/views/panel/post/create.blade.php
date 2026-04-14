@@ -66,8 +66,7 @@
                     <div class="checkbox">
                         <label for="display1" class="form-control__label">Опубликовать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1" checked>
-                    </div>
-    {{--                @dd(old('is_display'))--}}
+
                     <div class="checkbox">
                         <label for="display2" class="form-control__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0">
@@ -75,7 +74,6 @@
 
                 </div>
             </div>
-{{--            <textarea id="postText" rows="10"  class="input" name="title" placeholder="Описание"></textarea>--}}
         </div>
         <div class="form__bottom">
             <button type="submit" class="btn btn--yellow">Создать пост</button>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('mini_photo')->nullable();
             $table->json('photo_list')->nullable();
             $table->text('text')->nullable();
+            $table->integer('sort')->default(0);
             $table->boolean('is_display')->default(true);
             $table->timestamps();
         });

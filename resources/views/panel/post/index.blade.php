@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Добавить работу</a>
+            <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Добавить пост</a>
         </div>
 
 
@@ -79,7 +79,7 @@
                 </div>
             @empty
 
-                <p class="list__empty">Постов не найдено.</p>
+                <p class="list__empty">Постов не найдено</p>
 
             @endforelse
 
