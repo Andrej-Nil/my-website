@@ -21,6 +21,13 @@ class PostRepository
         toArray();
     }
 
+    public static function getPaginationByIsDisplay(int $isDisplay = 1, int $count = 20){
+        return Post::where('is_display', $isDisplay)->
+        orderBy('sort', 'ASC')->
+        paginate($count)->
+        toArray();
+    }
+
     public static function createPost(array $data):array{
         return Post::create($data)->toArray();
     }

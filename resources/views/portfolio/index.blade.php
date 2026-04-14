@@ -16,7 +16,7 @@
 
         <h1 class="page-title page-title--white">Портфолио</h1>
 
-            <div class="portfolio">
+            <div class="grid">
                 @if($portfolioList['data'])
                 <div class="portfolio__list">
                     @foreach($portfolioList['data'] as $portfolio)

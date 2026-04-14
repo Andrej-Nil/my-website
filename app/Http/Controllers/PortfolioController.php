@@ -11,7 +11,7 @@ class PortfolioController extends Controller
     {
 
         $admin = UserInfoRepository::getUserInfoByFirst();
-        $portfolioList = PortfolioRepository::getPagination();
+        $portfolioList = PortfolioRepository::getPaginationByIsDisplay();
         return view('portfolio.index', [
             'admin' => $admin,
             'portfolioList' => $portfolioList

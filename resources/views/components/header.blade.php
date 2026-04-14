@@ -4,12 +4,8 @@
         <a href="{{route('resume')}}" class="main-nav-item">Резюме</a>
         <a href="{{route('portfolios')}}" class="main-nav-item">Партфолио</a>
         <a href="{{route('hobbies')}}" class="main-nav-item">Хобби</a>
+        <a href="{{route('posts')}}" class="main-nav-item">Посты</a>
 
-
-{{--        <a href="{{route('resume')}}" class="main-nav-item">Вуыс</a>--}}
-{{--        <a href="{{route('about')}}" class="main-nav-item">авыаыва ыаывавыа</a>--}}
-{{--        <a href="{{route('post.index')}}" class="main-nav-item">Бываывалок</a>--}}
-{{--        <a href="{{route('contact')}}" class="main-nav-item">авываыва</a>--}}
         @if(!(\Illuminate\Support\Facades\Auth::check()))
             <a href="{{route('login')}}" class="main-nav-item">Вход</a>
         @else
