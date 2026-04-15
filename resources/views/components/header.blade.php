@@ -6,7 +6,7 @@
         <a href="{{route('hobbies')}}" class="main-nav-item">Хобби</a>
         <a href="{{route('posts')}}" class="main-nav-item">Посты</a>
 
-        @if(!(\Illuminate\Support\Facades\Auth::check()))
+        @if(!(Auth::check()))
             <a href="{{route('login')}}" class="main-nav-item">Вход</a>
         @else
             <a class="main-nav-item" href="{{route('panel')}}">Панель</a>

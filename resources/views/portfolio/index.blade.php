@@ -15,7 +15,11 @@
         </div>
 
         <h1 class="page-title page-title--white">Портфолио</h1>
-
+        @if((Auth::check()))
+            <div class="admin-links">
+                <a href="{{route('panel.portfolios')}}" class="admin-links__btn btn">Редактировать партфолио</a>
+            </div>
+        @endif
             <div class="grid">
                 @if($portfolioList['data'])
                 <div class="portfolio__list">

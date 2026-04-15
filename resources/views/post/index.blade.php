@@ -12,6 +12,11 @@
         </div>
 
         <h1 class="page-title page-title--white">Посты</h1>
+        @if((Auth::check()))
+            <div class="admin-links">
+                <a href="{{route('panel.posts')}}" class="admin-links__btn btn">Редактировать посты</a>
+            </div>
+        @endif
         @if($postList['data'])
             <div class="grid col-4">
                 @foreach($postList['data'] as $post)

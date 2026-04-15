@@ -5,6 +5,11 @@
 @section('content')
 
         <div id="hobbyPage" class="hobby-page">
+            @if((Auth::check()))
+                <div class="admin-links">
+                    <a href="{{route('panel.hobbies')}}" class="admin-links__btn btn">Редактировать хобби</a>
+                </div>
+            @endif
             <div class="hobby-page__content">
 
                 @foreach($hobbyList as $hobby)
@@ -26,8 +31,6 @@
 {{--                                        <img data-gallery-item="img" data-url="{{$photoUrl}}" src="{{$photoUrl}}" alt="" class="hobby-slider-slide__img">--}}
 {{--                                    </div>--}}
                                 @endforeach
-
-
                             </div>
 
                             @endif
