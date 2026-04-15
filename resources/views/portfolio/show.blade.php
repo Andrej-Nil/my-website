@@ -17,6 +17,11 @@
             <div class="portfolio-page">
                 <div class="portfolio-page__content">
                     <h1 class="page-title page-title--white">{{$portfolio['title']}}</h1>
+                    @if((Auth::check()))
+                        <div class="admin-links">
+                            <a href="{{route('panel.portfolios.edit', $portfolio['id'])}}" class="admin-links__btn btn">Редактировать пример работы</a>
+                        </div>
+                    @endif
                     <p class="portfolio-page__text">{{$portfolio['text']}}</p>
                     <div class="portfolio-page__bottom">
                         <a href="https://www.google.com" target="_blank" class="portfolio-page__btn btn">Ссылка на работу</a>

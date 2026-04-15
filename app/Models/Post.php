@@ -22,6 +22,7 @@ class Post extends Model
 
     protected $appends = [
         'photo_list_url',
+        'create_date'
     ];
 
     public function getPhotoListUrlAttribute() {
@@ -38,6 +39,16 @@ class Post extends Model
         }
 
         return $list;
+    }
+
+    public function getCreateDateAttribute() {
+
+
+        if($this->created_at) {
+            return explode(' ', $this->created_at)[0];
+        }
+
+        return null;
     }
 
 }
