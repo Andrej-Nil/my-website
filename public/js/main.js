@@ -80,7 +80,27 @@ class Service {
     }
 }
 
+class Container {
+    constructor(selector, ParentClass) {
+        this.selector = selector;
+        this.$elList = document.querySelectorAll(this.selector);
+        this.ParentClass = ParentClass;
+        this.list = [];
+        this.init()
+    }
 
+
+    init = () => {
+        if(!this.$elList.length) return;
+        this.$elList.forEach(($el) => {
+            this.set($el);
+        })
+    }
+
+    set = ($el) => {
+        this.list.push(new this.ParentClass($el));
+    }
+}
 
 class MainFormService extends Service {
     constructor(api) {
@@ -98,28 +118,6 @@ class MainFormService extends Service {
                 }
             }
         )
-    }
-}
-
-class Container {
-    constructor(selector, ParentClass) {
-        this.selector = selector;
-        this.$elList = document.querySelectorAll(this.selector);
-        this.ParentClass = ParentClass;
-        this.list = [];
-        this.init()
-    }
-
-
-    init = () => {
-      if(!this.$elList.length) return;
-        this.$elList.forEach(($el) => {
-            this.set($el);
-        })
-    }
-
-    set = ($el) => {
-        this.list.push(new this.ParentClass($el));
     }
 }
 
@@ -729,6 +727,141 @@ class Gallery {
     }
 }
 
+class PostService extends Service{
+    constructor(id) {
+        super();
+        this.id = id;
+        this.apiReaction = '/api/reaction';
+        // this.apiLike = '/api/reaction/like';
+        // this.apiDislike = '/api/reaction/dislike';
+    }
+
+    like = async (postId) => {
+        const formData = new FormData();
+        formData.append('post_id', postId);
+        formData.append('reaction', '1');
+        return this.post(
+            this.apiReaction,
+            {
+                data: formData,
+                headers: {
+                    "X-CSRF-Token": this._token,
+                    "accept": "application/json"
+                }
+            }
+        )
+    }
+
+    dislike = async (postId) => {
+        const formData = new FormData();
+        formData.append('post_id', postId);
+        formData.append('reaction', '2');
+        return this.post(
+            this.apiReaction,
+            {
+                data: formData,
+                headers: {
+                    "X-CSRF-Token": this._token,
+                    "accept": "application/json"
+                }
+            }
+        )
+    }
+}
+
+class Post {
+    constructor() {
+        this.$post = document.querySelector('[data-post]');
+
+        this.init();
+    }
+
+    init = () => {
+        if (!this.$post) return;
+
+        this.postId = this.$post.dataset.post;
+
+        this.$likeBtn = this.$post.querySelector('[data-like]');
+
+        this.$countLike = this.$post.querySelector('[data-like-count]');
+
+        this.$dislikeBtn = this.$post.querySelector('[data-dislike]');
+
+        this.$countDisLike = this.$post.querySelector('[data-dislike-count]');
+
+        this.service = new PostService(this.postId);
+
+        this.listeners();
+
+    }
+
+    setReactionCount = (activityPost) => {
+        this.$countLike.innerHTML = activityPost.like_count;
+        this.$countDisLike.innerHTML = activityPost.dislike_count;
+
+    }
+
+    reactionClear = () => {
+        this.$likeBtn.classList.remove('active');
+        this.$dislikeBtn.classList.remove('active');
+    }
+
+    reactionLike = () => {
+        this.$likeBtn.classList.add('active');
+    }
+
+    reactionDislike = () => {
+        this.$dislikeBtn.classList.add('active');
+    }
+
+    toggleReaction = (type) => {
+        this.reactionClear();
+        if(type === 1){
+            this.reactionLike();
+        } else if(type === 2){
+            this.reactionDislike();
+        }
+    }
+
+    like = async () => {
+        const rez = await this.service.like(this.postId);
+        if(rez.success){
+            this.toggleReaction(rez.data.user_reaction);
+            this.setReactionCount(rez.data.activityPost);
+        } else{
+
+        }
+    }
+
+    dislike = async () => {
+        const rez = await this.service.dislike(this.postId);
+        if(rez.success){
+            this.toggleReaction(rez.data.user_reaction);
+
+            this.setReactionCount(rez.data.activityPost);
+        } else{
+
+        }
+    }
+
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-like]')){
+            this.like()
+        }
+
+        if(e.target.closest('[data-dislike]')){
+            this.dislike()
+        }
+    }
+
+
+    listeners = () => {
+        this.$post.addEventListener('click', this.clickHandler);
+    }
+
+}
+
 const frame = new Frame();
 
 const frameForm = new MainForm();
@@ -744,4 +877,6 @@ const galleryContainer = new Container('[data-gallery]', Gallery);
 const groupContainer = new Container('[data-group]', Group);
 
 const hobbyPage = new HobbyPage();
+
+const post = new Post();
 

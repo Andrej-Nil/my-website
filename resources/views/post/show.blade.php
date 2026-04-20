@@ -3,6 +3,8 @@
 @section('title', 'Посты')
 @section('bg', 'dark')
 @section('content')
+
+
     <div class="container container--small">
 
         <div class="breadcrumbs breadcrumbs--white">
@@ -13,14 +15,13 @@
             <a class="breadcrumbs__link">{{$post['title']}}</a>
         </div>
 
-
 {{--        @if((Auth::check()))--}}
 {{--            <div class="admin-links">--}}
 {{--                <a href="{{route('panel.posts.edit', $post['id'])}}" class="admin-links__btn btn">Редактировать пост</a>--}}
 {{--            </div>--}}
 {{--        @endif--}}
 
-        <div class="post">
+        <div data-post="{{$post['id']}}" class="post">
             <div class="post__top">
                 <h1 class="post__title page-title page-title--white">{{$post['title']}}</h1>
                 <div class="post-date">
@@ -47,24 +48,21 @@
             <div class="post__bottom">
                 <div class="post__reaction">
                     <div class="post-activity-item">
-                        <img src="{{asset('img/icon/like.svg')}}" alt="" class="post-activity-item__icon pointer">
-                        <span class="post-activity-item__count">45645</span>
+                        <span data-like class="post-activity-item__icon reaction pointer {{$reactionUser == 1 ? 'active' : ''}}"></span>
+                        <span data-like-count class="post-activity-item__count">{{$activityTotal['like_count']}}</span>
                     </div>
 
                     <div class="post-activity-item">
-                        <img src="{{asset('img/icon/like.svg')}}" alt="" class="post-activity-item__icon pointer dislike">
-                        <span class="post-activity-item__count">5676576</span>
+                        <span data-dislike class="post-activity-item__icon reaction dislike pointer {{$reactionUser == 2 ? 'active' : ''}}"></span>
+                        <span data-dislike-count class="post-activity-item__count">{{$activityTotal['dislike_count']}}</span>
                     </div>
                 </div>
 
                 <div class="post-activity-item">
                     <img src="{{asset('img/icon/eye.svg')}}" alt="" class="post-activity-item__icon">
-                    <span class="post-activity-item__count">576567</span>
+                    <span class="post-activity-item__count">{{$activityTotal['viewing_count']}}</span>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 @endsection

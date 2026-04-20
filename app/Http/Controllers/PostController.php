@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Repositories\ActivityWithPostRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\UserInfoRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -22,19 +23,46 @@ class PostController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $admin = UserInfoRepository::getUserInfoByFirst();
         $post = PostRepository::getPostById($id);
-
         if(!$post){
             abort(404);
         }
-        return view('post.show', [
-                'admin' => $admin,
-                'post' => $post
-            ]
-        );
+//
+        $cookieId = $request->cookie('user_cookie_id');
+//
+        if(!$cookieId){
+            $cookieId = (string) Str::uuid();
+        }
+
+
+        $activityUser = ActivityWithPostRepository::getActivityWithPostByPostIdAndCookieId($id, $cookieId);
+
+        if(!$activityUser){
+            $activityUser = ActivityWithPostRepository::createActivityWithPost([
+                'cookie_id' => $cookieId,
+                'ip_address' => $request->ip(),
+                'post_id' => $post['id'],
+                'reaction' => 0,
+                'viewing' => 1
+            ]);
+        }
+
+//        $viewingCount = ActivityWithPostRepository::getActivityWithPostByViewingCount($post['id']);
+
+        $activityTotal = ActivityWithPostRepository::getActivityWithPostByPostId($post['id']);
+
+//dd($activityTotal);
+
+        return response()->view('post.show',[
+            'admin' => $admin,
+            'post' => $post,
+            'reactionUser' => $activityUser['reaction'],
+//            'viewingCount' => $viewingCount,
+            'activityTotal' => $activityTotal,
+        ])->cookie('user_cookie_id', $cookieId, 525600);
     }
 
 
