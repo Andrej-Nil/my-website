@@ -53,10 +53,18 @@
 }
 
 .post-activity-item__icon{
-    width: 20px;
-    height: 20px;
-    &.dislike{
+    width: 26px;
+    height: 26px;
+
+    &.reaction{
+        background: url('../img/icon/like.svg');
+    }
+    &.reaction.dislike{
         transform: rotate(180deg);
+    }
+
+    &.reaction.active{
+        background: url('../img/icon/like-active.svg');
     }
 }
 

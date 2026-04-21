@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('callback', [\App\Http\Controllers\Api\CallbackController::class, 'callback'])->name('callback');
+
+Route::post('api/reaction', [\App\Http\Controllers\Api\ActivityWithPostApiController::class, 'reaction'])->name('api.reaction');
+Route::post('api/reaction/like', [\App\Http\Controllers\Api\ActivityWithPostApiController::class, 'like'])->name('api.reaction.like');
+Route::post('api/reaction/dislike', [\App\Http\Controllers\Api\ActivityWithPostApiController::class, 'dislike'])->name('api.reaction.dislike');
 //Route::middleware('guest')->group(function (){
 //    Route::get('register', [\App\Http\Controllers\User\RegisterController::class, 'create'])->name('register');
 //    Route::post('register', [\App\Http\Controllers\User\RegisterController::class, 'store'])->name('user.store');

@@ -43,12 +43,16 @@ class Post extends Model
 
     public function getCreateDateAttribute() {
 
-
         if($this->created_at) {
             return explode(' ', $this->created_at)[0];
         }
 
         return null;
     }
+
+    public function reactions() {
+        return $this->hasMany(ActivityWithPost::class, 'post_id');
+    }
+
 
 }
