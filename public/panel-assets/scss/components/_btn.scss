@@ -1,3 +1,9 @@
+.btn-list{
+    display: flex;
+    gap: 20px;
+}
+
+
 .btn{
     background: #ccc;
     padding: 10px 15px;
@@ -10,7 +16,7 @@
     &.btn--yellow{
         background: #f8f3c0;
         &:hover{
-            background: #f6ed99;
+            background: #faeb88;
         }
     }
 
@@ -18,6 +24,13 @@
         background: #f8c0c0;
         &:hover{
             background: #f69999;
+        }
+    }
+
+    &.btn--blue{
+        background: #c0d0f8;
+        &:hover{
+            background: #82a6f8;
         }
     }
 }
