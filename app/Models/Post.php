@@ -50,4 +50,9 @@ class Post extends Model
         return null;
     }
 
+    public function reactions() {
+        return $this->hasMany(ActivityWithPost::class, 'post_id');
+    }
+
+
 }

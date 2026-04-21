@@ -22,7 +22,18 @@ class PostRepository
     }
 
     public static function getPaginationByIsDisplay(int $isDisplay = 1, int $count = 20){
-        return Post::where('is_display', $isDisplay)->
+        return Post::with('reactions')->withCount([
+                'reactions as likes_count' => function ($query) {
+                $query->where('reaction', '1');
+            },
+                'reactions as dislikes_count' => function ($query) {
+                $query->where('reaction', '2');
+            },
+                'reactions as viewing_count' => function ($query) {
+                $query->where('viewing', '1');
+            },
+
+        ])->where('is_display', $isDisplay)->
         orderBy('sort', 'ASC')->
         paginate($count)->
         toArray();
@@ -32,15 +43,27 @@ class PostRepository
         return Post::create($data)->toArray();
     }
 
-    public static function getPostById(int $id):array{
-        $item = Post::find($id);
+    public static function getPostById(int $id, $cookieId = ''):array{
+        $item = Post::withCount([
+            'reactions as likes_count' => function ($query) {
+                $query->where('reaction', '1');
+            },
+            'reactions as dislikes_count' => function ($query) {
+                $query->where('reaction', '2');
+            },
+            'reactions as viewing_count' => function ($query) {
+                $query->where('viewing', '1');
+            },
+            'reactions as cookie_id' => function ($query) use ($cookieId) {
+                $query->where('cookie_id', $cookieId);
+            }
+        ])->find($id);
         return $item ? $item->toArray() : [];
     }
 
     public static function updatePost(int $id, array $data):bool{
         return Post::where('id', $id)->update($data);
     }
-
 
     public static function deletePost(int $id):bool{
         return Post::where('id', $id)->delete();

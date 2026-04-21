@@ -13,13 +13,49 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $userCookieId = $request->cookie('user_cookie_id');
         $admin = UserInfoRepository::getUserInfoByFirst();
         $postList = PostRepository::getPaginationByIsDisplay();
+
+        foreach ($postList['data'] as $key => $post){
+            $postList['data'][$key]['user_reaction'] = 0;
+            foreach ($post['reactions'] as $reaction) {
+                if($reaction['cookie_id'] === $userCookieId){
+                    $postList['data'][$key]['user_reaction'] = $reaction['reaction'];
+                }
+            }
+        }
+
+
+
+
+
+//        foreach ($postList as $post) {
+//            $allReactions = $post->reactions;
+//        }
+
+//        dd($allReactions);
+
+//        $postList = Post::withCount([
+//            'reactions as likes_count' => function ($query) {
+//                $query->where('reaction', 1);
+//            },
+//            'reactions as dislikes_count' => function ($query) {
+//                $query->where('reaction', 2);
+//            },
+//            'reactions as view_count' => function ($query) {
+//        $query->where('reaction', 2);
+//    }
+//        ])->get();
+
+//        dd($postList);
         return view('post.index', [
             'admin' => $admin,
             'postList' => $postList,
+            'userCookieId' => $userCookieId
         ]);
     }
 
@@ -27,6 +63,7 @@ class PostController extends Controller
     {
         $admin = UserInfoRepository::getUserInfoByFirst();
         $post = PostRepository::getPostById($id);
+
         if(!$post){
             abort(404);
         }
@@ -52,7 +89,7 @@ class PostController extends Controller
 
 //        $viewingCount = ActivityWithPostRepository::getActivityWithPostByViewingCount($post['id']);
 
-        $activityTotal = ActivityWithPostRepository::getActivityWithPostByPostId($post['id']);
+//        $activityTotal = ActivityWithPostRepository::getActivityWithPostByPostId($post['id']);
 
 //dd($activityTotal);
 
@@ -60,8 +97,6 @@ class PostController extends Controller
             'admin' => $admin,
             'post' => $post,
             'reactionUser' => $activityUser['reaction'],
-//            'viewingCount' => $viewingCount,
-            'activityTotal' => $activityTotal,
         ])->cookie('user_cookie_id', $cookieId, 525600);
     }
 

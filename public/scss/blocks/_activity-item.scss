@@ -1,0 +1,29 @@
+
+.activity-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.activity-item__icon{
+    width: 26px;
+    height: 26px;
+
+    &.reaction{
+        background: url('../img/icon/like.svg');
+    }
+    &.reaction.dislike{
+        transform: rotate(180deg);
+    }
+
+    &.reaction.active{
+        background: url('../img/icon/like-active.svg');
+    }
+}
+
+.activity-item__count{
+    color: #cccccc;
+    font-size: 14px;
+}
+
+

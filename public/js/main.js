@@ -770,8 +770,8 @@ class PostService extends Service{
 }
 
 class Post {
-    constructor() {
-        this.$post = document.querySelector('[data-post]');
+    constructor($post) {
+        this.$post = $post;
 
         this.init();
     }
@@ -878,5 +878,8 @@ const groupContainer = new Container('[data-group]', Group);
 
 const hobbyPage = new HobbyPage();
 
-const post = new Post();
+// const post = new Post();
+
+
+const postContainer = new Container('[data-post]', Post)
 

@@ -20,17 +20,36 @@
         @if($postList['data'])
             <div class="grid col-4">
                 @foreach($postList['data'] as $post)
-                    <div class="post-card">
+                    <div data-post="{{$post['id']}}" class="post-card">
+                        <div class="post-card__content">
                         <a class="post-card__link" href="{{route('posts.show', $post['id'])}}">
-{{--                            <div class="post-card__content">--}}
-                                <img src="{{$post['photo_list_url'][0]}}" alt="{{$post['title']}}" class="post-card__img">
-
-                                <p class="post-card__title">
-                                    {{$post['title']}}
-                                </p>
-
-{{--                            </div>--}}
+                            <img src="{{$post['photo_list_url'][0]}}" alt="{{$post['title']}}" class="post-card__img">
+                            <p class="post-card__title">
+                                {{$post['title']}}
+                            </p>
                         </a>
+
+                            <div class="post-card__bottom">
+                                <div class="post-card__reaction">
+                                    <div class="activity-item">
+                                        <span data-like class="activity-item__icon reaction pointer {{$post['user_reaction'] == 1 ? 'active' : ''}}"></span>
+                                        <span data-like-count class="activity-item__count">{{$post['likes_count']}}</span>
+                                    </div>
+
+                                    <div class="post-activity-item">
+                                        <span data-dislike class="activity-item__icon reaction dislike pointer {{$post['user_reaction'] == 2 ? 'active' : ''}}"></span>
+                                        <span data-dislike-count class="activity-item__count">{{$post['dislikes_count']}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="post-activity-item">
+                                    <img src="{{asset('img/icon/eye.svg')}}" alt="" class="activity-item__icon">
+                                    <span class="activity-item__count">{{$post['viewing_count']}}</span>
+                                </div>
+                            </div>
+
+                            </div>
+
                     </div>
                 @endforeach
 
