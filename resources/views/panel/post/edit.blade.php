@@ -10,10 +10,15 @@
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Редастировать пост</a>
         </div>
-        <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Создать новый пост</a>
+
+        <div class="btn-list">
+            <a href="{{route('posts.show', $post['id'])}}" target="_blank"  type="submit" class="btn btn--blue">Просмотр</a>
+            <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Создать новый пост</a>
+        </div>
+
     </div>
 
-    <h1 class="panel-title">Редастировать пост</h1>
+    <h1 class="panel-title">Редактировать пост</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка сохранения формы.'])
     @endif

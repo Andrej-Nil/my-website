@@ -15,11 +15,11 @@
             <a class="breadcrumbs__link">{{$post['title']}}</a>
         </div>
 
-{{--        @if((Auth::check()))--}}
-{{--            <div class="admin-links">--}}
-{{--                <a href="{{route('panel.posts.edit', $post['id'])}}" class="admin-links__btn btn">Редактировать пост</a>--}}
-{{--            </div>--}}
-{{--        @endif--}}
+        @if((Auth::check()))
+            <div class="admin-links">
+                <a href="{{route('panel.posts.edit', $post['id'])}}" class="admin-links__btn btn">Редактировать пост</a>
+            </div>
+        @endif
 
         <div data-post="{{$post['id']}}" class="post">
             <div class="post__top">
@@ -32,7 +32,39 @@
             <div class="post__media">
                 @if($post['photo_list_url'])
                     @if(count($post['photo_list_url']) > 1 )
+                        <div id="postSlider" class="post-slider">
+                            <div class="post-slider__content">
+                                <span data-prev class="post-slider-arrow prev">
+                                    <span class="post-slider-arrow__circle"></span>
+                                </span>
+                                <div data-track class="post-slider__track">
+                                    <div data-slide class="post-slide">
+                                        <img src="https://img.freepik.com/free-psd/majestic-elephant-isolated_23-2151857814.jpg?semt=ais_hybrid" alt="" class="post-slide__content">
+                                    </div>
 
+                                    <div data-slide class="post-slide">
+                                        <img src="https://i.pinimg.com/736x/01/81/45/01814531cc31c8414975d9ea0b67bf71.jpg" alt="" class="post-slide__content">
+                                    </div>
+
+                                    <div data-slide class="post-slide">
+                                        <img src="https://img.freepik.com/free-photo/autumn-landscape-forestry-road_23-2151843655.jpg" alt="" class="post-slide__content">
+                                    </div>
+
+                                    <div data-slide class="post-slide">
+                                        <img src="https://img.freepik.com/free-vector/colorful-butterfly-girl-cartoon-illustration_1308-168808.jpg?semt=ais_hybrid&w=740&q=80" alt="" class="post-slide__content">
+                                    </div>
+                                </div>
+                                <span data-next class="post-slider-arrow next">
+                                    <span class="post-slider-arrow__circle"></span>
+                                </span>
+                            </div>
+                            <div class="post-slider-dots">
+                                <span data-dot class="post-slider-dot active"></span>
+                                <span data-dot class="post-slider-dot"></span>
+                                <span data-dot class="post-slider-dot"></span>
+                                <span data-dot class="post-slider-dot"></span>
+                            </div>
+                        </div>
                     @else
                         <img src="{{$post['photo_list_url'][0]}}" alt="{{$post['title']}}" class="post__img">
                     @endif
