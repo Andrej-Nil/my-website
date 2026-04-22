@@ -248,27 +248,6 @@ class MainForm {
     }
 
 }
-//
-// class MainTab{
-//     constructor() {
-//         this.$tabList = document.querySelectorAll('[data-main-frame-tab]');
-//         this.$linkList = document.querySelectorAll('[data-main-frame-tab-link]');
-//         this.init();
-//     }
-//     init = () => {
-//         this.listeners();
-//     }
-//
-//
-//     clickHandler = (e) => {
-//
-//     }
-//
-//     listeners = () => {
-//
-//     }
-//
-// }
 
 class MainFrameMessage {
     constructor() {
@@ -315,94 +294,6 @@ class FrameLight {
         this.$light.classList.remove('show');
     }
 }
-
-// class MainFrame {
-//     constructor() {
-//         this.$mainFrame = document.querySelector('#mainFrame');
-//         this.init();
-//     }
-//
-//     init = () => {
-//         if (!this.$mainFrame) return;
-//         this.form = new MainForm();
-//         this.message = new MainFrameMessage();
-//         this.isShowForm = false;
-//         this.listeners();
-//     }
-//
-//     showForm = () => {
-//         if( this.isShowForm) return
-//         this.isShowForm = true;
-//         light.show();
-//         setTimeout(() => {
-//             this.form.show()
-//             light.hide();
-//         }, 700);
-//     }
-//
-//     hideForm = () => {
-//         this.isShowForm = false;
-//         light.show();
-//         setTimeout(() => {
-//             this.form.hide();
-//             light.hide();
-//         }, 700);
-//     }
-//
-//     hideMessage = () => {
-//         light.show();
-//         setTimeout(() => {
-//             this.message.hide();
-//             this.message.clear();
-//             light.hide();
-//         }, 700);
-//
-//     }
-//
-//     sendHandler = async (e) => {
-//         light.show(true);
-//         e.preventDefault();
-//         const rez = await this.form.send();
-//         if(rez.success){
-//             setTimeout(() => {
-//                 this.message.set(`<p>${rez.message}</p>`);
-//                 this.message.show();
-//                 this.form.reset();
-//                 this.hideForm();
-//             }, 700);
-//         } else {
-//             setTimeout(() => {
-//                 this.form.showErrors();
-//                 light.hide();
-//             }, 700);
-//         }
-//     }
-//
-//     submitHandler = (e) => {
-//         if(e.target.closest('#mainForm')){
-//             this.sendHandler(e);
-//         }
-//     }
-//
-//     clickHandler = (e) => {
-//         if(e.target.closest('[data-main-form-btn]')){
-//             this.showForm();
-//         }
-//
-//         if(e.target.closest('[data-main-form-close]')){
-//             this.hideForm();
-//         }
-//
-//         if(e.target.closest('[data-main-frame-message-close]')){
-//             this.hideMessage();
-//         }
-//     }
-//
-//     listeners = () => {
-//         document.addEventListener('click', this.clickHandler);
-//         this.$mainFrame.addEventListener('submit', this.submitHandler)
-//     }
-// }
 
 class Frame {
     constructor() {
@@ -506,21 +397,11 @@ class Group {
         this.$hideBtn.classList.add('hide');
         this.$showBtn.classList.remove('hide');
     }
-    // clickHandler = (e) => {
-    //     if(e.target.closest('[data-group-btn="show"]')){
-    //
-    //     }
-    //
-    //     if(e.target.closest('[data-group-btn="hide"]')){
-    //
-    //     }
-    // }
+
 
     listeners = () => {
         this.$showBtn.addEventListener('click', this.showGroupHidden);
         this.$hideBtn.addEventListener('click', this.hideGroupHidden);
-
-        // document.addEventListener('click', this.clickHandler);
     }
 }
 
@@ -844,7 +725,6 @@ class Post {
         }
     }
 
-
     clickHandler = (e) => {
         if(e.target.closest('[data-like]')){
             this.like()
@@ -862,6 +742,231 @@ class Post {
 
 }
 
+class Slider {
+    constructor() {
+        this.$slider = document.querySelector('#postSlider');
+        this.init();
+    }
+
+
+    init = () => {
+        if(!this.$slider) return;
+        this.$track = this.$slider.querySelector('[data-track]');
+        this.$slides = this.$slider.querySelectorAll('[data-slide]');
+        this.slidesCount = this.$slides.length;
+        this.index = 1;
+        this.$dotList =  [...this.$slider.querySelectorAll('[data-dot]')];
+        this.cloneSlides();
+
+        this.$slidesWithClone = this.$slider.querySelectorAll('[data-slide]');
+        this.slidesCountWithClone = this.$slidesWithClone.length;
+        this.slideWidth = this.$slides[0].offsetWidth;
+
+        this.isMove = false;
+        this.currentSlide = 1;
+        this.touchStart = 0;
+        this.touchPosition = 0;
+        this.sensitivity = 30;
+        this.displaySlides = 1
+
+        this.speed = 300;
+
+
+        this.setPositionTrack();
+        this.listeners();
+    }
+
+
+    cloneSlides = () => {
+        const $slides = Array.from(this.$slides);
+        const $start = $slides.slice(0, this.index);
+        const $end = $slides.slice(this.slidesCount - this.index, this.slidesCount).reverse();
+
+        const $firstSlideClones = this.getClonesSlides($start);
+        const $lastSliderClones = this.getClonesSlides($end);
+        this.addSlideClones($firstSlideClones, 'append');
+        this.addSlideClones($lastSliderClones, 'prepend');
+    };
+
+    getClonesSlides = ($slidesArr) => {
+        return $slidesArr.map(($slide) => {
+            return this.createSlideClone($slide);
+        })
+    }
+
+
+    createSlideClone = (donorSlide) => {
+        const $clone = document.createElement('div');
+        $clone.innerHTML = donorSlide.innerHTML;
+        $clone.setAttribute('data-clone', '');
+        $clone.setAttribute('data-slide', '');
+        const cls = donorSlide.classList;
+        $clone.classList = cls;
+        return $clone;
+    }
+
+
+
+    next = () => {
+        if (this.isMove) return;
+        this.isMove = true;
+        this.currentSlide++;
+        if(!(this.index >= this.slidesCountWithClone - 1)){
+            this.index++;
+            this.dotIdx = this.index - this.displaySlides;
+        }
+        // this.$track.style.transition = `transform ${this.speedShift}ms  ease-in-out`;
+        // this.setPositionTrack();
+        // this.changeCurrentSlides();
+        // this.moveTrack();
+        this.move();
+    }
+
+    prev = () => {
+        if (this.isMove) return;
+        this.isMove = true;
+        this.currentSlide--;
+        if(!(this.index <= 0)){
+            this.index--;
+            this.dotIdx = this.index - this.displaySlides;
+        }
+        this.move();
+    }
+
+    move = () => {
+        this.$track.style.transition = `transform ${this.speed}ms ease-in-out`;
+        this.setPositionTrack();
+        this.moveTrack();
+        this.changeActiveDot();
+
+    }
+
+
+    moveTrack = () => {
+        this.$track.addEventListener('transitionend', (e) => {
+            if(e.target === this.$track){
+                this.$slidesWithClone[this.index].dataset.clone === 'last' ? this.index = this.displaySlides : this.index;
+
+                this.$slidesWithClone[this.index].dataset.clone === 'first' ? this.index = this.slidesCountWithClone - (this.displaySlides * 2) : this.index;
+
+                this.$track.style.transition = "none";
+
+                this.setPositionTrack();
+                this.isMove = false;
+            }
+
+        })
+    }
+
+    changeActiveDot = () => {
+        if(this.dotIdx < 0){
+            this.dotIdx = this.$dotList.length - 1;
+        }else if(this.dotIdx > this.$dotList.length - 1){
+
+            this.dotIdx = 0;
+        }
+
+        this.$dotList.forEach(($dot, idx) => {
+            $dot.classList.remove('active');
+            if(idx === this.dotIdx){
+                $dot.classList.add('active');
+            }
+        })
+    }
+
+    addSlideClones = ($slideClones, where) => {
+        if (where === 'append') {
+            $slideClones.forEach(($slide, idx) => {
+                if (idx === 0) {
+                    $slide.dataset.clone = 'last';
+                }
+                this.$track.append($slide);
+            })
+        }
+        if (where === 'prepend') {
+            $slideClones.forEach(($slide, idx) => {
+                if (idx === $slideClones.length - 1) {
+                    $slide.dataset.clone = 'first';
+                }
+                this.$track.prepend($slide);
+            })
+        }
+    }
+
+    setPositionTrack = () => {
+        const width = this.$slides[0].offsetWidth;
+        const margin = parseInt(getComputedStyle(this.$slides[0]).marginRight);
+
+        this.slideWidth = width + margin;
+        const position = this.getShiftTrack()
+        this.$track.style.transform = `translateX(-${position}px)`;
+    }
+
+    getShiftTrack = () => {
+        return this.index * this.slideWidth;
+    }
+
+
+    dotNavigate = ($dot) => {
+        this.dotIdx = this.$dotList.indexOf($dot);
+        this.index = this.dotIdx + this.displaySlides;
+        this.move();
+    }
+
+
+    startTouchMove = (e) => {
+        this.touchStart = e.changedTouches[0].clientX;
+        this.touchPosition = this.touchStart;
+    }
+
+    touchMove = (e) => {
+        this.touchPosition = e.changedTouches[0].clientX;
+    }
+
+    touchEnd = () => {
+        let distance = this.touchStart - this.touchPosition;
+        if (distance > 0 && distance >= this.sensitivity) {
+            this.next();
+        }
+        if (distance < 0 && distance * -1 >= this.sensitivity) {
+            this.prev();
+        }
+    }
+
+    clickHandler =(e) => {
+       if(e.target.closest('[data-prev]')){
+          this.prev();
+       }
+
+       if(e.target.closest('[data-next]')){
+          this.next();
+       }
+
+       if(e.target.closest('[data-dot]')){
+           this.dotNavigate(e.target.closest('[data-dot]'))
+       }
+    }
+
+    listeners = () => {
+        window.addEventListener('resize', this.setPositionTrack);
+        this.$slider.addEventListener('click', this.clickHandler);
+
+
+        this.$track.addEventListener('touchstart', (e) => {
+            this.startTouchMove(e)
+        });
+        this.$track.addEventListener('touchmove', (e) => {
+            this.touchMove(e)
+        });
+        this.$track.addEventListener('touchend', () => {
+            this.touchEnd()
+        });
+    }
+
+
+}
+
+
 const frame = new Frame();
 
 const frameForm = new MainForm();
@@ -878,8 +983,7 @@ const groupContainer = new Container('[data-group]', Group);
 
 const hobbyPage = new HobbyPage();
 
-// const post = new Post();
+const postContainer = new Container('[data-post]', Post);
 
-
-const postContainer = new Container('[data-post]', Post)
+const postSlider = new Slider();
 
