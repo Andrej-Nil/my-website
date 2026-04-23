@@ -9,7 +9,10 @@
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Редактировать опыт</a>
         </div>
-        <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить опыт</a>
+        <div class="btn-list">
+            <a href="{{route('portfolios.show', $portfolio['id'])}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу портфолио</a>
+            <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить опыт</a>
+        </div>
     </div>
     <h1 class="panel-title">Редактировать опыт</h1>
     @if($errors->any())

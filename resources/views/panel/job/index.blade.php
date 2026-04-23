@@ -35,8 +35,11 @@
                     </div>
                 </div>
            </div>
+            <div class="btn-list">
+                <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
+                <a href="{{route('panel.jobs.create')}}" class="btn btn--yellow">Добавить место работы</a>
+            </div>
 
-            <a href="{{route('panel.jobs.create')}}" class="btn btn--yellow">Добавить место работы</a>
         </div>
 
 

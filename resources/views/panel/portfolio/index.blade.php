@@ -33,7 +33,12 @@
                     </div>
                 </div>
             </div>
-            <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить опыт</a>
+
+            <div class="btn-list">
+                <a href="{{route('portfolios')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу списка портфолио</a>
+                <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить опыт</a>
+            </div>
+
         </div>
 
 
@@ -63,7 +68,6 @@
                         <img src="{{asset('panel-assets/img/icons/link-icon.svg')}}" class="list-item__icon" alt="" >
                     </a>
 
-
                     <a href="{{route('panel.portfolios.edit', $portfolio['id'])}}" class="list-item__btn" title="Редоктировать">
                         <img src="{{asset('panel-assets/img/icons/edit-icon.svg')}}" class="list-item__icon" alt="">
                     </a>
@@ -84,7 +88,7 @@
 
         </div>
         @if(count($portfolioList['links']) > 3 )
-            @include('panel.components.pagination', ['paginate' => $hobbyList])
+            @include('panel.components.pagination', ['paginate' => $portfolioList])
         @endif
     </div>
 @endsection

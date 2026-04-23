@@ -27,3 +27,7 @@ Route::post('portfolio/update/display', [\App\Http\Controllers\Admin\Api\Portfol
 
 Route::post('posts/update/sort', [\App\Http\Controllers\Admin\Api\PostApiController::class, 'updateSort'])->name('posts.update.sort');
 Route::post('posts/update/display', [\App\Http\Controllers\Admin\Api\PostApiController::class, 'updateDisplay'])->name('posts.update.display');
+
+
+Route::post('pageDescription/update/sort', [\App\Http\Controllers\Admin\Api\PageDescriptionApiController::class, 'updateSort'])->name('pageDescription.update.sort');
+Route::post('pageDescription/update/display', [\App\Http\Controllers\Admin\Api\PageDescriptionApiController::class, 'updateDisplay'])->name('pageDescription.update.display');

@@ -25,7 +25,7 @@
         <div class="form-control">
             <label for="title" class="form-control__label">Название</label>
             <div class="form-control__body">
-                <input id="title" type="text" class="form-control__input input" name="title" value="{{old('title')}}" placeholder="Название поста">
+                <input id="title" type="text" class="form-control__input input" name="title" value="{{old('title')}}" placeholder="Название">
                 @error('title')<p class="form-control__error">{{$message}}</p>@enderror
             </div>
         </div>

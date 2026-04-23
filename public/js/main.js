@@ -771,7 +771,6 @@ class Slider {
 
         this.speed = 300;
 
-
         this.setPositionTrack();
         this.listeners();
     }

@@ -32,7 +32,12 @@
                 </div>
             </div>
 
-            <a href="{{route('panel.schools.create')}}" class="btn btn--yellow">Добавить учреждение</a>
+
+            <div class="btn-list">
+                <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
+                <a href="{{route('panel.schools.create')}}" class="btn btn--yellow">Добавить учреждение</a>
+            </div>
+
         </div>
 
 
