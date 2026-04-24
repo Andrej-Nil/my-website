@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Helper\SortDataHelper;
-use App\Http\Requests\PageDescription\StorePageDescription;
+use App\Http\Requests\PageDescription\StorePageDescriptionRequest;
+use App\Http\Requests\PageDescription\UpdatePageDescriptionRequest;
 use App\Http\Requests\Search\SearchRequest;
 use App\Models\PageDescription;
 use App\Repositories\PageDescriptionRepository;
-use App\Repositories\PortfolioRepository;
+use App\Services\MediaDeleteService;
 use App\Services\MediaUploadService;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PageDescriptionController extends Controller
@@ -65,7 +65,7 @@ class PageDescriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePageDescription $request, MediaUploadService $mediaUploadService)
+    public function store(StorePageDescriptionRequest $request, MediaUploadService $mediaUploadService)
     {
 
         $validatedData = $request->validated();
@@ -82,7 +82,7 @@ class PageDescriptionController extends Controller
             abort(404);
         }
 
-        return to_route('panel.pageDescription.edit', $pageDescription['id'])->with('success', 'Статья создана');
+        return to_route('panel.pageDescriptions.edit', $pageDescription['id'])->with('success', 'Статья создана');
     }
 
     /**
@@ -113,30 +113,32 @@ class PageDescriptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PageDescription $pageDescription)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id, MediaUploadService $mediaDeleteService)
+    public function update(UpdatePageDescriptionRequest $request, $id)
     {
         $pageDescription = PageDescriptionRepository::getPageDescriptionById($id);
 
         if(!$pageDescription){
             abort('404');
         }
+        PageDescriptionRepository::updatePageDescription($id, $request->validated());
+        return to_route('panel.pageDescriptions.edit', $pageDescription['id'])->with('success', 'Изменение сохронены');
+    }
 
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id, MediaDeleteService $mediaDeleteService)
+    {
+        $pageDescription = PageDescriptionRepository::getPageDescriptionById($id);
+
+        if(!$pageDescription) {
+            abort('404');
+        }
         if($pageDescription['photo']){
             $mediaDeleteService->handle($pageDescription['photo']);
-//
         }
 
-
-
         PageDescriptionRepository::deletePageDescription($id);
-        return to_route('panel.pageDescriptionRepository')->with('success', 'Статья ' . "'" . $pageDescription['title'] . "'" . ' удалена');
+        return to_route('panel.pageDescriptions')->with('success', 'Статья ' . "'" . $pageDescription['title'] . "'" . ' удалена');
     }
 }

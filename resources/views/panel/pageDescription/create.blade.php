@@ -5,7 +5,7 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.pageDescription')}}" class="breadcrumbs__link">Описание сайте</a>
+            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайте</a>
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Создать статью</a>
         </div>
@@ -19,7 +19,7 @@
         @include('panel.components.success-board')
     @endif
 
-    <form id="formCreate" action="{{route('panel.pageDescription.store')}}" enctype="multipart/form-data" method="post" class="form">
+    <form id="formCreate" action="{{route('panel.pageDescriptions.store')}}" enctype="multipart/form-data" method="post" class="form">
         @csrf
         <div class="form__body">
             <div class="form-control">

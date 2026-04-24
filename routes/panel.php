@@ -55,11 +55,11 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::put('panel/posts/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'] )->name('panel.posts.update');
     Route::delete('panel/posts/{id}', [\App\Http\Controllers\Admin\PostController::class, 'destroy'] )->name('panel.posts.delete');
 
-    Route::get('panel/page-description', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'index'] )->name('panel.pageDescription');
-    Route::get('panel/page-description/create', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'create'] )->name('panel.pageDescription.create');
-    Route::post('panel/page-description', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'store'] )->name('panel.pageDescription.store');
-    Route::get('panel/page-description/{id}/edit', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'edit'] )->name('panel.pageDescription.edit');
-    Route::put('panel/page-description/{id}', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'update'] )->name('panel.pageDescription.update');
-    Route::delete('panel/page-description/{id}', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'destroy'] )->name('panel.pageDescription.delete');
+    Route::get('panel/page-descriptions', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'index'] )->name('panel.pageDescriptions');
+    Route::get('panel/page-descriptions/create', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'create'] )->name('panel.pageDescriptions.create');
+    Route::post('panel/page-descriptions', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'store'] )->name('panel.pageDescriptions.store');
+    Route::get('panel/page-descriptions/{id}/edit', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'edit'] )->name('panel.pageDescriptions.edit');
+    Route::put('panel/page-descriptions/{id}', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'update'] )->name('panel.pageDescriptions.update');
+    Route::delete('panel/page-descriptions/{id}', [\App\Http\Controllers\Admin\PageDescriptionController::class, 'destroy'] )->name('panel.pageDescriptions.delete');
 
 });

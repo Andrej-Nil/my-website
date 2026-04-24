@@ -36,6 +36,12 @@ class PageDescriptionRepository
         toArray();
     }
 
+
+    public static function getPageDescriptionByIsDisplay(int $isDisplay = 1){
+        return PageDescription::where('is_display', $isDisplay)->
+        orderBy('sort', 'ASC')->get()->toArray();
+    }
+
     public static function createPageDescription(array $data):array{
         return PageDescription::create($data)->toArray();
     }

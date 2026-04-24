@@ -5,13 +5,13 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.pageDescription')}}" class="breadcrumbs__link">Описание сайте</a>
+            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайте</a>
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Редактировать статью</a>
         </div>
         <div class="btn-list">
-            <a href="{{route('pageDescription')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу о сайте</a>
-            <a href="{{route('panel.pageDescription.create')}}" class="btn btn--yellow">Добавить статью</a>
+            <a href="{{route('pageDescriptions')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу о сайте</a>
+            <a href="{{route('panel.pageDescriptions.create')}}" class="btn btn--yellow">Добавить статью</a>
         </div>
     </div>
     <h1 class="panel-title">Редактировать статью</h1>
@@ -22,7 +22,7 @@
         @include('panel.components.success-board')
     @endif
 
-    <form id="formEdit" action="{{route('panel.pageDescription.store')}}" enctype="multipart/form-data" method="post" class="form">
+    <form id="formEdit" action="{{route('panel.pageDescriptions.update', $pageDescription['id'])}}" enctype="multipart/form-data" method="post" class="form">
         @csrf
         @method('PUT')
         <div class="form__body">
@@ -83,7 +83,6 @@
                         <label for="display2" class="form-control__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0" @checked($pageDescription['is_display'] == 0)>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -92,7 +91,7 @@
             <button type="submit" class="btn btn--yellow">Сохранить</button>
         </div>
     </form>
-    <form id="delete"  action="{{route('panel.pageDescription.delete', $pageDescription['id'])}}" method="post">
+    <form id="delete"  action="{{route('panel.pageDescriptions.delete', $pageDescription['id'])}}" method="post">
         @csrf
         @method('DELETE')
     </form>

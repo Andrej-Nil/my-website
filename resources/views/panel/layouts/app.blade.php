@@ -36,7 +36,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('panel.pageDescription')}}" class="nav-item__link">Описание стайта</a>
+                    <a href="{{route('panel.pageDescriptions')}}" class="nav-item__link">Описание стайта</a>
                 </li>
 
                 <li class="nav-item">
@@ -55,7 +55,7 @@
                 <span class="link-item__slash">\</span>
                 <a href="{{route('resume')}}" target="_blank" class="link-item">Резюме</a>
                 <span class="link-item__slash">\</span>
-                <a href="{{route('pageDescription')}}" target="_blank" class="link-item">О сайте</a>
+                <a href="{{route('pageDescriptions')}}" target="_blank" class="link-item">О сайте</a>
                 <span class="link-item__slash">\</span>
                 <a href="{{route('portfolios')}}" target="_blank" class="link-item">Портфолио</a>
                 <span class="link-item__slash">\</span>

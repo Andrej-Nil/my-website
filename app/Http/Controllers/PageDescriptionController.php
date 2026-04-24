@@ -15,8 +15,7 @@ class PageDescriptionController extends Controller
     public function index()
     {
         $admin = UserInfoRepository::getUserInfoByFirst();
-        $pageDescriptionList = PageDescriptionRepository::getPaginationByIsDisplay();
-
+        $pageDescriptionList = PageDescriptionRepository::getPageDescriptionByIsDisplay();
         return view('pageDescription.index', [
                 'admin' => $admin,
                 'pageDescriptionList' => $pageDescriptionList
@@ -42,9 +41,24 @@ class PageDescriptionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PageDescription $pageDescription)
+    public function show($id)
     {
-        //
+        $admin = UserInfoRepository::getUserInfoByFirst();
+        $pageDescription = PageDescriptionRepository::getPageDescriptionById($id);
+
+        if(!$pageDescription){
+            abort(404);
+        }
+
+
+        $pageDescriptionList = PageDescriptionRepository::getPageDescriptionByIsDisplay();
+
+        return view('pageDescription.show',[
+            'admin' => $admin,
+            'pageDescription' => $pageDescription,
+            'pageDescriptionList' => $pageDescriptionList
+        ]);
+
     }
 
     /**
