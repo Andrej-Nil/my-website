@@ -1,9 +1,9 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редактирование информации')
+@section('title', 'Редактировать информацию')
 
 @section('content')
-    <h1 class="panel-title">Редактирование информации</h1>
+    <h1 class="panel-title">Редактировать информацию</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif

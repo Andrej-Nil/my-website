@@ -9,9 +9,11 @@
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Редактировать хобби</a>
         </div>
+        <div class="btn-list">
+            <a href="{{route('hobbies')}}" class="btn btn--blue">Ссылка на страницу хобби</a>
+            <a href="{{route('panel.hobbies.create')}}" class="btn btn--yellow">Добавить хобби</a>
+        </div>
 
-        <a href="{{route('hobbies')}}" class="btn btn--blue">Ссылка на страницу хобби</a>
-        <a href="{{route('panel.hobbies.create')}}" class="btn btn--yellow">Добавить хобби</a>
     </div>
     <h1 class="panel-title">Редактировать хобби</h1>
     @if($errors->any())

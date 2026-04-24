@@ -1,13 +1,13 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Добовить место работ')
+@section('title', 'Добовить место работы')
 
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
             <a href="{{route('panel.jobs')}}" class="breadcrumbs__link">Опыт работы</a>
             <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Добовить место работ</a>
+            <a class="breadcrumbs__link">Добовить место работы</a>
         </div>
     </div>
     <h1 class="panel-title">Добовить место работы</h1>

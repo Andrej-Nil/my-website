@@ -1,11 +1,11 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редактировать статью о сайте')
+@section('title', 'Редактировать статью')
 
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайте</a>
+            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайта</a>
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Редактировать статью</a>
         </div>

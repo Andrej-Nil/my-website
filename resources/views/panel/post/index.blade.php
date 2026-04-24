@@ -36,7 +36,7 @@
             </div>
 
             <div class="btn-list">
-                <a href="{{route('posts')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу всех постов</a>
+                <a href="{{route('posts')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу постов</a>
                 <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Добавить пост</a>
             </div>
 
