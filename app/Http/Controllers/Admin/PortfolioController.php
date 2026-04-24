@@ -110,7 +110,7 @@ class PortfolioController extends Controller
 
        return view('panel.portfolio.edit', [
         'portfolio' => $portfolio,
-    ]);
+        ]);
     }
 
     /**

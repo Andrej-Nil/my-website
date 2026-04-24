@@ -9,7 +9,12 @@
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Редактирование места работы</a>
         </div>
-        <a href="{{route('panel.jobs.create')}}" class="btn btn--yellow">Добавить место работы</a>
+
+        <div class="btn-list">
+            <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
+            <a href="{{route('panel.jobs.create')}}" class="btn btn--yellow">Добавить место работы</a>
+        </div>
+
     </div>
     <h1 class="panel-title">Редактирование места работы</h1>
     @if($errors->any())

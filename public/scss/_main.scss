@@ -28,6 +28,10 @@ body{
     max-width: 640px;
 }
 
+.container--middle{
+    max-width: 1040px;
+}
+
 .wrapper {
     display: flex;
     flex: 1 0 auto;
@@ -55,6 +59,13 @@ body{
 .pointer{
     cursor: pointer;
 }
+
+.content-with-sidebar{
+    display: flex;
+    gap: 20px;
+}
+
+
 
 
 

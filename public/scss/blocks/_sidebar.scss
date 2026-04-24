@@ -2,4 +2,12 @@
     max-width: 320px;
     width: 100%;
     flex-shrink: 0;
+    border-right: 1px solid #cccccc;
+    padding-bottom: 40px;
+}
+
+.sidebar__title{
+    font-size: 24px;
+    color: #cccccc;
+    margin-bottom: 20px;
 }

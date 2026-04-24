@@ -12,7 +12,7 @@
         </div>
 
         <div class="btn-list">
-            <a href="{{route('posts.show', $post['id'])}}" target="_blank"  type="submit" class="btn btn--blue">Просмотр</a>
+            <a href="{{route('posts.show', $post['id'])}}" target="_blank" type="submit" class="btn btn--blue">Ссылка на страницу поста</a>
             <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Создать новый пост</a>
         </div>
 

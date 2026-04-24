@@ -40,3 +40,7 @@ Route::get('posts', [\App\Http\Controllers\PostController::class, 'index'])->nam
 Route::get('posts/{id}/show', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
 
+Route::get('page-descriptions', [\App\Http\Controllers\PageDescriptionController::class, 'index'])->name('pageDescriptions');
+Route::get('page-descriptions/{id}/show', [\App\Http\Controllers\PageDescriptionController::class, 'show'])->name('pageDescriptions.show');
+
+

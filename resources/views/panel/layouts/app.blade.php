@@ -36,6 +36,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{route('panel.pageDescriptions')}}" class="nav-item__link">Описание стайта</a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('panel.hobbies')}}" class="nav-item__link">Хобби</a>
                 </li>
 
@@ -50,6 +54,8 @@
                 <a href="{{route('home')}}" target="_blank" class="link-item">Главная</a>
                 <span class="link-item__slash">\</span>
                 <a href="{{route('resume')}}" target="_blank" class="link-item">Резюме</a>
+                <span class="link-item__slash">\</span>
+                <a href="{{route('pageDescriptions')}}" target="_blank" class="link-item">О сайте</a>
                 <span class="link-item__slash">\</span>
                 <a href="{{route('portfolios')}}" target="_blank" class="link-item">Портфолио</a>
                 <span class="link-item__slash">\</span>

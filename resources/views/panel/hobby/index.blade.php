@@ -36,7 +36,12 @@
                     </div>
                 </div>
             </div>
-            <a href="{{route('panel.hobbies.create')}}" class="btn btn--yellow">Добавить хобби</a>
+
+            <div class="btn-list">
+                <a href="{{route('hobbies')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу хобби</a>
+                <a href="{{route('panel.hobbies.create')}}" class="btn btn--yellow">Добавить хобби</a>
+            </div>
+
         </div>
 
 

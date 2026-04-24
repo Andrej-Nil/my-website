@@ -2,10 +2,26 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-right: 20px;
 }
 
 .sidebar-nav__link{
     display: block;
+    color: #c0c0c0;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 10px;
+    transition: 0.1s linear;
+
+    &.active{
+        color: #fff;
+        border-bottom: 1px solid #fff;
+    }
+    &:hover{
+        color: #fff;
+        border-bottom: 1px solid #fff;
+    }
 }
+
+
 
 

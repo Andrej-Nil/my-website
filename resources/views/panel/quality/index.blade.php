@@ -33,7 +33,10 @@
                     </div>
                 </div>
             </div>
-            <a href="{{route('panel.qualities.create')}}" class="btn btn--yellow">Добавить качество</a>
+            <div class="btn-list">
+                <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
+                <a href="{{route('panel.qualities.create')}}" class="btn btn--yellow">Добавить качество</a>
+            </div>
         </div>
 
         <div data-group data-sortable-list data-api="{{route('quality.update.sort')}}" class="list sortable-list">
@@ -73,7 +76,7 @@
 
         </div>
         @if(count($qualityList['links']) > 3 )
-            @include('panel.components.pagination', ['paginate' => $schoolList])
+            @include('panel.components.pagination', ['paginate' => $qualityList])
         @endif
     </div>
 @endsection
