@@ -1,16 +1,16 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Добавить опыт')
+@section('title', 'Добавить работу')
 
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
             <a href="{{route('panel.portfolios')}}" class="breadcrumbs__link">Портфолио</a>
             <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Добовить опыт</a>
+            <a class="breadcrumbs__link">Добовить работу</a>
         </div>
     </div>
-    <h1 class="panel-title">Добавить опыт</h1>
+    <h1 class="panel-title">Добовить работу</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -40,7 +40,7 @@
 
         <div class="form-control">
             <div class="form-control__head">
-                <span class="form-control__label">Главное фото</span>
+                <span class="form-control__label">Фото</span>
                 <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
             </div>
             <div data-media-file="one" data-format="jpg,jpeg,png" data-name="photo" class="media-file">
@@ -83,7 +83,7 @@
         </div>
 
         <div class="form__bottom">
-            <button type="submit" class="btn btn--yellow">Добавить опыт</button>
+            <button type="submit" class="btn btn--yellow">Добавить работу</button>
         </div>
     </form>
 @endsection

@@ -1,9 +1,9 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Информация о сайте')
+@section('title', 'Описание сайта')
 
 @section('content')
-    <h1 class="panel-title">Информация о сайте</h1>
+    <h1 class="panel-title">Описание сайта</h1>
 
     @if(session()->has('success'))
         @include('panel.components.success-board')

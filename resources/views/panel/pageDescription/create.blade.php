@@ -1,11 +1,11 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Создать статью о сайте')
+@section('title', 'Создать статью')
 
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайте</a>
+            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайта</a>
             <span class="breadcrumbs__slash">\</span>
             <a class="breadcrumbs__link">Создать статью</a>
         </div>
@@ -74,7 +74,7 @@
         </div>
 
         <div class="form__bottom">
-            <button type="submit" class="btn btn--yellow">Добавить статью</button>
+            <button type="submit" class="btn btn--yellow">Создать статью</button>
         </div>
     </form>
 @endsection

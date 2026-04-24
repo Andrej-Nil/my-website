@@ -1,6 +1,6 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редактировать опыт')
+@section('title', 'Редактировать работу')
 
 @section('content')
     <div class="content-top">
@@ -10,11 +10,11 @@
             <a class="breadcrumbs__link">Редактировать опыт</a>
         </div>
         <div class="btn-list">
-            <a href="{{route('portfolios.show', $portfolio['id'])}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу портфолио</a>
-            <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить опыт</a>
+            <a href="{{route('portfolios.show', $portfolio['id'])}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу работы</a>
+            <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить работу</a>
         </div>
     </div>
-    <h1 class="panel-title">Редактировать опыт</h1>
+    <h1 class="panel-title">Редактировать работу</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -44,7 +44,7 @@
 
             <div class="form-control">
                 <div class="form-control__head">
-                    <span class="form-control__label">Главное фото</span>
+                    <span class="form-control__label">Фото</span>
                     <p class="form-control__note">Загрузить изображение в формате jpg, jpeg, png</p>
                 </div>
                 <div data-upload-media-file="one" data-name="photo" class="media-file">

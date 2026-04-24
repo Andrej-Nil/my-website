@@ -36,7 +36,7 @@
 
             <div class="btn-list">
                 <a href="{{route('portfolios')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу списка портфолио</a>
-                <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить опыт</a>
+                <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить работу</a>
             </div>
 
         </div>

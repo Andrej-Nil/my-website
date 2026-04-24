@@ -1,13 +1,13 @@
 @extends('panel.layouts.app')
 
-@section('title', 'Редактирование места работы')
+@section('title', 'Редактировать место работы')
 
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
             <a href="{{route('panel.jobs')}}" class="breadcrumbs__link">Опыт работы</a>
             <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редактирование места работы</a>
+            <a class="breadcrumbs__link">Редактировать место работы</a>
         </div>
 
         <div class="btn-list">
@@ -16,7 +16,7 @@
         </div>
 
     </div>
-    <h1 class="panel-title">Редактирование места работы</h1>
+    <h1 class="panel-title">Редактировать место работы</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
