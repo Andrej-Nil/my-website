@@ -5,10 +5,14 @@
 
 
 .main-contact{
-    padding: 10px;
+    padding: 10px 0;
     transition: 0.2s ease-in-out;
     color: #ccc;
     &:hover{
         color: #fff;
     };
+    @media (max-width: 1040px) {
+        font-size: 12px;
+        padding: 5px 0;
+    }
 }

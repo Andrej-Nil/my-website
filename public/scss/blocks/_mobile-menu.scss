@@ -1,0 +1,33 @@
+.mobile-menu{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #000;
+}
+
+.mobile-menu__list{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.mobile-menu-item{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+}
+
+.mobile-menu-item__icon{
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.9;
+}
+
+.mobile-menu-item__title{
+    color: #cccccc;
+    font-size: 10px;
+}

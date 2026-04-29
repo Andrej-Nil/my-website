@@ -9,7 +9,7 @@
      @include('components.header')
 
        <div class="main-content">
-           <div class="signature">
+         <div class="signature">
                <div class="signature__inner">
                    <h1 class="signature__name">{{$admin['first_name'] . ' ' . $admin['second_name']}} </h1>
                    <p class="signature__profession">{{$admin['profession']}}</p>
@@ -17,7 +17,7 @@
                </div>
            </div>
 
-           <div id="mainFrame" class="main-frame">
+         <div id="mainFrame" class="main-frame">
 
                <div id="mainFrameLight"  class="main-frame-light">
                    <span class="main-frame-light__blink"></span>
@@ -28,7 +28,6 @@
 
 
                    <div data-frame-tab="message" class="main-frame-tab">
-{{--                       <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>--}}
                        <div class="main-frame-tab__inner scroll">
                            <div id="mainFrameMessage" class="main-frame-message">
                                <div class="main-frame-message__inner">
@@ -192,14 +191,14 @@
 {{--                           <span class="main-frame-link__icon"></span>--}}
                            <img src="{{asset('img/icon/user.svg')}}" alt="" class="main-frame-link__icon">
 
-                           <p class="main-frame-link__title">Кратко<br/> обо мне</p>
+                           <p class="main-frame-link__title">О себе</p>
 
                        </div>
 
                        <div data-frame-tab-link="works" class="main-frame-link">
 {{--                           <span class="main-frame-link__icon"></span>--}}
                            <img src="{{asset('img/icon/directory.svg')}}" alt="" class="main-frame-link__icon">
-                           <p class="main-frame-link__title">Пример<br/> работ</p>
+                           <p class="main-frame-link__title">Порфолио</p>
                        </div>
 
                        <div data-frame-tab-link="contact" class="main-frame-link">
@@ -212,20 +211,39 @@
 
                </div>
            </div>
-
-{{--           <div class="main-content__body">--}}
-
-
-
-{{--           </div>--}}
-
-
        </div>
 
 
      @include('components.footer')
 
+       <div class="mobile-menu">
+           <div class="mobile-menu__list">
+               <div class="mobile-menu-item">
+                   <img src="{{asset('img/icon/menu-nav.svg')}}" alt="" class="mobile-menu-item__icon">
+                   <span class="mobile-menu-item__title">Меню</span>
+               </div>
 
+               <div class="mobile-menu-item">
+                   <img src="{{asset('img/icon/phone-call.svg')}}" alt="" class="mobile-menu-item__icon">
+                   <span class="mobile-menu-item__title">Форма связи</span>
+               </div>
+
+               <div data-frame-tab-link="info" class="mobile-menu-item">
+                   <img src="{{asset('img/icon/user.svg')}}" alt="" class="mobile-menu-item__icon">
+                   <span class="mobile-menu-item__title">О себе</span>
+               </div>
+
+               <div data-frame-tab-link="works" class="mobile-menu-item">
+                   <img src="{{asset('img/icon/directory.svg')}}" alt="" class="mobile-menu-item__icon">
+                   <span class="mobile-menu-item__title">Портфолио</span>
+               </div>
+
+               <div data-frame-tab-link="contact" class="mobile-menu-item">
+                   <img src="{{asset('img/icon/old-phone.svg')}}" alt="" class="mobile-menu-item__icon">
+                   <span class="mobile-menu-item__title">Контакты</span>
+               </div>
+           </div>
+       </div>
 
 
    </div>
