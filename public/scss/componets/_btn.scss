@@ -1,13 +1,18 @@
 .btn{
-    padding: 10px 30px;
+    padding: 8px 15px;
     background: #ccc;
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
     transition: 0.2s ease-in-out;
     text-align: center;
     &:hover{
         background: #fff;
+    }
+
+    @media (min-width: 1040px) {
+        padding: 10px 30px;
+        font-size: 16px;
     }
 }

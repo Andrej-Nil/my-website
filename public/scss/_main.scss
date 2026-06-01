@@ -15,6 +15,11 @@ body{
     &.dark{
         background: #000;
     }
+
+    padding-bottom: 54px;
+    @media (min-width: 1040px) {
+        padding-bottom: 0;
+    }
 }
 
 .container{
@@ -60,11 +65,10 @@ body{
     cursor: pointer;
 }
 
-.content-with-sidebar{
+.content-with-sidebar {
     display: flex;
     gap: 20px;
 }
-
 
 
 

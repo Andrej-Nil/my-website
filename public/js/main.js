@@ -966,6 +966,41 @@ class Slider {
 }
 
 
+class MainNav {
+    constructor() {
+        this.$mainNav = document.querySelector('#mainNav');
+        this.init();
+
+    }
+
+    init = () => {
+        if(!this.$mainNav) return;
+
+        this.listeners()
+    }
+
+    open = () => {
+        this.$mainNav.classList.toggle('open');
+    }
+
+    close = () => {
+        this.$mainNav.classList.remove('open');
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-main-nav-open]')){
+            this.open()
+        }
+        if(e.target.closest('[data-main-nav-close]')){
+            this.close()
+        }
+    }
+
+    listeners = () => {
+        document.addEventListener('click', this.clickHandler);
+    }
+}
+
 const frame = new Frame();
 
 const frameForm = new MainForm();
@@ -985,4 +1020,6 @@ const hobbyPage = new HobbyPage();
 const postContainer = new Container('[data-post]', Post);
 
 const postSlider = new Slider();
+
+const mainNav = new MainNav();
 

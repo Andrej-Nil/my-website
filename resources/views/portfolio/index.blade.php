@@ -20,7 +20,6 @@
                 <a href="{{route('panel.portfolios')}}" class="admin-links__btn btn">Редактировать партфолио</a>
             </div>
         @endif
-            <div class="grid">
                 @if($portfolioList['data'])
                 <div class="portfolio__list">
                     @foreach($portfolioList['data'] as $portfolio)
@@ -46,7 +45,6 @@
                     Нет пример работ
                 </p>
                 @endif
-            </div>
 
         <div class="pagination">
 

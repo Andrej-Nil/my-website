@@ -1,7 +1,7 @@
 .main-header{
     position: relative;
     background: #000;
-    z-index: 10;
+    z-index: 20;
     @media(max-width: 1040px){
         position: fixed;
         justify-content: center;

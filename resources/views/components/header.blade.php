@@ -1,5 +1,6 @@
 <header class="main-header">
-    <div class="main-nav">
+    <div id="mainNav" class="main-nav">
+        <span class="main-nav__close" data-main-nav-close></span>
         <a href="{{route('home')}}" class="main-nav-item">Главная</a>
         <a href="{{route('resume')}}" class="main-nav-item">Резюме</a>
         <a href="{{route('portfolios')}}" class="main-nav-item">Портфолио</a>

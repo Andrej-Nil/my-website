@@ -7,28 +7,49 @@
 }
 
 .resume-item__title{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 20px;
+
+    @media(min-width: 1040px){
+        font-size: 20px;
+    }
 }
 
 .resume-item__period{
     font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
     margin-top: 5px;
-}
-.resume-item__option{
-    font-size: 18px;
-    margin-top: 15px;
+
+    @media(min-width: 1040px){
+        font-size: 16px;
+    }
 }
 
-.resume-item-desc{
-    font-size: 16px;
-    margin-top: 30px;
+.resume-item__option{
+    font-size: 14px;
+    margin-top: 15px;
+
+    @media(min-width: 1040px){
+        font-size: 18px;
+    }
 }
 
 .resume-item-desc__title{
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 14px;
+    @media(min-width: 1040px){
+        font-size: 18px;
+    }
 }
+
+.resume-item-desc{
+    font-size: 12px;
+    margin-top: 22px;
+    @media(min-width: 1040px){
+        font-size: 16px;
+        margin-top: 30px;
+    }
+}
+
 

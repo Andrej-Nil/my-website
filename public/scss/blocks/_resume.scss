@@ -1,7 +1,10 @@
 .resume{
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 40px;
+    @media(min-width: 1040px){
+        gap: 80px;
+    }
 }
 
 .resume__row{
@@ -11,14 +14,19 @@
 }
 
 .resume__top{
-    width: 100%;
-    background: #fff;
-    padding: 25px;
+
+    @media(min-width: 420px){
+        display: flex;
+    }
 }
 
 .resume__body{
     display: flex;
-
+    flex-direction: column;
+    @media(min-width: 1040px){
+        display: flex;
+        flex-direction: row;
+    }
 }
 
 .resume__main{
@@ -26,18 +34,21 @@
     flex-direction: column;
     background: #fff;
     flex-grow: 1;
-    padding: 25px 15px;
+    padding: 15px;
     gap: 24px;
+    @media(min-width: 1040px){
+        padding: 25px 15px;
+    }
 }
 
 .resume__data{
     display: flex;
     flex-direction: column;
-    width: 480px;
+
     background: #000000;
     flex-shrink: 0;
-    padding: 25px 15px;
-    gap: 50px;
+    padding: 15px;
+    gap: 30px;
 
     *{
         color: #fff;
@@ -46,6 +57,13 @@
     .resume-block__title{
         border-color: #fff;
     }
+
+    @media(min-width: 1040px){
+        width: 480px;
+        padding: 25px 15px;
+        gap: 50px;
+
+    }
 }
 
 .resume-block{
@@ -53,10 +71,13 @@
 }
 
 .resume-block__title{
-    font-size: 20px;
+    font-size: 18px;
     padding-bottom: 10px;
     border-bottom: 1px solid #444;
     margin-bottom: 10px;
+    @media(min-width: 1040px){
+        font-size: 24px;
+    }
 }
 
 .resume-list{
@@ -71,8 +92,11 @@
 }
 
 .resume-list-item__label{
-    width: 180px;
-    font-size: 16px;
+    //width: 180px;
+    font-size: 14px;
+    @media(min-width: 1040px){
+        font-size: 16px;
+    }
 }
 
 .resume-list-item__value{

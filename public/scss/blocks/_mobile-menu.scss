@@ -1,15 +1,22 @@
 .mobile-menu{
+
     position: fixed;
     bottom: 0;
     width: 100%;
     background: #000;
+    border-top: 1px solid #fff;
+    @media (min-width: 1040px) {
+        display: none;
+    }
 }
 
 .mobile-menu__list{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    //display: flex;
     gap: 10px;
-    padding: 10px;
-    justify-content: space-between;
+    padding: 10px 0;
+    //justify-content: space-between;
 }
 
 .mobile-menu-item{
