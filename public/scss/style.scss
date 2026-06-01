@@ -3,11 +3,12 @@
 @import 'grid';
 
 @import 'margins';
-@import "main-page/blocks/main";
+@import "blocks/main";
 //@import 'blocks/header';
-@import "main-page/blocks/main-header";
-@import "main-page/blocks/main-nav";
-@import "main-page/blocks/main-contacts";
+@import "blocks/main-header";
+@import "blocks/main-nav";
+@import "blocks/block";
+@import "blocks/main-contacts";
 @import "componets/page-title";
 @import "componets/page-subtitle";
 @import "componets/btn";
@@ -42,10 +43,13 @@
 @import "blocks/post-slider";
 @import "blocks/article";
 
-
 @import "blocks/gallery-modal";
 
 @import 'blocks/footer';
 
+@import 'blocks/mobile-menu';
 
 @import "admin";
+@import "importatnt";
+
+

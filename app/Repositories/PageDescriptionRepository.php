@@ -27,8 +27,6 @@ class PageDescriptionRepository
     }
 
 
-
-
     public static function getPaginationByIsDisplay(int $isDisplay = 1, int $count = null){
         return PageDescription::where('is_display', $isDisplay)->
         orderBy('sort', 'ASC')->

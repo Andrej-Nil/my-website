@@ -2,12 +2,15 @@
 @import 'main';
 @import 'grid';
 
+@import "blocks/main";
+@import "blocks/main-header";
+@import "blocks/main-nav";
+@import "blocks/main-contacts";
+@import 'blocks/mobile-menu';
+
 @import "main-page/componets/btn";
 @import "main-page/componets/input";
 @import "main-page/componets/main-close";
-
-@import "main-page/blocks/main";
-@import "main-page/blocks/main-header";
 
 @import "main-page/blocks/main-frame";
 @import "main-page/blocks/main-frame-light";
@@ -18,12 +21,11 @@
 
 @import "main-page/blocks/about-me";
 @import "main-page/blocks/my-works";
-@import "main-page/blocks/my-contacts";
 @import "main-page/blocks/socials";
 
 @import "main-page/blocks/main-form";
 @import "main-page/blocks/control";
-
-@import "main-page/blocks/main-nav";
-@import "main-page/blocks/main-contacts";
 @import "main-page/blocks/signature";
+
+
+@import "importatnt";
