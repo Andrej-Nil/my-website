@@ -554,6 +554,7 @@ class Gallery {
         this.isShowArrows = this.$photoList.length > 1;
         this.index = null;
         this.listeners();
+        console.log(this.$photoList);
     }
 
     setPhotoInModal = ($photo) => {

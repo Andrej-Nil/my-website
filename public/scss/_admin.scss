@@ -1,6 +1,10 @@
 .admin-links{
     display: flex;
     margin-bottom: 20px;
+    &.admin-links--absolute{
+        position: absolute;
+        z-index: 10;
+    }
 }
 
 .admin-links__btn{

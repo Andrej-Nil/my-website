@@ -1,12 +1,17 @@
 .hobby-page{
-    overflow: hidden;
-    position: relative;
-    padding: 0;
+    padding: 44px 0 0;
     background: #000;
     display: flex;
     flex-direction: column;
     width: 100%;
     //max-height: 100%;
+
+    @media (min-width: 1040px) {
+        padding: 0;
+        //padding: 44px 0 0;
+        position: relative;
+        overflow: hidden;
+    }
 }
 
 .hobby-page__content{

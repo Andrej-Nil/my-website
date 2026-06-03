@@ -18,7 +18,7 @@
             </div>
         @endif
         @if($postList['data'])
-            <div class="grid col-4">
+            <div class="post-list">
                 @foreach($postList['data'] as $post)
                     <div data-post="{{$post['id']}}" class="post-card">
                         <div class="post-card__content">
@@ -31,7 +31,7 @@
 
                             <div class="post-card__bottom">
                                 <div class="post-card__reaction">
-                                    <div class="activity-item">
+                                    <div class="post-activity-item">
                                         <span data-like class="activity-item__icon reaction pointer {{$post['user_reaction'] == 1 ? 'active' : ''}}"></span>
                                         <span data-like-count class="activity-item__count">{{$post['likes_count']}}</span>
                                     </div>
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
 
-                                <div class="post-activity-item">
+                                <div class="post-card__views post-activity-item">
                                     <img src="{{asset('img/icon/eye.svg')}}" alt="" class="activity-item__icon">
                                     <span class="activity-item__count">{{$post['viewing_count']}}</span>
                                 </div>

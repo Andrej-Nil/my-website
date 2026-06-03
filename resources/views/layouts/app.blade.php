@@ -105,16 +105,16 @@
 
 <div id="galleryModal" class="gallery-modal">
     <div data-close class="gallery-modal__back"></div>
-        <img data-close src="{{asset('img/icon/close-white.svg')}}" alt="" class="gallery-modal__close" />
-        <div data-gallery-modal="prev" class="gallery-modal-arrow prev hide">
-            <img src="{{asset('img/icon/arrow-left.svg')}}" alt="" class="gallery-modal-arrow__icon">
-        </div>
-        <div data-gallery-modal="next" class="gallery-modal-arrow next hide">
-            <img src="{{asset('img/icon/arrow-right.svg')}}" alt="" class="gallery-modal-arrow__icon">
-        </div>
-        <div data-content class="gallery-modal__wrap">
+    <img data-close src="{{asset('img/icon/close-white.svg')}}" alt="" class="gallery-modal__close" />
+    <div data-gallery-modal="prev" class="gallery-modal-arrow prev hide">
+        <img src="{{asset('img/icon/arrow-left.svg')}}" alt="" class="gallery-modal-arrow__icon">
+    </div>
+    <div data-gallery-modal="next" class="gallery-modal-arrow next hide">
+        <img src="{{asset('img/icon/arrow-right.svg')}}" alt="" class="gallery-modal-arrow__icon">
+    </div>
+    <div data-content class="gallery-modal__wrap">
 
-        </div>
+    </div>
 </div>
 
 <script src="{{asset('js/main.js')}}"></script>

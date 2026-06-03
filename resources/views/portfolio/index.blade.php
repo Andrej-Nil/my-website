@@ -35,6 +35,8 @@
                                         <a href="{{$portfolio['link']}}" target="_blank" class="portfolio-card__btn btn">Ссылка</a>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
 

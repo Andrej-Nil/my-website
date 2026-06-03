@@ -6,18 +6,24 @@
 }
 
 .activity-item__icon{
-    width: 26px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
 
     &.reaction{
-        background: url('../img/icon/like.svg');
+        background: url('../img/icon/like.svg') no-repeat;
     }
     &.reaction.dislike{
         transform: rotate(180deg);
     }
 
     &.reaction.active{
-        background: url('../img/icon/like-active.svg');
+        background: url('../img/icon/like-active.svg') no-repeat;
+    }
+
+    @media (min-width: 720px) {
+        width: 26px;
+        height: 26px;
+
     }
 }
 
