@@ -627,29 +627,6 @@ class MediaFile {
         }
 
 
-        // if(this.countItem >= this.count) return;
-        //
-        // const extension = files[0].name.split('.').slice(-1)[0];
-        // const url = URL.createObjectURL(files[0]);
-        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
-        //     // if(this.countPhoto === this.count) return;
-        //     this.render.photo(url);
-        //     this.countItem++;
-        //     // this.countPhoto = this.countPhoto + 1;
-        // } else if(extension === 'mp4'){
-        //     // if(this.countVideo === this.count) return;
-        //     this.render.mediaItem('video', files[0]);
-        //     this.countVideo = this.countVideo + 1;
-        // } else {
-        //     return false;
-        // }
-
-        // const newInputFile = this.$mediaList.querySelector('.new');
-        // newInputFile.files = file;
-        // newInputFile.classList.remove('new');
-
-
-        // return dataTransfer.files;
     }
 
     getDataFile = (file) => {
@@ -703,17 +680,7 @@ class MediaFile {
 
         return this.extensionList.includes(extension);
 
-        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
-        //     // if(this.countPhoto === this.count) return;
-        //     this.countItem++;
-        //     // this.countPhoto = this.countPhoto + 1;
-        // } else if(extension === 'mp4'){
-        //     // if(this.countVideo === this.count) return;
-        //     this.render.mediaItem('video', files[0]);
-        //     this.countVideo = this.countVideo + 1;
-        // } else {
-        //     return false;
-        // }
+
     }
 
     getMediaItemCount = () => {
@@ -779,26 +746,7 @@ class UploadMediaFile {
         } else {
             this.render.photo(media);
         }
-        // if(this.countItem >= this.count) return;
-        //
-        // const extension = files[0].name.split('.').slice(-1)[0];
-        // const url = URL.createObjectURL(files[0]);
-        // if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' ){
-        //     // if(this.countPhoto === this.count) return;
-        //     this.render.photo(url);
-        //     this.countItem++;
-        //     // this.countPhoto = this.countPhoto + 1;
-        // } else if(extension === 'mp4'){
-        //     // if(this.countVideo === this.count) return;
-        //     this.render.mediaItem('video', files[0]);
-        //     this.countVideo = this.countVideo + 1;
-        // } else {
-        //     return false;
-        // }
-        //
-        // const newInputFile = this.$mediaList.querySelector('.new');
-        // newInputFile.files = files;
-        // newInputFile.classList.remove('new');
+
     }
 
     addMedia = async () => {
@@ -888,19 +836,6 @@ class UploadMediaFile {
 
     }
 
-    // filterFiles = (files) => {
-    //     const dataTransfer = new DataTransfer();
-    //     for(let i=0; i<files.length; i++) {
-    //         const file = files[i];
-    //
-    //         if(this.checkExtension(file.name)){
-    //             dataTransfer.items.add(
-    //                 new File([file.slice(0, file.size, file.type)], file.name)
-    //             );
-    //         }
-    //     }
-    //     return dataTransfer.files;
-    // }
 
     checkExtension = (name) => {
 
@@ -943,13 +878,6 @@ class UploadMediaFile {
 
         }
 
-        // const $file = $mediaItem.querySelector('[data-media-file]')
-
-        // if($file.name === 'videos[]'){
-        //     this.countVideo = this.countVideo - 1;
-        // }if($file.name === 'photos[]'){
-        //     this.countPhoto = this.countPhoto - 1;
-        // }
         this.toggleAddMedia();
 
     }

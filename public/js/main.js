@@ -1,5 +1,25 @@
 'use strict'
+class Container {
+    constructor(selector, ParentClass) {
+        this.selector = selector;
+        this.$elList = document.querySelectorAll(this.selector);
+        this.ParentClass = ParentClass;
+        this.list = [];
+        this.init()
+    }
 
+
+    init = () => {
+        if(!this.$elList.length) return;
+        this.$elList.forEach(($el) => {
+            this.set($el);
+        })
+    }
+
+    set = ($el) => {
+        this.list.push(new this.ParentClass($el));
+    }
+}
 class Service {
     constructor() {
         this.POST = 'POST';
@@ -79,29 +99,6 @@ class Service {
         return document.querySelector('[name="csrf-token"]').content;
     }
 }
-
-class Container {
-    constructor(selector, ParentClass) {
-        this.selector = selector;
-        this.$elList = document.querySelectorAll(this.selector);
-        this.ParentClass = ParentClass;
-        this.list = [];
-        this.init()
-    }
-
-
-    init = () => {
-        if(!this.$elList.length) return;
-        this.$elList.forEach(($el) => {
-            this.set($el);
-        })
-    }
-
-    set = ($el) => {
-        this.list.push(new this.ParentClass($el));
-    }
-}
-
 class MainFormService extends Service {
     constructor(api) {
         super();
@@ -345,7 +342,7 @@ class Frame {
         }, 700);
     }
 
-    closeTabbHandler = ($target) => {
+    closeTabHandler = ($target) => {
         const $tab = $target.closest('[data-frame-tab]');
         if(!$tab) return;
         frameLight.show();
@@ -362,7 +359,7 @@ class Frame {
             this.replaceTabHandler(e.target.closest('[data-frame-tab-link]'));
         }
         if(e.target.closest('[data-frame-tab-close]')){
-            this.closeTabbHandler(e.target);
+            this.closeTabHandler(e.target);
         }
     }
 
@@ -965,7 +962,6 @@ class Slider {
 
 }
 
-
 class MainNav {
     constructor() {
         this.$mainNav = document.querySelector('#mainNav');
@@ -1001,6 +997,42 @@ class MainNav {
     }
 }
 
+
+class HobbyList{
+    constructor() {
+
+        this.$list = document.querySelector('#hobbyList');
+        this.init();
+    }
+
+
+    init = () => {
+        if(!this.$list) return;
+
+        this.listeners();
+    }
+
+    open = () => {
+        this.$list.classList.add('open');
+    }
+    close = () => {
+        this.$list.classList.remove('open');
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-hobby-list-open]')){
+            this.open();
+        }
+        if(e.target.closest('[data-hobby-list-close]')){
+            this.close();
+        }
+    };
+
+    listeners = () => {
+        document.addEventListener('click', this.clickHandler);
+    }
+}
+
 const frame = new Frame();
 
 const frameForm = new MainForm();
@@ -1022,4 +1054,9 @@ const postContainer = new Container('[data-post]', Post);
 const postSlider = new Slider();
 
 const mainNav = new MainNav();
+
+
+const hobbyList = new HobbyList();
+
+
 

@@ -1,4 +1,5 @@
 .post{
+
 }
 
 .post__top{
@@ -52,21 +53,24 @@
     gap: 5px;
 }
 
-.post-activity-item__icon{
-    width: 26px;
-    height: 26px;
-
-    &.reaction{
-        background: url('../img/icon/like.svg');
-    }
-    &.reaction.dislike{
-        transform: rotate(180deg);
-    }
-
-    &.reaction.active{
-        background: url('../img/icon/like-active.svg');
-    }
-}
+//.post-activity-item__icon{
+//    width: 18px;
+//    height: 18px;
+//
+//    &.reaction{
+//        background: url('../img/icon/like.svg');
+//    }
+//    &.reaction.dislike{
+//        transform: rotate(180deg);
+//    }
+//
+//    &.reaction.active{
+//        background: url('../img/icon/like-active.svg');
+//    }
+//
+//
+//
+//}
 
 .post-activity-item__count{
     color: #cccccc;
