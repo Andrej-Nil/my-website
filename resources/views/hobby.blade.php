@@ -56,6 +56,19 @@
                  </div>
                  @endforeach
             </div>
+
+            <div data-hobby-list-open class="hobby-btn">Все хобби</div>
+
+            <div id="hobbyList" class="hobby-list">
+                <span class="hobby-list__close" data-hobby-list-close></span>
+                <div class="hobby-list__inner">
+                    @foreach($hobbyList as $key => $hobby)
+                        <p data-hobby-list-close data-hobby-dot="{{$key}}" class="hobby-list__item">
+                            {{$hobby['title']}}
+                        </p>
+                    @endforeach
+                </div>
+            </div>
         </div>
 {{--        </div>--}}
 @endsection
