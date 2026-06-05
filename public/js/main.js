@@ -416,6 +416,7 @@ class HobbyPage {
         this.showTab(this.$tabList[this.activeTabIdx]);
         this.changeDot(this.$dotList[this.activeTabIdx]);
         this.listeners();
+        this.delay = this.setDelay();
     }
 
     changeDot = ($dot) => {
@@ -433,7 +434,7 @@ class HobbyPage {
         setTimeout(() => {
             $tab.classList.add('hide');
             $tab.classList.remove('move-down');
-        }, 1000)
+        }, this.delay)
     }
 
     showTab = ($tab) => {
@@ -443,7 +444,7 @@ class HobbyPage {
         setTimeout(() => {
             $tab.classList.remove('move-up');
             $tab.classList.add('show');
-        }, 1000)
+        }, this.delay)
     }
 
     changeTab = ($dot) => {
@@ -456,7 +457,7 @@ class HobbyPage {
         setTimeout(() => {
             this.showTab(this.$tabList[this.activeTabIdx]);
             this.changeDot(this.$dotList[this.activeTabIdx]);
-        }, 1000)
+        }, this.delay)
     }
 
     clickHandler = (e) => {
@@ -465,8 +466,25 @@ class HobbyPage {
         }
     }
 
+    setDelay = () => {
+        if(document.documentElement.clientWidth < 1040){
+            return 200;
+        } else{
+            return 1000;
+        }
+    }
+
+    updateDelay = () => {
+        if(document.documentElement.clientWidth < 1040){
+            this.delay = 0;
+        } else{
+            this.delay = 1000;
+        }
+    }
+
     listeners = () => {
         this.$hobbyPage.addEventListener('click', this.clickHandler);
+        window.addEventListener('resize', this.updateDelay);
     }
 }
 
@@ -997,7 +1015,6 @@ class MainNav {
     }
 }
 
-
 class HobbyList{
     constructor() {
 
@@ -1054,7 +1071,6 @@ const postContainer = new Container('[data-post]', Post);
 const postSlider = new Slider();
 
 const mainNav = new MainNav();
-
 
 const hobbyList = new HobbyList();
 

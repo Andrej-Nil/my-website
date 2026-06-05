@@ -1,11 +1,35 @@
 .my-contacts{
-    margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 auto;
+    @media (min-width: 1040px) {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 30px;
+    }
+}
+
+.my-contacts__photo{
+    width: 200px;
+    height: 200px;
+}
+
+.my-contacts__body{
+
+}
+
+.my-contacts__name{
+    font-size: 24px;
+    color: #cccccc;
+    margin-bottom: 30px;
 }
 
 .my-contacts__list{
     display: grid;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .my-contact{

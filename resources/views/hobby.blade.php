@@ -49,26 +49,26 @@
                     <div data-hobby-dot="{{$key}}" class="hobby-nav-item">
                         @if($hobby['bg_photo_url'])
                             <img src="{{$hobby['mini_photo_url']}}" alt="" class="hobby-nav-item__img"/>
-{{--                         <p class="hobby-nav-item__title">{{$hobby['title']}}</p>--}}
                         @else
                             <img src="{{asset('img/thumbnail.webp')}}" alt="" class="hobby-nav-item__img"/>
                         @endif
+                            <p class="hobby-nav-item__title">{{$hobby['title']}}</p>
                  </div>
                  @endforeach
             </div>
 
-            <div data-hobby-list-open class="hobby-btn">Все хобби</div>
+{{--            <div data-hobby-list-open class="hobby-btn">Все хобби</div>--}}
 
-            <div id="hobbyList" class="hobby-list">
-                <span class="hobby-list__close" data-hobby-list-close></span>
-                <div class="hobby-list__inner">
-                    @foreach($hobbyList as $key => $hobby)
-                        <p data-hobby-list-close data-hobby-dot="{{$key}}" class="hobby-list__item">
-                            {{$hobby['title']}}
-                        </p>
-                    @endforeach
-                </div>
-            </div>
+{{--            <div id="hobbyList" class="hobby-list">--}}
+{{--                <span class="hobby-list__close" data-hobby-list-close></span>--}}
+{{--                <div class="hobby-list__inner">--}}
+{{--                    @foreach($hobbyList as $key => $hobby)--}}
+{{--                        <p data-hobby-list-close data-hobby-dot="{{$key}}" class="hobby-list__item">--}}
+{{--                            {{$hobby['title']}}--}}
+{{--                        </p>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
 {{--        </div>--}}
 @endsection

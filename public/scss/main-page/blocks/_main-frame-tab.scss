@@ -9,12 +9,12 @@
 .main-frame-tab__inner{
     display: flex;
     height: 100%;
-    padding: 30px 70px;
+
+    padding: 50px 10px;
     overflow: auto;
-    //
-    //@media screen {
-    //
-    //}
+    @media (min-width: 1040px) {
+        padding: 30px 70px;
+    }
 }
 
 .main-frame-tab__close{
