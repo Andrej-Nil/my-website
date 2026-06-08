@@ -412,6 +412,7 @@ class HobbyPage {
         if(!this.$hobbyPage) return;
         this.activeTabIdx = 0
         this.$tabList = this.$hobbyPage.querySelectorAll('[data-hobby-tab]');
+        this.$hobbyNav = this.$hobbyPage.querySelector('#hobbyNav');
         this.$dotList = this.$hobbyPage.querySelectorAll('[data-hobby-dot]');
         this.showTab(this.$tabList[this.activeTabIdx]);
         this.changeDot(this.$dotList[this.activeTabIdx]);
@@ -448,21 +449,39 @@ class HobbyPage {
     }
 
     changeTab = ($dot) => {
+
+        if(+$dot.dataset.hobbyDot === this.activeTabIdx) return;
+
         const newActiveTabIdx = $dot.dataset.hobbyDot;
-        if(+newActiveTabIdx === this.activeTabIdx) return;
         this.hideTab(this.$tabList[this.activeTabIdx]);
 
         this.activeTabIdx = newActiveTabIdx;
 
         setTimeout(() => {
+            this.close();
             this.showTab(this.$tabList[this.activeTabIdx]);
             this.changeDot(this.$dotList[this.activeTabIdx]);
         }, this.delay)
     }
 
+
+    open = () => {
+        this.$hobbyNav.classList.add('open');
+    }
+
+    close = () => {
+        this.$hobbyNav.classList.remove('open');
+    }
+
     clickHandler = (e) => {
         if(e.target.closest('[data-hobby-dot]')){
             this.changeTab(e.target.closest('[data-hobby-dot]'));
+        }
+        if(e.target.closest('[data-hobby-nav-open]')){
+            this.open();
+        }
+        if(e.target.closest('[data-hobby-nav-close]')){
+            this.close();
         }
     }
 
@@ -1017,11 +1036,9 @@ class MainNav {
 
 class HobbyList{
     constructor() {
-
         this.$list = document.querySelector('#hobbyList');
         this.init();
     }
-
 
     init = () => {
         if(!this.$list) return;
@@ -1032,6 +1049,7 @@ class HobbyList{
     open = () => {
         this.$list.classList.add('open');
     }
+
     close = () => {
         this.$list.classList.remove('open');
     }
@@ -1072,7 +1090,7 @@ const postSlider = new Slider();
 
 const mainNav = new MainNav();
 
-const hobbyList = new HobbyList();
+// const hobbyList = new HobbyList();
 
 
 
