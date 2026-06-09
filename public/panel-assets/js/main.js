@@ -1153,7 +1153,6 @@ class DisplaySwitcher {
 
 }
 
-
 class SortingSelect{
     constructor($sortingSelect) {
         this.$sortingSelect = $sortingSelect;

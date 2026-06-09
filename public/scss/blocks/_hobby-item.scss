@@ -83,12 +83,6 @@
 }
 
 @keyframes showNav{
-    //from{
-    //    right: -100%;
-    //}
-    //to{
-    //    right: 0;
-    //}
 
     from{
         bottom: -110%;
@@ -110,11 +104,22 @@
     }
 }
 
+@keyframes smellFlareDotShadow{
+    from{
+        box-shadow: 0 0 1px 2px rgba(235, 240, 255, 1);
+    }
+    50%{
+        box-shadow: 0 0 3px 4px rgba(235, 240, 255, 1);
+    }
+    to{
+        box-shadow: 0 0 1px 2px rgba(235, 240, 255, 1);
+    }
+}
+
 .hobby-item{
     display: none;
     height: 100%;
     width: 100%;
-
     @media (min-width: 1040px) {
         display: block;
     }
@@ -147,31 +152,12 @@
     }
 }
 
-//.hobby-item.move-back{
-//    .hobby-item__image{
-//        left: -2000px;
-//        top: -1000px;
-//    }
-//
-//    .hobby-item__desc{
-//        right: -2000px;
-//        top: -1000px;
-//    }
-//
-//    .hobby-item__bg{
-//        bottom: -1000px;
-//    }
-//}
-
-
 .hobby-item.hide{
 
     @media (min-width: 1040px) {
         display: none;
     }
 }
-
-
 
 .hobby-item.move-up{
     display: block;
@@ -205,7 +191,6 @@
 }
 
 .hobby-item__inner{
-
     z-index: 10;
     @media (min-width: 1040px) {
         position: absolute;
@@ -259,7 +244,6 @@
     }
 }
 
-
 .hobby-item__text{
     color: #fff;
     font-size: 14px;
@@ -299,52 +283,128 @@
 }
 
 .hobby-nav{
-    position: absolute;
-    display: none;
-    justify-content: center;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.3);
-    width: 100%;
-    padding: 15px;
-    right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
     bottom: 0;
-    gap: 10px;
-    z-index: 10;
-    animation: showNav 1s ease-in-out forwards;
+    right: 0;
+    width: 100%;
+    z-index: -1;
+    transition: 0.2s ease-in-out;
+    &.open{
+        z-index: 100;
+        .hobby-nav__list{
+            transform: translateX(0);
+        }
+    }
+
     @media (min-width: 1040px) {
+        position: static;
+        z-index: 100;
+
+        width: 100%;
+        max-width: 100%;
+        animation: showNav 1s ease-in-out forwards;
         gap: 30px;
         display: flex;
     }
 }
 
+.hobby-nav__substrate{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    @media (min-width: 1040px) {
+        display: none;
+    }
+}
+
+.hobby-nav__list{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-110%);
+    background: #000;
+    max-width: 380px;
+    width: 100%;
+    display: flex;
+    padding: 60px 10px 30px;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 10px 0 15px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.2s ease-in-out;
+    z-index: 2;
+    @media (min-width: 1040px) {
+        transform: translateX(0);
+        position: static;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.3);
+        flex-direction: row;
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+        gap: 30px;
+    }
+}
+
+.hobby-nav__close{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    display: block;
+    margin-left: auto;
+    width: 25px;
+    height: 25px;
+    background-image: url('../img/icon/close-white.svg');
+    background-repeat: no-repeat;
+    cursor: pointer;
+    @media (min-width: 1040px) {
+        display: none;
+    }
+}
+
+
 .hobby-nav-item{
     cursor: pointer;
-    width: 80px;
-    height: 80px;
-    padding: 10px ;
-    background: #ebf0ff;
+    padding: 7px 10px;
+    background: rgba(255, 255, 255, .3);
     &.active{
-        animation: flareDotShadow 2s ease-in-out infinite;
+        animation: smellFlareDotShadow 2s ease-in-out infinite;
     }
     @media (min-width: 1040px) {
         width: 120px;
         height: 120px;
+        background: #ebf0ff;
+        &.active{
+            animation: flareDotShadow 2s ease-in-out infinite;
+        }
     }
 }
 
 .hobby-nav-item__img{
+    display: none;
     width: 100%;
-
     height: 100%;
     object-fit: cover;
     object-position: center;
     background: #fff;
+    @media (min-width: 1040px) {
+        display:block;
+    }
 }
 
 .hobby-nav-item__title{
-    padding: 5px 0;
+    display:block;
     font-weight: 700;
     font-size: 12px;
+    color: #ffffff;
+    @media (min-width: 1040px) {
+        display: none;
+    }
 }
 
 

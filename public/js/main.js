@@ -99,6 +99,59 @@ class Service {
         return document.querySelector('[name="csrf-token"]').content;
     }
 }
+
+class Render {
+    delete = ($element) => {
+        if (!$element) {
+            return;
+        }
+        $element.remove();
+    }
+
+    clear = ($element) => {
+        if (!$element) {
+            return;
+        }
+        $element.innerHTML = '';
+    }
+
+    getListHtml = (getHtmlFn, arr) => {
+        let list = '';
+        arr.forEach((item) => {
+
+            list += getHtmlFn(item);
+        })
+
+        return list;
+    }
+
+    innerHtml = ($element, string) => {
+        $element.innerHTML = string;
+    }
+
+    render = ($parent, getHtmlMarkup, argument = null, array = null, where = 'beforeend') => {
+
+        let markupAsStr = '';
+        if (!$parent) {
+            return;
+        }
+
+        if (array) {
+            array.forEach((item) => {
+                markupAsStr = markupAsStr + getHtmlMarkup(item);
+            })
+        }
+        if (argument) {
+            markupAsStr = getHtmlMarkup(argument);
+        }
+
+        if (!array && !argument) {
+            markupAsStr = getHtmlMarkup();
+        }
+        $parent.insertAdjacentHTML(where, markupAsStr);
+    }
+}
+
 class MainFormService extends Service {
     constructor(api) {
         super();
@@ -412,10 +465,12 @@ class HobbyPage {
         if(!this.$hobbyPage) return;
         this.activeTabIdx = 0
         this.$tabList = this.$hobbyPage.querySelectorAll('[data-hobby-tab]');
+        this.$hobbyNav = this.$hobbyPage.querySelector('#hobbyNav');
         this.$dotList = this.$hobbyPage.querySelectorAll('[data-hobby-dot]');
         this.showTab(this.$tabList[this.activeTabIdx]);
         this.changeDot(this.$dotList[this.activeTabIdx]);
         this.listeners();
+        this.delay = this.setDelay();
     }
 
     changeDot = ($dot) => {
@@ -433,7 +488,7 @@ class HobbyPage {
         setTimeout(() => {
             $tab.classList.add('hide');
             $tab.classList.remove('move-down');
-        }, 1000)
+        }, this.delay)
     }
 
     showTab = ($tab) => {
@@ -443,32 +498,68 @@ class HobbyPage {
         setTimeout(() => {
             $tab.classList.remove('move-up');
             $tab.classList.add('show');
-        }, 1000)
+        }, this.delay)
     }
 
     changeTab = ($dot) => {
+
+        if(+$dot.dataset.hobbyDot === this.activeTabIdx) return;
+
         const newActiveTabIdx = $dot.dataset.hobbyDot;
-        if(+newActiveTabIdx === this.activeTabIdx) return;
         this.hideTab(this.$tabList[this.activeTabIdx]);
 
         this.activeTabIdx = newActiveTabIdx;
 
         setTimeout(() => {
+            this.close();
             this.showTab(this.$tabList[this.activeTabIdx]);
             this.changeDot(this.$dotList[this.activeTabIdx]);
-        }, 1000)
+        }, this.delay)
+    }
+
+
+    open = () => {
+        this.$hobbyNav.classList.add('open');
+    }
+
+    close = () => {
+        this.$hobbyNav.classList.remove('open');
     }
 
     clickHandler = (e) => {
         if(e.target.closest('[data-hobby-dot]')){
             this.changeTab(e.target.closest('[data-hobby-dot]'));
         }
+        if(e.target.closest('[data-hobby-nav-open]')){
+            this.open();
+        }
+        if(e.target.closest('[data-hobby-nav-close]')){
+            this.close();
+        }
+    }
+
+    setDelay = () => {
+        if(document.documentElement.clientWidth < 1040){
+            return 200;
+        } else{
+            return 1000;
+        }
+    }
+
+    updateDelay = () => {
+        if(document.documentElement.clientWidth < 1040){
+            this.delay = 0;
+        } else{
+            this.delay = 1000;
+        }
     }
 
     listeners = () => {
         this.$hobbyPage.addEventListener('click', this.clickHandler);
+        window.addEventListener('resize', this.updateDelay);
     }
 }
+
 
 class GalleryModal {
     constructor() {
@@ -480,13 +571,53 @@ class GalleryModal {
         if(!this.$modal) return;
         this.$contentWrap = this.$modal.querySelector('[data-content]');
         this.arrowList = this.$modal.querySelectorAll('[data-gallery-modal]');
+        this.$contentList = [];
+        this.index = 0;
+
         this.IMG = 'img';
+
+        this.touchStart = 0;
+        this.touchPosition = 0;
+        this.sensitivity = 50;
+
         this.listeners();
     }
 
-    setContent = ($photo) => {
-        const type = $photo.dataset.galleryItem;
-        const url = $photo.dataset.url;
+    open = ($contentList, $currentItem = null) => {
+        this.$contentList = $contentList;
+
+        this.setIndex($currentItem);
+
+        this.toggleArrows();
+
+        this.setContent($currentItem);
+        this.$modal.classList.add('open');
+    }
+
+    close = () => {
+        this.removeContent()
+        this.$modal.classList.remove('open');
+    }
+
+    setIndex = ($currenItem) => {
+        this.$contentList.forEach(($item, key) => {
+            if($currenItem === $item){
+                this.index = key;
+            }
+        })
+    }
+
+    setContent = ($contentItem = null) => {
+        if($contentItem){
+            this.createContent($contentItem);
+        } else {
+            this.createContent(this.$contentList[0]);
+        }
+    }
+
+    createContent = ($contentItem) => {
+        const type = $contentItem.dataset.galleryItem;
+        const url = $contentItem.dataset.url;
         if(type === this.IMG){
             this.createImg(url);
         }
@@ -496,18 +627,30 @@ class GalleryModal {
         this.$contentWrap.innerHTML = `<img src="${url}" alt="" class="gallery-modal__content"/>`;
     }
 
-    open = (isShowArrows) => {
-
-        this.toggleArrows(isShowArrows);
-        this.$modal.classList.add('open');
+    removeContent = () => {
+        this.$contentWrap.innerHTML = '';
     }
 
-    close = () => {
-        this.$modal.classList.remove('open');
+    next = () => {
+        this.index += 1;
+
+        if(this.index >  (this.$contentList.length - 1)){
+            this.index = 0;
+        }
+        this.setContent(this.$contentList[this.index]);
     }
 
-    toggleArrows = (isShowArrows) => {
-        if(isShowArrows){
+    prev = () => {
+        this.index -= 1;
+
+        if(this.index <  0){
+            this.index = this.$contentList.length - 1;
+        }
+        this.setContent(this.$contentList[this.index]);
+    }
+
+    toggleArrows = () => {
+        if(this.$contentList.length > 1){
             this.showArrows();
         } else {
             this.hideArrows();
@@ -526,82 +669,114 @@ class GalleryModal {
         });
     }
 
-
     clickHandler = (e) => {
         if(e.target.closest('[data-close]')){
             this.close();
         }
+
+        if(e.target.closest('[data-gallery-modal="next"]')){
+            this.next();
+        }
+
+        if(e.target.closest('[data-gallery-modal="prev"]')){
+            this.prev();
+        }
     }
+
+
+
+    startTouchMove = (e) => {
+        this.touchStart = e.changedTouches[0].clientX;
+        this.touchPosition = this.touchStart;
+    }
+
+    touchMove = (e) => {
+        this.touchPosition = e.changedTouches[0].clientX;
+    }
+
+    touchEnd = () => {
+        let distance = this.touchStart - this.touchPosition;
+        if (distance > 0 && distance >= this.sensitivity) {
+            this.next();
+        }
+        if (distance < 0 && distance * -1 >= this.sensitivity) {
+            this.prev();
+        }
+    }
+
 
     listeners = () => {
         this.$modal.addEventListener('click', this.clickHandler);
+
+        this.$contentWrap.addEventListener('touchstart', (e) => {
+            this.startTouchMove(e)
+        }, true);
+        this.$contentWrap.addEventListener('touchmove', (e) => {
+            this.touchMove(e)
+        }, true);
+        this.$contentWrap.addEventListener('touchend', () => {
+            this.touchEnd()
+        }, true);
     }
 }
 
 class Gallery {
     constructor($gallery) {
         this.$gallery = $gallery;
-
         this.init();
     }
 
     init = () => {
         if (!this.$gallery) return;
-        this.$photoList = this.$gallery.querySelectorAll('[data-gallery-item]');
-        this.isShowArrows = this.$photoList.length > 1;
-        this.index = null;
+        this.$contentList = this.$gallery.querySelectorAll('[data-gallery-item]');
         this.listeners();
     }
 
-    setPhotoInModal = ($photo) => {
-        this.$photoList.forEach(($item, key) => {
-            if($item === $photo){
-                this.index = key;
-                galleryModal.setContent($photo);
-            }
-        })
+
+    openGalleryModal = ($galleryItem) => {
+        galleryModal.open(this.$contentList, $galleryItem);
     }
 
-    showPhoto = ($photo) => {
-        this.setPhotoInModal($photo);
-        setTimeout(() => {
-            galleryModal.open(this.isShowArrows);
-        }, 40)
-    }
+    // setPhotoInModal = ($photo) => {
+    //     this.$photoList.forEach(($item, key) => {
+    //         if($item === $photo){
+    //             this.index = key;
+    //             galleryModal.setContent($photo);
+    //         }
+    //     })
+    // }
 
-    nextPhoto = () => {
-        this.index += 1;
-        if(this.index >  (this.$photoList.length - 1)){
-            this.index = 0;
-        }
-        galleryModal.setContent(this.$photoList[this.index]);
-    }
-
-    prevPhoto = () => {
-        this.index -= 1;
-
-        if(this.index <  0){
-            this.index = this.$photoList.length - 1;
-        }
-        galleryModal.setContent(this.$photoList[this.index]);
-    }
-
+    // showPhoto = ($photo) => {
+    //     this.setPhotoInModal($photo);
+    //     setTimeout(() => {
+    //         galleryModal.open(this.isShowArrows);
+    //     }, 40)
+    // }
+    //
+    // nextPhoto = () => {
+    //     this.index += 1;
+    //     if(this.index >  (this.$photoList.length - 1)){
+    //         this.index = 0;
+    //     }
+    //     galleryModal.setContent(this.$photoList[this.index]);
+    // }
+    //
+    // prevPhoto = () => {
+    //     this.index -= 1;
+    //
+    //     if(this.index <  0){
+    //         this.index = this.$photoList.length - 1;
+    //     }
+    //     galleryModal.setContent(this.$photoList[this.index]);
+    // }
     clickHandler = (e) => {
         if(e.target.closest('[data-gallery-item]')){
-            this.showPhoto(e.target.closest('[data-gallery-item]'));
-        }
-
-        if(e.target.closest('[data-gallery-modal="prev"]')){
-            this.prevPhoto();
-        }
-
-        if(e.target.closest('[data-gallery-modal="next"]')){
-            this.nextPhoto();
+            this.openGalleryModal(e.target.closest('[data-gallery-item]'));
         }
     }
 
     listeners = () => {
-        document.addEventListener('click', this.clickHandler);
+        this.$gallery.addEventListener('click', this.clickHandler);
     }
 }
 
@@ -997,14 +1172,11 @@ class MainNav {
     }
 }
 
-
 class HobbyList{
     constructor() {
-
         this.$list = document.querySelector('#hobbyList');
         this.init();
     }
-
 
     init = () => {
         if(!this.$list) return;
@@ -1015,6 +1187,7 @@ class HobbyList{
     open = () => {
         this.$list.classList.add('open');
     }
+
     close = () => {
         this.$list.classList.remove('open');
     }
@@ -1055,8 +1228,7 @@ const postSlider = new Slider();
 
 const mainNav = new MainNav();
 
-
-const hobbyList = new HobbyList();
+// const hobbyList = new HobbyList();
 
 
 

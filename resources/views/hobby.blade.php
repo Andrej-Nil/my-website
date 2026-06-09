@@ -13,7 +13,6 @@
             <div class="hobby-page__content">
 
                 @foreach($hobbyList as $key => $hobby)
-{{--                    @dd($hobbyList)--}}
                 <div data-hobby-tab="{{$key}}" class="hobby-item hide">
                     <div class="hobby-item__inner container">
                         @if($hobby['main_photo_url'])
@@ -23,52 +22,38 @@
                             <p class="hobby-item__title">{{$hobby['title']}}</p>
                             <p class="hobby-item__text"> {{$hobby['text']}}</p>
                             @if($hobby['photo_list_url'])
-
                                 <div data-gallery class="hobby-item__gallery">
                                     @foreach($hobby['photo_list_url'] as $photoUrl)
                                     <img data-gallery-item="img" data-url="{{$photoUrl}}" src="{{$photoUrl}}" alt="" class="hobby-item__photo">
-    {{--                                    <div class="hobby-slider-slide">--}}
-    {{--                                        <img data-gallery-item="img" data-url="{{$photoUrl}}" src="{{$photoUrl}}" alt="" class="hobby-slider-slide__img">--}}
-    {{--                                    </div>--}}
                                     @endforeach
                                 </div>
-
                             @endif
                         </div>
                     </div>
                     @if($hobby['bg_photo_url'])
                         <img src="{{$hobby['bg_photo_url']}}" alt="" class="hobby-item__bg">
                     @endif
-
                 </div>
                 @endforeach
 
             </div>
-            <div class="hobby-nav">
-                 @foreach($hobbyList as $key => $hobby)
-                    <div data-hobby-dot="{{$key}}" class="hobby-nav-item">
-                        @if($hobby['bg_photo_url'])
-                            <img src="{{$hobby['mini_photo_url']}}" alt="" class="hobby-nav-item__img"/>
-{{--                         <p class="hobby-nav-item__title">{{$hobby['title']}}</p>--}}
-                        @else
-                            <img src="{{asset('img/thumbnail.webp')}}" alt="" class="hobby-nav-item__img"/>
-                        @endif
-                 </div>
-                 @endforeach
-            </div>
-
-            <div data-hobby-list-open class="hobby-btn">Все хобби</div>
-
-            <div id="hobbyList" class="hobby-list">
-                <span class="hobby-list__close" data-hobby-list-close></span>
-                <div class="hobby-list__inner">
+            <div id="hobbyNav" class="hobby-nav">
+                <div data-hobby-nav-close class="hobby-nav__substrate"></div>
+                <div class="hobby-nav__list">
+                    <span data-hobby-nav-close class="hobby-nav__close"></span>
                     @foreach($hobbyList as $key => $hobby)
-                        <p data-hobby-list-close data-hobby-dot="{{$key}}" class="hobby-list__item">
-                            {{$hobby['title']}}
-                        </p>
+                        <div data-hobby-dot="{{$key}}" class="hobby-nav-item">
+                            @if($hobby['bg_photo_url'])
+                                <img src="{{$hobby['mini_photo_url']}}" alt="" class="hobby-nav-item__img"/>
+                            @else
+                                <img src="{{asset('img/thumbnail.webp')}}" alt="" class="hobby-nav-item__img"/>
+                            @endif
+                            <p class="hobby-nav-item__title">{{$hobby['title']}}</p>
+                        </div>
                     @endforeach
                 </div>
             </div>
+
+            <div data-hobby-nav-open class="hobby-btn">Все хобби</div>
         </div>
-{{--        </div>--}}
 @endsection

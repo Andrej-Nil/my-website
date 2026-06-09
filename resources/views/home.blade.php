@@ -87,6 +87,7 @@
                          <div class="main-frame-tab__inner scroll">
                              <div class="about-me">
                                  <div class="about-me__content">
+                                     <img src="{{$admin['photo_url']}}" alt="{{$admin['second_name'].' '.$admin['first_name']}}" class="about-me__photo">
                                      <div class="about-me__intro">
                                       <p class="about-me__title">{{$admin['second_name'].' '.$admin['first_name']}}</p>
                                       <p class="about-me__text">
@@ -94,7 +95,7 @@
                                       </p>
 
                                      </div>
-                                     <img src="{{$admin['photo_url']}}" alt="" class="about-me__photo">
+
 
                                  </div>
 {{--                                 <div class="about-me__body">--}}
@@ -119,7 +120,7 @@
                          <div class="my-works">
                              <div class="my-works__list">
                                  @foreach($portfolioList as $portfolio)
-                                     <a href="{{$portfolio['link']}}" target="_blank" class="my-work-card">
+                                     <a href="{{route('portfolios.show', $portfolio['id'])}}" target="_blank" class="my-work-card">
                                          <img src="{{$portfolio['photo_url']}}" alt="" class="my-work-card__img"/>
                                          <p class="my-work-card__title">{{$portfolio['title']}}</p>
                                      </a>
@@ -127,16 +128,8 @@
                              </div>
 
                              <div class="my-works__bottom">
-                                <a href="{{route('portfolios')}}" class="my-works__link btn">Ссылка</a>
+                                <a href="{{route('portfolios')}}" target="_blank" class="my-works__link btn">Ссылка</a>
                              </div>
-
-
-{{--                             @endif--}}
-{{--                             @foreach($workList as $work)--}}
-{{--                                 <a href="{{$work['url']}}" target="_blank" class="my-work-card">--}}
-{{--                                     <img src="{{$work['photo']['url']}}" alt="" class="my-work-card__img"/>--}}
-{{--                                 </a>--}}
-{{--                             @endforeach--}}
 
                          </div>
                      </div>
@@ -144,15 +137,15 @@
 
                    <div data-frame-tab="contact" class="main-frame-tab">
                      <div data-frame-tab-close class="main-close  main-frame-tab__close"></div>
-                     <div class="main-frame-tab__inner scroll">
-                         <div class="about-me">
-                             <div class="about-me__body">
-                                 <p class="about-me__title">{{$admin['second_name'].' '.$admin['first_name']}}</p>
-                                 <p class="about-me__text">{{$admin['about']}}</p>
-                             </div>
-
+                         <div class="main-frame-tab__inner scroll">
                              <div class="my-contacts">
-                                     <div class="about-me__subtitle">Контакты</div>
+                                 <img src="{{$admin['photo_url']}}" alt="{{$admin['second_name'].' '.$admin['first_name']}}" class="my-contacts__photo">
+
+                                 <div class="my-contacts__body">
+                                     <p class="my-contacts__name">{{$admin['second_name'].' '.$admin['first_name']}}</p>
+
+
+
                                      <div class="my-contacts__list">
 
                                          <div class="my-contact">
@@ -165,20 +158,22 @@
                                              <a href="tel:{{$admin['mail']}}"  class="my-contact__content">{{$admin['mail']}}</a>
                                          </div>
                                      </div>
-
-                                        <div class="socials">
-                                            <a href="{{$admin['telegram']}}" target="_blank" class="social__link">
-                                                <img src="{{asset('img/icon/tg.svg')}}"class="social__icon" alt="">
-                                            </a>
-                                            <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
-                                                <img src="{{asset('img/icon/vk.svg')}}"class="social__icon" alt="">
-                                            </a>
-                                            <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
-                                                <img src="{{asset('img/icon/wa.svg')}}"class="social__icon" alt="">
-                                            </a>
-                                        </div>
-                                     <button data-frame-tab-link="form" type="button" class="my-contacts__btn btn">Форма</button>
+                                     <div class="socials">
+                                         <a href="{{$admin['telegram']}}" target="_blank" class="social__link">
+                                             <img src="{{asset('img/icon/tg.svg')}}"class="social__icon" alt="">
+                                         </a>
+                                         <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
+                                             <img src="{{asset('img/icon/vk.svg')}}"class="social__icon" alt="">
+                                         </a>
+                                         <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
+                                             <img src="{{asset('img/icon/wa.svg')}}"class="social__icon" alt="">
+                                         </a>
+                                     </div>
+{{--                                     <button data-frame-tab-link="form" type="button" class="my-contacts__btn btn">Обратная связь</button>--}}
                                  </div>
+
+
+                             </div>
 
                          </div>
                      </div>
