@@ -683,8 +683,6 @@ class GalleryModal {
         }
     }
 
-
-
     startTouchMove = (e) => {
         this.touchStart = e.changedTouches[0].clientX;
         this.touchPosition = this.touchStart;
@@ -703,7 +701,6 @@ class GalleryModal {
             this.prev();
         }
     }
-
 
     listeners = () => {
         this.$modal.addEventListener('click', this.clickHandler);
