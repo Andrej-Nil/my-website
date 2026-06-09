@@ -24,8 +24,6 @@
     z-index: 1;
 }
 
-
-
 .gallery-modal__content{
     position: relative;
     margin: auto;
@@ -34,14 +32,15 @@
     width: auto;
     max-height: 80vh;
     height: auto;
-    border: 10px solid #fff;
+    border: 2px solid #fff;
     z-index: 3;
+
 }
 
 .gallery-modal__close{
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 20px;
+    right: 20px;
     width: 35px;
     height: 35px;
     padding: 5px;
@@ -59,27 +58,46 @@
 .gallery-modal-arrow{
     position: absolute;
     top: 50%;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     user-select: none;
+    border-radius: 50%;
     padding: 5px;
     transition: 0.2s linear;
-    z-index: 1;
+    z-index: 5;
+    background: #333;
     &.hide{
         display: none;
     }
     &.prev{
-        left: 30px;
+        left: 20px;
         transform: translateY(-50%);
     }
     &.next{
-        right: 30px;
+        right: 20px;
         transform: translateY(-50%);
     }
 
     &:hover{
         background: #333;
+    }
+
+    @media (min-width: 1040px) {
+        background: #33333300;
+        width: 40px;
+        height: 40px;
+        &.prev{
+            left: 30px;
+            transform: translateY(-50%);
+        }
+        &.next{
+            right: 30px;
+            transform: translateY(-50%);
+        }
+        &:hover{
+            background: #333;
+        }
     }
 
 }
