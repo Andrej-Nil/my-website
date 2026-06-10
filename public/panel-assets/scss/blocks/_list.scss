@@ -12,11 +12,16 @@
 .list-item{
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 5px 15px;
+    gap: 10px;
+    padding: 5px;
     border-top: 1px solid #dfdfdf;
     &:first-child{
         border-top: none;
+    }
+    @media (min-width: 1040px) {
+        padding: 5px 15px;
+        gap: 15px;
+
     }
 }
 
@@ -28,9 +33,15 @@
 
 .list-item__title{
     flex-grow: 1;
-    padding: 10px 0;
+    font-size: 12px;
+
+
     &--grab{
         cursor: grab;
+    }
+    @media (min-width: 1040px) {
+       font-size: 16px;
+
     }
 }
 
@@ -46,6 +57,7 @@
     cursor: pointer;
     border: none;
     outline: none;
+    flex-shrink: 0;
     &:hover{
         background: #f8f3c0;
     }

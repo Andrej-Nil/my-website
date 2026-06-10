@@ -51,17 +51,34 @@
         </div>
         <div class="container">
             <nav class="link-list">
-                <a href="{{route('home')}}" target="_blank" class="link-item">Главная</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('resume')}}" target="_blank" class="link-item">Резюме</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('pageDescriptions')}}" target="_blank" class="link-item">О сайте</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('portfolios')}}" target="_blank" class="link-item">Портфолио</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('hobbies')}}" target="_blank" class="link-item">Хобби</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('posts')}}" target="_blank" class="link-item">Посты</a>
+                <a href="{{route('home')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Главная </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('resume')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Резюме </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('pageDescriptions')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> О сайте </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('portfolios')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Портфолио </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('hobbies')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Хобби </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('posts')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Посты </span>
+                </a>
             </nav>
             @yield('content')
         </div>
@@ -79,6 +96,15 @@
 
     </div>
 </div>
+
+
+<div class="mobile-menu">
+    <span data-open-mobile-menu class="mobile-menu-item">
+        <img src="{{asset('panel-assets/img/icons/menu-nav.svg')}}" alt="" class="mobile-menu-item__icon">
+    </span>
+</div>
 <script src="{{asset('panel-assets/js/main.js')}}"></script>
+
+
 </body>
 </html>

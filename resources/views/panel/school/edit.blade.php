@@ -5,18 +5,24 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.schools')}}" class="breadcrumbs__link">Образование</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редатирование учереждения</a>
+            <a href="{{route('panel.schools')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Образование</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Редатировать учреждение</span>
+            </a>
         </div>
 
-        <div class="btn-list">
-            <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
-            <a href="{{route('panel.schools.create')}}" class="btn btn--yellow">Добавить учереждение</a>
+
+
+        <div class="content-top__links">
+            <a href="{{route('resume')}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр резюме</a>
+            <a href="{{route('panel.schools.create')}}" class="content-top__btn btn btn--yellow">Добавить учреждение</a>
         </div>
 
     </div>
-    <h1 class="panel-title">Редатирование учереждения</h1>
+    <h1 class="panel-title">Редатировать учереждения</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
     @endif
@@ -77,7 +83,7 @@
             <div class="form-control">
                 <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{$school['text']}}</textarea>
+                    <textarea id="text" rows="10"  class="form-control__input input" name="text"  placeholder="Описание">{{$school['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
@@ -86,12 +92,12 @@
                 <span class="form-control__label">Статус публикации</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="display1" class="form-control__label">Опубликовать</label>
+                        <label for="display1" class="checkbox__label">Опубликовать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1"  @checked($school['is_display'] == 1)>
                     </div>
 
                     <div class="checkbox">
-                        <label for="display2" class="form-control__label">Скрыть</label>
+                        <label for="display2" class="checkbox__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0"  @checked($school['is_display'] == 0)>
                     </div>
                 </div>

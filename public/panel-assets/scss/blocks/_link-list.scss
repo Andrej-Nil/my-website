@@ -1,20 +1,41 @@
 .link-list{
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 15px 5px;
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ccc;
+    @media (min-width: 1040px) {
+        gap: 10px;
+    }
 }
 
 .link-item{
-    font-size: 16px;
+    display: flex;
+    gap: 5px;
+    &:hover .link-item__label{
+        text-decoration: none;
+    }
+    @media (min-width: 1040px) {
+        gap: 10px;
+    }
+}
+
+.link-item__label{
+    font-size: 12px;
     color: #007aff;
     text-decoration: underline;
-    &:hover{
-        text-decoration: none;
+
+    @media (min-width: 1040px) {
+        font-size: 16px;
     }
 }
 
 .link-item__slash{
+    font-size: 12px;
     color: #007aff;
+    @media (min-width: 1040px) {
+        font-size: 16px;
+    }
 }
+

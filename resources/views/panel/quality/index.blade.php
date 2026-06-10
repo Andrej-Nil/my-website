@@ -13,6 +13,12 @@
 
     <div class="content">
         <div class="content-top">
+
+            <div class="content-top__links">
+                <a href="{{route('resume')}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр резюме</a>
+                <a href="{{route('panel.qualities.create')}}" class="content-top__btn btn btn--yellow">Добавить качество</a>
+            </div>
+            <div class="content-top__controls">
             <form action="{{route('panel.qualities')}}" method="get" class="search-form">
 
                 <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>
@@ -33,20 +39,11 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-list">
-                <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
-                <a href="{{route('panel.qualities.create')}}" class="btn btn--yellow">Добавить качество</a>
             </div>
         </div>
 
         <div data-group data-sortable-list data-api="{{route('quality.update.sort')}}" class="list sortable-list">
 
-            <div data-sortable-loader class="sortable-loader">
-                <div class="sortable-loader__inner">
-                    <p class="sortable-loader__message">Произошла ошибка. Попробуйте еще раз.</p>
-                    <button data-loader-close class="btn btn--yellow">Закрыть</button>
-                </div>
-            </div>
             @forelse($qualityList['data'] as $quality)
                 <div draggable="true" data-sortable-item="{{$quality['id']}}" class="list-item">
                     <span data-display-switcher="{{$quality['id']}}" data-api="{{route('quality.update.display')}}" class="list-item__btn{{$quality['is_display'] ? ' active' : '' }} " title="Редоктировать">
@@ -73,6 +70,13 @@
             @empty
                 <p class="list__empty">Качеств не найдено</p>
             @endforelse
+
+            <div data-sortable-loader class="sortable-loader">
+                <div class="sortable-loader__inner">
+                    <p class="sortable-loader__message">Произошла ошибка. Попробуйте еще раз.</p>
+                    <button data-loader-close class="btn btn--yellow">Закрыть</button>
+                </div>
+            </div>
 
         </div>
         @if(count($qualityList['links']) > 3 )

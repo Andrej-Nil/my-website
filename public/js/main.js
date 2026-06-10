@@ -20,6 +20,7 @@ class Container {
         this.list.push(new this.ParentClass($el));
     }
 }
+
 class Service {
     constructor() {
         this.POST = 'POST';
@@ -559,7 +560,6 @@ class HobbyPage {
         window.addEventListener('resize', this.updateDelay);
     }
 }
-
 
 class GalleryModal {
     constructor() {

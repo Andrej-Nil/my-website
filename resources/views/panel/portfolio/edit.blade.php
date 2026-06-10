@@ -82,11 +82,11 @@
                 <span class="form-control__label">Статус публикации</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="display1" class="form-control__label">Опубликовать</label>
+                        <label for="display1" class="checkbox__label">Опубликовать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1" @checked($portfolio['is_display'] == 1)>
                     </div>
                     <div class="checkbox">
-                        <label for="display2" class="form-control__label">Скрыть</label>
+                        <label for="display2" class="checkbox__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0" @checked($portfolio['is_display'] == 0)>
                     </div>
 

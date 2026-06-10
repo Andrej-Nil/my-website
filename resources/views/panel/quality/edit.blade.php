@@ -38,12 +38,12 @@
                 <span class="form-control__label">Тип</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="type0" class="form-control__label">Личные</label>
+                        <label for="type0" class="checkbox__label">Личные</label>
                         <input id="type0" type="radio" class="input" name="type" value="1"  @checked($quality['type'] == 1)>
                     </div>
 
                     <div class="checkbox">
-                        <label for="type1" class="form-control__label">Профессиональные</label>
+                        <label for="type1" class="checkbox__label">Профессиональные</label>
                         <input id="type1" type="radio" class="input" name="type" value="2" @checked($quality['type'] == 2)>
                     </div>
 
@@ -54,12 +54,12 @@
                 <span class="form-control__label">Статус публикации</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="display1" class="form-control__label">Опубликовать</label>
+                        <label for="display1" class="checkbox__label">Показать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1" @checked($quality['is_display'] == 1)>
                     </div>
 
                     <div class="checkbox">
-                        <label for="display2" class="form-control__label">Скрыть</label>
+                        <label for="display2" class="checkbox__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0" @checked($quality['is_display'] == 0)>
                     </div>
                 </div>

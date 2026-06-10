@@ -4,15 +4,20 @@
 
 @section('content')
     <div class="content-top">
+
         <div class="breadcrumbs">
-            <a href="{{route('panel.jobs')}}" class="breadcrumbs__link">Опыт работы</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редактировать место работы</a>
+            <a href="{{route('panel.jobs')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Опыт работы</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Редактировать место работы</span>
+            </a>
         </div>
 
-        <div class="btn-list">
-            <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
-            <a href="{{route('panel.jobs.create')}}" class="btn btn--yellow">Добавить место работы</a>
+        <div class="content-top__links">
+            <a href="{{route('resume')}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр резюме</a>
+            <a href="{{route('panel.jobs.create')}}" class="content-top__btn btn btn--yellow">Добавить место работы</a>
         </div>
 
     </div>
@@ -86,12 +91,12 @@
                 <span class="form-control__label">Статус публикации</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="display1" class="form-control__label">Опубликовать</label>
+                        <label for="display1" class="checkbox__label">Опубликовать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1"  @checked($job['is_display'] == 1)>
                     </div>
 
                     <div class="checkbox">
-                        <label for="display2" class="form-control__label">Скрыть</label>
+                        <label for="display2" class="checkbox__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0"  @checked($job['is_display'] == 0)>
                     </div>
 
