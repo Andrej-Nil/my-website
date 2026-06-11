@@ -46,11 +46,6 @@
 
 
         <div data-group data-sortable-list data-api="{{route('job.update.sort')}}" class="list sortable-list">
-{{--            <div class="list-head">--}}
-{{--                <p class="list-item__title">Название</p>--}}
-
-
-{{--            </div>--}}
             @forelse($jobList['data'] as $job)
             <div draggable="true" data-sortable-item="{{$job['id']}}" class="list-item">
                  <span data-display-switcher="{{$job['id']}}" data-api="{{route('job.update.display')}}" class="list-item__btn{{$job['is_display'] ? ' active' : '' }} " title="Редоктировать">

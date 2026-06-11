@@ -19,26 +19,26 @@
                 <a href="{{route('panel.qualities.create')}}" class="content-top__btn btn btn--yellow">Добавить качество</a>
             </div>
             <div class="content-top__controls">
-            <form action="{{route('panel.qualities')}}" method="get" class="search-form">
+                <form action="{{route('panel.qualities')}}" method="get" class="search-form">
 
-                <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>
-                <button class="search-form__btn">
-                    <img src="{{asset('panel-assets/img/icons/search-icon.svg')}}" alt="" class="search-form__icon">
-                </button>
-            </form>
-            <div data-sorting class="sorting">
-                <span class="sorting__label">Сортировка</span>
-                <div class="sorting__select">
-                    <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>
-                    <div data-sorting-list class="sorting__list">
-                        <a href="{{route('panel.qualities', ['search' => $search])}}" class="sorting__link">По умолчанию</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'old-up', 'search' => $search] )}}" class="sorting__link">Сначало старые</a>
+                    <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>
+                    <button class="search-form__btn">
+                        <img src="{{asset('panel-assets/img/icons/search-icon.svg')}}" alt="" class="search-form__icon">
+                    </button>
+                </form>
+                <div data-sorting class="sorting">
+                    <span class="sorting__label">Сортировка</span>
+                    <div class="sorting__select">
+                        <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>
+                        <div data-sorting-list class="sorting__list">
+                            <a href="{{route('panel.qualities', ['search' => $search])}}" class="sorting__link">По умолчанию</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'old-up', 'search' => $search] )}}" class="sorting__link">Сначало старые</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
 

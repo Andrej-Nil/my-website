@@ -3,14 +3,14 @@
     align-items: center;
     border-radius: 5px;
     gap: 10px;
-    max-width: 600px;
+
     width: 100%;
     border: 1px solid #dfdfdf;
     padding: 0 10px;
     @media (min-width: 1040px) {
         padding: 0 15px;
+        max-width: 600px;
     }
-
 }
 
 .search-form__input{

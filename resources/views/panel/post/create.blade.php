@@ -4,11 +4,14 @@
 
 @section('content')
     <div class="content-top">
-
         <div class="breadcrumbs">
-            <a href="{{route('panel.posts')}}" class="breadcrumbs__link">Посты</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Создание поста</a>
+            <a href="{{route('panel.posts')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Посты</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Создание поста</span>
+            </a>
         </div>
     </div>
     <h1 class="panel-title">Создание поста</h1>
@@ -54,7 +57,7 @@
             <div class="form-control">
                 <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{old('text')}}</textarea>
+                    <textarea id="text" rows="10" class="form-control__input input" name="text"  placeholder="Описание">{{old('text')}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
 

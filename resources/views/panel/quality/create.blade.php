@@ -5,11 +5,16 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.qualities')}}" class="breadcrumbs__link">Качества</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Добавить качество</a>
+            <a href="{{route('panel.qualities')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Качества</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Добавить качество</span>
+            </a>
         </div>
     </div>
+
     <h1 class="panel-title">Добавить качество</h1>
     @if($errors->any())
         @include('panel.components.error-board', ['message'=>'Ошибка отправки формы.'])
@@ -33,12 +38,12 @@
                 <span class="form-control__label">Тип</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="type1" class="form-control__label">Профессиональные</label>
+                        <label for="type1" class="checkbox__label">Профессиональные</label>
                         <input id="type1" type="radio" class="input" name="type" value="1" >
                     </div>
 
                     <div class="checkbox">
-                        <label for="type0" class="form-control__label">Личные</label>
+                        <label for="type0" class="checkbox__label">Личные</label>
                         <input id="type0" type="radio" class="input" name="type" value="2" checked>
                     </div>
                 </div>

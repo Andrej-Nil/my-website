@@ -82,7 +82,7 @@
             <div class="form-control">
                 <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{$job['text']}}</textarea>
+                    <textarea id="text" rows="10"  class="form-control__input input" name="text"  placeholder="Описание">{{$job['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>

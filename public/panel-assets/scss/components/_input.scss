@@ -2,7 +2,10 @@
     outline: none;
     border: 1px solid #dfdfdf;
     border-radius: 5px;
-    padding: 10px 15px;
+    padding: 5px 10px;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
+    @media (min-width: 1040px) {
+        padding: 10px 15px;
+    }
 }

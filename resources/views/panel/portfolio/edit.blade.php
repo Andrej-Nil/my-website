@@ -5,14 +5,21 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.portfolios')}}" class="breadcrumbs__link">Портфолио</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редактировать опыт</a>
+            <a href="{{route('panel.portfolios')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Опыт работы</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Редактировать работу</span>
+            </a>
         </div>
-        <div class="btn-list">
-            <a href="{{route('portfolios.show', $portfolio['id'])}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу работы</a>
-            <a href="{{route('panel.portfolios.create')}}" class="btn btn--yellow">Добавить работу</a>
+
+        <div class="content-top__links">
+            <a href="{{route('portfolios.show', $portfolio['id'])}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр работы</a>
+            <a href="{{route('panel.portfolios.create')}}" class="content-top__btn btn btn--yellow">Добавить работу</a>
         </div>
+
+
     </div>
     <h1 class="panel-title">Редактировать работу</h1>
     @if($errors->any())
@@ -73,7 +80,7 @@
             <div class="form-control">
                 <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10" class="input" name="text" placeholder="Описание">{{$portfolio['text']}}</textarea>
+                    <textarea id="text" rows="10" class="form-control__input input" name="text" placeholder="Описание">{{$portfolio['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>

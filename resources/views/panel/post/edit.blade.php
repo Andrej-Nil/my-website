@@ -6,14 +6,18 @@
     <div class="content-top">
 
         <div class="breadcrumbs">
-            <a href="{{route('panel.posts')}}" class="breadcrumbs__link">Посты</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редастировать пост</a>
+            <a href="{{route('panel.posts')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Посты</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Редастировать пост</span>
+            </a>
         </div>
 
-        <div class="btn-list">
-            <a href="{{route('posts.show', $post['id'])}}" target="_blank" type="submit" class="btn btn--blue">Ссылка на страницу поста</a>
-            <a href="{{route('panel.posts.create')}}" class="btn btn--yellow">Создать новый пост</a>
+        <div class="content-top__links">
+            <a href="{{route('posts.show', $post['id'])}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр поста</a>
+            <a href="{{route('panel.posts.create')}}" class="content-top__btn btn btn--yellow">Добавить пост</a>
         </div>
 
     </div>
@@ -71,9 +75,9 @@
             </div>
 
             <div class="form-control">
-                <label for="postText" class="form-control__label">Текст</label>
+                <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{$post['text']}}</textarea>
+                    <textarea id="text" rows="10" class="form-control__input input" name="text"  placeholder="Описание">{{$post['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
 
@@ -86,7 +90,6 @@
                         <label for="display1" class="checkbox__label">Опубликовать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1" @checked($post['is_display'] == 1)>
                     </div>
-                    {{--                @dd(old('is_display'))--}}
                     <div class="checkbox">
                         <label for="display2" class="checkbox__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0" @checked($post['is_display'] == 0)>
@@ -94,7 +97,6 @@
 
                 </div>
             </div>
-            {{--            <textarea id="postText" rows="10"  class="input" name="title" placeholder="Описание"></textarea>--}}
         </div>
         <div class="form__bottom">
             <button type="submit" form="delete" class="btn btn--red">Удалить</button>

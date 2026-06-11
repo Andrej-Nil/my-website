@@ -4,15 +4,22 @@
 
 @section('content')
     <div class="content-top">
+
+
         <div class="breadcrumbs">
-            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайта</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редактировать статью</a>
+            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Описание сайта</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Редактировать статью</span>
+            </a>
         </div>
-        <div class="btn-list">
-            <a href="{{route('pageDescriptions')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу о сайте</a>
-            <a href="{{route('panel.pageDescriptions.create')}}" class="btn btn--yellow">Добавить статью</a>
+        <div class="content-top__links">
+            <a href="{{route('pageDescriptions.show', $pageDescription['id'])}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр статьи</a>
+            <a href="{{route('panel.pageDescriptions.create')}}" class="content-top__btn btn btn--yellow">Создать статью</a>
         </div>
+
     </div>
     <h1 class="panel-title">Редактировать статью</h1>
     @if($errors->any())
@@ -67,7 +74,7 @@
             <div class="form-control">
                 <label for="text" class="form-control__label">Описание</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10" class="input" name="text" placeholder="Описание">{{$pageDescription['text']}}</textarea>
+                    <textarea id="text" rows="10" class="form-control__input input" name="text" placeholder="Описание">{{$pageDescription['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>

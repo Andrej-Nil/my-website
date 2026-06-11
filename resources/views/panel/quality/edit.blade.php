@@ -5,14 +5,20 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.qualities')}}" class="breadcrumbs__link">Качества</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редактировать качество</a>
+            <a href="{{route('panel.qualities')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Качества</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Редактировать качество</span>
+            </a>
         </div>
-        <div class="btn-list">
-            <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
-            <a href="{{route('panel.qualities.create')}}" class="btn btn--yellow">Добавить качество</a>
+
+        <div class="content-top__links">
+            <a href="{{route('resume')}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр резюме</a>
+            <a href="{{route('panel.qualities.create')}}" class="content-top__btn btn btn--yellow">Добавить качество</a>
         </div>
+
     </div>
     <h1 class="panel-title">Редактировать качество</h1>
     @if($errors->any())

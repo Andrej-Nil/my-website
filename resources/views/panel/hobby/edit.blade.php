@@ -4,14 +4,20 @@
 
 @section('content')
     <div class="content-top">
+
         <div class="breadcrumbs">
-            <a href="{{route('panel.hobbies')}}" class="breadcrumbs__link">Хобби</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Редактировать хобби</a>
+            <a href="{{route('panel.hobbies')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Хобби</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Редактировать хобби</span>
+            </a>
         </div>
-        <div class="btn-list">
-            <a href="{{route('hobbies')}}" class="btn btn--blue">Ссылка на страницу хобби</a>
-            <a href="{{route('panel.hobbies.create')}}" class="btn btn--yellow">Добавить хобби</a>
+
+        <div class="content-top__links">
+            <a href="{{route('hobbies')}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр стр хобби</a>
+            <a href="{{route('panel.hobbies.create')}}" class="content-top__btn btn btn--yellow">Добавить хобби</a>
         </div>
 
     </div>
@@ -120,7 +126,7 @@
             <div class="form-control">
                 <label for="text" class="form-control__label">Текст</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10"  class="input" name="text"  placeholder="Описание">{{$hobby['text']}}</textarea>
+                    <textarea id="text" rows="10"  class="form-control__input input" name="text"  placeholder="Описание">{{$hobby['text']}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
 
