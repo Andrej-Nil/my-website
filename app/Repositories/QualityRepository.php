@@ -7,7 +7,7 @@ use App\Models\Quality;
 class QualityRepository
 {
 
-    public static function getPagination(array $data = [], int $count = 20):array{
+    public static function getPagination(array $data = [], int $count = 10):array{
         if(isset($data['search'])){
             return Quality::where('title', 'LIKE', '%'.$data['search'].'%')->
             orderBy($data['sort']['key'], $data['sort']['type'])->

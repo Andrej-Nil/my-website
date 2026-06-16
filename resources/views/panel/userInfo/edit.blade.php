@@ -87,7 +87,7 @@
             <div class="form-control">
                 <label for="about" class="form-control__label">О себе</label>
                 <div class="form-control__body">
-                    <textarea id="about" rows="10"  class="input" name="about" placeholder="Описание">{{$userInfo['about']}}</textarea>
+                    <textarea id="about" rows="10"  class="form-control__input input" name="about" placeholder="Описание">{{$userInfo['about']}}</textarea>
                     @error('about')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>

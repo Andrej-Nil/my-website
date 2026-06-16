@@ -1,19 +1,38 @@
 .breadcrumbs{
-
+    display: flex;
+    flex-wrap: wrap;
+    gap:5px;
+    @media (min-width: 1040px) {
+        gap: 10px;
+    }
 }
 
-.breadcrumbs__link{
-    text-decoration: underline;
-    font-size: 14px;
-    font-weight: 600;
+.breadcrumbs-link{
+    display: flex;
+
+    gap: 5px;
+    align-items: center;
+    font-size: 12px;
     color: #999;
     &:hover{
         color: #444;
         text-decoration: none;
     }
-    &:last-child{
+    &:last-child .breadcrumbs-link__label{
         text-decoration: none;
         color: #444;
     }
+    @media (min-width: 1040px) {
+        gap: 10px;
+        font-size: 14px;
+    }
+}
+
+.breadcrumbs-link__label{
+    text-decoration: underline;
+}
+
+.breadcrumbs-link__slash{
+
 }
 

@@ -7,7 +7,7 @@ use App\Models\Job;
 
 class HobbyRepository
 {
-    public static function getPagination(array $data = [], int $count = 20):array{
+    public static function getPagination(array $data = [], int $count = 10):array{
 
         if(isset($data['search'])){
             return Hobby::where('title', 'LIKE', '%'.$data['search'].'%')->

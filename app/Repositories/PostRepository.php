@@ -6,7 +6,7 @@ use App\Models\Post;
 
 class PostRepository
 {
-    public static function getPagination(array $data = [], int $count = 20):array{
+    public static function getPagination(array $data = [], int $count = 10):array{
 //        return Job::limit($count)->orderBy('sort', 'ASC')->get()->toArray();
         if(isset($data['search'])){
             return Post::where('title', 'LIKE', '%'.$data['search'].'%')->

@@ -1,6 +1,9 @@
 .list{
     border: 1px solid #dfdfdf;
     border-radius: 5px;
+    &.select-block{
+        user-select: none;
+    }
 }
 
 
@@ -12,11 +15,24 @@
 .list-item{
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 5px 15px;
+    gap: 10px;
+    padding: 3px;
     border-top: 1px solid #dfdfdf;
+    touch-action: none;
     &:first-child{
         border-top: none;
+    }
+
+    &.dragging{
+        opacity: 0.6;
+        background: #e0e0e0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        transform: scale(1.02);
+    }
+    @media (min-width: 1040px) {
+        padding: 5px 15px;
+        gap: 15px;
+
     }
 }
 
@@ -28,29 +44,35 @@
 
 .list-item__title{
     flex-grow: 1;
-    padding: 10px 0;
+    font-size: 12px;
+
+
     &--grab{
         cursor: grab;
+    }
+    @media (min-width: 1040px) {
+       font-size: 16px;
+
     }
 }
 
 .list-item__btn{
     position: relative;
     display: block;
-    width: 32px;
-    height: 32px;
-    padding: 5px;
+    width: 26px;
+    height: 26px;
+    padding: 3px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0);
     transition: 0.2s ease-in-out;
     cursor: pointer;
     border: none;
     outline: none;
-    &:hover{
-        background: #f8f3c0;
-    }
+    flex-shrink: 0;
+
     &.active .list-item__icon{
         opacity: 1;
+
     }
 
     //&.action .list-item__slash{
@@ -60,6 +82,16 @@
 
     &.active .list-item__slash{
         display: none;
+
+    }
+
+    @media (min-width: 1040px) {
+        width: 32px;
+        height: 32px;
+        padding: 5px;
+        &:hover{
+            background: #f8f3c0;
+        }
 
     }
 }
@@ -84,8 +116,3 @@
     }
 }
 
-.list__pagination{
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 15px;
-}

@@ -5,3 +5,11 @@
     align-items: center;
     gap: 5px;
 }
+
+
+.checkbox__label{
+    font-size: 14px;
+    @media (min-width: 1040px) {
+        font-size: 16px;
+    }
+}

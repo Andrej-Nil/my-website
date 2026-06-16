@@ -13,40 +13,37 @@
 
     <div class="content">
         <div class="content-top">
-            <form action="{{route('panel.qualities')}}" method="get" class="search-form">
 
-                <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>
-                <button class="search-form__btn">
-                    <img src="{{asset('panel-assets/img/icons/search-icon.svg')}}" alt="" class="search-form__icon">
-                </button>
-            </form>
-            <div data-sorting class="sorting">
-                <span class="sorting__label">Сортировка</span>
-                <div class="sorting__select">
-                    <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>
-                    <div data-sorting-list class="sorting__list">
-                        <a href="{{route('panel.qualities', ['search' => $search])}}" class="sorting__link">По умолчанию</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
-                        <a href="{{route('panel.qualities', ['sort' => 'old-up', 'search' => $search] )}}" class="sorting__link">Сначало старые</a>
+            <div class="content-top__links">
+                <a href="{{route('resume')}}" target="_blank" class="content-top__btn btn btn--blue">Просмотр резюме</a>
+                <a href="{{route('panel.qualities.create')}}" class="content-top__btn btn btn--yellow">Добавить качество</a>
+            </div>
+            <div class="content-top__controls">
+                <form action="{{route('panel.qualities')}}" method="get" class="search-form">
+
+                    <input name="search" class="search-form__input input" placeholder="Поиск по постам" value="{{$search}}"/>
+                    <button class="search-form__btn">
+                        <img src="{{asset('panel-assets/img/icons/search-icon.svg')}}" alt="" class="search-form__icon">
+                    </button>
+                </form>
+                <div data-sorting class="sorting">
+                    <span class="sorting__label">Сортировка</span>
+                    <div class="sorting__select">
+                        <span data-sorting-btn class="sorting__current">{{$currentSortTitle}}</span>
+                        <div data-sorting-list class="sorting__list">
+                            <a href="{{route('panel.qualities', ['search' => $search])}}" class="sorting__link">По умолчанию</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'a-up', 'search' => $search])}}" class="sorting__link">От А до Я</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'z-up', 'search' => $search] )}}" class="sorting__link">От Я до А</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'new-up', 'search' => $search] )}}" class="sorting__link">Сначало новые</a>
+                            <a href="{{route('panel.qualities', ['sort' => 'old-up', 'search' => $search] )}}" class="sorting__link">Сначало старые</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="btn-list">
-                <a href="{{route('resume')}}" target="_blank"  type="submit" class="btn btn--blue">Ссылка на страницу резюме</a>
-                <a href="{{route('panel.qualities.create')}}" class="btn btn--yellow">Добавить качество</a>
             </div>
         </div>
 
         <div data-group data-sortable-list data-api="{{route('quality.update.sort')}}" class="list sortable-list">
 
-            <div data-sortable-loader class="sortable-loader">
-                <div class="sortable-loader__inner">
-                    <p class="sortable-loader__message">Произошла ошибка. Попробуйте еще раз.</p>
-                    <button data-loader-close class="btn btn--yellow">Закрыть</button>
-                </div>
-            </div>
             @forelse($qualityList['data'] as $quality)
                 <div draggable="true" data-sortable-item="{{$quality['id']}}" class="list-item">
                     <span data-display-switcher="{{$quality['id']}}" data-api="{{route('quality.update.display')}}" class="list-item__btn{{$quality['is_display'] ? ' active' : '' }} " title="Редоктировать">
@@ -55,7 +52,7 @@
                              class="list-item__icon list-item__icon--eye"
                              alt="">
                     </span>
-                    <p class="list-item__title list-item__title--grab">
+                    <p data-sortable-drag class="list-item__title list-item__title--grab">
                         <span class="list-item__name">{{$quality['title']}}</span>
                     </p>
 
@@ -73,6 +70,13 @@
             @empty
                 <p class="list__empty">Качеств не найдено</p>
             @endforelse
+
+            <div data-sortable-loader class="sortable-loader">
+                <div class="sortable-loader__inner">
+                    <p class="sortable-loader__message">Произошла ошибка. Попробуйте еще раз.</p>
+                    <button data-loader-close class="btn btn--yellow">Закрыть</button>
+                </div>
+            </div>
 
         </div>
         @if(count($qualityList['links']) > 3 )

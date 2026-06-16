@@ -13,9 +13,13 @@
 <div class="app">
 
     <div class="wrapper">
-        <div class="sidebar">
+        <div id="sidebar" class="sidebar">
             <div class="sidebar__top">
                 <a href="{{route('home')}}" class="site-link"> Посетить сайт >></a>
+
+                <span data-sidebar-close class="sidebar-close">
+                    <img src="{{asset('panel-assets/img/icons/close-black.svg')}}" alt="" class="sidebar-close__icon">
+                </span>
             </div>
 
             <ul class="nav">
@@ -51,21 +55,37 @@
         </div>
         <div class="container">
             <nav class="link-list">
-                <a href="{{route('home')}}" target="_blank" class="link-item">Главная</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('resume')}}" target="_blank" class="link-item">Резюме</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('pageDescriptions')}}" target="_blank" class="link-item">О сайте</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('portfolios')}}" target="_blank" class="link-item">Портфолио</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('hobbies')}}" target="_blank" class="link-item">Хобби</a>
-                <span class="link-item__slash">\</span>
-                <a href="{{route('posts')}}" target="_blank" class="link-item">Посты</a>
+                <a href="{{route('home')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Главная </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('resume')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Резюме </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('pageDescriptions')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> О сайте </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('portfolios')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Портфолио </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('hobbies')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Хобби </span>
+                    <span class="link-item__slash">\</span>
+                </a>
+
+                <a href="{{route('posts')}}" target="_blank" class="link-item">
+                    <span class="link-item__label"> Посты </span>
+                </a>
             </nav>
             @yield('content')
         </div>
-
     </div>
 </div>
 
@@ -79,6 +99,15 @@
 
     </div>
 </div>
+
+
+<div class="mobile-menu">
+    <span data-sidebar-open class="mobile-menu-item">
+        <img src="{{asset('panel-assets/img/icons/menu-nav.svg')}}" alt="" class="mobile-menu-item__icon">
+    </span>
+</div>
 <script src="{{asset('panel-assets/js/main.js')}}"></script>
+
+
 </body>
 </html>

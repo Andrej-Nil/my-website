@@ -9,6 +9,10 @@
 .sortable-loader{
     position: absolute;
     //display: flex;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -17,7 +21,7 @@
     height: 100%;
     background: #fff;
     animation: flicker 2s linear infinite;
-
+    z-index: 1;
     &.show{
         display: flex;
     }

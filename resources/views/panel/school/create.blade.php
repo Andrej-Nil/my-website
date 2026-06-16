@@ -5,10 +5,15 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.schools')}}" class="breadcrumbs__link">Образование</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Добавить учреждение</a>
+            <a href="{{route('panel.schools')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Образование</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Добавить учреждение</span>
+            </a>
         </div>
+
     </div>
     <h1 class="panel-title">Добавить учреждение</h1>
     @if($errors->any())
@@ -77,12 +82,12 @@
                 <span class="form-control__label">Статус публикации</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="display1" class="form-control__label">Опубликовать</label>
+                        <label for="display1" class="checkbox__label">Опубликовать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1" @checked(old('is_display') == 1)>
                     </div>
 
                     <div class="checkbox">
-                        <label for="display2" class="form-control__label">Скрыть</label>
+                        <label for="display2" class="checkbox__labell">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0" @checked(old('is_display') == 0)>
                     </div>
 

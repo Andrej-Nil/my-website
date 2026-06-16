@@ -211,66 +211,35 @@ class ManualListSorter{
     }
 
 
-    dragstartHandler = (e) => {
+    dragging = (e) => {
+        this.$draggingEl = e.target.closest('[data-sortable-item]');
+        if(!this.$draggingEl) return;
+        this.$draggingEl.classList.add('dragging');
+        this.$sortableBlock.classList.add('select-block');
+        this.$draggingEl.setPointerCapture(e.pointerId);
+    }
 
-        const $item = e.target.closest('[data-sortable-item]');
-        const $wrapItem = e.target.closest('[data-sortable-list]');
-        if($item && $wrapItem === this.$sortableBlock){
-            this.startMove(e.target.closest('[data-sortable-item]'));
+    getNextSibling = (e) => {
+       const $siblingList = [...this.$sortableBlock.querySelectorAll('[data-sortable-item]:not(.dragging)')];
+
+
+       return $siblingList.find($sibling => {
+            const box = $sibling.getBoundingClientRect();
+            return e.clientY <= box.top + box.height / 2;
+        });
+    }
+    pasteDraggingItem = (nextSibling) => {
+        if (nextSibling) {
+            this.$sortableBlock.insertBefore(this.$draggingEl, nextSibling);
+        } else {
+            this.$sortableBlock.appendChild(this.$draggingEl);
         }
     }
 
-
-    startMove = ($el) => {
-        this.$draggingEl = $el;
-        this.setOpacity()
-    }
-
-
-    setOpacity = () => {
-        this.$draggingEl.style.opacity = 0.2;
-    }
-
-    dragendHandler = (e) => {
-        const $item = e.target.closest('[data-sortable-item]');
-        const $wrapItem = e.target.closest('[data-sortable-list]');
-        if($item && $wrapItem === this.$sortableBlock){
-            this.endMove();
-            this.updateSortHandler();
-        }
-    }
-
-    endMove = () => {
-        this.resetOpacity();
-        this.resetDraggingEl();
-    }
-
-
-    resetOpacity = () => {
-        this.$draggingEl.style.opacity = 1;
-    }
-
-    resetDraggingEl = () => {
-        this.$draggingEl = null;
-    }
-
-    dragoverHandler = (e) => {
-        this.out(e);
-    }
-
-    out = (e) => {
-        e.preventDefault();
-        const currentElement = e.target.closest('[data-sortable-item]');
-        if((currentElement !== this.$draggingEl) && e.target.closest('[data-sortable-item]')){
-            const nextElement = this.getNextElement(e.clientY, currentElement);
-            this.$sortableBlock.insertBefore(this.$draggingEl, nextElement);
-        }
-    }
-
-    getNextElement = (clientY, currentElement) => {
-        const currentElementCoord = currentElement.getBoundingClientRect();
-        const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
-        return (clientY < currentElementCenter) ? currentElement : currentElement.nextElementSibling;
+    moveDragging = (e) => {
+        if (!this.$draggingEl) return;
+        const nextSibling = this.getNextSibling(e);
+        this.pasteDraggingItem(nextSibling);
     }
 
     updateSortHandler = async () => {
@@ -291,6 +260,7 @@ class ManualListSorter{
         this.$loader.classList.add('show');
         this.hideError();
     }
+
     hideLoader = () => {
         this.$loader.classList.remove('show');
         this.hideError();
@@ -304,6 +274,7 @@ class ManualListSorter{
     hideError = () => {
         this.$loader.classList.remove('error');
     }
+
     getIdList = () => {
         const $itemList = this.$sortableBlock.querySelectorAll('[data-sortable-item]');
         return Array.from($itemList).map(($item) => {
@@ -311,18 +282,37 @@ class ManualListSorter{
         })
     }
 
-
-    clickHandler = (e) => {
-        if(e.target.closest('[data-loader-close]')){
-            this.hideLoader()
+    pointerdownHandler = (e) => {
+        if(e.target.closest('[data-sortable-drag]')){
+            this.dragging(e);
         }
     }
-    listeners = () => {
-        this.$sortableBlock.addEventListener('click', this.clickHandler)
-        this.$sortableBlock.addEventListener('dragstart', this.dragstartHandler);
-        this.$sortableBlock.addEventListener('dragend', this.dragendHandler);
-        this.$sortableBlock.addEventListener('dragover', this.dragoverHandler);
+
+    pointermoveHandler = (e) => {
+        if(e.target.closest('[data-sortable-item]')){
+            this.moveDragging(e);
+        }
+
     }
+
+    pointerupHandler = async (e) => {
+        if (!this.$draggingEl) return;
+
+        this.$draggingEl.releasePointerCapture(e.pointerId);
+
+        this.$draggingEl.classList.remove('dragging');
+        this.$sortableBlock.classList.remove('select-block');
+        this.$draggingEl = null;
+        await  this.updateSortHandler()
+
+    }
+
+    listeners = () => {
+        this.$sortableBlock.addEventListener('pointerdown', this.pointerdownHandler)
+        this.$sortableBlock.addEventListener('pointermove', this.pointermoveHandler)
+        this.$sortableBlock.addEventListener('pointerup', this.pointerupHandler)
+    }
+
 }
 
 class MediaFileService extends Service{
@@ -1177,6 +1167,41 @@ class SortingSelect{
 
 }
 
+class Sidebar{
+    constructor() {
+
+        this.$sidebar = document.querySelector('#sidebar');
+        this.init();
+    }
+
+    init = () => {
+        if(!this.$sidebar) return;
+        this.listeners();
+    }
+
+    open = () => {
+        this.$sidebar.classList.add('open');
+    }
+
+    close = () => {
+        this.$sidebar.classList.remove('open');
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-sidebar-open]')){
+            this.open();
+        }
+
+        if(e.target.closest('[data-sidebar-close]')){
+            this.close();
+        }
+    }
+
+    listeners = () => {
+        document.addEventListener('click', this.clickHandler);
+    };
+}
+
 const mediaFileContainer = new Container('[data-media-file]', MediaFile);
 
 const sortingSelectContainer = new Container('[data-sorting]', SortingSelect);
@@ -1190,3 +1215,61 @@ const manualListSorter = new ManualListSorter();
 const mediaViewer = new MediaViewer();
 
 const formEdit = new FormEdit();
+
+const sidebar = new Sidebar();
+
+//
+// const list = document.querySelector('.sortable-list');
+// let draggingItem = null;
+//
+// // 1. Захват элемента (клик или касание)
+// list.addEventListener('pointerdown', (e) => {
+//     const item = e.target.closest('.sortable-item');
+//     if (!item) return;
+//
+//     draggingItem = item;
+//     draggingItem.classList.add('dragging');
+//
+//     // Перенаправляем все события указателя на этот элемент (актуально для тача)
+//     draggingItem.setPointerCapture(e.pointerId);
+// });
+//
+// // 2. Движение пальца / мыши
+// list.addEventListener('pointermove', (e) => {
+//     if (!draggingItem) return;
+//
+//     // Находим элемент, над которым сейчас находится палец/курсор
+//     const siblings = [...list.querySelectorAll('.sortable-item:not(.dragging)')];
+//
+//     // Ищем элемент, перед которым нужно вставить текущий
+//     const nextSibling = siblings.find(sibling => {
+//         const box = sibling.getBoundingClientRect();
+//         // Сортировка сработает, когда центр перемещаемого объекта пересечет центр соседа
+//         return e.clientY <= box.top + box.height / 2;
+//     });
+//
+//     // Вставляем элемент на новое место
+//     if (nextSibling) {
+//         list.insertBefore(draggingItem, nextSibling);
+//     } else {
+//         list.appendChild(draggingItem);
+//     }
+// });
+//
+// // 3. Отпускание элемента
+// list.addEventListener('pointerup', (e) => {
+//     if (!draggingItem) return;
+//
+//     // Освобождаем захват указателя
+//     draggingItem.releasePointerCapture(e.pointerId);
+//
+//     draggingItem.classList.remove('dragging');
+//     draggingItem = null;
+// });
+//
+// // На случай, если жест прервался (например, вылетел входящий звонок)
+// list.addEventListener('pointercancel', (e) => {
+//     if (!draggingItem) return;
+//     draggingItem.classList.remove('dragging');
+//     draggingItem = null;
+// });

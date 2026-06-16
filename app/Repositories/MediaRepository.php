@@ -7,7 +7,7 @@ use App\Models\Media;
 
 class MediaRepository
 {
-    public static function getPagination(array $data = [], int $count = 20):array{
+    public static function getPagination(array $data = [], int $count = 10):array{
 
 //        if(isset($data['search'])){
 //            return Hobby::with('photo')->where('title', 'LIKE', '%'.$data['search'].'%')->limit($count)->get()->toArray();

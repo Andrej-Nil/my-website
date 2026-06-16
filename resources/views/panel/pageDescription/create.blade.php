@@ -5,9 +5,13 @@
 @section('content')
     <div class="content-top">
         <div class="breadcrumbs">
-            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs__link">Описание сайта</a>
-            <span class="breadcrumbs__slash">\</span>
-            <a class="breadcrumbs__link">Создать статью</a>
+            <a href="{{route('panel.pageDescriptions')}}" class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Описание сайта</span>
+                <span class="breadcrumbs-link__slash">\</span>
+            </a>
+            <a class="breadcrumbs-link">
+                <span class="breadcrumbs-link__label">Создать статью</span>
+            </a>
         </div>
 
     </div>
@@ -52,7 +56,7 @@
             <div class="form-control">
                 <label for="text" class="form-control__label">Описание</label>
                 <div class="form-control__body">
-                    <textarea id="text" rows="10" class="input" name="text" placeholder="Описание">{{old('text')}}</textarea>
+                    <textarea id="text" rows="10" class="form-control__input input" name="text" placeholder="Описание">{{old('text')}}</textarea>
                     @error('text')<p class="form-control__error">{{$message}}</p>@enderror
                 </div>
             </div>
@@ -61,11 +65,11 @@
                 <span class="form-control__label">Статус публикации</span>
                 <div class="form-control__group">
                     <div class="checkbox">
-                        <label for="display1" class="form-control__label">Опубликовать</label>
+                        <label for="display1" class="checkbox__label">Опубликовать</label>
                         <input id="display1" type="radio" class="input" name="is_display" value="1" checked>
                     </div>
                     <div class="checkbox">
-                        <label for="display2" class="form-control__label">Скрыть</label>
+                        <label for="display2" class="checkbox__label">Скрыть</label>
                         <input id="display2" type="radio" class="input" name="is_display" value="0">
                     </div>
 
