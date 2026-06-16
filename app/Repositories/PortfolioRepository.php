@@ -6,7 +6,7 @@ use App\Models\Portfolio;
 
 class PortfolioRepository
 {
-    public static function getPagination(array $data = [],  int $count = 20):array
+    public static function getPagination(array $data = [],  int $count = 10):array
     {
         if ($data) {
             if (isset($data['search'])) {

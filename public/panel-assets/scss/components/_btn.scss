@@ -6,8 +6,8 @@
 
 .btn{
     background: #ccc;
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: 5px 10px;
+    font-size: 12px;
     border: none;
     outline: none;
     cursor: pointer;
@@ -15,22 +15,33 @@
     transition: 0.2s ease-in-out;
     &.btn--yellow{
         background: #f8f3c0;
-        &:hover{
-            background: #faeb88;
-        }
     }
-
     &.btn--red{
         background: #f8c0c0;
-        &:hover{
-            background: #f69999;
-        }
     }
-
     &.btn--blue{
         background: #c0d0f8;
-        &:hover{
-            background: #82a6f8;
+    }
+
+    @media (min-width: 1040px) {
+        padding: 10px 15px;
+        font-size: 16px;
+        &.btn--yellow{
+            &:hover{
+                background: #faeb88;
+            }
+        }
+
+        &.btn--red{
+            &:hover{
+                background: #f69999;
+            }
+        }
+
+        &.btn--blue{
+            &:hover{
+                background: #82a6f8;
+            }
         }
     }
 }

@@ -57,7 +57,7 @@
                          class="list-item__icon list-item__icon--eye"
                          alt="">
                 </span>
-                    <p class="list-item__title list-item__title--grab">
+                    <p data-sortable-drag class="list-item__title list-item__title--grab">
                         <span class="list-item__name">{{$pageDescription['title']}}</span>
                     </p>
 

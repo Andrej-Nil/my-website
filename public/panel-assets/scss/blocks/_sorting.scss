@@ -29,15 +29,15 @@
     border: 1px solid #dfdfdf;
     padding: 4px 10px;
     border-radius: 5px;
+    min-width: 200px;
     font-size: 12px;
     cursor: pointer;
-    //font-weight: 700;
     transition: 0.2s linear;
     &:hover{
         background: #f0f0f0;
     }
     @media (min-width: 1040px) {
-        padding: 4px 40px;
+        padding: 4px 15px;
         font-size: 16px;
     }
 }

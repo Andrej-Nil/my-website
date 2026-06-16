@@ -9,6 +9,7 @@ use App\Http\Requests\Portfolio\UpdatePortfolioRequest;
 use App\Http\Requests\Search\SearchRequest;
 use App\Models\Portfolio;
 use App\Repositories\PortfolioRepository;
+use App\Services\MediaDeleteService;
 use App\Services\MediaUploadService;
 use Illuminate\Http\Request;
 
@@ -131,7 +132,7 @@ class PortfolioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id, MediaUploadService $mediaDeleteService)
+    public function destroy($id, MediaDeleteService $mediaDeleteService)
     {
         $portfolio = PortfolioRepository::getPortfolioById($id);
 
@@ -142,15 +143,9 @@ class PortfolioController extends Controller
         if($portfolio['photo']){
             $mediaDeleteService->handle($portfolio['photo']);
 
-//            $media = MediaRepository::getMediaByLink($hobby['main_photo']);
-//            dd($media);
-//            MediaRepository::deleteMediaByLink($hobby['main_photo']);
-//
         }
 
-
-
         PortfolioRepository::deletePortfolio($id);
-        return to_route('panel.portfolio')->with('success', 'Хобби ' . "'" . $portfolio['title'] . "'" . ' удалено');
+        return to_route('panel.portfolios')->with('success', 'Работа ' . "'" . $portfolio['title'] . "'" . ' удалено');
     }
 }

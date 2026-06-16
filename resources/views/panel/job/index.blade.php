@@ -47,14 +47,14 @@
 
         <div data-group data-sortable-list data-api="{{route('job.update.sort')}}" class="list sortable-list">
             @forelse($jobList['data'] as $job)
-            <div draggable="true" data-sortable-item="{{$job['id']}}" class="list-item">
+            <div draggable="false" data-sortable-item="{{$job['id']}}" class="list-item">
                  <span data-display-switcher="{{$job['id']}}" data-api="{{route('job.update.display')}}" class="list-item__btn{{$job['is_display'] ? ' active' : '' }} " title="Редоктировать">
                     <span class="list-item__slash"></span>
                     <img src="{{asset('panel-assets/img/icons/eye.svg')}}"
                          class="list-item__icon list-item__icon--eye"
                          alt="">
                 </span>
-                <p class="list-item__title list-item__title--grab">
+                <p data-sortable-drag class="list-item__title list-item__title--grab">
                     <span class="list-item__name">{{$job['title']}}</span>
                 </p>
 

@@ -13,9 +13,13 @@
 <div class="app">
 
     <div class="wrapper">
-        <div class="sidebar">
+        <div id="sidebar" class="sidebar">
             <div class="sidebar__top">
                 <a href="{{route('home')}}" class="site-link"> Посетить сайт >></a>
+
+                <span data-sidebar-close class="sidebar-close">
+                    <img src="{{asset('panel-assets/img/icons/close-black.svg')}}" alt="" class="sidebar-close__icon">
+                </span>
             </div>
 
             <ul class="nav">
@@ -82,7 +86,6 @@
             </nav>
             @yield('content')
         </div>
-
     </div>
 </div>
 
@@ -99,7 +102,7 @@
 
 
 <div class="mobile-menu">
-    <span data-open-mobile-menu class="mobile-menu-item">
+    <span data-sidebar-open class="mobile-menu-item">
         <img src="{{asset('panel-assets/img/icons/menu-nav.svg')}}" alt="" class="mobile-menu-item__icon">
     </span>
 </div>

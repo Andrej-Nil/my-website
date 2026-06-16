@@ -1,14 +1,27 @@
 .pagination{
     display: flex;
     gap: 10px;
+
 }
+
+.list__pagination{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
 
 .pagination-item{
     border-radius: 5px;
-    padding: 8px 10px;
+    padding: 6px 8px;
     border: 1px solid #dfdfdf;
-
+    font-size: 12px;
     &.active{
         background: #f8f3c0;
+    }
+
+    @media (min-width: 1040px) {
+        font-size: 16px;
+        padding: 8px 10px;
     }
 }
