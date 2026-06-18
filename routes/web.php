@@ -7,7 +7,7 @@ Route::get('/',  [\App\Http\Controllers\HomeController::class, 'index'])->name('
 
 
 Route::middleware('guest')->group(function (){
-    Route::get('register', [\App\Http\Controllers\User\RegisterController::class, 'create'])->name('register');
+//    Route::get('register', [\App\Http\Controllers\User\RegisterController::class, 'create'])->name('register');
     Route::post('register', [\App\Http\Controllers\User\RegisterController::class, 'store'])->name('user.store');
     Route::get('login', [\App\Http\Controllers\User\LoginController::class, 'login'])->name('login');
     Route::post('login', [\App\Http\Controllers\User\LoginController::class, 'loginAuth'])->name('login.auth');
