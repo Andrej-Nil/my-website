@@ -15,7 +15,7 @@
             <span  class="main-nav-item">{{auth()->user()->name}}</span>
         @endif
     </div>
-    @if(!(Auth::check()))
+    @if((Auth::check()))
         <div class="main-contacts">
             <a href="tel:{{$admin['phone']}}" class="main-contact">{{$admin['phone']}}</a>
             <a href="mailto:{{$admin['mail']}}" class="main-contact">{{$admin['mail']}}</a>
