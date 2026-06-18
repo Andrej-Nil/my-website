@@ -26,7 +26,8 @@ class UserInfoRepository
 
 
     public static function getUserInfoByFirst():array{
-        return UserInfo::first()->toArray();
+        $item = UserInfo::first();
+        return $item ? $item->toArray() : [];
     }
 
     public static function createUserInfo(array $data):array{
