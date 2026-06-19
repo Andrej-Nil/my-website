@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helper\SortDataHelper;
-use App\Http\Requests\post\StorePostRequest;
+use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Requests\Search\SearchRequest;
 use App\Models\Post;
