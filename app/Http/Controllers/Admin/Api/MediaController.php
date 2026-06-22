@@ -27,7 +27,7 @@ class MediaController extends BaseController
 //        $jpeg = 'jpeg';
         //dd($request->validated());
         //$type = $extensionHelper->getType($test);
-        $data = $request->validated();
+//        $data = $request->validated();
 //        dd($data);
         $item = $mediaUploadService->handle($request->file('media'));
         return $this->sendResponse(['media'=>$item]);
