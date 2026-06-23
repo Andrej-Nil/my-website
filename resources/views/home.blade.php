@@ -17,7 +17,7 @@
 
            <div id="mainFrame" class="main-frame">
 
-               <div id="mainFrameLight"  class="main-frame-light">
+               <div id="mainFrameLight" class="main-frame-light">
                    <span class="main-frame-light__blink"></span>
                </div>
 
