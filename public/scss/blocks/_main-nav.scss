@@ -1,5 +1,5 @@
 .main-nav{
-    padding: 60px 15px 20px;
+    padding: 45px 15px 20px;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     top: 0;
     bottom: 0;
     left: 0;
-    gap: 20px;
+    gap: 10px;
     font-size: 16px;
     z-index: 10;
     background: #fff;
@@ -21,10 +21,12 @@
 
     @media (min-width: 1040px) {
         padding: 0;
+        gap: 25px;
         transform: translateX(0);
         background: #000;
         max-width: none;
         width: auto;
+        align-items: center;
         flex-direction: row;
         position: static;
 
@@ -32,9 +34,10 @@
 }
 
 .main-nav-item{
-    padding: 10px;
+    padding: 8px 0;
     transition: 0.2s ease-in-out;
     color: #000;
+    font-size: 14px;
     @media (min-width: 1040px) {
         color: #ccc;
         &:hover{

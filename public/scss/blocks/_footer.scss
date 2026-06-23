@@ -1,6 +1,24 @@
 .footer {
     padding: 20px;
-    flex: 0 0 auto;
-    background: #212121;
-    color: #cbd5e0;
+    //flex: 0 0 auto;
+    background: #000;
+
+    display: flex;
+    align-items: flex-start;
+    //justify-content: space-between;
+}
+
+.footer-author{
+    color: #444444;
+    font-size: 12px;
+}
+
+.footer-author__link{
+    color: #444;
+    border-bottom: 1px solid #444;
+    transition: 0.2s ease-in-out;
+    &:hover{
+        color: #fff;
+        border-bottom: 1px solid #fff;
+    }
 }

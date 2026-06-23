@@ -1,4 +1,4 @@
-<header class="main-header">
+<header class="header">
     <div id="mainNav" class="main-nav">
         <span class="main-nav__close" data-main-nav-close></span>
         <a href="{{route('home')}}" class="main-nav-item">Главная</a>
@@ -7,14 +7,16 @@
         <a href="{{route('pageDescriptions')}}" class="main-nav-item">О сайте</a>
         <a href="{{route('hobbies')}}" class="main-nav-item">Хобби</a>
         <a href="{{route('posts')}}" class="main-nav-item">Посты</a>
+        <button class="header__btn btn">Обратная связь</button>
 
-        @if(!(Auth::check()))
-            <a href="{{route('login')}}" class="main-nav-item">Вход</a>
-        @else
-            <a class="main-nav-item" href="{{route('panel')}}">Панель</a>
-            <span  class="main-nav-item">{{auth()->user()->name}}</span>
-        @endif
+{{--        @if(!(Auth::check()))--}}
+{{--            <a href="{{route('login')}}" class="main-nav-item">Вход</a>--}}
+{{--        @else--}}
+{{--            <a class="main-nav-item" href="{{route('panel')}}">Панель</a>--}}
+{{--            <span  class="main-nav-item">{{auth()->user()->name}}</span>--}}
+{{--        @endif--}}
     </div>
+
     @if((Auth::check()))
         <div class="main-contacts">
             <a href="tel:{{$admin['phone']}}" class="main-contact">{{$admin['phone']}}</a>

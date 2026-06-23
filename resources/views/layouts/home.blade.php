@@ -7,13 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{asset('css/main-page.css')}}">
-    <title>My website @yield('title', 'My website')</title>
+    <title>My website - @yield('title')</title>
 </head>
 
 <body>
-{{--<div class="app">--}}
+<div class="main">
+    @include('components.header')
+
     @yield('content')
-{{--</div>--}}
+
+    @include('components.footer')
+</div>
+
 </body>
 
 <script src="{{asset('js/main.js')}}"></script>
