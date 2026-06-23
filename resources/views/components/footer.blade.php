@@ -1,14 +1,6 @@
-<div class="main-footer">
-    dnfbdhjfdfh
-
-    {{--           <div class="signature">--}}
-    {{--               <h1 class="signature-name">Кучеров Андрей</h1>--}}
-    {{--               <p class="signature-profession">front-end разработчик</p>--}}
-    {{--           </div>--}}
-</div>
-
-
-
+<footer class="footer">
+    <span class="footer-author">Разработчик сайта - <a class="footer-author__link" href="https://github.com/Andrej-Nil" target="_blank">AndrejNill</a></span>
+</footer>
 
 <div class="mobile-menu">
     <div class="mobile-menu__list">
@@ -28,26 +20,6 @@
         </a>
 
         <span class="mobile-menu-item"></span>
-
-{{--        <div class="mobile-menu-item">--}}
-{{--            <img src="{{asset('img/icon/phone-call.svg')}}" alt="" class="mobile-menu-item__icon">--}}
-{{--            <span class="mobile-menu-item__title">Форма связи</span>--}}
-{{--        </div>--}}
-
-{{--        <div data-frame-tab-link="info" class="mobile-menu-item">--}}
-{{--            <img src="{{asset('img/icon/user.svg')}}" alt="" class="mobile-menu-item__icon">--}}
-{{--            <span class="mobile-menu-item__title">О себе</span>--}}
-{{--        </div>--}}
-
-{{--        <div data-frame-tab-link="works" class="mobile-menu-item">--}}
-{{--            <img src="{{asset('img/icon/directory.svg')}}" alt="" class="mobile-menu-item__icon">--}}
-{{--            <span class="mobile-menu-item__title">Портфолио</span>--}}
-{{--        </div>--}}
-
-{{--        <div data-frame-tab-link="contact" class="mobile-menu-item">--}}
-{{--            <img src="{{asset('img/icon/old-phone.svg')}}" alt="" class="mobile-menu-item__icon">--}}
-{{--            <span class="mobile-menu-item__title">Контакты</span>--}}
-{{--        </div>--}}
 
         <div data-main-nav-open class="mobile-menu-item">
             <img src="{{asset('img/icon/menu-nav.svg')}}" alt="" class="mobile-menu-item__icon">

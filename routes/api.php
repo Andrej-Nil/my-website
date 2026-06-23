@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-Route::post('callback', [\App\Http\Controllers\Api\CallbackController::class, 'callback'])->name('callback');
+Route::post('callback', [\App\Http\Controllers\Api\CallbackController::class, 'callback'])->name('callback')->middleware('throttle:3,1|10,60');
 
 Route::post('api/reaction', [\App\Http\Controllers\Api\ActivityWithPostApiController::class, 'reaction'])->name('api.reaction');
 Route::post('api/reaction/like', [\App\Http\Controllers\Api\ActivityWithPostApiController::class, 'like'])->name('api.reaction.like');

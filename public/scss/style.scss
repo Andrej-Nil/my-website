@@ -2,16 +2,16 @@
 @import 'main';
 @import 'grid';
 
-@import 'margins';
-@import "blocks/main";
-//@import 'blocks/header';
-@import "blocks/main-header";
-@import "blocks/main-nav";
-@import "blocks/block";
-@import "blocks/main-contacts";
 @import "componets/page-title";
 @import "componets/page-subtitle";
 @import "componets/btn";
+
+@import 'margins';
+@import "blocks/main";
+@import "blocks/header";
+@import "blocks/main-nav";
+@import "blocks/block";
+@import "blocks/main-contacts";
 
 @import 'blocks/body';
 

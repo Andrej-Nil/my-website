@@ -4,12 +4,10 @@
 
 
 @section('content')
-   <div class="main">
 
-     @include('components.header')
 
        <div class="main-content">
-         <div class="signature">
+           <div class="signature">
                <div class="signature__inner">
                    <h1 class="signature__name">{{$admin['first_name'] . ' ' . $admin['second_name']}} </h1>
                    <p class="signature__profession">{{$admin['profession']}}</p>
@@ -17,12 +15,11 @@
                </div>
            </div>
 
-         <div id="mainFrame" class="main-frame">
+           <div id="mainFrame" class="main-frame">
 
                <div id="mainFrameLight"  class="main-frame-light">
                    <span class="main-frame-light__blink"></span>
                </div>
-
 
                <div class="main-frame__content">
 
@@ -179,7 +176,7 @@
                      </div>
                  </div>
 
-                   <div data-frame-nav class="main-frame-nav">
+               <div data-frame-nav class="main-frame-nav">
                        <div class="main-frame-nav__list">
                        <div data-frame-tab-link="info" class="main-frame-link">
 
@@ -204,11 +201,9 @@
                        </div>
                    </div>
 
-               </div>
            </div>
        </div>
 
 
-     @include('components.footer')
-   </div>
+
 @endsection
