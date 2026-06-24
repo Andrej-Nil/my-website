@@ -102,6 +102,50 @@
 
 </div>
 
+<div data-modal="modalCallback" class="modal">
+    <div data-modal-close="modalCallback" class="modal__bg"></div>
+    <div class="modal__inner">
+        <span data-modal-close="modalCallback" class="modal__close main-close"></span>
+        <form id="mainForm" action="{{route('callback')}}" method="post" class="main-form">
+            @csrf
+            <div class="main-form__inner">
+                <p class="main-form__title">Обратная связь</p>
+                <div class="main-form__body">
+                    <div  class="control">
+                        <label for="mainFormName" class="control__label">Ваше имя</label>
+                        <input data-input type="text" id="mainFormName" name="name" class="control__input input" placeholder="Ваше имя">
+                        <div data-control-errors="name" class="control__errors"></div>
+                    </div>
+
+                    <div class="control">
+                        <label for="mainFormPhone" class="control__label">Номер телефона</label>
+                        <input data-input type="text" id="mainFormPhone" name="phone" class="control__input input" placeholder="Номер телефона">
+                        <div data-control-errors="phone" class="control__errors"></div>
+                    </div>
+
+                    <div class="control">
+                        <label for="mainFormMail" class="control__label">Почта</label>
+                        <input data-input type="text" id="mainFormMail" name="email" class="control__input input" placeholder="Почта">
+                        <div data-control-errors="email" class="control__errors">
+
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <label for="mainFormMessage" class="control__label">Коментарий</label>
+                        <textarea data-input id="mainFormMessage" name="comment" class="control__input input" rows="2" placeholder="Коментарий"></textarea>
+                        <div data-control-errors="comment" class="control__errors"></div>
+
+                    </div>
+                </div>
+                <div class="main-form__bottom">
+                    <button type="submit" class="main-form__submit btn">Отправить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 <div id="galleryModal" class="gallery-modal">
     <div data-close class="gallery-modal__back"></div>
