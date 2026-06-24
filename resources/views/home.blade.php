@@ -1,10 +1,8 @@
 @extends('layouts.home')
 
-@section('title', 'Home page')
-
+@section('title', 'Главная')
 
 @section('content')
-
 
        <div class="main-content">
            <div class="signature">
@@ -203,7 +201,5 @@
 
            </div>
        </div>
-
-
 
 @endsection

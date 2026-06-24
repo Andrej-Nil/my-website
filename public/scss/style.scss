@@ -4,7 +4,9 @@
 
 @import "componets/page-title";
 @import "componets/page-subtitle";
+@import "componets/input";
 @import "componets/btn";
+@import "componets/main-close";
 
 @import 'margins';
 @import "blocks/main";
@@ -48,9 +50,10 @@
 @import "blocks/gallery-modal";
 
 @import 'blocks/footer';
-
+@import "blocks/main-form";
+@import "main-page/blocks/control";
 @import 'blocks/mobile-menu';
-
+@import 'blocks/modal';
 @import "admin";
 @import "importatnt";
 

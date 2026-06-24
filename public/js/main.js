@@ -1203,6 +1203,44 @@ class HobbyList{
     }
 }
 
+
+class Modal {
+    constructor($modal) {
+        this.$modal = $modal;
+        this.init();
+    }
+
+
+    init = () => {
+        if(!this.$modal) return;
+        this.name = this.$modal.dataset.modal
+
+        this.listeners();
+    }
+
+    open = () => {
+        this.$modal.classList.add('open');
+    }
+
+    close = () => {
+        this.$modal.classList.remove('open');
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest(`[data-modal-open="${this.name}"]`)) {
+            this.open();
+        }
+
+        if(e.target.closest(`[data-modal-close="${this.name}"]`)) {
+            this.close();
+        }
+    }
+
+    listeners = () => {
+        document.addEventListener('click', this.clickHandler);
+    }
+}
+
 const frame = new Frame();
 
 const frameForm = new MainForm();
@@ -1220,6 +1258,7 @@ const groupContainer = new Container('[data-group]', Group);
 const hobbyPage = new HobbyPage();
 
 const postContainer = new Container('[data-post]', Post);
+const modalContainer = new Container('[data-modal]', Modal);
 
 const postSlider = new Slider();
 

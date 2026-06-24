@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Описание сайта')
+@section('title', $pageDescription['title'])
 @section('bg', 'dark')
 @section('content')
 

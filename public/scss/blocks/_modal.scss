@@ -1,0 +1,39 @@
+.modal{
+    padding: 50px;
+    position: fixed;
+    overflow-y: auto;
+    display: none;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    &.open{
+        display: block;
+    }
+}
+
+.modal__bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.modal__inner{
+    background: #000000;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px;
+    width: 100%;
+    position: relative;
+}
+
+.modal__close{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
+
