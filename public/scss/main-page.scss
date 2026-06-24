@@ -2,16 +2,8 @@
 @import 'main';
 @import 'grid';
 @import "main-page/componets/btn";
-@import "main-page/componets/input";
-@import "main-page/componets/main-close";
-@import "blocks/main";
-@import "blocks/header";
-@import "blocks/main-nav";
-@import "blocks/main-contacts";
-@import 'blocks/mobile-menu';
-@import 'blocks/footer';
-
-
+@import "componets/input";
+@import "componets/main-close";
 
 @import "main-page/blocks/main-frame";
 @import "main-page/blocks/main-frame-light";
@@ -25,9 +17,16 @@
 @import "main-page/blocks/socials";
 @import "main-page/blocks/my-contacts";
 
-@import "main-page/blocks/main-form";
 @import "main-page/blocks/control";
 @import "main-page/blocks/signature";
 
+@import "blocks/main-form";
+@import "blocks/main";
+@import "blocks/header";
+@import "blocks/main-nav";
+@import "blocks/main-contacts";
+@import 'blocks/mobile-menu';
+@import 'blocks/footer';
+@import 'blocks/modal';
 
 @import "importatnt";

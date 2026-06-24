@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Полтфолио: ')
+@section('title', 'Полтфолио: ' . $portfolio['title'])
 @section('bg', 'dark')
 @section('content')
     <div class="container">

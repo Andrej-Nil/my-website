@@ -2,6 +2,7 @@
     <span class="footer-author">Разработчик сайта - <a class="footer-author__link" href="https://github.com/Andrej-Nil" target="_blank">AndrejNill</a></span>
 </footer>
 
+
 <div class="mobile-menu">
     <div class="mobile-menu__list">
         <a href="{{route('home')}}" class="mobile-menu-item">

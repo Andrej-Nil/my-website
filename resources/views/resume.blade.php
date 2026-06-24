@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Decs')
+@section('title', 'Резюме')
 
 @section('content')
 
@@ -9,7 +9,7 @@
             <div class="breadcrumbs">
                 <a href="{{route('home')}}" class="breadcrumbs__link">Главная</a>
                 <span class="breadcrumbs__slash">/</span>
-                <a class="breadcrumbs__link">Decs</a>
+                <a class="breadcrumbs__link">Резюме</a>
             </div>
 
             <h1 class="page-title">Резюме</h1>

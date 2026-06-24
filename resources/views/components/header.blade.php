@@ -7,7 +7,7 @@
         <a href="{{route('pageDescriptions')}}" class="main-nav-item">О сайте</a>
         <a href="{{route('hobbies')}}" class="main-nav-item">Хобби</a>
         <a href="{{route('posts')}}" class="main-nav-item">Посты</a>
-        <button class="header__btn btn">Обратная связь</button>
+        <button data-modal-open="modalCallback" class="header__btn btn">Обратная связь</button>
 
 {{--        @if(!(Auth::check()))--}}
 {{--            <a href="{{route('login')}}" class="main-nav-item">Вход</a>--}}

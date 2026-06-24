@@ -17,9 +17,12 @@
     @yield('content')
 
     @include('components.footer')
+
+
 </div>
 
+<script src="{{asset('js/main.js')}}"></script>
 </body>
 
-<script src="{{asset('js/main.js')}}"></script>
+
 </html>
