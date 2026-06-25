@@ -15,8 +15,8 @@
 
            <div id="mainFrame" class="main-frame">
 
-               <div id="mainFrameLight" class="main-frame-light">
-                   <span class="main-frame-light__blink"></span>
+               <div id="frameLight" class="frame-light">
+                   <span class="frame-light__blink"></span>
                </div>
 
                <div class="main-frame__content">
@@ -27,8 +27,7 @@
                            <div id="mainFrameMessage" class="main-frame-message">
                                <div class="main-frame-message__inner">
                                    <i data-frame-tab-close class="main-close main-form-message__close"></i>
-                                   <div data-message-inner class="main-frame-message__content">
-                               </div>
+                                   <div data-message-inner class="main-frame-message__content"></div>
                                </div>
                            </div>
                        </div>

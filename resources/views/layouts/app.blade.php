@@ -105,6 +105,17 @@
 <div data-modal="modalCallback" class="modal">
     <div data-modal-close="modalCallback" class="modal__bg"></div>
     <div class="modal__inner">
+        <div id="frameLight" class="frame-light">
+            <span class="frame-light__blink"></span>
+        </div>
+
+        <div id="mainFrameMessage" class="main-frame-message">
+            <div class="main-frame-message__inner">
+                <i data-frame-tab-close class="main-close main-form-message__close"></i>
+                <div data-message-inner class="main-frame-message__content"></div>
+            </div>
+        </div>
+
         <span data-modal-close="modalCallback" class="modal__close main-close"></span>
         <form id="mainForm" action="{{route('callback')}}" method="post" class="main-form">
             @csrf

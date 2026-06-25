@@ -283,7 +283,10 @@ class MainForm {
         if(rez.success){
             setTimeout(() => {
                 frameMessage.set(`<p>${rez.message}</p>`);
-                frame.replaceTab('message');
+                if(frame.$frame){
+                    frame.replaceTab('message');
+                }
+
                 this.reset();
                 frameLight.hide();
             }, 700);
@@ -323,7 +326,7 @@ class MainFrameMessage {
 
 class FrameLight {
     constructor() {
-        this.$light = document.querySelector('#mainFrameLight');
+        this.$light = document.querySelector('#frameLight');
     }
 
     show = (isBlink) => {
@@ -361,6 +364,7 @@ class Frame {
     }
 
     replaceTab = (tabName) => {
+        if(!this.$tabList) return
         this.$tabList.forEach(($tab) => {
             this.hideTab($tab);
             if($tab.dataset.frameTab === tabName){
@@ -1202,7 +1206,6 @@ class HobbyList{
         document.addEventListener('click', this.clickHandler);
     }
 }
-
 
 class Modal {
     constructor($modal) {

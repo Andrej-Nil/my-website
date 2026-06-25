@@ -1,13 +1,13 @@
 @import 'reset';
 @import 'main';
 @import 'grid';
-@import "main-page/componets/btn";
+@import "componets/btn";
 @import "componets/input";
 @import "componets/main-close";
 
 @import "main-page/blocks/main-frame";
-@import "main-page/blocks/main-frame-light";
-@import "main-page/blocks/main-frame-message";
+@import "blocks/frame-light";
+@import "blocks/frame-message";
 @import "main-page/blocks/main-frame-nav";
 @import "main-page/blocks/main-frame-link";
 @import "main-page/blocks/main-frame-tab";
