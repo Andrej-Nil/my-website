@@ -1,5 +1,5 @@
 .main-form{
-
+    //position: relative;
     max-width: 500px;
     width: 100%;
     margin: auto;
@@ -14,7 +14,7 @@
 
 
 .main-form__inner{
-    position: relative;
+    //position: relative;
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -35,6 +35,21 @@
     gap: 20px;
 }
 
+
+.main-form__message{
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    width: 100%;
+    z-index: 2;
+    &.show{
+        display: flex;
+    }
+}
 .main-form__bottom{
 
 }

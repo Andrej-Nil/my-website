@@ -172,6 +172,95 @@ class MainFormService extends Service {
     }
 }
 
+class Form {
+    constructor($form) {
+        this.$form = $form;
+        this.init()
+    }
+
+    init = () => {
+        if(!this.$form) return;
+        this.api = this.$form.action;
+        this.service = new MainFormService(this.api);
+        this.$inputList = this.$form.querySelectorAll('[data-input]');
+        this.$inputErrorList = this.$form.querySelectorAll('[data-control-errors]');
+        this.$message = this.$form.querySelector('[data-form-message]');
+        this.message = new Message( this.$message);
+
+        this.listeners();
+    }
+
+
+    clearError = ($error) => {
+        $error.innerHTML = '';
+    }
+
+    createErrors = ($item, errorList) => {
+        let errorText = '';
+        errorList.forEach((error) => {
+            errorText += `<p>${error}</p>`
+        })
+        $item.innerHTML = errorText;
+    }
+
+    clearErrorList = () => {
+        this.$inputErrorList.forEach(($item) => {
+            this.clearError($item);
+        })
+    }
+
+    clear = () => {
+        this.$inputList.forEach(($input) => {
+            $input.value = '';
+        })
+    }
+
+    reset = () => {
+        this.clear();
+        this.clearErrorList();
+    }
+
+    send = async () => {
+        const formData = new FormData(this.$form);
+        const response = await this.service.getFormData(formData);
+        if(response.success){
+            return {
+                success: true,
+                message: response.data.message
+            }
+        }else{
+            this.errors = response.errors
+            // this.showErrors(response.errors);
+            return {
+                error: true,
+            }
+        }
+    }
+
+    submitHandler = async (e) => {
+        e.preventDefault();
+        frameLight.show(true);
+
+        const rez = await this.send();
+        if(rez.success){
+            setTimeout(() => {
+                this.message.set(`<p>${rez.message}</p>`);
+                this.message.show();
+
+                this.reset();
+                frameLight.hide();
+            }, 700);
+
+        } else {
+            this.createErrors()
+        }
+    }
+    listeners = () => {
+        this.$form.addEventListener('submit', this.submitHandler);
+    }
+
+}
+
 class MainForm {
     constructor() {
         this.$form = document.querySelector('#mainForm');
@@ -282,7 +371,7 @@ class MainForm {
         const rez = await this.send();
         if(rez.success){
             setTimeout(() => {
-                frameMessage.set(`<p>${rez.message}</p>`);
+                message.set(`<p>${rez.message}</p>`);
                 if(frame.$frame){
                     frame.replaceTab('message');
                 }
@@ -303,23 +392,32 @@ class MainForm {
 
 }
 
-class MainFrameMessage {
-    constructor() {
-        this.$message = document.querySelector('#mainFrameMessage');
-        this.init()
+class Message {
+    constructor($message ) {
+        this.$message = $message;
+        this.init();
     }
 
     init = () => {
         if(!this.$message) return;
-        this.$inner = document.querySelector('[data-message-inner]');
+        this.$content = this.$message.querySelector('[data-message-content]');
+
+    }
+
+    show = () => {
+        this.$message.classList.add('show');
+    }
+
+    hide = () => {
+        this.$message.classList.remove('show');
     }
 
     set = (content) => {
-        this.$inner.innerHTML = content;
+        this.$content.innerHTML = content;
     }
 
     clear = () => {
-        this.$inner.innerHTML = '';
+        this.$content.innerHTML = '';
     }
 
 }
@@ -1246,9 +1344,9 @@ class Modal {
 
 const frame = new Frame();
 
-const frameForm = new MainForm();
+// const frameForm = new MainForm();
 
-const frameMessage = new MainFrameMessage();
+const message = new Message();
 
 const frameLight = new FrameLight();
 
@@ -1257,6 +1355,7 @@ const galleryModal = new GalleryModal();
 const galleryContainer = new Container('[data-gallery]', Gallery);
 
 const groupContainer = new Container('[data-group]', Group);
+const formContainer = new Container('[data-form]', Form);
 
 const hobbyPage = new HobbyPage();
 

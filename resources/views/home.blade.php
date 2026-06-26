@@ -20,14 +20,12 @@
                </div>
 
                <div class="main-frame__content">
-
-
                    <div data-frame-tab="message" class="main-frame-tab">
                        <div class="main-frame-tab__inner scroll">
-                           <div id="mainFrameMessage" class="main-frame-message">
-                               <div class="main-frame-message__inner">
-                                   <i data-frame-tab-close class="main-close main-form-message__close"></i>
-                                   <div data-message-inner class="main-frame-message__content"></div>
+                           <div id="message" class="message main-frame-message">
+                               <div class="message__inner">
+                                   <i data-frame-tab-close class="main-close message__close"></i>
+                                   <div data-message-inner class="message__content"></div>
                                </div>
                            </div>
                        </div>

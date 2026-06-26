@@ -1,0 +1,34 @@
+.message{
+    display: none;
+    position: relative;
+    //max-width: 500px;
+    align-items: center;
+    margin: 0 auto;
+    &.show{
+        display: flex;
+    }
+}
+
+.message__inner{
+    position: relative;
+}
+
+.message__content{
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+    color: #ccc;
+    font-size: 18px;
+}
+
+.message__text{
+    color: #ccc;
+    text-align: center;
+    font-size: 18px;
+}
+
+.message__close{
+    position: absolute;
+    top: 0;
+    right: 0;
+}

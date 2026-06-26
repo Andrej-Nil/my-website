@@ -11,114 +11,37 @@
 </head>
 <body class="body">
 
-{{--<nav class="navbar navbar-expand-lg bg-body-tertiary">--}}
-{{--    <div class="container-fluid">--}}
-{{--        <a class="navbar-brand" href="{{route('home')}}">Logo</a>--}}
-{{--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--}}
-{{--            <span class="navbar-toggler-icon"></span>--}}
-{{--        </button>--}}
-{{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-{{--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>--}}
-{{--                </li>--}}
-
-{{--                @if ( Route::has('login') )--}}
-{{--                    @auth--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="{{route('panel')}}">Panel</a>--}}
-{{--                        </li>--}}
-
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="#">{{auth()->user()->name}}</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="{{route('logout')}}">Logout</a>--}}
-{{--                        </li>--}}
-{{--                    @else--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="{{route('login')}}">Login</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="{{route('register')}}">Register</a>--}}
-{{--                        </li>--}}
-{{--                    @endauth--}}
-{{--                @endif--}}
-{{--            </ul>--}}
-
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</nav>--}}
-
 <div class="app @yield('bg')">
 
-{{--    <header class="header ">--}}
-{{--        <div class="header__inner ">--}}
-{{--            <nav class="nav">--}}
-
-{{--                <a href="{{route('home')}}" class="nav-item">Главная</a>--}}
-{{--                <a href="{{route('resume')}}" class="nav-item">Резюме</a>--}}
-{{--                <a href="{{route('about')}}" class="nav-item">Обо мне</a>--}}
-{{--                <a href="{{route('post.index')}}" class="nav-item">Блог</a>--}}
-{{--                <a href="{{route('contact')}}" class="nav-item">Контакты</a>--}}
-{{--                @auth--}}
-{{--                    <a href="{{route('panel')}}" class="nav-item">Панель</a>--}}
-{{--                    <span class="nav-item">{{auth()->user()->name}}</span>--}}
-{{--                @endauth--}}
-{{--            </nav>--}}
-{{--            <div class="header__contacts">--}}
-{{--                <a href="tel:" class="nav-item">+7 897 989 09 09</a>--}}
-{{--                <a href="mailto:" class="nav-item">testtesttesttest@test.ru</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </header>--}}
-
-
-    @include('components.header')
+    @include('components.header', ['btn'=>1])
 
     <div class="wrapper">
-
-{{--        @if($errors->any())--}}
-{{--            <div class="alert alert-danger">--}}
-{{--                <ul>--}}
-{{--                    @foreach($errors->all() as $error)--}}
-{{--                        <li>{{$error}}</li>--}}
-{{--                    @endforeach--}}
-{{--                </ul>--}}
-{{--            </div>--}}
-{{--        @endif--}}
-
-{{--        @if(session('success'))--}}
-{{--            <div class="alert alert-success">--}}
-{{--                {{ session('success')}}--}}
-{{--            </div>--}}
-{{--        @endif--}}
 
         @yield('content')
 
     </div>
-    @include('components.footer')
 
+    @include('components.footer')
 
 </div>
 
-<div data-modal="modalCallback" class="modal">
-    <div data-modal-close="modalCallback" class="modal__bg"></div>
+<div data-modal="modalCallback" class="modal open">
+    <div data-message-close  data-modal-close="modalCallback" class="modal__bg"></div>
     <div class="modal__inner">
         <div id="frameLight" class="frame-light">
             <span class="frame-light__blink"></span>
         </div>
 
-        <div id="mainFrameMessage" class="main-frame-message">
-            <div class="main-frame-message__inner">
-                <i data-frame-tab-close class="main-close main-form-message__close"></i>
-                <div data-message-inner class="main-frame-message__content"></div>
-            </div>
-        </div>
-
-        <span data-modal-close="modalCallback" class="modal__close main-close"></span>
-        <form id="mainForm" action="{{route('callback')}}" method="post" class="main-form">
+        <span data-message-close data-modal-close="modalCallback" class="modal__close main-close"></span>
+        <form data-form action="{{route('callback')}}" method="post" class="main-form">
             @csrf
+            <div data-form-message class="main-form__message message">
+                <div class="message__inner">
+{{--                    <i data-message-close data-modal-close class="main-close message__close"></i>--}}
+                    <div data-message-content class="message__content"></div>
+                </div>
+            </div>
+
             <div class="main-form__inner">
                 <p class="main-form__title">Обратная связь</p>
                 <div class="main-form__body">
