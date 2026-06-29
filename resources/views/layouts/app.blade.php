@@ -13,7 +13,7 @@
 
 <div class="app @yield('bg')">
 
-    @include('components.header', ['btn'=>1])
+    @include('components.header', ['btn'=>1, 'contacts'=>1])
 
     <div class="wrapper">
 

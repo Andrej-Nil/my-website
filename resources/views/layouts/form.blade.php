@@ -6,19 +6,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="{{asset('css/main-page.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <title>My website - @yield('title')</title>
 </head>
 
 <body>
-<div class="main">
-    @include('components.header', ['btn'=>0, 'contacts'=>1])
-
+<div class="app dark">
+    @include('components.header', ['btn'=>0, 'contacts'=>0])
+    <div class="wrapper">
     @yield('content')
-
+    </div>
     @include('components.footer')
-
-
 </div>
 
 <script src="{{asset('js/main.js')}}"></script>
