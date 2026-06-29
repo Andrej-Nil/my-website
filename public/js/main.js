@@ -153,7 +153,7 @@ class Render {
     }
 }
 
-class MainFormService extends Service {
+class FormService extends Service {
     constructor(api) {
         super();
         this.api = api;
@@ -170,6 +170,116 @@ class MainFormService extends Service {
             }
         )
     }
+}
+
+class Form {
+    constructor($form) {
+        this.$form = $form;
+        this.init()
+    }
+
+    init = () => {
+        if(!this.$form) return;
+        this.api = this.$form.action;
+        this.service = new FormService(this.api);
+        this.$inputList = this.$form.querySelectorAll('[data-input]');
+        this.$inputErrorList = this.$form.querySelectorAll('[data-control-errors]');
+        this.$loading = this.$form.querySelector('[data-form-loading]');
+        this.$message = this.$form.querySelector('[data-form-message]');
+
+        this.message = new FormMessage(this.$message);
+        this.loading = new FormLoading(this.$loading);
+
+        this.listeners();
+    }
+
+
+
+
+    showErrorsForm = (errorList) => {
+        Object.keys(errorList).forEach((key) => {
+            this.$inputErrorList.forEach(($error) => {
+                if($error.dataset.controlErrors === key){
+                    this.createErrors($error, errorList[key]);
+                }
+            })
+        });
+
+        this.loading.hide();
+    }
+
+    createErrors = ($item, errorList) => {
+        let errorText = '';
+        errorList.forEach((error) => {
+            errorText += `<p>${error}</p>`
+        })
+        $item.innerHTML = errorText;
+    }
+
+
+    clearError = ($error) => {
+        $error.innerHTML = '';
+    }
+
+
+    clearErrorList = () => {
+        this.$inputErrorList.forEach(($item) => {
+            this.clearError($item);
+        })
+    }
+
+    clear = () => {
+        this.$inputList.forEach(($input) => {
+            $input.value = '';
+        })
+    }
+
+    reset = () => {
+        this.clear();
+        this.clearErrorList();
+    }
+
+    fetch = async () => {
+        const formData = new FormData(this.$form);
+        return await this.service.getFormData(formData);
+
+    }
+
+    success = (data) => {
+        setTimeout(() => {
+            this.message.set(`<p>${data.message}</p>`);
+            this.message.show();
+
+
+            this.loading.hide();
+        }, 700);
+    }
+
+    submitHandler = async (e) => {
+        e.preventDefault();
+        this.loading.show();
+        this.clearErrorList();
+        const rez = await this.fetch();
+
+
+        if(rez.success){
+            this.reset();
+            this.success(rez.data);
+        } else {
+
+            if(rez.errors){
+                this.showErrorsForm(rez.errors);
+            } else {
+                this.reset();
+                this.success(rez);
+            }
+            //
+        }
+    }
+    listeners = () => {
+        this.$form.addEventListener('submit', this.submitHandler);
+    }
+
 }
 
 class MainForm {
@@ -282,8 +392,11 @@ class MainForm {
         const rez = await this.send();
         if(rez.success){
             setTimeout(() => {
-                frameMessage.set(`<p>${rez.message}</p>`);
-                frame.replaceTab('message');
+                message.set(`<p>${rez.message}</p>`);
+                if(frame.$frame){
+                    frame.replaceTab('message');
+                }
+
                 this.reset();
                 frameLight.hide();
             }, 700);
@@ -300,30 +413,75 @@ class MainForm {
 
 }
 
-class MainFrameMessage {
-    constructor() {
-        this.$message = document.querySelector('#mainFrameMessage');
-        this.init()
+class FormLoading {
+    constructor($loading) {
+        this.$loading = $loading;
+        // this.init();
+    }
+
+    // init = () => {
+    //     if(!this.$loading) return;
+    // }
+    //
+
+    show = () => {
+        if(!this.$loading) return;
+        this.$loading.classList.add('show');
+    }
+
+    hide = () => {
+        if(!this.$loading) return;
+        this.$loading.classList.remove('show');
+    }
+}
+
+class FormMessage {
+    constructor($message) {
+        this.$message = $message;
+        this.init();
     }
 
     init = () => {
         if(!this.$message) return;
-        this.$inner = document.querySelector('[data-message-inner]');
+        this.$content = this.$message.querySelector('[data-message-content]');
+        this.listeners();
+    }
+
+    show = () => {
+        this.$message.classList.add('show');
+    }
+
+    hide = () => {
+        this.$message.classList.remove('show');
     }
 
     set = (content) => {
-        this.$inner.innerHTML = content;
+        this.$content.innerHTML = content;
     }
 
     clear = () => {
-        this.$inner.innerHTML = '';
+        this.$content.innerHTML = '';
     }
 
+    close = () => {
+        this.clear();
+        this.hide();
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-message-close]')){
+            this.close();
+        }
+    }
+
+    listeners = () => {
+        this.$message.addEventListener('click', this.clickHandler);
+    }
 }
 
 class FrameLight {
     constructor() {
-        this.$light = document.querySelector('#mainFrameLight');
+        this.$light = document.querySelector('#frameLight');
     }
 
     show = (isBlink) => {
@@ -361,6 +519,7 @@ class Frame {
     }
 
     replaceTab = (tabName) => {
+        if(!this.$tabList) return
         this.$tabList.forEach(($tab) => {
             this.hideTab($tab);
             if($tab.dataset.frameTab === tabName){
@@ -1203,7 +1362,6 @@ class HobbyList{
     }
 }
 
-
 class Modal {
     constructor($modal) {
         this.$modal = $modal;
@@ -1243,9 +1401,9 @@ class Modal {
 
 const frame = new Frame();
 
-const frameForm = new MainForm();
+// const frameForm = new MainForm();
 
-const frameMessage = new MainFrameMessage();
+// const message = new Message();
 
 const frameLight = new FrameLight();
 
@@ -1254,6 +1412,7 @@ const galleryModal = new GalleryModal();
 const galleryContainer = new Container('[data-gallery]', Gallery);
 
 const groupContainer = new Container('[data-group]', Group);
+const formContainer = new Container('[data-form]', Form);
 
 const hobbyPage = new HobbyPage();
 

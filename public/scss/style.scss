@@ -2,6 +2,7 @@
 @import 'main';
 @import 'grid';
 
+@import "animations/flicker";
 @import "componets/page-title";
 @import "componets/page-subtitle";
 @import "componets/input";
@@ -48,9 +49,13 @@
 @import "blocks/article";
 
 @import "blocks/gallery-modal";
+@import "blocks/frame-light";
 
 @import 'blocks/footer';
-@import "blocks/main-form";
+
+@import "blocks/message";
+@import "blocks/form";
+@import "blocks/frame-message";
 @import "main-page/blocks/control";
 @import 'blocks/mobile-menu';
 @import 'blocks/modal';

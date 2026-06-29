@@ -12,7 +12,7 @@
 
 <body>
 <div class="main">
-    @include('components.header')
+    @include('components.header', ['btn'=>0])
 
     @yield('content')
 

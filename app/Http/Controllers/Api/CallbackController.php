@@ -14,6 +14,7 @@ class CallbackController extends BaseController
 {
 
     public function callback(CallbackRequest $request){
+
         $key = 'contact-form:' . $request->ip();
         if (RateLimiter::tooManyAttempts($key, 1)) {
             $secondsLeft = RateLimiter::availableIn($key);

@@ -1,0 +1,86 @@
+.form{
+    //position: relative;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+
+}
+
+
+.form__close{
+    position: absolute;
+    top: 4px;
+    right: 0;
+}
+
+
+.form__inner{
+    //position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+}
+
+.form__title{
+    font-size: 30px;
+    margin-bottom: 50px;
+    color: #ccc;
+}
+
+.form__content{
+    position: relative;
+}
+
+.form__body{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+
+
+
+.form__bottom{
+
+}
+
+.form__loading{
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    &.show{
+        display: flex;
+    }
+}
+
+.form__spinner{
+    color: #ffffff;
+    font-size: 24px;
+    animation: flicker 2s linear infinite;
+}
+
+
+.form__message{
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    width: 100%;
+    z-index: 2;
+    &.show{
+        display: flex;
+    }
+}
+

@@ -15,62 +15,77 @@
 
            <div id="mainFrame" class="main-frame">
 
-               <div id="mainFrameLight" class="main-frame-light">
-                   <span class="main-frame-light__blink"></span>
+               <div id="frameLight" class="frame-light">
+                   <span class="frame-light__blink"></span>
                </div>
 
                <div class="main-frame__content">
-
-
                    <div data-frame-tab="message" class="main-frame-tab">
                        <div class="main-frame-tab__inner scroll">
-                           <div id="mainFrameMessage" class="main-frame-message">
-                               <div class="main-frame-message__inner">
-                                   <i data-frame-tab-close class="main-close main-form-message__close"></i>
-                                   <div data-message-inner class="main-frame-message__content">
-                               </div>
+                           <div id="message" class="message main-frame-message">
+                               <div class="message__inner">
+                                   <i data-frame-tab-close class="main-close message__close"></i>
+                                   <div data-message-inner class="message__content"></div>
                                </div>
                            </div>
                        </div>
                    </div>
 
-                   <div data-frame-tab="form" class="main-frame-tab">
+                   <div data-frame-tab="form" class="main-frame-tab show">
                        <div data-frame-tab-close class="main-close main-frame-tab__close"></div>
                        <div class="main-frame-tab__inner scroll">
-                           <form id="mainForm" action="{{route('callback')}}" method="post" class="main-form">
+                           <form data-form action="{{route('callback')}}" method="post" class="form">
                                @csrf
-                               <div class="main-form__inner">
-                                   <p class="main-form__title">Обратная связь</p>
-                                   <div class="main-form__body">
-                                       <div  class="control">
-                                           <label for="mainFormName" class="control__label">Ваше имя</label>
-                                           <input data-input type="text" id="mainFormName" name="name" class="control__input input" placeholder="Ваше имя">
-                                           <div data-control-errors="name" class="control__errors"></div>
-                                       </div>
 
-                                       <div class="control">
-                                           <label for="mainFormPhone" class="control__label">Номер телефона</label>
-                                           <input data-input type="text" id="mainFormPhone" name="phone" class="control__input input" placeholder="Номер телефона">
-                                           <div data-control-errors="phone" class="control__errors"></div>
-                                       </div>
+                               <div class="form__inner">
+                                   <p class="form__title">Обратная связь</p>
+                                   <div class="form__content">
 
-                                       <div class="control">
-                                           <label for="mainFormMail" class="control__label">Почта</label>
-                                           <input data-input type="text" id="mainFormMail" name="email" class="control__input input" placeholder="Почта">
-                                           <div data-control-errors="email" class="control__errors">
+                                       <div class="form__body">
+                                           <div class="control">
+                                               <label for="mainFormName" class="control__label">Ваше имя</label>
+                                               <input data-input type="text" id="mainFormName" name="name" class="control__input input" placeholder="Ваше имя">
+                                               <div data-control-errors="name" class="control__errors"></div>
+                                           </div>
+
+                                           <div class="control">
+                                               <label for="mainFormPhone" class="control__label">Номер телефона</label>
+                                               <input data-input type="text" id="mainFormPhone" name="phone" class="control__input input" placeholder="Номер телефона">
+                                               <div data-control-errors="phone" class="control__errors"></div>
+                                           </div>
+
+                                           <div class="control">
+                                               <label for="mainFormMail" class="control__label">Почта</label>
+                                               <input data-input type="text" id="mainFormMail" name="email" class="control__input input" placeholder="Почта">
+                                               <div data-control-errors="email" class="control__errors">
+
+                                               </div>
+                                           </div>
+
+                                           <div class="control">
+                                               <label for="mainFormMessage" class="control__label">Коментарий</label>
+                                               <textarea data-input id="mainFormMessage" name="comment" class="control__input input" rows="2" placeholder="Коментарий"></textarea>
+                                               <div data-control-errors="comment" class="control__errors"></div>
 
                                            </div>
                                        </div>
-
-                                       <div class="control">
-                                           <label for="mainFormMessage" class="control__label">Коментарий</label>
-                                           <textarea data-input id="mainFormMessage" name="comment" class="control__input input" rows="2" placeholder="Коментарий"></textarea>
-                                           <div data-control-errors="comment" class="control__errors"></div>
-
+                                       <div class="form__bottom">
+                                           <button type="submit" class="form__submit btn">Отправить</button>
                                        </div>
-                                   </div>
-                                   <div class="main-form__bottom">
-                                       <button type="submit" class="main-form__submit btn">Отправить</button>
+
+                                       <div data-form-loading class="form__loading">
+                                           <span class="form__spinner">
+                                               Идет отправка...
+                                           </span>
+                                       </div>
+
+
+                                       <div data-form-message class="form__message message">
+                                           <div class="message__inner">
+                                               <i data-message-close class="main-close message__close"></i>
+                                               <div data-message-content class="message__content"></div>
+                                           </div>
+                                       </div>
                                    </div>
                                </div>
                            </form>
@@ -174,7 +189,7 @@
                      </div>
                  </div>
 
-               <div data-frame-nav class="main-frame-nav">
+               <div data-frame-nav class="main-frame-nav hide">
                        <div class="main-frame-nav__list">
                        <div data-frame-tab-link="info" class="main-frame-link">
 

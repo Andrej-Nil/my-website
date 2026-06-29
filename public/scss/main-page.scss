@@ -1,13 +1,17 @@
 @import 'reset';
 @import 'main';
 @import 'grid';
-@import "main-page/componets/btn";
+
+@import "animations/flicker";
+
+@import "componets/btn";
 @import "componets/input";
 @import "componets/main-close";
 
 @import "main-page/blocks/main-frame";
-@import "main-page/blocks/main-frame-light";
-@import "main-page/blocks/main-frame-message";
+@import "blocks/frame-light";
+@import "blocks/message";
+@import "blocks/frame-message";
 @import "main-page/blocks/main-frame-nav";
 @import "main-page/blocks/main-frame-link";
 @import "main-page/blocks/main-frame-tab";
@@ -20,7 +24,7 @@
 @import "main-page/blocks/control";
 @import "main-page/blocks/signature";
 
-@import "blocks/main-form";
+@import "blocks/form";
 @import "blocks/main";
 @import "blocks/header";
 @import "blocks/main-nav";
