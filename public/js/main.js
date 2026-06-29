@@ -281,136 +281,6 @@ class Form {
 
 }
 
-class MainForm {
-    constructor() {
-        this.$form = document.querySelector('#mainForm');
-        this.init();
-    }
-
-    init = () => {
-        if (!this.$form) return;
-
-        this.api = this.$form.action;
-        this.service = new MainFormService(this.api);
-        this.$inputList = this.$form.querySelectorAll('[data-input]')
-        this.$inputErrorList = this.$form.querySelectorAll('[data-control-errors]');
-        this.listeners()
-
-    }
-
-    createErrors = ($item, errorList) => {
-        let errorText = '';
-        errorList.forEach((error) => {
-            errorText += `<p>${error}</p>`
-        })
-        $item.innerHTML = errorText;
-    }
-
-    showErrors = () => {
-        Object.keys(this.errors).forEach((key) => {
-           this.$inputErrorList.forEach(($item) => {
-               if(key === $item.dataset.controlErrors){
-                   this.createErrors($item, this.errors[key]);
-               }
-           })
-        })
-    }
-
-    send = async () => {
-        const formData = new FormData(this.$form);
-        const response = await this.service.getFormData(formData);
-        if(response.success){
-            return {
-                success: true,
-                message: response.data.message
-            }
-        }else{
-            this.errors = response.errors
-            // this.showErrors(response.errors);
-            return {
-                error: true,
-            }
-        }
-    }
-
-    clearError = ($error) => {
-        $error.innerHTML = '';
-    }
-
-    clearErrorList = () => {
-        this.$inputErrorList.forEach(($item) => {
-            this.clearError($item);
-        })
-    }
-
-    clear = () => {
-        this.$inputList.forEach(($input) => {
-            $input.value = '';
-        })
-
-    }
-
-    reset = () => {
-        this.clear();
-        this.clearErrorList();
-    }
-
-    show = () => {
-        this.$form.classList.add('show');
-    }
-
-    hide = () => {
-        this.$form.classList.remove('show');
-    }
-
-    sendHandler = () => {
-        //     sendHandler = async (e) => {
-//
-//         e.preventDefault();
-//         const rez = await this.form.send();
-//         if(rez.success){
-//             setTimeout(() => {
-//                 this.message.set(`<p>${rez.message}</p>`);
-//                 this.message.show();
-//                 this.form.reset();
-//                 this.hideForm();
-//             }, 700);
-//         } else {
-//             setTimeout(() => {
-//                 this.form.showErrors();
-//                 light.hide();
-//             }, 700);
-//         }
-//     }
-    }
-
-    submitHandler = async (e) => {
-        e.preventDefault();
-        frameLight.show(true);
-
-        const rez = await this.send();
-        if(rez.success){
-            setTimeout(() => {
-                message.set(`<p>${rez.message}</p>`);
-                if(frame.$frame){
-                    frame.replaceTab('message');
-                }
-
-                this.reset();
-                frameLight.hide();
-            }, 700);
-
-        } else {
-            this.createErrors()
-        }
-
-    }
-
-    listeners = () => {
-        this.$form.addEventListener('submit', this.submitHandler);
-    }
-
-}
 
 class FormLoading {
     constructor($loading) {
@@ -1398,11 +1268,13 @@ class Modal {
     }
 }
 
-const frame = new Frame();
+
 
 // const frameForm = new MainForm();
 
 // const message = new Message();
+
+const frame = new Frame();
 
 const frameLight = new FrameLight();
 

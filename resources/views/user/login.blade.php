@@ -14,15 +14,11 @@
                     <input name="email" id="email" type="text" class="form-control" placeholder="Email">
 
                 </div>
-
-
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input name="password" id="password" type="password" class="form-control" placeholder="Password">
 
                 </div>
-
-
                 <div class="form-check">
                     <input name="remember" class="form-check-input" type="checkbox" id="remember">
                     <label class="form-check-label" for="remember">
@@ -31,7 +27,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Login</button>
-                <a href="{{route('password.request')}}" class="ms-2">Забыли пароль?</a>
+{{--                <a href="{{route('password.request')}}" class="ms-2">Забыли пароль?</a>--}}
             </form>
         </div>
     </div>
