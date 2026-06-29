@@ -31,7 +31,7 @@
                        </div>
                    </div>
 
-                   <div data-frame-tab="form" class="main-frame-tab show">
+                   <div data-frame-tab="form" class="main-frame-tab">
                        <div data-frame-tab-close class="main-close main-frame-tab__close"></div>
                        <div class="main-frame-tab__inner scroll">
                            <form data-form action="{{route('callback')}}" method="post" class="form">
@@ -189,7 +189,7 @@
                      </div>
                  </div>
 
-               <div data-frame-nav class="main-frame-nav hide">
+               <div data-frame-nav class="main-frame-nav">
                        <div class="main-frame-nav__list">
                        <div data-frame-tab-link="info" class="main-frame-link">
 

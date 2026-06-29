@@ -261,7 +261,6 @@ class Form {
         this.clearErrorList();
         const rez = await this.fetch();
 
-
         if(rez.success){
             this.reset();
             this.success(rez.data);
@@ -273,9 +272,9 @@ class Form {
                 this.reset();
                 this.success(rez);
             }
-            //
         }
     }
+
     listeners = () => {
         this.$form.addEventListener('submit', this.submitHandler);
     }
