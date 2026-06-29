@@ -153,7 +153,7 @@ class Render {
     }
 }
 
-class MainFormService extends Service {
+class FormService extends Service {
     constructor(api) {
         super();
         this.api = api;
@@ -181,18 +181,31 @@ class Form {
     init = () => {
         if(!this.$form) return;
         this.api = this.$form.action;
-        this.service = new MainFormService(this.api);
+        this.service = new FormService(this.api);
         this.$inputList = this.$form.querySelectorAll('[data-input]');
         this.$inputErrorList = this.$form.querySelectorAll('[data-control-errors]');
+        this.$loading = this.$form.querySelector('[data-form-loading]');
         this.$message = this.$form.querySelector('[data-form-message]');
-        this.message = new Message( this.$message);
+
+        this.message = new FormMessage(this.$message);
+        this.loading = new FormLoading(this.$loading);
 
         this.listeners();
     }
 
 
-    clearError = ($error) => {
-        $error.innerHTML = '';
+
+
+    showErrorsForm = (errorList) => {
+        Object.keys(errorList).forEach((key) => {
+            this.$inputErrorList.forEach(($error) => {
+                if($error.dataset.controlErrors === key){
+                    this.createErrors($error, errorList[key]);
+                }
+            })
+        });
+
+        this.loading.hide();
     }
 
     createErrors = ($item, errorList) => {
@@ -202,6 +215,12 @@ class Form {
         })
         $item.innerHTML = errorText;
     }
+
+
+    clearError = ($error) => {
+        $error.innerHTML = '';
+    }
+
 
     clearErrorList = () => {
         this.$inputErrorList.forEach(($item) => {
@@ -220,39 +239,41 @@ class Form {
         this.clearErrorList();
     }
 
-    send = async () => {
+    fetch = async () => {
         const formData = new FormData(this.$form);
-        const response = await this.service.getFormData(formData);
-        if(response.success){
-            return {
-                success: true,
-                message: response.data.message
-            }
-        }else{
-            this.errors = response.errors
-            // this.showErrors(response.errors);
-            return {
-                error: true,
-            }
-        }
+        return await this.service.getFormData(formData);
+
+    }
+
+    success = (data) => {
+        setTimeout(() => {
+            this.message.set(`<p>${data.message}</p>`);
+            this.message.show();
+
+
+            this.loading.hide();
+        }, 700);
     }
 
     submitHandler = async (e) => {
         e.preventDefault();
-        frameLight.show(true);
+        this.loading.show();
+        this.clearErrorList();
+        const rez = await this.fetch();
 
-        const rez = await this.send();
+
         if(rez.success){
-            setTimeout(() => {
-                this.message.set(`<p>${rez.message}</p>`);
-                this.message.show();
-
-                this.reset();
-                frameLight.hide();
-            }, 700);
-
+            this.reset();
+            this.success(rez.data);
         } else {
-            this.createErrors()
+
+            if(rez.errors){
+                this.showErrorsForm(rez.errors);
+            } else {
+                this.reset();
+                this.success(rez);
+            }
+            //
         }
     }
     listeners = () => {
@@ -392,8 +413,30 @@ class MainForm {
 
 }
 
-class Message {
-    constructor($message ) {
+class FormLoading {
+    constructor($loading) {
+        this.$loading = $loading;
+        // this.init();
+    }
+
+    // init = () => {
+    //     if(!this.$loading) return;
+    // }
+    //
+
+    show = () => {
+        if(!this.$loading) return;
+        this.$loading.classList.add('show');
+    }
+
+    hide = () => {
+        if(!this.$loading) return;
+        this.$loading.classList.remove('show');
+    }
+}
+
+class FormMessage {
+    constructor($message) {
         this.$message = $message;
         this.init();
     }
@@ -401,7 +444,7 @@ class Message {
     init = () => {
         if(!this.$message) return;
         this.$content = this.$message.querySelector('[data-message-content]');
-
+        this.listeners();
     }
 
     show = () => {
@@ -420,6 +463,20 @@ class Message {
         this.$content.innerHTML = '';
     }
 
+    close = () => {
+        this.clear();
+        this.hide();
+    }
+
+    clickHandler = (e) => {
+        if(e.target.closest('[data-message-close]')){
+            this.close();
+        }
+    }
+
+    listeners = () => {
+        this.$message.addEventListener('click', this.clickHandler);
+    }
 }
 
 class FrameLight {
@@ -1346,7 +1403,7 @@ const frame = new Frame();
 
 // const frameForm = new MainForm();
 
-const message = new Message();
+// const message = new Message();
 
 const frameLight = new FrameLight();
 

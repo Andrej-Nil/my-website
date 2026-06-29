@@ -14,9 +14,7 @@ class CallbackController extends BaseController
 {
 
     public function callback(CallbackRequest $request){
-        return $this->sendResponse([
-            'message' =>  'Ваше письмо отправленно.<br/> В скором времени я с вами свяжусь'
-        ]);
+
         $key = 'contact-form:' . $request->ip();
         if (RateLimiter::tooManyAttempts($key, 1)) {
             $secondsLeft = RateLimiter::availableIn($key);

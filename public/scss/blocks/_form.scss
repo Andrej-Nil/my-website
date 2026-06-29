@@ -1,4 +1,4 @@
-.main-form{
+.form{
     //position: relative;
     max-width: 500px;
     width: 100%;
@@ -6,14 +6,15 @@
 
 }
 
-.main-form__close{
+
+.form__close{
     position: absolute;
     top: 4px;
     right: 0;
 }
 
 
-.main-form__inner{
+.form__inner{
     //position: relative;
     display: flex;
     height: 100%;
@@ -21,14 +22,17 @@
 
 }
 
-
-.main-form__title{
+.form__title{
     font-size: 30px;
     margin-bottom: 50px;
     color: #ccc;
 }
 
-.main-form__body{
+.form__content{
+    position: relative;
+}
+
+.form__body{
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -36,7 +40,36 @@
 }
 
 
-.main-form__message{
+
+
+
+.form__bottom{
+
+}
+
+.form__loading{
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    &.show{
+        display: flex;
+    }
+}
+
+.form__spinner{
+    color: #ffffff;
+    font-size: 24px;
+    animation: flicker 2s linear infinite;
+}
+
+
+.form__message{
     justify-content: center;
     position: absolute;
     top: 0;
@@ -50,9 +83,4 @@
         display: flex;
     }
 }
-.main-form__bottom{
-
-}
-
-
 

@@ -1,6 +1,9 @@
 @import 'reset';
 @import 'main';
 @import 'grid';
+
+@import "animations/flicker";
+
 @import "componets/btn";
 @import "componets/input";
 @import "componets/main-close";
@@ -21,7 +24,7 @@
 @import "main-page/blocks/control";
 @import "main-page/blocks/signature";
 
-@import "blocks/main-form";
+@import "blocks/form";
 @import "blocks/main";
 @import "blocks/header";
 @import "blocks/main-nav";
