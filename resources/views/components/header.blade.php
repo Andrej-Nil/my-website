@@ -10,18 +10,16 @@
         @if($btn === 1)
         <button data-modal-open="modalCallback" class="header__btn btn">Обратная связь</button>
         @endif
-{{--        @if(!(Auth::check()))--}}
-{{--            <a href="{{route('login')}}" class="main-nav-item">Вход</a>--}}
-{{--        @else--}}
-{{--            <a class="main-nav-item" href="{{route('panel')}}">Панель</a>--}}
-{{--            <span  class="main-nav-item">{{auth()->user()->name}}</span>--}}
-{{--        @endif--}}
+
     </div>
 
-    @if((Auth::check()))
+    @if($contacts === 1)
         <div class="main-contacts">
             <a href="tel:{{$admin['phone']}}" class="main-contact">{{$admin['phone']}}</a>
             <a href="mailto:{{$admin['mail']}}" class="main-contact">{{$admin['mail']}}</a>
+                @if((Auth::check()))
+                <a href="{{route('logout')}}" class="main-contact">Выход</a>
+            @endif
         </div>
     @endif
 </header>

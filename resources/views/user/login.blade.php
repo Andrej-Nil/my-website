@@ -1,36 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.form')
 
-@section('title', 'Login')
+@section('title', 'Вход')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h1>Login</h1>
-            <form action="{{route('login.auth')}}" method="post">
+    <div class="container">
+                <form action="{{route('login.auth')}}" method="post" class="form">
                 @csrf
+                 <div class="form__inner">
+                     <p class="form__title">Вход</p>
+                     <div class="form__content">
+                         <div class="form__body">
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input name="email" id="email" type="text" class="form-control" placeholder="Email">
+                             <div class="control">
+                                 <label for="email" class="control__label form-label">Почта</label>
+                                 <input name="email" id="email" type="text" class="control__input input form-control" placeholder="Почта">
+                             </div>
 
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input name="password" id="password" type="password" class="form-control" placeholder="Password">
+                             <div class="control">
+                                 <label for="password" class="control__label form-label">Пароль</label>
+                                 <input name="password" id="password" type="password" class="control__input input form-control" placeholder="Пароль">
 
-                </div>
-                <div class="form-check">
-                    <input name="remember" class="form-check-input" type="checkbox" id="remember">
-                    <label class="form-check-label" for="remember">
-                        Remember me
-                    </label>
-                </div>
+                             </div>
+                             <div class="form-check">
+                                 <input name="remember" class="form-check-input" type="checkbox" id="remember">
+                                 <label class="form-check-label" for="remember">
+                                    Запомнить
+                                 </label>
+                             </div>
+                         </div>
 
-                <button type="submit" class="btn btn-primary">Login</button>
-{{--                <a href="{{route('password.request')}}" class="ms-2">Забыли пароль?</a>--}}
+                     <div class="form__bottom">
+                        <button type="submit" class="btn btn-primary">Вход</button>
+                     </div>
+                     </div>
+                 </div>
             </form>
         </div>
-    </div>
 
 @endsection
 
