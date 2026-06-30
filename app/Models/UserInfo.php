@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,7 +39,8 @@ class UserInfo extends Model
 
     public function getYearBirthDateAttribute() {
         if($this->year_birth) {
-            return explode(' ', $this->year_birth)[0];
+            return Carbon::parse($this->year_birth)->format('d-m-Y');
+//            return explode(' ', $this->year_birth)[0];
         }
         return null;
     }
