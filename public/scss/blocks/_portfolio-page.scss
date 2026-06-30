@@ -1,11 +1,12 @@
 .portfolio-page{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px
+    //display: grid;
+    //grid-template-columns: repeat(2, 1fr);
+    //gap: 20px
 }
 
 .portfolio-page__img{
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .portfolio-page__content{
