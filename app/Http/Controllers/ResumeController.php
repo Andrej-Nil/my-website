@@ -24,7 +24,6 @@ class ResumeController extends Controller
         $collectionQuality = collect($quality);
         $professionalQualities = $collectionQuality->where('type', 1);
         $personalQualities = $collectionQuality->where('type', 2);
-
         return view('resume', [
             'admin' => $admin,
             'jobList' => $jobList,

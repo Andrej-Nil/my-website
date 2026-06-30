@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
@@ -24,7 +25,7 @@ class Job extends Model
 
     public function getStartDateAttribute() {
         if($this->start) {
-            return explode(' ', $this->start)[0];
+            return Carbon::parse($this->start)->format('d-m-Y');
         }
 
         return null;
@@ -32,7 +33,7 @@ class Job extends Model
 
     public function getEndDateAttribute() {
         if($this->end) {
-            return explode(' ', $this->start)[0];
+            return Carbon::parse($this->end)->format('d-m-Y');
         }
 
         return null;
