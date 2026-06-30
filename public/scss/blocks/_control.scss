@@ -5,8 +5,11 @@
 }
 
 .control__label{
-    font-size: 16px;
+    font-size: 12px;
     color: #ccc;
+    @media (min-width: 1040px) {
+        font-size: 16px;
+    }
 }
 
 .control__errors{

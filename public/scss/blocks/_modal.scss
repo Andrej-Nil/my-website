@@ -1,5 +1,5 @@
 .modal{
-    padding: 50px;
+    padding: 15px;
     position: fixed;
     overflow-y: auto;
     display: none;
@@ -10,6 +10,10 @@
     z-index: 1000;
     &.open{
         display: block;
+    }
+
+    @media (min-width: 1040px) {
+        padding: 50px;
     }
 }
 
@@ -26,15 +30,22 @@
     background: #000000;
     max-width: 600px;
     margin: 0 auto;
-    padding: 50px;
+    padding: 40px 10px 30px;
     width: 100%;
     position: relative;
+    @media (min-width: 1040px) {
+        padding: 50px;
+    }
 }
 
 .modal__close{
     position: absolute;
-    top: 20px;
-    right: 50px;
+    top: 10px;
+    right: 10px;
+    @media (min-width: 1040px) {
+        top: 20px;
+        right: 50px;
+    }
 }
 
 

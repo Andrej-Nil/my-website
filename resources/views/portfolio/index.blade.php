@@ -20,33 +20,30 @@
                 <a href="{{route('panel.portfolios')}}" class="admin-links__btn btn">Редактировать партфолио</a>
             </div>
         @endif
-                @if($portfolioList['data'])
-                <div class="portfolio__list">
-                    @foreach($portfolioList['data'] as $portfolio)
-                        <div class="portfolio-card">
-                            <div class="portfolio-card__inner">
-                                <img src="{{$portfolio['photo_url']}}" alt="{{$portfolio['title']}}" class="portfolio-card__img">
+        @if($portfolioList['data'])
+        <div class="portfolio__list">
+            @foreach($portfolioList['data'] as $portfolio)
+            <div class="portfolio-card">
+                <div class="portfolio-card__inner">
+                    <img src="{{$portfolio['photo_url']}}" alt="{{$portfolio['title']}}" class="portfolio-card__img">
 
-                                <div class="portfolio-card__content">
-                                    <p class="portfolio-card__title">{{$portfolio['title']}}</p>
-                                    <p class="portfolio-card__text">{{$portfolio['text_short']}}</p>
-                                    <div class="portfolio-card__bottom">
-                                        <a href="{{route('portfolios.show', $portfolio['id'])}}" class="portfolio-card__btn btn">Подробнее</a>
-                                        <a href="{{$portfolio['link']}}" target="_blank" class="portfolio-card__btn btn">Ссылка</a>
-                                    </div>
-                                </div>
-
-
-                            </div>
+                    <div class="portfolio-card__content">
+                        <p class="portfolio-card__title">{{$portfolio['title']}}</p>
+                        <p class="portfolio-card__text">{{$portfolio['text_short']}}</p>
+                        <div class="portfolio-card__bottom">
+                            <a href="{{route('portfolios.show', $portfolio['id'])}}" class="portfolio-card__btn btn">Подробнее</a>
+                            <a href="{{$portfolio['link']}}" target="_blank" class="portfolio-card__btn btn">Ссылка</a>
                         </div>
-
-                    @endforeach
+                    </div>
                 </div>
-                @else
-                <p class="portfolio__message">
-                    Нет пример работ
-                </p>
-                @endif
+            </div>
+            @endforeach
+        </div>
+        @else
+        <p class="portfolio__message">
+            Нет пример работ
+        </p>
+        @endif
 
         <div class="pagination">
 

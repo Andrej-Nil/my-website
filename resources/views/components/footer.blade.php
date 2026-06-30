@@ -20,7 +20,10 @@
             <span class="mobile-menu-item__title">Портфолио</span>
         </a>
 
-        <span class="mobile-menu-item"></span>
+        <div data-modal-open="modalCallback" class="mobile-menu-item">
+            <img src="{{asset('img/icon/person-call.svg')}}" alt="" class="mobile-menu-item__icon">
+            <span class="mobile-menu-item__title">Связаться</span>
+        </div>
 
         <div data-main-nav-open class="mobile-menu-item">
             <img src="{{asset('img/icon/menu-nav.svg')}}" alt="" class="mobile-menu-item__icon">
