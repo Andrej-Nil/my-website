@@ -7,14 +7,19 @@
     z-index: 20;
     padding: 10px 15px;
     display: flex;
-
+    border-bottom: 1px solid #ffffff;
     @media(min-width: 1040px){
+        border-bottom: none;
         position: relative;
         justify-content: space-between;
     }
 }
 
 .header__btn{
+    display: none;
     font-size: 14px;
     padding: 10px 15px;
+    @media(min-width: 1040px){
+        display: block;
+    }
 }

@@ -55,10 +55,10 @@
                                     </div>
                                     @endforeach
                                     @if(count($jobList) > 1)
-                                        <button data-group-btn="show" type="button" class="resume-group-btn">
+                                        <button data-group-btn="show" type="button" class="resume-group__btn btn">
                                             open
                                         </button>
-                                        <button data-group-btn="hide" type="button" class="resume-group-btn hide">
+                                        <button data-group-btn="hide" type="button" class="resume-group__btn btn hide">
                                             close
                                         </button>
                                      @endif
@@ -99,13 +99,12 @@
                                     @endforeach
 
                                     @if(count($schoolList) > 1)
-                                    <button data-group-btn="show" type="button" class="resume-group-btn">
+                                    <button data-group-btn="show" type="button" class="resume-group__btn btn">
                                         open
                                     </button>
-                                    <button data-group-btn="hide" type="button" class="resume-group-btn hide">
+                                    <button data-group-btn="hide" type="button" class="resume-group__btn btn hide">
                                         close
                                     </button>
-
                                     @endif
                                 </div>
                             </div>
@@ -116,11 +115,9 @@
                     <div class="resume__data">
                         @if($professionalQualities)
                             <div class="resume-block">
-
                                 <p class="resume-block__title">Профессиональные навыки </p>
                                 <ul class="resume-list">
                                 @foreach($professionalQualities as $quality)
-
                                         <li class="resume-list-item">
                                             <span class="resume-list-item__label">{{$quality['title']}}</span>
                                         </li>
@@ -129,33 +126,31 @@
                             </div>
                         @endif
 
-                            @if($personalQualities)
-                                <div class="resume-block">
+                        @if($personalQualities)
+                            <div class="resume-block">
+                                <p class="resume-block__title">Личные навыки</p>
+                                <ul class="resume-list">
+                                    @foreach($personalQualities as $quality)
+                                        <li class="resume-list-item">
+                                            <span class="resume-list-item__label">{{$quality['title']}}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
-                                    <p class="resume-block__title">Личные навыки</p>
-                                    <ul class="resume-list">
-                                        @foreach($personalQualities as $quality)
-
-                                            <li class="resume-list-item">
-                                                <span class="resume-list-item__label">{{$quality['title']}}</span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            @if($hobbyList)
-                                <div class="resume-block">
-                                    <p class="resume-block__title">Хобби</p>
-                                    <ul class="resume-list">
-                                        @foreach($hobbyList as $hobby)
-                                            <li class="resume-list-item">
-                                                <span class="resume-list-item__label">{{$hobby['title']}}</span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+                        @if($hobbyList)
+                            <div class="resume-block">
+                                <p class="resume-block__title">Хобби</p>
+                                <ul class="resume-list">
+                                    @foreach($hobbyList as $hobby)
+                                        <li class="resume-list-item">
+                                            <span class="resume-list-item__label">{{$hobby['title']}}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

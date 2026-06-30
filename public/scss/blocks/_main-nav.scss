@@ -17,6 +17,7 @@
     transition: 0.2s ease-in-out;
     &.open{
         transform: translateX(0);
+        box-shadow: 10px 0 10px rgba(0, 0, 0, 0.3);
     }
 
     @media (min-width: 1040px) {
@@ -29,15 +30,15 @@
         align-items: center;
         flex-direction: row;
         position: static;
-
     }
 }
 
 .main-nav-item{
-    padding: 8px 0;
+    padding: 8px 10px;
     transition: 0.2s ease-in-out;
     color: #000;
     font-size: 14px;
+    border-bottom: 1px solid #000;
     @media (min-width: 1040px) {
         color: #ccc;
         &:hover{
