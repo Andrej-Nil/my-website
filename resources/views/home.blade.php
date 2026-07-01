@@ -169,15 +169,23 @@
                                          </div>
                                      </div>
                                      <div class="socials">
+                                         @if($admin['telegram'])
                                          <a href="{{$admin['telegram']}}" target="_blank" class="social__link">
                                              <img src="{{asset('img/icon/tg.svg')}}"class="social__icon" alt="">
                                          </a>
-                                         <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
-                                             <img src="{{asset('img/icon/vk.svg')}}"class="social__icon" alt="">
-                                         </a>
+                                         @endif
+
+                                         @if($admin['whatsapp'])
                                          <a href="{{$admin['whatsapp']}}" target="_blank" class="social__link">
                                              <img src="{{asset('img/icon/wa.svg')}}"class="social__icon" alt="">
                                          </a>
+                                         @endif
+
+                                         @if($admin['vk'])
+                                         <a href="{{$admin['vk']}}" target="_blank" class="social__link">
+                                             <img src="{{asset('img/icon/wa.svg')}}"class="social__icon" alt="">
+                                         </a>
+                                         @endif
                                      </div>
 {{--                                     <button data-frame-tab-link="form" type="button" class="my-contacts__btn btn">Обратная связь</button>--}}
                                  </div>

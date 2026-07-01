@@ -8,12 +8,15 @@
         flex-direction: row;
         align-items: center;
         margin-top: 30px;
+        gap: 40px;
     }
 }
 
 .my-contacts__photo{
-    width: 200px;
+    width:150px;
     height: 200px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .my-contacts__body{
