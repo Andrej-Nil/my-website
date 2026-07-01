@@ -56,10 +56,10 @@
                                     @endforeach
                                     @if(count($jobList) > 1)
                                         <button data-group-btn="show" type="button" class="resume-group__btn btn">
-                                            open
+                                            Показать все
                                         </button>
                                         <button data-group-btn="hide" type="button" class="resume-group__btn btn hide">
-                                            close
+                                            Скрыть
                                         </button>
                                      @endif
                                 </div>
@@ -100,10 +100,10 @@
 
                                     @if(count($schoolList) > 1)
                                     <button data-group-btn="show" type="button" class="resume-group__btn btn">
-                                        open
+                                        Показать все
                                     </button>
                                     <button data-group-btn="hide" type="button" class="resume-group__btn btn hide">
-                                        close
+                                        Скрыть
                                     </button>
                                     @endif
                                 </div>
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="resume__data">
-                        @if($professionalQualities)
+                        @if(count($professionalQualities))
                             <div class="resume-block">
                                 <p class="resume-block__title">Профессиональные навыки </p>
                                 <ul class="resume-list">
@@ -126,7 +126,7 @@
                             </div>
                         @endif
 
-                        @if($personalQualities)
+                        @if(count($personalQualities))
                             <div class="resume-block">
                                 <p class="resume-block__title">Личные навыки</p>
                                 <ul class="resume-list">
@@ -139,7 +139,7 @@
                             </div>
                         @endif
 
-                        @if($hobbyList)
+                        @if(count($hobbyList))
                             <div class="resume-block">
                                 <p class="resume-block__title">Хобби</p>
                                 <ul class="resume-list">
