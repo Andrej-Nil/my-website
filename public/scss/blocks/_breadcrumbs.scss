@@ -38,8 +38,11 @@
         color: #000;
     }
 
-    &:hover{
-        color: #000;
+    @media (min-width: 1040px) {
+        font-size: 14px;
+        &:hover{
+            color: #000;
+        }
     }
 
 }

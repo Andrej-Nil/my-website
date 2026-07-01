@@ -22,6 +22,18 @@
                             <p class="badge__name">{{$admin['second_name'].' '.$admin['first_name']}}</p>
                             <p class="badge__data">Дата рождения: {{$admin['year_birth_date']}}</p>
                             <p class="badge__post">{{$admin['profession']}}</p>
+
+                            <p class="badge-contact">
+                                <span class="badge-contact__label">Телефон:</span>
+                                <a class="badge-contact__value" href="mailto:{{$admin['phone']}}">{{$admin['phone']}}</a>
+                            </p>
+
+                            <p class="badge-contact">
+                                <span class="badge-contact__label">Почта:</span>
+                                <a class="badge-contact__value" href="mailto:{{$admin['mail']}}">{{$admin['mail']}}</a>
+                            </p>
+
+
                         </div>
                     </div>
                 </div>
