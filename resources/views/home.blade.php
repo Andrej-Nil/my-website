@@ -183,7 +183,7 @@
 
                                          @if($admin['vk'])
                                          <a href="{{$admin['vk']}}" target="_blank" class="social__link">
-                                             <img src="{{asset('img/icon/wa.svg')}}"class="social__icon" alt="">
+                                             <img src="{{asset('img/icon/vk.svg')}}"class="social__icon" alt="">
                                          </a>
                                          @endif
                                      </div>
