@@ -43,10 +43,30 @@
 
 .badge__post{
     font-size: 16px;
-    margin-top: 12px;
+    margin: 12px 0 20px;
     @media(min-width: 1040px){
         font-size: 24px;
         margin-top: 20px;
+    }
+}
+
+.badge-contact{
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    @media(min-width: 1040px){
+        font-size: 16px;
+    }
+}
+
+.badge-contact__label{
+    font-weight: 600;
+}
+
+.badge-contact__value{
+    border-bottom: 1px solid #444;
+    &:hover{
+        border-bottom: 1px solid rgba(0, 0, 0, 0);
     }
 }
 

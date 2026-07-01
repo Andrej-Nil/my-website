@@ -1,0 +1,34 @@
+@media print {
+    .content{
+        padding: 0;
+    }
+    .breadcrumbs{
+        display: none;
+    }
+    .header{
+        display: none;
+    }
+    .footer{
+        display: none;
+    }
+
+    .mobile-menu{
+        display: none;
+    }
+
+    .resume-group{
+        margin-bottom: 50px;
+        &.display-only-first .resume-item{
+            display: block;
+        }
+    }
+    .resume-group__btn{
+        display: none;
+    }
+
+    .resume__data {
+        * {
+            color: #444;
+        }
+    }
+}
